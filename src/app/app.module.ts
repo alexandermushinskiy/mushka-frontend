@@ -28,6 +28,12 @@ import { SidebarModule } from './sidebar/sidebar.module';
 import { HeaderModule } from './header/header.module';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { ToastrModule } from 'ngx-toastr';
+import { OrdersModule } from './orders/orders.module';
+import { SuppliersModule } from './suppliers/suppliers.module';
+import { GoodsModule } from './goods/goods.module';
+import { PackagesModule } from './packages/packages.module';
+import { PartnersModule } from './partners/partners.module';
+import { LogisticsModule } from './logistics/logistics.module';
 
 @NgModule({
   declarations: [
@@ -40,6 +46,12 @@ import { ToastrModule } from 'ngx-toastr';
     CoreModule,
     SidebarModule,
     HeaderModule,
+    OrdersModule,
+    SuppliersModule,
+    GoodsModule,
+    PackagesModule,
+    PartnersModule,
+    LogisticsModule,
     Ng2Webstorage.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

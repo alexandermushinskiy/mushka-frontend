@@ -7,7 +7,7 @@
        routerLinkActive="active"
        class="menu-item"
        [ngClass]="{'csr-disabled-control': !item.isEnabled}">
-      <i class="ico" [ngClass]="item.icon"></i>
+      <i class="fa" [ngClass]="item.icon"></i>
       {{ item.title }}
       <span *ngIf="item.badges > 0" class="badge">{{ item.badges }}</span>
     </a>

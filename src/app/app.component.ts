@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AppLoaderService } from './core/app-loader/app-loader.service';
+import { SidebarMenuStateService } from './core/sidebar-menu-state/sidebar-menu-state.service';
 
 @Component({
   selector: 'mhk-root',
@@ -10,10 +11,12 @@ import { AppLoaderService } from './core/app-loader/app-loader.service';
 export class AppComponent implements OnInit {
   
   isAppReady = false;
+  isCollapsed: boolean;
 
   private isStarted = false;
 
-  constructor(private appLoaderService: AppLoaderService) {
+  constructor(private appLoaderService: AppLoaderService,
+              private sidebarMenuStateService: SidebarMenuStateService,) {
   }
 
   ngOnInit() {
@@ -21,5 +24,8 @@ export class AppComponent implements OnInit {
       this.appLoaderService.bootstrap();
       this.isAppReady = true;
     }, 550);
+
+    this.sidebarMenuStateService.isCollapsed()
+      .subscribe(val => this.isCollapsed = val);
   }
 }

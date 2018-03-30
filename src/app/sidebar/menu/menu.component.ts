@@ -41,16 +41,16 @@ export class MenuComponent extends UnsubscriberComponent implements OnInit {
   }
 
   onMenuItemSelected(name) {
-    if ([MenuLabels.VIEWS, MenuLabels.FAVORITES].includes(name)) {
-      this.sidebarMenuStateService.changeMenuItemCollapsedState();
-    }
+    // if ([MenuLabels.VIEWS, MenuLabels.FAVORITES].includes(name)) {
+    //   this.sidebarMenuStateService.changeMenuItemCollapsedState();
+    // }
   }
 
   private getWorklistUnseenTicketsTotal() {
     this.badgesService.getUnseenTicketsTotal()
       .takeUntil(this.ngUnsubscribe$)
       .subscribe((unseenTicketsCount: number) => {
-        this.updateBadge(MenuLabels.WORKLIST, unseenTicketsCount);
+        //this.updateBadge(MenuLabels.WORKLIST, unseenTicketsCount);
       });
   }
 

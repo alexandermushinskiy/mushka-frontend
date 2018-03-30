@@ -1,0 +1,16 @@
+<form (ngSubmit)="handleSearch(searchField.value)">
+  <input #searchField csrNumField required
+         maxlength="14"
+         minlength="6"
+         [disabled]="isLoading"
+         name="search"
+         id="search"
+         class="form-control jump-to-csr"
+         placeholder="Global Search..." />
+  <button [disabled]="isLoading" type="submit" class="btn btn-submit">
+    <span *ngIf="isLoading;then spinner else searchIcon"></span>
+  </button>
+</form>
+
+<ng-template #searchIcon><span class="sr-only">Search</span></ng-template>
+<ng-template #spinner><mhk-spinner [isLoading]="true"></mhk-spinner></ng-template>

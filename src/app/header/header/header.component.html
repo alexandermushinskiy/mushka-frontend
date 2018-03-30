@@ -1,10 +1,10 @@
 <header id="header">
   <div class="actions-left">
-      <div class="logo" routerlink="/" title="Ericsson CSR-H" tabindex="0">
-        <img alt="Ericsson" class="logo-ericsson" height="20" src="./assets/images/logo_er.svg" width="15">
-        <img alt="CSR-H" class="logo-csrh" height="11" src="./assets/images/logo_CSRH.svg" width="46">
+      <div class="logo" routerlink="/" title="MUSHKA Accounting" tabindex="0">
+        <img alt="Ericsson" class="logo-ericsson" height="30" src="./assets/images/mushka-logo.svg" width="35">
+        <span class="accounting">ACCOUNTING</span>
     </div>
-    <!-- <csr-jump-to-csr #search (onSearch)="jumpToCsr($event)" [isLoading]="isLoadingInProgress"></csr-jump-to-csr> -->
+    <mhk-global-search #search (onSearch)="jumpToCsr($event)" [isLoading]="isLoadingInProgress"></mhk-global-search>
   </div>
   <div class="actions-right">
     <a class="btn btn-outline-light" aria-label="addNew" [routerLink]="'/create-csr'">Create CSR</a>

@@ -1,0 +1,46 @@
+@import "../../../variables";
+:host {
+  position: relative;
+}
+.jump-to-csr {
+  background-color: $global-search-input-bg;
+  border: $border-width solid $global-search-input-border;
+  color: $global-search-input-color;
+  width: $global-search-input-width;
+  transition: all 250ms;
+  &:not([value]) {
+    + .btn-search {
+      opacity: 0;
+    }
+  }
+  &:focus {
+    background-color: $global-search-input-bg;
+    border-color: $global-search-input-border;
+    + .btn-search {
+      opacity: 1;
+    }
+  }
+  &[disabled] {
+    border-color: $global-search-input-border-disabled;
+  }
+}
+.btn-submit {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  border: 0;
+  margin: 0;
+  background: none;
+  font-size: 16px;
+  line-height: 1;
+  color: $global-search-submit-color;
+  opacity: 1;
+  transition: opacity 250ms;
+  &[disabled] {
+    cursor: default;
+    color: $global-search-submit-color-disabled;
+  }
+}
+.header-search {
+  position: relative;
+}

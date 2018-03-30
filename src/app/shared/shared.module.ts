@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { LoadingScreenComponent } from './widgets/loading-screen/loading-screen.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SpinnerComponent } from './widgets/spinner/spinner.component';
 
 @NgModule({
   imports: [
@@ -14,14 +15,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule.forRoot(),
   ],
   declarations: [
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    SpinnerComponent
   ],
   exports: [
     NgbModule,
     CommonModule,
     FormsModule,
     RouterModule,
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    SpinnerComponent
   ]
 })
 

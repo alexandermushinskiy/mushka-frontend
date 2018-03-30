@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { HeaderBadgeComponent } from './header-badge/header-badge.component';
-// import { JumpToCsrComponent } from './jump-to-csr/jump-to-csr.component';
 import { UserNotificationComponent } from './user-notification/user-notification.component';
 import { UserComponent } from '../header/user/user.component';
+import { GlobalSearchComponent } from './global-search/global-search.component';
 
 @NgModule({
   imports: [
@@ -13,10 +13,10 @@ import { UserComponent } from '../header/user/user.component';
   ],
   declarations: [
     HeaderComponent,
-    //JumpToCsrComponent,
     HeaderBadgeComponent,
     UserNotificationComponent,
-    UserComponent
+    UserComponent,
+    GlobalSearchComponent
   ],
   exports: [
     HeaderComponent

@@ -7,6 +7,7 @@ export const MenuItems: MenuItem[] = [
     icon: 'fa-shopping-cart',
     routePath: '/orders',
     isEnabled: true,
+    badges: 13
   }),
   new MenuItem({
     title: MenuLabels.GOODS,
@@ -20,7 +21,7 @@ export const MenuItems: MenuItem[] = [
     icon: 'fa-archive',
     routePath: '/packages',
     isEnabled: true,
-    badges: 0,
+    badges: 0
   }),
   new MenuItem({
     title: MenuLabels.SUPPLIERS,

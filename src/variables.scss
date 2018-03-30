@@ -382,17 +382,17 @@ $header-padding-x:              1.5rem;
 
 $appbar-height:                 $header-height;
 
-//jump-to-csr
-$jump-csr-input-height:                35px;
-$jump-csr-input-width:                 16rem;
-$jump-csr-input-padding:               1rem 3.6rem 1rem 1rem;
-$jump-csr-input-bg:                    #212121;
-$jump-csr-input-color:                 #898989;
-$jump-csr-input-border:                $dark-gray;
-$jump-csr-input-border-disabled:       $jump-csr-input-border;
+//global-search
+$global-search-input-height:                35px;
+$global-search-input-width:                 36rem;
+$global-search-input-padding:               1rem 3.6rem 1rem 1rem;
+$global-search-input-bg:                    #212121;
+$global-search-input-color:                 #898989;
+$global-search-input-border:                $dark-gray;
+$global-search-input-border-disabled:       $global-search-input-border;
 
-$jump-csr-submit-color:                transparentize($gray, .1);
-$jump-csr-submit-color-disabled:       $blue;
+$global-search-submit-color:                transparentize($gray, .1);
+$global-search-submit-color-disabled:       $blue;
 
 //Main menu
 $menu-padding:                   $padding-base ($padding-base - 1) $padding-base $padding-base*2;

@@ -1,0 +1,15 @@
+<span [hidden]="!isLoading">
+  <span *ngIf="isIE;then fontLoader else svgLoader"></span>
+
+<ng-template #svgLoader>
+  <i class="loading">
+    <svg class="circular">
+      <circle class="path" cx="50%" cy="50%" r="50%" fill="none" stroke-width="2"></circle>
+    </svg>
+  </i>
+</ng-template>
+
+<ng-template #fontLoader>
+  <i class="ie-loading"></i>
+</ng-template>
+</span>

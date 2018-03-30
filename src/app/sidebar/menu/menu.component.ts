@@ -21,10 +21,6 @@ export class MenuComponent extends UnsubscriberComponent implements OnInit {
     super();
   }
 
-  get oldCsrhUrl() {
-    return '';
-  }
-
   ngOnInit() {
     this.getWorklistUnseenTicketsTotal();
 

@@ -5,6 +5,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppLoaderService } from './app-loader/app-loader.service';
 import { SidebarMenuStateService } from './sidebar-menu-state/sidebar-menu-state.service';
 import { BadgesService } from './api/badges.service';
+import { NotificationsService } from './notifications/notifications.service';
+import { UserNotificationsService } from './user-notifications/user-notifications.service';
+import { CurrentUserService } from './api/current-user.service';
 
 @NgModule({
   imports: [
@@ -14,7 +17,10 @@ import { BadgesService } from './api/badges.service';
   providers: [
     AppLoaderService,
     SidebarMenuStateService,
-    BadgesService
+    BadgesService,
+    NotificationsService,
+    UserNotificationsService,
+    CurrentUserService
   ],
   declarations: [],
   exports: []

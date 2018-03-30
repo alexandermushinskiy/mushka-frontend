@@ -25,6 +25,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { SidebarModule } from './sidebar/sidebar.module';
+import { HeaderModule } from './header/header.module';
+import { Ng2Webstorage } from 'ngx-webstorage';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,13 @@ import { SidebarModule } from './sidebar/sidebar.module';
     AppRoutingModule,
     SharedModule,
     CoreModule,
-    SidebarModule
+    SidebarModule,
+    HeaderModule,
+    Ng2Webstorage.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

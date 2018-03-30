@@ -4,17 +4,20 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { LoadingScreenComponent } from './widgets/loading-screen/loading-screen.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    NgbModule.forRoot(),
   ],
   declarations: [
     LoadingScreenComponent
   ],
   exports: [
+    NgbModule,
     CommonModule,
     FormsModule,
     RouterModule,

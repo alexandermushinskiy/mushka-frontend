@@ -1,0 +1,30 @@
+@import '../../../variables';
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  background-color: $layer0;
+  border-color: $border-dark-color;
+  padding: .4rem;
+  z-index: 1000;
+
+  .dropdown-item {
+    background-color: transparentize($gray, .8);
+    border-radius: $border-radius-base;
+    color: transparentize($white, .1);
+
+    &:hover {
+      color: transparentize($white, .1);
+      background-color: transparentize($gray, .8);
+    }
+
+    &.new {
+      &,
+      &:hover {
+        background-color: transparentize($gray, .5);
+      }
+    }
+  }
+}

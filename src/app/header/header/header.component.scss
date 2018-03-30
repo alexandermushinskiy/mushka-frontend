@@ -1,0 +1,63 @@
+@import '../../../variables';
+
+:host {
+  background-color: $header-bg;
+  height: $header-height;
+  display: block;
+}
+
+#header{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  height: $header-height;
+  padding: $header-padding-y $header-padding-x;
+}
+
+.actions-left {
+  align-items: center;
+  display: flex;
+
+  > :not(:first-child) { margin-left: $padding-base; }
+  > :not(:last-child) { margin-right: $padding-base; }
+}
+
+.actions-right {
+  display: flex;
+  align-items: center;
+  > :not(:first-child) { margin-left: $padding-base; }
+  > :not(:last-child) { margin-right: $padding-base; }
+}
+
+.notifications-dropdown {
+  .dropdown-menu {
+    min-width: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .dropdown-item {
+    font-size: 1.2rem;
+  }
+  .fa {
+    color: $text-muted;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+  }
+  .dropdown-item + .dropdown-item {
+    margin-top: .5rem;
+  }
+}
+
+.badge-group {
+  background-color: $text;
+  border-radius: $input-height/2;
+  padding: 0 $padding-base;
+  height: $input-height;
+  display: flex;
+  align-items: center;
+
+  > :not(:first-child) { margin-left: $padding-base/2; }
+  > :not(:last-child) { margin-right: $padding-base/2; }
+}
+
+

@@ -1,0 +1,49 @@
+@import '../../../variables';
+
+.dropdown-toggle {
+  align-items: center;
+  color: transparentize($white, .3);
+  cursor: pointer;
+  display: flex;
+  line-height: 30px;
+  transition: color 250ms;
+
+  &:hover {
+    color: $white;
+  }
+
+  .show & {
+    color: $white;
+
+    .ico-chevron-down {
+      transform: rotate(180deg);
+    }
+  }
+
+  .ico-profile {
+    font-size: 16px;
+  }
+
+  .ico-chevron-down {
+    font-size: 12px;
+  }
+
+  .username {
+    margin: 0 $padding-base/4;
+    white-space: nowrap;
+  }
+}
+
+.dropdown-menu {
+  background-color: $layer0;
+  border-color: $border-dark-color;
+  z-index: 10000;
+
+  .dropdown-item {
+    color: $white;
+
+    &:hover {
+      background-color: $dropdown-link-dark-hover-bg;
+    }
+  }
+}

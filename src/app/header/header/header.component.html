@@ -1,0 +1,19 @@
+<header id="header">
+  <div class="actions-left">
+      <div class="logo" routerlink="/" title="Ericsson CSR-H" tabindex="0">
+        <img alt="Ericsson" class="logo-ericsson" height="20" src="./assets/images/logo_er.svg" width="15">
+        <img alt="CSR-H" class="logo-csrh" height="11" src="./assets/images/logo_CSRH.svg" width="46">
+    </div>
+    <!-- <csr-jump-to-csr #search (onSearch)="jumpToCsr($event)" [isLoading]="isLoadingInProgress"></csr-jump-to-csr> -->
+  </div>
+  <div class="actions-right">
+    <a class="btn btn-outline-light" aria-label="addNew" [routerLink]="'/create-csr'">Create CSR</a>
+    <mhk-user-notification></mhk-user-notification>
+    <div class="badge-group">
+      <mhk-header-badge (click)="openModal(csrRate)" [title]="'Unrated'" [icon]="'ico-favorites'" [value]="totalUnrated"></mhk-header-badge>
+      <mhk-header-badge [title]="'Unassigned'" [icon]="'ico-eye'" [value]="totalUnassigned"></mhk-header-badge>
+      <mhk-header-badge [title]="'Unread'" [icon]="'ico-csr-new'" [value]="totalUnseen"></mhk-header-badge>
+    </div>
+    <mhk-user></mhk-user>
+  </div>
+</header>

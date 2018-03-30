@@ -1,0 +1,13 @@
+<div ngbDropdown placement="bottom-center">
+  <div ngbDropdownToggle (click)="trackEvent()">
+    <mhk-header-badge [title]="'Notifications'" [icon]="'ico-bell'" [value]="activeNotificationsAmount"></mhk-header-badge>
+  </div>
+  <div *ngIf="notifications.length" ngbDropdownMenu>
+    <ng-container *ngFor="let notification of notifications">
+      <button class="dropdown-item" [ngClass]="{'new':  notification.isUnread}" (click)="showNotification(notification)">
+        <i class="fa" [ngClass]="getIconClass(notification.type)"></i> {{ notification.label }}
+        <span *ngIf="notification.attachments.length">, {{ notification.attachments.length }} file(s) left</span>
+      </button>
+    </ng-container>
+  </div>
+</div>

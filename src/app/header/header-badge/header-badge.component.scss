@@ -1,0 +1,17 @@
+@import '../../../variables';
+
+.header-badge {
+  color: $white;
+  font-size: 1.3rem;
+  line-height: 1.6rem;
+  display: inline-flex;
+  vertical-align: middle;
+
+  .ico {
+    font-size: 1.6rem;
+  }
+
+  span {
+    margin-left: 1rem;
+  }
+}

@@ -1,0 +1,162 @@
+@mixin csr-embargo-cover () {
+  position: relative;
+  border: 0;
+  box-shadow: none;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: $embargo-alert-backdrop-bg;
+    z-index: 999;
+  }
+}
+
+.csr-embargo {
+  .csr-slogan-wrapper {
+    @include csr-embargo-cover();
+  }
+
+  csr-collaboration-rating {
+    .collaboration-rating {
+      @include csr-embargo-cover();
+    }
+  }
+
+  csr-toolbar {
+    .toolbar {
+      .item {
+        @include csr-embargo-cover();
+      }
+    }
+  }
+
+  csr-details {
+    .property-list {
+      .item {
+        @include csr-embargo-cover();
+      }
+    }
+
+    .btn-toggle {
+      @include csr-embargo-cover();
+    }
+  }
+
+  csr-anchor-panel {
+    #anchor-panel {
+      @include csr-embargo-cover();
+
+      &.sticky {
+        visibility: hidden;
+      }
+    }
+  }
+
+  csr-timeline,
+  csr-suggested-engineers {
+    .module {
+      @include csr-embargo-cover();
+    }
+  }
+
+  csr-tasks,
+  csr-metis,
+  csr-forum,
+  csr-description,
+  csr-suggested-metis-consumables {
+    .mod-title,
+    .mod-content {
+      @include csr-embargo-cover();
+    }
+  }
+
+  .thumbnail-group-item {
+    @include csr-embargo-cover();
+  }
+
+  csr-investigation-lead {
+    .mod-title {
+      @include csr-embargo-cover();
+    }
+  }
+
+  csr-ticket-workgroups {
+    .mod-title,
+    .workgroup-label {
+      @include csr-embargo-cover();
+    }
+  }
+
+  csr-remedy,
+  csr-delivery,
+  csr-trouble-report,
+  csr-formal-answer,
+  csr-technical-answer,
+  csr-working-problem-description {
+    .mod-title,
+    .timestamp,
+    .answer,
+    .box {
+      @include csr-embargo-cover();
+    }
+  }
+
+  csr-participants {
+    .mod-title,
+    .mod-content {
+      @include csr-embargo-cover();
+    }
+
+    .btn-add.dropdown-toggle {
+      display: none;
+    }
+  }
+
+  .btn-add {
+    @include csr-embargo-cover();
+
+    &:after {
+      border-radius: 50%;
+    }
+  }
+
+  csr-follow {
+    display: inline-block;
+    @include csr-embargo-cover();
+  }
+
+  .user-pic {
+    @include csr-embargo-cover();
+
+    &:after {
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px $embargo-alert-backdrop-bg;
+    }
+  }
+
+  .user-name {
+    @include csr-embargo-cover();
+  }
+
+  .app-page-aside {
+    z-index: $zindex-panel !important;
+  }
+
+  .aside-toggle {
+    display: none !important;
+  }
+
+  .ticket-panel {
+    .panel-header {
+      @include csr-embargo-cover();
+    }
+
+    .csr-slogan {
+      @include csr-embargo-cover();
+    }
+  }
+}

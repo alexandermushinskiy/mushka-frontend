@@ -1,0 +1,96 @@
+@import "../../variables";
+
+#app ngb-datepicker,
+.modal-open ngb-datepicker {
+  font-size: $ngb-datepicker-font-size;
+  border-radius: $ngb-datepicker-border-radius;
+  background-color: $ngb-datepicker-bg;
+
+  &:focus {
+    outline: none;
+  }
+
+  .ngb-dp-header {
+    border-radius: $ngb-datepicker-header-border-radius;
+    padding-top: $ngb-datepicker-header-padding-t;
+  }
+
+  &-navigation {
+    height: $ngb-datepicker-navigation-height;
+    line-height: $ngb-datepicker-navigation-line-height;
+  }
+
+  &-navigation-select {
+    flex-basis: $ngb-datepicker-navigation-select-width;
+
+    > .custom-select {
+      padding: $ngb-datepicker-navigation-select-padding-x $ngb-datepicker-navigation-select-padding-y;
+      font-size: $ngb-datepicker-navigation-select-font-size;
+      border: 1px solid $ngb-datepicker-navigation-select-border-color;
+      &:first-child {
+        border-radius: $ngb-datepicker-navigation-select-border-radius-month;
+      }
+      &:last-child {
+        border-radius: $ngb-datepicker-navigation-select-border-radius-year;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .ngb-dp-arrow {
+    width: $ngb-datepicker-arrow-size;
+    height: $ngb-datepicker-arrow-size;
+
+    &-btn {
+      padding: $ngb-datepicker-arrow-btn-padding-x $ngb-datepicker-arrow-btn-padding-y;
+      color: $ngb-datepicker-arrow-btn-color;
+      &:hover {
+        color: $ngb-datepicker-arrow-btn-color-hover;
+      }
+    }
+  }
+
+  .ngb-dp-week {
+    border-radius: $ngb-datepicker-week-border-radius;
+  }
+
+  .ngb-dp-weekdays {
+    border-radius: 0;
+  }
+
+  .ngb-dp-month-name {
+    height: $ngb-datepicker-month-name-height;
+    line-height: $ngb-datepicker-month-name-line-height;
+    color: $ngb-datepicker-month-name-color;
+  }
+
+  .ngb-dp-month:first-child .ngb-dp-week {
+    padding-left: $ngb-datepicker-week-first-padding-l;
+  }
+
+  .ngb-dp-month:last-child .ngb-dp-week {
+    padding-right: $ngb-datepicker-week-last-padding-r;
+  }
+
+  .ngb-dp-day {
+    div {
+      width: $ngb-datepicker-day-selected-size;
+      height: $ngb-datepicker-day-selected-size;
+      line-height: $ngb-datepicker-day-selected-line-height;
+      border-radius: $ngb-datepicker-day-selected-border-radius;
+      transition: color 250ms ease, background-color 250ms ease, border-color 250ms ease;
+    }
+  }
+
+  .ngb-dp-weekday {
+    color: $ngb-datepicker-weekday-color;
+  }
+
+  .ngb-dp-day, .ngb-dp-weekday, .ngb-dp-week-number {
+    width: $ngb-datepicker-cell-size;
+    height: $ngb-datepicker-cell-size;
+    line-height: $ngb-datepicker-cell-line-height;
+  }
+}

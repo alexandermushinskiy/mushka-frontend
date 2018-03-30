@@ -1,0 +1,75 @@
+@import '../../variables';
+
+:host {
+  display: flex;
+  width: 100%;
+}
+
+.thumbnail-group {
+  border-bottom: $border-width solid $border-color;
+  margin-bottom: $padding-base*2;
+  width: 100%;
+}
+
+.thumbnail-group-item {
+  align-items: center;
+  border-top: $border-width solid $border-color;
+  display: flex;
+  height: $thumbnails-min-height;
+  justify-content: space-between;
+  padding-left: $thumbnails-item-padding-l;
+  padding-right: $thumbnails-item-padding-r;
+  position: relative;
+  width: 100%;
+
+  :host-context(csr-customer-thumbnail) & {
+    padding-right: 0;
+  }
+
+  h5 {
+    color: $blue;
+    cursor: pointer;
+    flex: auto;
+    font-size: $font-size-base;
+    line-height: 16px;
+    margin: 0;
+
+    &.disabled {
+      pointer-events: none;
+    }
+  }
+
+  .timestamp {
+    @include text-ellipsis(100%);
+    margin-left: $padding-base;
+  }
+
+  .text-muted {
+    font-size: 12px;
+    margin-left: $padding-base/4;
+  }
+
+  .btn-add {
+    position: absolute;
+    top: 8px;
+    right: 0;
+
+    :host-context(csr-customer-thumbnail) & {
+      position: static;
+    }
+  }
+
+  .customer-info {
+    align-items: center;
+    display: flex;
+    font-size: $font-size-small;
+
+    > :not(:first-child) { margin-left: .25rem; }
+    > :not(:last-child) { margin-right: .25rem; }
+
+    .customer-name {
+      color: $text-muted;
+      @include text-ellipsis(250px);
+    }
+  }
+}

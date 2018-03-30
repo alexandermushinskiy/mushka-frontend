@@ -1,0 +1,131 @@
+@font-face {
+  font-family: 'csr-icons';
+  src:  url('assets/fonts/csr-icons.eot?qi6gfi');
+  src:  url('assets/fonts/csr-icons.eot?qi6gfi#iefix') format('embedded-opentype'),
+  url('assets/fonts/csr-icons.ttf?qi6gfi') format('truetype'),
+  url('assets/fonts/csr-icons.woff?qi6gfi') format('woff'),
+  url('assets/fonts/csr-icons.svg?qi6gfi#csr-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+%ico, .ico, [class^='ico-'], [class*=' ico-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'csr-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ico-dashboard:before {
+  content: '\e901';
+}
+.ico-favorites:before {
+  content: '\e902';
+}
+.ico-help:before {
+  content: '\e903';
+}
+.ico-kanban:before {
+  content: '\e904';
+}
+.ico-search:before {
+  content: '\e905';
+}
+.ico-small_bar:before {
+  content: '\e906';
+}
+.ico-team:before {
+  content: '\e907';
+}
+.ico-workgroups:before {
+  content: '\e908';
+}
+.ico-worklist:before {
+  content: '\e909';
+}
+.ico-chevron-down:before {
+  content: '\e900';
+}
+.ico-chevron-right:before {
+  content: '\e90a';
+}
+.ico-bell:before {
+  content: '\e90b';
+}
+.ico-csr-new:before {
+  content: '\e90c';
+}
+.ico-csr-unasigned:before {
+  content: '\e90d';
+}
+.ico-livepad:before {
+  content: '\e90e';
+}
+.ico-add:before {
+  content: '\e90f';
+}
+.ico-phone:before {
+  content: '\e910';
+}
+.ico-envelope:before {
+  content: '\e912';
+}
+.ico-dots:before {
+  content: '\e911';
+}
+.ico-arrow-up:before {
+  content: '\e913';
+}
+.ico-filter:before {
+  content: '\e914';
+}
+.ico-close:before {
+  content: '\e90a';
+}
+.ico-high:before {
+  content: '\e915';
+}
+.ico-medium:before {
+  content: '\e916';
+}
+.ico-low:before {
+  content: '\e917';
+}
+.ico-ban:before {
+  content: '\e918';
+}
+.ico-feedback:before {
+  content: '\e919';
+}
+.ico-views:before {
+  content: '\e91a';
+}
+.ico-eye:before {
+  content: '\e91b';
+}
+.ico-profile:before {
+  content: '\e91c';
+}
+.ico-filter2:before {
+  content: '\e91d';
+}
+.ico-sorting:before {
+  content: '\e91e';
+}
+.ico-sort-up:before {
+  content: '\e91f';
+}
+.ico-sort-down:before {
+  content: '\e920';
+}

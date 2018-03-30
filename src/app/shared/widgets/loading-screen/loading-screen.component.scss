@@ -1,0 +1,44 @@
+@import "../../../../variables";
+
+$loading-screen-bg: #F9F9F9;
+
+@mixin full-screen {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.loading-screen {
+  @include full-screen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $zindex-loading-screen;
+  //background: $loading-screen-bg;
+  transform: translateZ(0);
+  &.fade-out {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-delay: .75s;
+    animation-fill-mode: forwards;
+  }
+
+  img.bounce-out {
+    animation-name: bounceIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale3d(0.4, 0.4, 0.4); }
+  50% { transform: scale3d(1, 1, 1); }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; z-index: -1;}
+}

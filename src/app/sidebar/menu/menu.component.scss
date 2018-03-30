@@ -1,0 +1,85 @@
+@import "../../../variables";
+
+@mixin menuCollapsedState {
+  padding-left: $padding-base - 1;
+  .menu-item {
+    width: 2.1rem;
+    @media (min-height: 768px) {
+      &[title="Help"] {
+        left: $padding-base;
+      }
+    }
+  }
+}
+
+@mixin bagdeCollapsePosition {
+  top: -.75rem;
+  right: -.75rem;
+}
+
+:host {
+  display: block;
+  padding: $menu-padding;
+  @media (max-width: $desktop-lg - 1) {
+    csr-sidebar:not(:hover) & {
+      @include menuCollapsedState();
+    }
+  }
+  @media (min-width: $desktop-lg) {
+    .sidebar-collapsed & {
+      @include menuCollapsedState();
+    }
+  }
+}
+.menu {
+  > span {
+    display: block;
+    &:not(:last-child) {
+      margin-bottom: $padding-base*2;
+    }
+  }
+  &-item {
+    display: flex;
+    align-items: center;
+    color: $menu-link-color;
+    text-decoration: none;
+    transition: all 300ms ease;
+    position: relative;
+    white-space: nowrap;
+    &[title="Help"] {
+      left: 0;
+      @media (min-height: 768px) {
+        position: absolute;
+        bottom: .5rem;
+        left: $padding-base*2;
+      }
+    }
+    &:hover,
+    &.active {
+      color: $menu-link-hover-color;
+    }
+  }
+  .ico {
+    font-size: 2.1rem;
+    margin-right: $padding-base;
+  }
+  .ico-views {
+    font-size: 1.8rem;
+  }
+  .badge {
+    position: absolute;
+    right: 0;
+    top: calc(50% - .8rem);
+    @media (max-width: $desktop-lg) {
+      :host-context(csr-sidebar:not(:hover)) & {
+        @include bagdeCollapsePosition();
+      }
+    }
+    @media (min-width: $desktop-lg) {
+      :host-context(.sidebar-collapsed) &{
+        @include bagdeCollapsePosition();
+      }
+    }
+  }
+}
+

@@ -1,0 +1,121 @@
+@import 'variables';
+@import '../node_modules/font-awesome/scss/font-awesome';
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import '../node_modules/summernote/dist/summernote-bs4.css';
+
+@import 'assets/styles/autocomplete';
+@import 'assets/styles/boxes';
+@import 'assets/styles/buttons';
+@import 'assets/styles/dropdowns';
+@import 'assets/styles/icons';
+@import 'assets/styles/forms';
+@import 'assets/styles/ngx-datatable';
+@import 'assets/styles/ngx-treeview';
+@import 'assets/styles/progressbar';
+@import 'assets/styles/type';
+@import 'assets/styles/summernote-editor';
+@import 'assets/styles/forum';
+@import 'assets/styles/tooltips';
+@import 'assets/styles/notifications';
+@import 'assets/styles/modal';
+@import 'assets/styles/rating';
+@import 'assets/styles/panel';
+@import 'assets/styles/inline-editor';
+@import 'assets/styles/ngx-datepicker';
+@import 'assets/styles/csr-search';
+@import 'assets/styles/learning-reflection';
+@import 'assets/styles/ngb-datepicker';
+@import 'assets/styles/ngb-timepicker';
+@import 'assets/styles/csr-embargo';
+/* You can add global styles to this file, and also import other style files */
+html {
+  font-size: 10px;
+}
+html, body {
+  height: 100%;
+}
+body {
+  overflow: hidden;
+}
+#app {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 100%;
+}
+
+#main {
+  height: calc(100vh - #{$header-height});
+  padding-left: $sidebar-width-collapsed;
+  transition: padding-left 250ms cubic-bezier(0.1, .57, .1, 1);
+  position: relative;
+  @media (min-width: $desktop-lg) {
+    padding-left: $sidebar-width;
+  }
+  &.sidebar-collapsed {
+    padding-left: $sidebar-width-collapsed;
+  }
+}
+
+//General layout styles
+.app-page-container {
+  background-color: $layer2;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-top: 20px;
+  position: relative;
+  will-change: scroll-position;
+}
+
+.app-page-body {
+  overflow: hidden;
+}
+
+//General module styles
+.module {
+  margin-bottom: $padding-base*2;
+
+  .mod-header {
+    align-items: center;
+    clear: both;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $padding-base;
+  }
+
+  .mod-header-actions > * {
+    display: inline-flex;
+    vertical-align: top;
+  }
+
+  .mod-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0;
+
+    .app-page-aside & {
+      color: rgba(36, 36, 36, 0.6);
+      font-size: $font-size-base;
+      font-weight: normal;
+      line-height: 17px;
+    }
+  }
+
+  .mod-content {
+    @include clearfix();
+  }
+}
+
+.h-100vh {
+  height: 100vh;
+}
+
+// disabled state for unimplemented controls
+.csr-disabled-control {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: default;
+  user-select: none;
+}

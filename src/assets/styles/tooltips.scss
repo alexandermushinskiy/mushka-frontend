@@ -1,0 +1,103 @@
+.tooltip.bs-tooltip-top {
+  font-size: 12px;
+}
+
+.timeline {
+  .tooltip-inner {
+    background-color: $dark-gray;
+  }
+  .bs-tooltip-top .arrow:before {
+    border-top-color: $dark-gray;
+  }
+
+  .bs-tooltip-right .arrow:before {
+    border-right-color: $dark-gray;
+  }
+
+  .bs-tooltip-bottom .arrow:before {
+    border-bottom-color: $dark-gray;
+  }
+
+  .bs-tooltip-left .arrow:before {
+    border-left-color: $dark-gray;
+  }
+}
+
+.timeline-tooltip {
+  text-align: left;
+  > .timeline-date-indicate {
+    display: block;
+    color: $blue;
+  }
+
+  &-completed {
+    > .timeline-date-indicate {
+      color: $light-green;
+    }
+
+    &.timeline-tooltip-overtime {
+      > .timeline-date-indicate {
+        color: $orange;
+      }
+    }
+  }
+
+  &-overtime {
+    >.timeline-date-indicate {
+      color: $red;
+    }
+  }
+}
+
+.file-share-actions .tooltip-inner {
+  max-width: inherit;
+  width: 500px;
+  background-color: $dark-gray;
+  font-size: 1.4rem;
+  padding: 20px;
+  text-align: left;
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+  ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    li {
+      padding-left: 1rem;
+      text-indent: -1rem;
+      &:before {
+        content: "-";
+        padding-right: 5px;
+      }
+    }
+  }
+}
+
+//lock tooltip
+.lock-tooltip {
+  color: $text-muted;
+
+  &:hover {
+    color: $text-info;
+  }
+
+  + .tooltip {
+    .tooltip-inner {
+      font-size: 1.2rem;
+      max-width: 400px;
+      padding: $padding-base;
+      text-align: left;
+      width: 100%;
+
+      h6 {
+        font-size: $font-size-base;
+        font-weight: bold;
+        line-height: 1.35;
+      }
+    }
+  }
+}
+
+

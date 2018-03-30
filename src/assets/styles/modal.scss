@@ -1,0 +1,112 @@
+//general modal stiles
+.modal-content {
+  border: $modal-content-border;
+  border-radius: $modal-content-border-radius;
+  box-shadow: $modal-content-box-shadow;
+}
+.modal-header {
+  .close {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.modal-title {
+  font-weight: bold;
+  margin-bottom: 0;
+  font-size: $modal-title-font-size;
+  line-height: $modal-title-line-height;
+}
+.modal-header {
+  .close {
+    padding: 0;
+    margin: 0;
+  }
+}
+.modal-body {
+  padding: $modal-body-padding;
+}
+
+.modal-footer {
+  padding: $modal-footer-padding;
+  .btn {
+    padding: .5em 1em;
+    min-width: 7rem;
+  }
+  &-column {
+    flex: 1 0;
+  }
+  > :not(:first-child) { margin-left: .5rem; }
+  > :not(:last-child) { margin-right: .5rem; }
+}
+
+//assignment modal styles
+.assignment-modal {
+  .modal-footer {
+    border: 0;
+    text-align: center;
+    justify-content: center;
+    background-color: $assignment-modal-footer-bg;
+    padding: $assignment-modal-padding;
+  }
+}
+//general reset for ng-bootstrap popover
+.popover {
+  background-color: transparent;
+  border-radius: $border-radius-base;
+  bottom: $scroll-bar-width;
+  z-index: $zindex-modal;
+  .popover-body {
+    display: flex;
+    height: 100%;
+    flex-flow: column;
+    max-width: 100%;
+  }
+}
+
+.views-modal {
+  .modal-dialog {
+    max-width: 800px;
+  }
+}
+
+.task-creation-modal {
+  .modal-dialog {
+    max-width: 420px;
+  }
+}
+
+//general reset for ngb-alert
+.alert {
+  .close {
+    @extend .ico;
+    @extend .ico-close;
+    color: $gray;
+    font-size: 1.2rem;
+    top: .75rem;
+    span {
+      display: none;
+    }
+  }
+}
+
+//uploading window
+.alert-uploading {
+  background-color: $dark-gray;
+  border-color: rgba(1, 37, 97, .05);
+  border-radius: $border-radius-base;
+  box-shadow: 0 5px 10px 0 transparentize($black, .85);
+  color: $white;
+  margin: 0;
+  padding: 0;
+  width: 380px;
+  header {
+    background-color: $black;
+    border-radius: $border-radius-base $border-radius-base 0 0;
+    font-size: $notification-font-size;
+    font-weight: bold;
+    line-height: $notification-line-height;
+    padding: 1.3rem 1.5rem;
+    text-transform: uppercase;
+  }
+}

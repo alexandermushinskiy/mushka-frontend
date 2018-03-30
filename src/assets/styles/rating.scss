@@ -1,0 +1,57 @@
+ngb-rating {
+  margin-left: -$rating-margin-r;
+  &:focus {
+    outline: none;
+  }
+  > span:nth-child(even) {
+    margin-left: $rating-margin-r;
+    line-height: 100%;
+
+    .rating-item {
+      font-size: $rating-font-size;
+      color: $rating-color;
+
+      &.rating-active {
+        color: $rating-active-color;
+      }
+    }
+  }
+}
+
+.collaboration-rating-modal {
+  .modal-body {
+    padding: 0;
+  }
+
+  .collaboration-rating-badge {
+    text-align: center;
+    padding: $padding-base/2;
+  }
+}
+
+.collaboration-table {
+  margin: 0;
+  padding: 0;
+  > thead {
+    > tr {
+      > th {
+        border: none;
+        border-bottom: $border-width solid $border-dark-color;
+        padding: $padding-base/2 $padding-base;
+        background-color: transparent;
+        color: $text-color;
+      }
+    }
+  }
+  > tbody {
+    > tr {
+      > td {
+        border-color: transparent;
+        padding: $table-body-cell-padding-x $table-body-cell-padding-y;
+      }
+      &:nth-child(even) {
+        background-color: $table-body-row-even;
+      }
+    }
+  }
+}

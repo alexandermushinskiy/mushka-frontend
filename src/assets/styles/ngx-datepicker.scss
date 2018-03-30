@@ -1,0 +1,84 @@
+//ngx-datepicker
+.ngxmdp {
+  div.selector {
+    border: 0;
+    border-radius: $datepicker-border-radius;
+    box-shadow: $datepicker-box-shadow;
+    &:focus {
+      border: 0;
+    }
+    .header {
+      background-color: $datepicker-header-bg;
+    }
+    .headerbtn, .headerbtncell, .headermonthtxt, .headertodaybtn, .headeryeartxt, .headerlabelbtn, .yearchangebtn {
+      background-color: $datepicker-header-inner-bg;
+    }
+    .headerbtn, .headerlabelbtn {
+      transition: color 250ms;
+      &:hover,
+      &:focus {
+        color: $datepicker-header-btn-color-hover;
+      }
+    }
+    .headertodaybtn {
+      transition: border-color 250ms;
+      &:hover,
+      &:focus {
+        border-color: $datepicker-btn-today-border-color-hover;
+      }
+    }
+    .caltable, .monthtable, .yeartable {
+      border-bottom-left-radius: $datepicker-border-radius;
+      border-bottom-right-radius: $datepicker-border-radius;
+    }
+    .caltable tbody tr:nth-child(6) td:first-child,
+    .monthtable tbody tr:nth-child(4) td:first-child,
+    .yeartable tbody tr:nth-child(7) td:first-child {
+      border-bottom-left-radius: $datepicker-border-radius;
+    }
+    .caltable tbody tr:nth-child(6) td:last-child,
+    .monthtable tbody tr:nth-child(4) td:last-child,
+    .yeartable tbody tr:nth-child(7) td:last-child {
+      border-bottom-right-radius: $datepicker-border-radius;
+    }
+    .caltable, .daycell, .monthcell, .monthtable, .weekdaytitle, .yearcell, .yeartable {
+      color: $datepicker-cell-color;
+      &:focus { outline: none; }
+    }
+    .selectedday .datevalue, .selectedmonth .monthvalue, .selectedyear .yearvalue {
+      background-color: $datepicker-selected-bg;
+      border-radius: 0;
+    }
+    .weekdaytitle {
+      color: $datepicker-weekdaytitle-color;
+      background-color: $datepicker-weekdaytitle-bg;
+    }
+    td.currmonth, td.monthcell, td.yearcell {
+      background-color: $datepicker-cell-bg;
+    }
+    .tablesingleday, .tablesinglemonth, .tablesingleyear {
+      transition: all 250ms;
+      .datevalue {
+        background-color: $datepicker-cell-bg;
+      }
+      &:hover,
+      &.selectedday {
+        color: $datepicker-cell-color-hover;
+        background-color: $datepicker-cell-bg-hover;
+        .highlight, .markcurrday, .markcurrmonth, .markcurryear {
+          color: $datepicker-cell-color-hover;
+        }
+      }
+    }
+    .highlight {
+      color: $datepicker-highlight-color;
+    }
+    .markcurrday, .markcurrmonth, .markcurryear {
+      text-decoration: none;
+      color:$datepicker-current-color;
+    }
+    .icon-ngxmydpdown, .icon-ngxmydpleft, .icon-ngxmydpright, .icon-ngxmydpup {
+      font-size: $datepicker-icon-font-size;
+    }
+  }
+}

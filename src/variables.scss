@@ -1,0 +1,1211 @@
+// stylelint-disable
+
+$fa-font-path: '../node_modules/font-awesome/fonts';
+
+$white: #fafafa;
+$light-gray: #f9f9f9;
+$lighten-gray: #d6d6d6;
+$rgba-gray: rgba(147, 149, 151, .1);
+$purple: #a56ebe;
+$red: #f52323;
+$red-200: #fcd6d3;
+$red-100: #fbceca;
+$green: #36b07f;
+$green-lighten: #67a4a0;
+$light-green: #298964;
+$dark-blue: #1d488f;
+$blue-darken: #677ca0;
+$blue: #0082F0;
+$blue-100: #f3f8f8;
+$light-blue: #8cd1e1;
+$orange: #f78521;
+$yellow: #f2c618;
+$gray: #939597;
+$gray-100:#eaeaeb;
+$gray-200: rgb(214, 214, 214);
+$gray-300: #f4f4f4;
+$dark-gray: #4e4e4e;
+$gray-lightest: #e0e0e0;
+$gray-light: #c8c8c8;
+$gray-darken: #242424;
+$black: #000;
+$purple-100: rgb(184, 85, 172);
+$icon-gray: #767676;
+
+// Layer colors
+$layer0: rgb(12, 12, 12);
+$layer1: rgb(224, 224, 224);
+$layer2: rgb(242, 242, 242);
+$layer3: rgb(235, 235, 235);
+
+// Text
+$hover-text: rgb(78, 78, 78);
+$text: rgb(78, 78, 78);
+$paragraph: rgba(36, 36, 36, .8);
+$gray: rgb(118, 118, 118);
+$link-blue: rgb(0, 132, 240);
+$table-hover: rgba(40, 160, 255, .1);
+
+//mixin
+@mixin text-ellipsis($width) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: $width;
+}
+
+@mixin clearfix() {
+  &:after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+$brand-success:                  $green-lighten !default;
+
+// Body
+$body-color:                     $text !default;
+$body-bg:                        $layer2;
+
+//Breakpoints
+$mobile:                         768px;
+$tablet:                         992px;
+$desktop:                        1200px;
+$desktop-lg:                     1368px;
+
+// Default settings
+$text-color:                     $body-color;
+//$font-family-sans-serif:         -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-family-sans-serif:         'Ericsson Hilda', Helvetica, Arial, sans-serif;
+$font-family-monospace:          'Hilda Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+$font-regular:                   100;
+$border-width:                   .1rem;
+$border-color:                   $gray-200;
+$border-dark-color:              $dark-gray;
+$border-radius-base:             3px !default;
+$padding-base:                   16px;
+$link-color:                     $blue;
+
+//typography
+$font-size-base:                 1.4rem !default;
+$font-size-small:                1.2rem !default;
+$font-size-smaller:              1.2rem !default;
+$line-height-small:              1.5rem !default;
+$font-size-xs:                   1.1rem !default;
+$line-height-xs:                 1.2rem !default;
+$text-muted:                     transparentize($text-color, .4);
+$text-info:                      $blue;
+$text-warning:                   $yellow;
+$text-danger:                    $red;
+$text-success:                   $light-green;
+$code-bg:                        $light-gray;
+$timestamp-color:                $text-muted;
+
+$arrow-back-color:               lighten($gray, 10%);
+$arrow-top-color:                $gray;
+
+$csr-slogan-font-size:          1.8rem;
+$csr-slogan-line-height:        2.1rem;
+
+//hr
+$hr-margin-y:                    15px !default;
+$hr-border-color:                $border-color;
+
+  //Badges
+$badge-bg:                       $blue !default;
+$badge-color:                    $white !default;
+$badge-link-hover-color:         $white !default;
+$badge-active-color:             $blue !default;
+$badge-active-bg:                $blue !default;
+$badge-font-weight:              normal !default;
+$badge-font-size:                11px !default;
+$badge-border-radius:            16px !default;
+$badge-empty-bg:                 #eaeaea;
+$badge-empty-color:              $gray;
+$badge-padding-x:                .5rem;
+$badge-padding-t:                .2rem;
+$badge-padding-b:                .3rem;
+
+//Buttons
+$input-btn-border-width:       0.1rem !default;
+$input-btn-border-color:       $border-color !default;
+$input-btn-padding-y:          .85rem !default;
+$input-btn-padding-x:          .6rem !default;
+$input-btn-line-height:        1.14 !default;
+
+$input-btn-padding-y-sm:       .8rem !default;
+$input-btn-padding-x-sm:       .9rem !default;
+$input-btn-line-height-sm:     1.5 !default;
+
+$input-btn-padding-y-xs:        .1rem !default;
+$input-btn-padding-x-xs:        1rem !default;
+$input-btn-font-size-xs:        13px !default;
+$input-btn-line-height-xs:      15px !default;
+
+$btn-border-radius-xs:          $border-radius-base;
+$btn-font-weight:                normal !default;
+$btn-radius-base:                $border-radius-base;
+$btn-border-radius-base:         $btn-radius-base !default;
+
+//forms
+$input-height:                   28px;
+$input-border-color:             $border-color;
+$input-border-hover:             rgb(176, 176, 176);
+$input-danger-border-color:      $red;
+$input-focus-border-color:       $blue;
+$input-box-shadow:               none;
+$input-color:                    $text-color;
+$input-placeholder-color:        #898989;
+
+//form control
+$input-padding-x:                6px !default;
+$input-padding-y:                4px !default;
+$input-font-size:                .9em !default;
+$input-line-height:              18px !default;
+$input-disabled-bg:              #e6e6e6;
+$input-border-radius:            0;
+$input-border-radius-sm:         0;
+$input-border-radius-lg:         0;
+
+//form-control-sm
+$input-padding-y-sm:             .25rem;
+$input-padding-x-sm:             .5rem;
+
+//form-control-lg
+$input-padding-y-lg:             1.2rem;
+$input-padding-x-lg:             1.5rem;
+$font-size-lg:                   1.6rem;
+
+
+//solid search form
+$solid-input-bg:                               #F2F2F2;
+$solid-input-border-color:                     $solid-input-bg;
+
+//large search form
+$large-input-height:                            5rem;
+$large-input-font-size:                         1.5rem;
+$large-input-line-height:                       $large-input-font-size*1.333;
+$large-input-padding:                           1.4rem 4.5rem 1.6rem 1.5rem;
+$large-input-submit-padding:                    1.6rem 1.5rem;
+
+//search options dropdown
+$search-dropdown-toggle-height:                 $large-input-height;
+$search-dropdown-toggle-padding:                1.4rem 3rem 1.6rem 1.5rem;
+$search-dropdown-toggle-font-size:              $large-input-font-size;
+$search-dropdown-toggle-line-height:            $large-input-line-height;
+$search-dropdown-toggle-bg-hover:               $gray;
+
+//btn
+$btn-padding-y:                  .5em;
+$btn-padding-x:                  1em;
+$btn-font-size:                  12px;
+$btn-line-height:                16px;
+$btn-border-radius:              $border-radius-base;
+
+//btn small
+$btn-font-size-small:            12px !default;
+$btn-line-height-small:          16px !default;
+$btn-font-weight-small:          normal !default;
+
+//btn-lg
+$btn-padding-y-lg:              1.5rem !default;
+$btn-padding-x-lg:              .6rem !default;
+$btn-font-size-lg:              $font-size-base;
+$btn-line-height-lg:            1.6rem;
+$btn-border-radius-lg:          $border-radius-base;
+
+$btn-focus-box-shadow:         none;
+$btn-disabled-opacity:        .5;
+$btn-active-box-shadow:       none;
+
+//btn light
+$btn-light-color:              $text-color;
+$btn-light-bg:                 transparent;
+$btn-light-border:             $dark-gray;
+$btn-light-color-hover:        $white;
+$btn-light-bg-hover:           $dark-gray;
+$btn-light-border-hover:       $dark-gray;
+$btn-light-color-active:       $white;
+$btn-light-bg-active:          darken($dark-gray, 8%);
+$btn-light-border-active:      darken($dark-gray, 8%);
+
+//btn primary
+$btn-primary-color:              $white !default;
+$btn-primary-bg:                 $blue !default;
+$btn-primary-border:             $blue !default;
+$btn-primary-bg-hover:           lighten($blue, 15%);
+$btn-primary-border-hover:       lighten($blue, 15%);
+$btn-primary-bg-active:          darken($blue, 15%);
+$btn-primary-border-active:      darken($blue, 15%);
+
+//btn success
+$btn-success-color:              $white !default;
+$btn-success-bg:                 $green-lighten !default;
+$btn-success-border:             $green-lighten !default;
+$btn-success-bg-hover:           darken($green-lighten, 5%);
+$btn-success-border-hover:       darken($green-lighten, 5%);
+$btn-success-bg-active:          darken($green-lighten, 6%);
+$btn-success-border-active:      darken($green-lighten, 6%);
+$btn-success-bg-disabled:        $green-lighten;
+$btn-success-border-disabled:    $green-lighten;
+
+//btn send-post
+$btn-send-post-color:            $white;
+$btn-send-post-bg:               transparentize($green, .4);
+$btn-send-post-border:           transparentize($green, .4);
+$btn-send-post-bg-hover:         transparentize($green, .2);
+$btn-send-post-border-hover:     transparentize($green, .2);
+$btn-send-post-padding-x:        8px;
+$btn-send-post-padding-y:        35px;
+
+//btn-filter
+$btn-filter-color:               #4e4e4e;
+$btn-filter-bg:                  #e0e0e0;
+$btn-filter-bg-hover:            #b8b8b8;
+$btn-filter-radius:              12px;
+$btn-filter-label-font-size:     12px;
+$btn-filter-label-line-height:   14px;
+$btn-filter-padding-x:           1rem;
+$btn-filter-padding-y:           .5rem;
+
+//btn underline
+$btn-underline-font-size:        15px;
+$btn-underline-line-height:      20px;
+$btn-underline-padding:          0 0.3rem 1.3rem 0.3rem;
+$btn-underline-margin:           0 2.8rem 0 -0.3rem;
+$btn-underline-color-hover:      $blue;
+$btn-underline-border-color:     $btn-underline-color-hover;
+
+//btn icon
+$btn-icon-bg:                    transparent;
+$btn-icon-color:                 $paragraph;
+$btn-icon-color-hover:           $blue;
+$btn-icon-border:                0;
+$btn-icon-padding:               0;
+
+//btn add
+$btn-add-size:                   3.4rem;
+$btn-add-size-xs:                2.4rem;
+
+$btn-edit-bg:                    #f7f7f7;
+
+$btn-search-color:               $gray;
+
+//btn-toggle
+$btn-toggle-size:                   3.4rem;
+
+//Suggested workgroups
+$btn-suggested-group-margin:        $padding-base -#{$padding-base/2} $padding-base !important;
+$btn-suggested-item-margin:         $padding-base/2 !important;
+$btn-suggested-item-border-radius:  2px !important;
+$btn-suggested-item-bg:             $white;
+$btn-suggested-item-border:         $border-color;
+$btn-suggested-item-color:          $paragraph;
+$btn-suggested-item-border-hover:   $border-dark-color;
+$btn-suggested-item-bg-hover:       $border-dark-color;
+$btn-suggested-item-color-hover:    $white;
+
+//$btn-info-color:                 #fff !default;
+//$btn-info-bg:                    $brand-info !default;
+//$btn-info-border:                darken($btn-info-bg, 5%) !default;
+//
+//$btn-warning-color:              #fff !default;
+//$btn-warning-bg:                 $brand-warning !default;
+//$btn-warning-border:             darken($btn-warning-bg, 5%) !default;
+//
+//$btn-danger-color:               #fff !default;
+//$btn-danger-bg:                  $brand-danger !default;
+//$btn-danger-border:              darken($btn-danger-bg, 5%) !default;
+//
+//$btn-link-disabled-color:        $gray-light !default;
+
+//Dropdowns
+$dropdown-min-width:             12rem;
+$dropdown-max-width:             290px;
+$dropdown-max-height:            35rem;
+$dropdown-padding-y:             0;
+$dropdown-spacer:                .4rem;
+$dropdown-bg:                    $white;
+$dropdown-border-color:          $border-color;
+$dropdown-border-radius:         0;
+$dropdown-divider-color:         $border-color;
+$dropdown-box-shadow:            none;
+$dropdown-link-color:            $text-color;
+$dropdown-link-hover-color:      $dropdown-link-color;
+$dropdown-link-hover-bg:         transparentize($blue, 0.9);
+$dropdown-link-dark-hover-bg:    #363636;
+$dropdown-link-active-color:     $dropdown-link-color;
+$dropdown-link-active-bg:        $dropdown-link-hover-bg;
+
+$dropdown-link-disabled-color:   transparentize($text-color, .5);
+
+$dropdown-font-size:             $font-size-base !default;
+$dropdown-line-height:           1.2em !default;
+
+$dropdown-item-padding-y:        8px;
+$dropdown-item-padding-x:        8px;
+
+$dropdown-header-color:          $dropdown-link-color;
+$dropdown-header-bg:             $layer2;
+
+$dropdown-font-size-small:       $font-size-small !default;
+$dropdown-line-height-small:     15px !default;
+
+$dropdown-dark-bg:               $dark-gray;
+$dropdown-dark-box-shadow:       inset 0 1px 3px 0 transparentize($black, .75), 0 2px 5px 0 transparentize($black, .75);
+
+//dl
+$dt-horizontal-offset:          180px !default;
+
+// Z-index master list
+$zindex-fixed:              1030 !default;
+$zindex-popover:            1077 !default;
+$zindex-sidebar:            1081 !default;
+$zindex-sticky:             2 !default;
+$zindex-dropdown:           1061 !default;
+$zindex-tooltip:            1077 !default;
+$zindex-toggle-button:      1075 !default;
+$zindex-modal-backdrop:     1089 !default;
+$zindex-modal:              1090 !default;
+$zindex-panel:              1076 !default;
+$zindex-chatbot:            $zindex-toggle-button;
+$zindex-notification:       1091 !default;
+$zindex-loading-screen:     1100;
+
+//Header
+$header-height:                 48px;
+$header-bg:                     $layer0;
+$header-padding-y:              .8rem;
+$header-padding-x:              1.5rem;
+
+$appbar-height:                 $header-height;
+
+//jump-to-csr
+$jump-csr-input-height:                35px;
+$jump-csr-input-width:                 16rem;
+$jump-csr-input-padding:               1rem 3.6rem 1rem 1rem;
+$jump-csr-input-bg:                    #212121;
+$jump-csr-input-color:                 #898989;
+$jump-csr-input-border:                $dark-gray;
+$jump-csr-input-border-disabled:       $jump-csr-input-border;
+
+$jump-csr-submit-color:                transparentize($gray, .1);
+$jump-csr-submit-color-disabled:       $blue;
+
+//Main menu
+$menu-padding:                   $padding-base ($padding-base - 1) $padding-base $padding-base*2;
+$menu-link-color:                $text-color;
+$menu-link-hover-color:          $blue;
+
+$sidebar-bg:                     $layer1;
+$sidebar-border-width:           0;
+$sidebar-border:                 $layer1;
+$sidebar-footer-height:          40px;
+$sidebar-footer-link-bg:         $layer1;
+$sidebar-footer-link-color:      $text-color;
+$btn-hamburger-color:            $blue;
+$sidebar-width:                  220px;
+$sidebar-width-collapsed:        50px;
+
+
+$sidebar-header-height:          $header-height;
+$sidebar-header-bg:              $header-bg;
+$sidebar-header-padding-y:       1.5rem;
+$sidebar-header-padding-x:       1.5rem;
+//anchor-bar
+$anchor-panel-height:            50px;
+$anchor-btn-home-width:          $anchor-panel-height;
+$anchor-btn-border-color:        $border-color;
+
+//Box Utilities
+$box-border-color:              $border-color;
+$box-border-color-hover:        $input-border-hover;
+$box-font-size:                 $font-size-base !default;
+$box-line-height:               1.35 !default;
+
+$suggested-csr-bg:              $white;
+
+//Ticket layout controls
+$scroll-bar-width:                   17px;
+$app-page-content-width:             75%;
+$app-page-aside-width:               25%;
+$app-page-aside-min-width:           470px;
+$app-page-aside-min-width-md:        400px;
+$app-page-content-full-width:        $app-page-content-width + $app-page-aside-width;
+$aside-border-width:                 $border-width*3;
+$aside-border-color:                 $layer1;
+
+//user status
+$user-status-online:             $light-green;
+$user-status-away:               $yellow;
+$user-status-offline:            $gray;
+$user-status-border:             #fcfcfc;
+
+//user-pic image size
+$user-pic-extra-small:           24px;
+$user-pic-small:                 34px;
+$user-pic-medium:                50px;
+$user-pic-sublarge:              80px;
+$user-pic-large:                 96px;
+
+//user-pic status
+$user-pic-status-small:          10px;
+$user-pic-status-medium:         14px;
+
+//answer
+$answer-padding:                 $padding-base;
+$answer-min-height:              50px;
+$answer-wrapper-padding-left:    $user-pic-medium + $padding-base*2;
+$answer-avatar-offset:           -#{$user-pic-medium + $padding-base};
+$answer-avatar-offset-sm:        $user-pic-small;
+
+$formal-answer-bg:               $layer3;
+$technical-answer-bg:            $layer3;
+
+//Forum
+$forum-gutter:                                   $padding-base*2;
+$forum-border:                                   $blue-100;
+$forum-bg:                                       $blue-100;
+$forum-text-font-size:                           $font-size-small;
+$forum-text-line-height:                         $forum-text-font-size*1.6;
+$forum-blockquote-font-size:                     $font-size-small;
+$forum-blockquote-color:                         $paragraph;
+$forum-blockquote-border:                        rgba(36, 36, 36, .3);
+$forum-timestamp-font-size:                      $font-size-small;
+$forum-timestamp-color:                          $timestamp-color;
+$forum-email-post-bg:                            transparent;
+
+$forum-label-color:                              $white;
+$forum-label-radius:                             $border-radius-base;
+$forum-label-font-size:                          $font-size-small;
+$forum-label-line-height:                        1.1;
+$forum-label-padding-x:                          .3rem;
+$forum-label-padding-y:                          .5rem;
+$forum-label-from-sms-bg:                        $gray;
+$forum-label-from-sms-margin-x:                  0;
+$forum-label-from-sms-margin-y:                  5px;
+
+$forum-filters-bg:                               $layer3;
+$forum-filters-padding:                          $padding-base;
+$forum-filters-margin-bottom:                    $padding-base*2;
+$forum-toggle-margin:                            0 0 0 $padding-base;
+$forum-toggle-description-margin:                11px;
+$forum-toggle-description-color:                 $text-color;
+$forum-filter-group-margin-top:                  $padding-base;
+$forum-filter-group-margin-bottom:               $padding-base;
+$forum-filter-label-width:                       80px;
+$forum-filter-label-color:                       $gray;
+$forum-comment-offset:                           $user-pic-medium + $padding-base*2;
+$forum-comment-padding-right:                    $padding-base;
+$forum-comment-avatar-offset:                    -#{$user-pic-medium + $padding-base};
+$forum-reply-offset:                             $padding-base*2;
+$forum-item-text-color:                          transparentize($text, .4);
+
+//Forum user emails
+$forum-user-email-post-bg: $forum-email-post-bg;
+$forum-user-email-text-line-height: 0.9rem;
+$forum-user-email-text-font-size: $forum-text-font-size;
+
+//forum history item
+$forum-history-item-bg:                          $body-bg;
+$forum-history-item-height:                      50px;
+$forum-history-item-border-width:                2px;
+$forum-history-item-border-color:                #F3F8F8;
+$forum-history-item-margin-bottom:               0;
+$forum-history-item-padding:                     1px 0 $padding-base 0;
+$forum-history-item-font-size:                   1.2rem;
+$forum-history-item-line-height:                 $forum-history-item-font-size*1.14;
+$forum-history-item-color:                       #242424;
+$forum-history-icon-font-size:                   12px;
+$forum-history-user-pic-size:                    27px;
+$forum-history-icon-size:                        $forum-history-user-pic-size;
+$forum-history-icon-box-shadow:                  0 0 0 2px $white;
+$forum-history-icon-bg:                          transparentize($gray, .4);
+$forum-history-icon-bg-cover:                    $white;
+$forum-history-icon-color:                       $white;
+$forum-history-icon-offset:                      -10px;
+$forum-history-action-width:                    $user-pic-medium;
+
+//Forum navigation
+$forum-navigation-collapsed-padding:         7px;
+
+//Tasks
+$tasks-panel-bg:                 $layer3;
+$tasks-panel-padding:            $padding-base;
+$tasks-nav-link-color:           $gray;
+$tasks-add-panel-bg:             transparentize($gray, 0.85);
+
+//Linked Items
+$csr-status-registered:          transparentize($gray, 0.4);
+$csr-status-pre_analysis:        $dark-blue;
+$csr-status-analysis:            $orange;
+$csr-status-internal:            $purple;
+$csr-status-formal:              $blue;
+$csr-status-follow_up:           $green;
+$csr-status-finished:            $light-green;
+$csr-status-default:             $gray;
+
+//CSR collaboration Status
+$status-engagement:              transparentize($green, .4);
+$status-consultation:            transparentize($blue, .4);
+$status-collaboration:           transparentize($orange, .4);
+$status-waiting:                 transparentize($red, .4);
+$status-answered:                transparentize($orange, 0.4);
+$status-completed:               transparentize($dark-blue, 0.4);
+
+//CSR Type
+$csr-type-font-size:             1.2rem;
+$csr-type-line-height:           1.15;
+$csr-type-problem:               $orange;
+$csr-type-consultation:          $blue;
+$csr-type-project:               $green;
+$csr-type-internal:              $gray;
+$csr-type-warranty:              $purple;
+$csr-type-hardware:              $purple;
+
+//CSR Severity
+$csr-severity-font-size:        12px;
+$csr-severity-line-height:      15px;
+$csr-severity-icon-size:        1rem;
+$csr-severity-low:              $blue;
+$csr-severity-emergency:        $red;
+$csr-severity-high:             $orange;
+$csr-severity-medium:           $light-green;
+
+//Popover
+$popover-bg:                    $white !default;
+$popover-max-width:             420px !default;
+$popover-border-width:          0 !default;
+$popover-border-radius:         4px;
+$popover-box-shadow:            0 2px 15px 0 rgba(0,0,0,0.25);
+
+$popover-inner-padding-y:       $padding-base !default;
+$popover-inner-padding-x:       $padding-base*2 !default;
+
+$popover-header-bg:             transparent !default;
+$popover-header-color:          $text-muted !default;
+$popover-header-padding-y:      0 !default;
+$popover-header-padding-x:      0 !default;
+$popover-header-font-size:      18px;
+$popover-header-line-height:    21px;
+$popover-header-margin:         25px;
+
+$popover-arrow-width:           0 !default;
+$popover-arrow-height:          0 !default;
+$popover-arrow-color:           transparent !default;
+
+$popover-body-padding-y:        0 !default;
+$popover-body-padding-x:        0 !default;
+
+// tooltip
+$tooltip-font-size:            1.2rem;
+$tooltip-border-radius:        0;
+$tooltip-bg:                   #333;
+$tooltip-color:                $white;
+$tooltip-opacity:              1;
+$tooltip-padding-y:           .12rem;
+$tooltip-padding-x:           .6rem;
+
+
+//csr popover
+$csr-popover-bg:                 $white;
+$csr-popover-width:              470px;
+$csr-popover-padding:            40px;
+$csr-popover-border-radius:      $border-radius-base*2;
+$csr-popover-box-shadow:         0 2px 15px 0 transparentize($black, .75);
+
+//dl
+$dt-horizontal-offset:          180px !default;
+
+// Z-index master list
+$zindex-dropdown:              1061 !default;
+$zindex-sticky:                1060 !default;
+$zindex-fixed:                 1030 !default;
+$zindex-modal-backdrop:        1079 !default;
+$zindex-modal:                 1080 !default;
+$zindex-popover:               1030 !default;
+$zindex-tooltip:               1071 !default;
+$zindex-sidebar:               1060 !default;
+$zindex-notification:          1080 !default;
+$zindex-loading-screen:        1081;
+$zindex-search-row:            3;
+$zindex-search-autocomplete:   2;
+
+//CSR Details
+$details-name-width:           200px;
+$details-name-width-sm:        150px;
+$details-line-height:          1.15;
+$datails-name-font-weight:     normal;
+$details-name-color:           $text-muted;
+$details-min-resize-width:     1500px;
+
+//ngx-table
+$table-header-bg:                      none;
+$table-header-padding-y:               1rem;
+$table-header-padding-x:               0;
+$table-header-font-size:               $font-size-base;
+$table-header-line-height:             1.6rem;
+$table-header-font-weight:             bold;
+$table-header-color:                   $text-color;
+$table-header-border:                  $gray;
+$table-body-bg:                        none;
+$table-body-row-odd:                   transparent;
+$table-body-row-even:                  #ebebeb;
+$table-body-row-hover:                 $table-hover;
+$table-body-row-active:                $table-hover;
+$table-body-row-checked:               $table-hover;
+$table-body-font-size:                 $font-size-base;
+$table-body-line-height:               normal;
+$table-body-cell-padding-x:            0.8rem;
+$table-body-cell-padding-y:            1rem;
+$table-cell-font-size-sm:              1.2rem;
+$table-checkbox-content:               url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fafafa' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+
+
+//data-table header
+$datatable-header-height:                    48px;
+$datatable-header-title-padding-x:           12px;
+$datatable-header-title-padding-y:           $padding-base;
+$datatable-header-actions-padding-x:         $padding-base/2;
+$datatable-header-actions-padding-y:         $padding-base;
+$datatable-header-search-width:              200px;
+
+$datatable-settings-title-padding:            ($padding-base + $padding-base/2) $padding-base $padding-base*2;
+$datatable-settings-title-font-size:          18px;
+$datatable-settings-title-line-height:        24px;
+$datatable-settings-title-color:              $text-muted;
+$datatable-settings-dropdown-offset-top:      -50px;
+$datatable-settings-dropdown-offset-left:     -123px;
+$datatable-settings-dropdown-width:           220px;
+
+//gutter toggle
+$gutter-toggle-width:                         50px;
+$gutter-toggle-height:                        $datatable-header-height;
+$gutter-toggle-color:                         $blue;
+
+//progress linear loader
+$progress-linear-loader-height:               3px;
+$progress-linear-loader-bg:                   linear-gradient(to right, #0082F0 0%,  #63D4FF 100%);
+$progress-linear-loader-bar-bg: #004fcb;
+
+//tasks
+$tasks-count-bg:                       $blue;
+$tasks-count-radius:                   5px;
+$tasks-count-font-size:                12px;
+$tasks-count-line-height:               1;
+$tasks-count-padding-x:                .25rem;
+$tasks-count-padding-y:                .5rem;
+
+//Aside toggle button
+$aside-toggle-radius:                  $border-radius-base;
+$aside-toggle-bg:                      $blue;
+$aside-toggle-collapsed-bg:            $blue;
+$aside-toggle-color:                   $gray;
+$aside-toggle-collapsed-color:         $white;
+$aside-toggle-box-shadow:              0 2px 10px 0 rgba(29, 72, 143, 0.5);
+$aside-toggle-width:                   36px;
+$aside-toggle-height:                  36px;
+
+// List group
+$list-group-bg:                        transparentize($green, 0.95);
+$list-group-border-width:              0;
+$list-group-item-padding-y:            0.8rem !default;
+$list-group-item-padding-x:            1.5rem !default;
+$list-group-item-border-radius:        $border-radius-base;
+
+//thumbnails
+$thumbnails-item-padding-l:            0;
+$thumbnails-item-padding-r:            calc(#{$btn-add-size} + #{$padding-base});
+$thumbnails-min-height:                50px;
+
+//Collaboration rating
+$collaboration-rating-bg:              $layer3;
+$collaboration-rating-padding-x:       9px;
+$collaboration-rating-padding-y:       13px;
+$collaboration-rating-title-font-size: $font-size-small;
+$collaboration-rating-title-color:     $gray;
+
+//Collaboration rating tooltip
+$collaboration-rating-tooltip-header-font-size: 1.3rem;
+$collaboration-rating-tooltip-header-margin-b: 5px;
+
+//Timeline
+$timeline-time-margin-t:               7px;
+$timeline-time-margin-b:               10px;
+
+$timeline-editable-field-margin-l:     10px;
+$timeline-editable-field-icon-font-size: 1.6rem;
+$timeline-loader-bg:                   rgba(255, 255, 255, 0.5);
+$timeline-loader-font-size:            3rem;
+
+//Progressbar
+$progress-font-size:                   1.05rem;
+$progress-height:                      .5rem;
+$progress-border-radius:               0;
+$progress-bg:                          rgba(147, 149, 151, .2);
+$progress-bar-bg:                      $blue;
+
+//Workgroups
+$workgroups-nav-header-height:         $datatable-header-height;
+$workgroups-nav-width:                 230px;
+$workgroups-nav-width-collapsed:       0;
+$workgroups-nav-box-shadow:            inset -3px 0 0 0 $layer1;
+$workgroups-nav-bg:                    $layer2;
+$workgroups-nav-border-color:          $gray-100;
+$workgroups-nav-toggle-border:         $gray-100;
+$workgroups-nav-loading-size:          $font-size-base*1.42;
+$workgroups-nav-loading-padding:       $workgroups-nav-header-height + $padding-base $padding-base;
+$workgroups-nav-bg-hover:              transparentize($blue, 0.97);
+$workgroups-nav-color-hover:           $blue;
+
+$workgroups-tree-icon-color:           $paragraph;
+$workgroups-tree-icon-right-color:     $workgroups-tree-icon-color;
+$workgroups-tree-icon-up-color:        $blue;
+$workgroups-tree-link-color:           $text-color;
+$workgroups-tree-link-color-hover:     $blue;
+$workgroups-tree-font-size:            $font-size-small;
+$workgroups-tree-line-height:          15px;
+$workgroups-tree-item-margin-x:        $padding-base/2;
+$workgroups-tree-item-margin-y:        0;
+
+
+//Workgroups
+$workgroup-assigned-color:             $green;
+$workgroup-sms-engagement-color:       $gray;
+$workgroup-unassigned-color:           $orange;
+$workgroup-participant-only:           $red;
+
+//text-editor
+$text-editor-min-height:               280px;
+$text-editor-no-header-min-height:     123px;
+$text-editor-max-height:               500px;
+$text-editor-border:                   1px solid $border-color;
+$text-editor-border-color:             $border-color;
+$text-editor-toolbar-padding-x:        12px;
+$text-editor-toolbar-padding-y:        8px;
+$text-editor-toolbar-bg-color:         $layer3;
+$text-editor-toolbar-border-radius:    $border-radius-base $border-radius-base 0 0;
+$text-editor-heading-width:            110px;
+$text-editor-heading-font-weight:      bold;
+$text-editor-h1-font-size:             12px;
+$text-editor-h2-font-size:             12px;
+$text-editor-base-font-size:           12px;
+$text-editor-picker-options-width:     72px;
+$text-editor-footer-padding-x:         $padding-base/2;
+$text-editor-footer-padding-y:         $padding-base;
+$text-editor-footer-border-radius:     0 0 $border-radius-base $border-radius-base;
+
+$comments-textarea-padding-x:          1.2rem;
+$comments-textarea-padding-y:          0.8rem;
+$comments-textarea-margin-x:           0.5rem;
+$comments-textarea-margin-y:           0;
+
+$simple-editor-bg:                     $white;
+$simple-editor-border:                 $text-editor-border;
+$simple-editor-padding:                $padding-base .1rem $padding-base $padding-base;
+$simple-editor-font-size:              $box-font-size;
+$simple-editor-line-height:            $box-line-height;
+$simple-editor-min-height:             198px;
+
+//inline editor
+$inline-editor-bg:                       $white;
+$inline-editor-height:                   $btn-add-size;
+$inline-editor-border-width:             $input-btn-border-width;
+$inline-editor-box-shadow:               0 1px 4px 0 transparentize($black, .88);
+$inline-editor-border-color:             $border-color;
+$inline-editor-offset:                   -#{$input-btn-padding-y} -#{$input-btn-padding-x + $input-btn-border-width};
+$inline-editor-padding:                  ($input-btn-padding-y - $border-width) $btn-add-size ($input-btn-padding-y - $border-width) $input-btn-padding-x;
+$inline-editor-border-radius:            0;
+$inline-editor-toggle-font-size:         $csr-severity-font-size;
+$inline-editor-toggle-line-height:       $csr-severity-line-height;
+$inline-edit-fields-padding:             ($input-btn-padding-y - $border-width) $padding-base ($input-btn-padding-y - $border-width) $input-btn-padding-x;
+
+//post status dropdown
+$post-type-margin-x:                    5px;
+$post-type-margin-y:                    $padding-base;
+$post-type-btn-color:                   $white;
+$post-type-btn-border:                  0;
+$post-type-btn-padding-x:               0.5rem;
+$post-type-btn-padding-y:               1rem;
+$post-type-btn-font-size:               1.2rem;
+$post-type-btn-font-weight:             bold;
+$post-type-dropdown-height:             300px;
+$post-type-dropdown-item-color:         $text-color;
+
+//notications
+$notification-width:                    380px;
+$notification-font-size:                14px;
+$notification-line-height:              16px;
+$notification-icon-size:                20px;
+$notification-border:                   #c5c5c5;
+// Modals
+$modal-lg:                                       800px !default;
+$modal-md:                                       650px !default;
+$modal-sm:                                       420px !default;
+
+$modal-title-font-size:                          1.6rem;
+$modal-title-line-height:                        2rem;
+$modal-content-border-radius:                    0;
+$modal-content-border:                           0 !default;
+$modal-content-box-shadow:                       none;
+$modal-backdrop-bg:                              $black !default;
+$modal-backdrop-opacity:                         .25 !default;
+$modal-header-border-color:                      transparent;
+$modal-header-padding:                           $padding-base !default;
+$modal-body-padding:                             $padding-base !default;
+$modal-footer-padding:                           $padding-base;
+
+// Rating
+$rating-font-size:                               1.6rem;
+$rating-color:                                   $gray;
+$rating-active-color:                            $yellow;
+$rating-margin-r:                                7px;
+
+  //asignment-modal
+$assignment-modal-footer-bg:                     #f4f4f4;
+$assignment-modal-padding:                       10px 15px 15px;
+
+//panel
+$panel-width:                                    $app-page-aside-min-width;
+$panel-width-md:                                 $app-page-aside-min-width-md;
+$panel-box-shadow:                               inset 1px 0 0 0 $gray-100;
+$panel-border-width:                             3px;
+$panel-border-color:                             $layer1;
+$panel-header-height:                            $header-height;
+$panel-heading-font-size:                        1.7rem;
+$panel-heading-line-height:                      normal;
+$panel-search-form-width:                        158px;
+$panel-header-box-shadow:                        inset 0 1px 0 0 $gray-100;
+
+//fullsize-panel
+$fullsize-panel-bg:                              $header-bg;
+
+//ticket preview panel
+$ticket-panel-box-shadow:                        inset 0 1px 0 0 $gray-100, inset 1px 0 0 0 $gray-100;
+$ticket-panel-font-size:                         $font-size-base;
+$ticket-panel-line-height:                       1.35;
+$ticket-panel-toolbar-font-size:                 12px;
+$ticket-panel-toolbar-line-height:               16px;
+$ticket-panel-spacer:                            5px;
+
+//collaboration modal
+$collaboration-modal-body-padding:               0;
+$collaboration-modal-body-padding-inner:         $padding-base;
+
+//hint
+$hint-bg:                                        $light-gray;
+$hint-font-size:                                 $font-size-small;
+$hint-line-height:                               21px;
+$hint-padding-x:                                 20px;
+$hint-padding-y:                                 85px;
+$collaboration-modal-hint-margin:                0 -15px -20px;
+
+$info-bubble-bg:                                 $icon-gray;
+$info-bubble-size:                               50px;
+$info-bubble-font-size:                          20px;
+
+//csr history filters
+$csr-history-filters-padding:                      $padding-base/2 $padding-base;
+$csr-history-filter-item-bg:                       $light-gray;
+$csr-history-filter-item-border:                   $lighten-gray;
+$csr-history-filter-item-color:                    $gray;
+$csr-history-filter-item-bg-hover:                 $blue;
+$csr-history-filter-item-border-hover:             $blue;
+$csr-history-filter-item-color-hover:              $white;
+$csr-history-filter-item-border-radius:            $border-radius-base !important;
+
+$csr-history-filter-underline-item-bg:             transparent;
+$csr-history-filter-underline-item-border:         transparent;
+$csr-history-filter-underline-item-color:          $text-color;
+$csr-history-filter-underline-item-color:          $text-color;
+$csr-history-filter-underline-item-bg-hover:       $csr-history-filter-underline-item-bg;
+$csr-history-filter-underline-item-border-hover:   $csr-history-filter-underline-item-border;
+$csr-history-filter-underline-item-color-hover:    $blue;
+$csr-history-filter-item-underline-border-radius:  0 !important;
+$csr-history-filter-item-underline-border-color:   $blue;
+
+//custom control
+$custom-control-gutter:                          $padding-base*2;
+$custom-control-spacer-y:                        $padding-base;
+$custom-control-indicator-size:                  1.4rem !default;
+$custom-control-indicator-bg:                    $white !default;
+$custom-control-indicator-bg-size:               75% 75% !default;
+$custom-control-indicator-border:                $border-width solid $box-border-color;
+
+$custom-checkbox-indicator-border-radius:        0 !default;
+$custom-control-indicator-checked-color:         $white;
+
+$custom-control-indicator-disabled-bg:           $gray-100 !default;
+$custom-control-indicator-disabled-border:       $custom-control-indicator-disabled-bg;
+$custom-control-description-disabled-color:      $gray !default;
+
+$custom-control-indicator-checked-bg:            $blue !default;
+$custom-control-indicator-checked-color:         $white !default;
+$custom-control-indicator-checked-border:        $custom-control-indicator-checked-bg;
+$custom-control-indicator-checked-box-shadow:    none !default;
+
+$custom-control-indicator-focus-border:          $blue;
+$custom-control-indicator-focus-box-shadow:      none !default;
+
+$custom-control-indicator-active-bg:             $blue !default;
+$custom-control-indicator-active-color:          $white !default;
+$custom-control-indicator-active-border:         $custom-control-indicator-active-bg;
+$custom-control-indicator-active-box-shadow:     none !default;
+
+$custom-select-border-radius:0;
+
+//toggle control
+$toggle-control-width:                           2.2rem;
+$toggle-control-height:                          1.4rem;
+$toggle-control-bg:                              $white;
+$toggle-control-active-bg:                       $purple;
+$toggle-control-border:                          $gray;
+$toggle-control-active-border:                   $toggle-control-active-bg;
+$toggle-label-font-size:                         1.3rem;
+$toggle-label-line-height:                       $toggle-control-height;
+
+
+//trouble report notes
+$note-border-width:                              2px;
+$note-border-color:                              $blue;
+$note-padding-left:                              10px;
+$note-margin-bottom:                             $padding-base;
+
+//cards
+$card-width:                                     275px;
+$card-height:                                    400px;
+$card-border-radius:                             0;
+$card-border-color:                              $white;
+$card-border-color-hover:                        $border-color;
+$card-beta-features-bg:                          #e9eaea;
+$card-beta-features-border:                      $card-beta-features-bg;
+$card-box-shadow:                                0 0 10px transparentize($black, .85);
+$card-icon-color:                                #a0a0a0;
+$card-title-color:                               $text-color;
+$card-title-font-size:                           1.6rem;
+$card-title-line-height:                         1.3;
+$card-title-margin-bottom:                       $padding-base;
+$card-text-font-size:                            $font-size-small;
+$card-text-line-height:                          1.53;
+
+//beta key
+$input-beta-key-padding-right:                   35px;
+
+//autocomplete
+$completer-dropdown-box-shadow:                 $dropdown-box-shadow;
+$completer-dropdown-height:                     300px;
+$completer-dropdown-width:                      310px !important;
+$completer-dropdown-border:                     0 !important;
+$completer-dropdown-padding:                    0 !important;
+$completer-dropdown-margin-top:                 10px !important;
+$completer-row-color:                           $text-color !important;
+$completer-row-font-size:                       $font-size-small;
+$completer-row-line-height:                     $line-height-small;
+$completer-row-padding:                         10px !important;
+$completer-invalid-border-color:                $red;
+$completer-selected-row-background:             $dropdown-link-hover-bg !important;
+$completer-selected-row-color:                  $dropdown-link-hover-color !important;
+$completer-searching-color:                     $text-muted !important;
+$completer-searching-padding:                   10px !important;
+
+//emails
+$email-collapsed-height:                        100px;
+$email-inner-padding:                           $padding-base;
+$email-border-width:                            1px;
+$email-border-color:                            $gray-100;
+$email-font-size:                               $font-size-small;
+$email-line-height:                             $line-height-small*1.333;
+$email-subject-font-size:                       $email-font-size*1.15;
+$email-subject-line-height:                     $email-line-height*0.85;
+$email-subject-margin-bottom:                   25px;
+$email-sender-color:                            $text-color;
+$email-sender-font-size:                        $email-font-size*1.15;
+$email-sender-line-height:                      $email-line-height*0.85;
+$email-date-color:                              $text-muted;
+$email-recipients-color:                        $text-muted;
+
+//Search page
+$search-filters-width:                          350px;
+$search-filters-width-collapsed:                0;
+$search-filters-bg:                             $white;
+$search-filters-box-shadow:                     $workgroups-nav-box-shadow;
+$search-csr-area-bg:                            $light-gray;
+$search-csr-area-height:                        100%;
+$search-csr-area-min-width:                     640px;
+$search-csr-header-height:                      130px;
+$search-csr-header-border-width:                $border-width;
+$search-csr-header-border-color:                $border-color;
+$search-csr-body-bg:                            $white;
+$search-csr-body-height:                        calc(100% - #{$search-csr-header-height});
+$search-csr-item-margin:                        $padding-base*2 $padding-base;
+$search-csr-item-offset:                        30px;
+$search-csr-item-time-font-size:                90%;
+$search-csr-item-title-font-size:               17px;
+$search-csr-item-title-line-height:             25px;
+$search-csr-item-text-color:                    $text-color;
+$search-csr-item-text-font-size:                $font-size-small;
+$search-csr-item-text-line-height:              $font-size-small*1.384;
+$search-csr-item-highlight-bg:                  $layer1;
+
+//metis search item
+$metis-item-padding-y:                          6.5rem;
+$metis-item-margin-x:                           $padding-base*2;
+$metis-item-space-sm:                           $padding-base/2;
+$metis-product-border-width:                    2px;
+$metis-product-padding-x:                       $padding-base - $metis-product-border-width;
+$metis-item-title-color:                        $dark-blue;
+$metis-item-title-font-size:                    1.6rem;
+$metis-item-title-line-height:                  1.125;
+$metis-item-title-margin-b:                     2.3rem;
+
+//pagination
+$pagination-font-size:                          1.5rem;
+$pagination-line-height:                        1.3333 !default;
+$pagination-color:                              $text-color !default;
+$pagination-bg:                                 transparent !default;
+$pagination-hover-color:                        $blue !default;
+$pagination-hover-bg:                           $white !default;
+$pagination-active-bg:                          $blue !default;
+$pagination-active-color:                       $white !default;
+$pagination-padding-x:                          $padding-base;
+$pagination-padding-y:                          $padding-base/2;
+$pagination-nav-margin-x:                       0;
+$pagination-nav-margin-y:                       10px;
+$pagination-nav-border-radius:                  $border-radius-base;
+$pagination-nav-border-width:                   1px;
+$pagination-nav-border-color:                   $border-color;
+$pagination-border-radius:                      $border-radius-base;
+$pagination-border-width:                       1px;
+$pagination-border-color:                       $border-color;
+
+//circle badge
+$circle-bagde-bg:                               $gray-100;
+$circle-bagde-color:                            $white;
+$circle-bagde-width:                            106px;
+$circle-bagde-height:                           $circle-bagde-width;
+$circle-bagde-border-radius:                    $circle-bagde-width;
+$circle-bagde-font-size:                        42px;
+$circle-bagde-line-height:                      $circle-bagde-height - $padding-base*2;
+$circle-bagde-padding:                          $padding-base;
+
+//tpp section
+$tpp-timeline-border-color:                     #E8E8E8;
+$tpp-post-font-size:                            1.2rem;
+$tpp-post-line-height:                          1.666;
+
+$tpp-in-progress-bg:                            $white;
+$tpp-overdue-bg:                                transparentize($red,.95);
+$tpp-completed-bg:                              transparentize($gray,.95);
+$tpp-in-progress-badge-bg:                      transparentize($orange, .5);
+$tpp-overdue-badge-bg:                          transparentize($red, .5);
+$tpp-completed-badge-bg:                        transparentize($light-green, .5);
+$tpp-item-box-shadow:                           inset 0 -1px 0 0 $border-color;
+$tpp-item-font-size:                            12px;
+$tpp-item-line-height:                          16px;
+$tpp-item-color:                                $text-muted;
+$tpp-comlog-counter-bg:                         $lighten-gray;
+$tpp-comlog-counter-color:                      $text-color;
+$tpp-comlog-section-bg:                         transparentize($layer3, .4);
+$tpp-assignment-section-bg:                     $layer3;
+
+//ngx-datepicker
+$datepicker-border-radius:                      $border-radius-base;
+$datepicker-box-shadow:                         $dropdown-box-shadow;
+$datepicker-header-bg:                          $white;
+$datepicker-header-inner-bg:                    transparent;
+$datepicker-header-btn-color-hover:             $blue;
+$datepicker-btn-today-border-color-hover:       $datepicker-header-btn-color-hover;
+$datepicker-weekdaytitle-bg:                    $table-header-bg;
+$datepicker-weekdaytitle-color:                 $table-header-color;
+$datepicker-cell-color:                         $text-color;
+$datepicker-cell-bg:                            transparent;
+$datepicker-cell-bg-hover:                      $blue;
+$datepicker-cell-color-hover:                   $white;
+$datepicker-current-color:                      $blue;
+$datepicker-highlight-color:                    $gray;
+$datepicker-selected-bg:                        transparent;
+$datepicker-icon-font-size:                     14px;
+
+//ngb-datepicker
+$ngb-datepicker-font-size:                      1.4rem;
+$ngb-datepicker-bg:                             $white;
+$ngb-datepicker-border-radius:                  0.5rem;
+$ngb-datepicker-header-border-radius:           0.5rem 0.5rem 0 0;
+$ngb-datepicker-header-padding-t:               0.5rem;
+$ngb-datepicker-navigation-height:              4rem;
+$ngb-datepicker-navigation-line-height:         3.85rem;
+$ngb-datepicker-navigation-select-width:        18rem;
+$ngb-datepicker-navigation-select-padding-x:    0.5rem;
+$ngb-datepicker-navigation-select-padding-y:    1rem;
+$ngb-datepicker-navigation-select-font-size:    1.4rem;
+$ngb-datepicker-navigation-select-border-color: $gray-200;
+$ngb-datepicker-navigation-select-border-radius-month: 0.5rem 0 0 0.5rem;
+$ngb-datepicker-navigation-select-border-radius-year: 0 0.5rem 0.5rem 0;
+$ngb-datepicker-arrow-size:                     4rem;
+$ngb-datepicker-arrow-btn-padding-x:            0;
+$ngb-datepicker-arrow-btn-padding-y:            2rem;
+$ngb-datepicker-arrow-btn-color:                $blue;
+$ngb-datepicker-arrow-btn-color-hover:          $dark-blue;
+$ngb-datepicker-week-border-radius:             0.5rem;
+$ngb-datepicker-week-first-padding-l:           0.5rem;
+$ngb-datepicker-week-last-padding-r:            0.5rem;
+$ngb-datepicker-month-name-height:              4rem;
+$ngb-datepicker-month-name-line-height:         4rem;
+$ngb-datepicker-month-name-color:               $dark-gray;
+$ngb-datepicker-day-selected-size:              4rem;
+$ngb-datepicker-day-selected-line-height:       4rem;
+$ngb-datepicker-day-selected-border-radius:     0.5rem;
+$ngb-datepicker-weekday-color:                  $blue;
+$ngb-datepicker-cell-size:                      4rem;
+$ngb-datepicker-cell-line-height:               4rem;
+
+//ngx-timepicker
+$timepicker-arrow-color:                        $blue;
+$timepicker-min-height:                         60px;
+
+//csr-datetimepicker
+
+//chatbot
+$chatbot-panel-height:                          450px;
+$chatbot-panel-width:                           350px;
+$chatbot-panel-shadow:                          0 2px 24px 0 transparentize($black, .7);
+$chatbot-panel-padding:                         $padding-base;
+$chatbot-panel-margin:                          5px;
+$chatbot-collapsed-button-bg:                   $blue;
+
+//webterminal
+$webterminal-collapsed-button-bg:               $blue;
+$webterminal-collapsed-button-active-bg:        $blue;
+
+//learning and reflection
+$lnr-success-color:                             $green;
+$lnr-issue-color:                               $red;
+$lnr-improvement-color:                         $blue;
+$lnr-sellable-bg:                               transparentize($red,.95);
+$lnr-sellable-badge-bg:                         transparentize($red,.5);
+
+//User profile
+$profile-width:                                 57rem;
+$profile-main-offset:                           6.5rem;
+$profile-initial-font-size:                     1.7rem;
+$profile-initial-line-height:                   2.2rem;
+$user-initials-color:                           $dark-blue;
+
+//embargo alert
+$embargo-alert-backdrop-bg:                     $layer1;
+$embargo-alert-bg:                              $layer0;
+$embargo-alert-color:                           $white;
+$embargo-alert-btn-width:                       10rem;
+
+//tabs-vertical
+$tabs-vertical-nav-width-sm:                   20rem;
+$tabs-vertical-nav-width-md:                   30rem;
+$tabs-vertical-nav-height:                     calc(100vh - #{$header-height} - #{$panel-header-height});
+
+//sms-sync status
+$sms-sync-status-color-success:                #5cb85c;
+$sms-sync-status-color-primary:                #337ab7;
+$sms-sync-status-color-warning:                #f0ad4e;
+$sms-sync-status-color-danger:                 #d9534f;

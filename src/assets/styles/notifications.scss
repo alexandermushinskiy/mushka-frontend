@@ -1,0 +1,90 @@
+//notifications
+@mixin notification-variant($bg-color, $color, $border-color, $border-hover-color) {
+  background-color: $bg-color;
+  border: $border-width solid $border-color;
+  color: $color;
+
+  &:hover {
+    border-color: $border-hover-color;
+  }
+}
+
+.notification {
+  @include notification-variant($white, $text-color, $notification-border, $border-dark-color);
+  box-shadow: 0 2px 16px 0 transparentize($black, .9);
+  margin: $padding-base 0;
+  overflow: hidden;
+  padding: $padding-base;
+  pointer-events: auto;
+  position: relative;
+  transition: opacity 250ms ease-out;
+  width: $notification-width;
+
+  .heading {
+    font-size: $notification-font-size;
+    line-height: $notification-line-height;
+    margin: 0;
+  }
+
+  p {
+    font-weight: $font-regular;
+    margin: 16px 0 0;
+    opacity: .8;
+  }
+
+  a {
+    color: $white;
+    font-weight: $font-regular;
+    opacity: .8;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &-footer{
+    margin-top: $padding-base;
+    padding: 0 $padding-base;
+
+    .btn + .btn {
+      margin-left: 6px;
+    }
+  }
+
+  &.danger {
+    @include notification-variant($red, $white, $red, $red);
+  }
+
+  &.success {
+    @include notification-variant($blue, $white, $blue, $blue);
+  }
+}
+
+.toast-top-left {
+  top: 12px;
+  left: 12px;
+}
+
+.toast-top-right {
+  top: 60px;
+  right: 32px;
+}
+
+.toast-bottom-right {
+  right: 47px;
+  bottom: 60px;
+}
+
+.toast-bottom-left {
+  bottom: 12px;
+  left: 12px;
+}
+
+#toast-container {
+  position: absolute;
+  z-index: $zindex-notification;
+}
+
+#toast-container * {
+  box-sizing: border-box;
+}

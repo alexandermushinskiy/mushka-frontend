@@ -1,0 +1,358 @@
+input::-ms-clear {
+  display: none;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  background-color: transparent;
+  color: $text-color;
+}
+
+.form-control {
+  padding: $input-padding-y $input-padding-x;
+  font-size: $input-font-size;
+  line-height: $input-line-height;
+
+  &:hover {
+    border-color: $input-border-hover;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: $input-focus-border-color;
+  }
+
+
+  &:disabled,
+  &[disabled],
+  &[readonly] {
+    opacity: .65;
+    background-color: $input-disabled-bg;
+  }
+  &.ng-invalid {
+    box-shadow: inset 1px 0 0 0 $orange;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  &.required-dropdown {
+    box-shadow: inset 1px 0 0 0 $orange;
+  }
+}
+
+.form-control-sm {
+  font-size: $font-size-xs;
+  padding: $input-padding-y-sm $input-padding-x-sm !important;
+}
+
+.form-control-lg {
+  padding: $input-padding-y-lg $input-padding-x-lg;
+}
+
+//input search group
+.input-group {
+  .btn-search {
+    background: none;
+    border: 0;
+    color: $text-color;
+    padding: .7rem 1rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+
+    .ico-search {
+      font-size: 16px;
+    }
+  }
+}
+
+//assign-form
+.form-assign {
+  .form-group {
+    width: 100%;
+  }
+  .form-control {
+    width: 100%;
+    max-width: 257px;
+
+    + .btn {
+      margin-left: ($padding-base - 4);
+    }
+  }
+}
+
+//custom control
+.custom-control{
+  //min-height: $custom-control-indicator-size;
+  margin-bottom: 1rem;
+
+  .custom-control-label {
+    margin-bottom: 0;
+    display: flex;
+    cursor: pointer;
+  }
+}
+.custom-control-input {
+  & ~ .custom-control-label:before {
+    border: $custom-control-indicator-border;
+  }
+  &:checked ~ .custom-control-label:before {
+    border-color: $custom-control-indicator-checked-border;
+  }
+  &:focus ~ .custom-control-label:before {
+    border-color: $custom-control-indicator-focus-border;
+  }
+  &:active ~ .custom-control-label:before {
+    border-color: $custom-control-indicator-active-border;
+  }
+  &:disabled ~ .custom-control-label:before {
+    border-color:  $custom-control-indicator-disabled-border;
+  }
+  &:disabled ~ .custom-control-label {
+    pointer-events: none;
+  }
+}
+.custom-control-label {
+  font-size: $font-size-small;
+  line-height: $line-height-small;
+}
+
+//search filter checkbox
+.filter-option {
+  @include clearfix();
+  .custom-control-indicator {
+    border-radius: $custom-checkbox-indicator-border-radius;
+  }
+  .custom-control-label {
+    @include clearfix();
+  }
+  .custom-control-input {
+    &:not(:disabled):active ~.custom-control-label:before,
+    &:not(:disabled):checked ~.custom-control-label:before {
+      @extend .fa;
+      @extend .fa-remove;
+      top: -.1rem;
+      text-align: center;
+      background-image: none;
+      background-color: transparent;
+      border-color: transparent;
+      font-size: $custom-control-indicator-size;
+      color: $custom-control-indicator-checked-bg;
+    }
+    &:not(:disabled):active ~.custom-control-label:after,
+    &:not(:disabled):checked ~.custom-control-label:after {
+      background-image: none;
+    }
+    &:not(:disabled):checked ~ .custom-control-label,
+    &:not(:disabled):checked ~ .count {
+      color: $custom-control-indicator-checked-bg;
+    }
+  }
+  .count {
+    float: right;
+    font-style: normal;
+    color: $text-muted;
+    margin-left: .2rem;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+  }
+}
+
+//toggle control
+.toggle {
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  .custom-controls-stacked & {
+    margin: 0 0 $padding-base;
+    display: block;
+  }
+  .toggle-description {
+    font-size: $toggle-label-font-size;
+    line-height: $toggle-label-line-height;
+    color: $text-muted;
+    transition: color 250ms;
+  }
+  .toggle-control-indicator {
+    display: inline-flex;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    width: $toggle-control-width;
+    height: $toggle-control-height;
+    border-radius: 50%;
+    margin-right: .5rem;
+    &:before,
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      content: "";
+      transform: translateZ(0);
+    }
+    &:before {
+      right: 0;
+      background-color: $toggle-control-bg;
+      border: $border-width solid $toggle-control-border;
+      border-radius: #{$toggle-control-width/2};
+      transition: background 250ms;
+    }
+    &:after {
+      width: $toggle-control-height;
+      height: $toggle-control-height;
+      background-color: $toggle-control-bg;
+      border-radius: 100%;
+      border: $border-width solid $toggle-control-border;
+      margin-left: 0;
+      transition: margin-left 250ms linear, border-color 250ms;
+    }
+  }
+  .toggle-control {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+    &:checked ~ .toggle-control-indicator {
+      &:before {
+        background-color: $toggle-control-active-bg;
+        border-color: $toggle-control-active-border;
+      }
+      &:after {
+        margin-left: #{$toggle-control-width/2 - $border-width*2};
+        border-color: $toggle-control-active-border;
+      }
+    }
+    &:checked ~ .toggle-description {
+      color: $text-color;
+    }
+  }
+}
+.toggle-right {
+  @include clearfix();
+  .toggle-control-indicator {
+    float: right;
+    margin-right: 0;
+  }
+  .toggle-description {
+    float: left;
+  }
+}
+// input with icon
+.input-wrapper {
+  position: relative;
+  .form-control {
+    padding-right: 3.2rem;
+  }
+  > .fa,
+  > [class*="fa-"] {
+    color: $text-muted;
+    font-size: 1.6rem;
+    position: absolute;
+    top: calc(50% - 0.8rem);
+    right: 10px;
+  }
+}
+// datarange
+.daterange-group {
+  display: flex;
+  .daterange-input-group {
+    position: relative;
+    width: calc(50% - .5rem);
+    .form-control {
+      padding-right: 30px;
+      box-shadow: none;
+    }
+    .fa-calendar-o {
+      position: absolute;
+      top: calc(50% - 0.8rem);
+      right: 1rem;
+      font-size: 1.6rem;
+      color: $text-muted;
+    }
+  }
+  > :not(:first-child) { margin-left: .5rem; }
+  > :not(:last-child) { margin-right: .5rem; }
+}
+
+ng-select {
+  > div.below {
+    @extend .form-control;
+    padding: .6rem .4rem !important;
+    > div.multiple {
+      padding: 0;
+      min-height: 1.6rem;
+      > div.option {
+        font-size: 1.1rem;
+        line-height: 1.6rem;
+        padding: 0 .5rem;
+        margin: .2rem;
+        border: 0;
+        color: $white;
+        background-color: #BEBFC0;
+        font-weight: bold;
+        border-radius: $border-radius-base;
+        span.deselect-option {
+          line-height: 1.6rem;
+          height: 1.6rem;
+          float: right;
+          font-size: 11px;
+          font-weight: bold;
+          text-shadow: 1px 0 transparentize($black,.9);
+          margin-left: .5rem;
+          color: $white;
+        }
+      }
+      input {
+        height: 2rem;
+        line-height: 2rem;
+      }
+    }
+  }
+  select-dropdown > div {
+    border: 0;
+    padding: 0;
+    margin-top: 10px;
+    min-width: $dropdown-min-width;
+    background-color: $dropdown-bg;
+    border-radius: $border-radius-base;
+    box-shadow: $dropdown-box-shadow;
+    width: 100% !important;
+    .options {
+      > ul {
+        > li {
+          padding: 16px 10px;
+          &.selected {
+            color: $text-muted;
+            background-color: $white;
+            cursor: default;
+          }
+          &.message {
+            color: $text-muted;
+          }
+        }
+      }
+    }
+  }
+  select-dropdown .highlighted {
+    background-color: $blue-100;
+    color: $text-color;
+  }
+}
+
+//create CSR
+.new-csr {
+  .form-group {
+    margin-bottom: $padding-base;
+
+    label {
+      font-size: 1.2rem;
+      line-height: 1.9rem;
+      margin-bottom: .5rem;
+      color: $text-muted;
+    }
+  }
+}

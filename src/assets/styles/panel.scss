@@ -1,0 +1,317 @@
+@import '../../variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: calc(100vh - #{$header-height});
+  width: 100%;
+}
+
+.csr-panel {
+  height: calc(100vh - #{$header-height});
+  position: absolute;
+  top: $header-height;
+  right: 0;
+  min-width: $app-page-aside-min-width-md;
+  width: $app-page-aside-min-width-md;
+  transition: width 250ms linear;
+  background-color: $white;
+  //z-index: $zindex-panel;
+  z-index: 2;
+
+  csr-ticket & {
+    top: 0;
+    right: $scroll-bar-width;
+  }
+
+  @media (min-width: $mobile) {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+
+    csr-ticket & {
+      position: relative;
+      top: -#{$appbar-height};
+      right: auto;
+      bottom: auto;
+    }
+  }
+
+  @media (min-width: $desktop) {
+    min-width: $app-page-aside-min-width;
+    width: $app-page-aside-min-width;
+  }
+}
+
+.panel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  overflow: hidden;
+  position: relative;
+  backface-visibility: hidden;
+  min-width: 0;
+  border-left: $panel-border-width solid $panel-border-color;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: $panel-header-height;
+  padding: $padding-base/2 $padding-base;
+  position: relative;
+  flex: none;
+
+  .actions-right {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+
+    > :not(:first-child) { margin-left: $padding-base; }
+    > :not(:last-child) { margin-right: $padding-base; }
+  }
+}
+
+.panel-heading {
+  font-size: $panel-heading-font-size;
+  line-height: $panel-heading-line-height;
+  margin-bottom: 0;
+  flex: auto;
+}
+
+.panel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > :not(:first-child) { margin-left: $padding-base/2; }
+  > :not(:last-child) { margin-right: $padding-base/2; }
+}
+
+.panel-body {
+  padding: $padding-base/2 $padding-base;
+  flex: 1 1 auto;
+
+  &.scrollable-area {
+    padding: 0;
+    height: 100%;
+  }
+}
+
+.panel-body-inner {
+  padding: $padding-base/2 $padding-base;
+}
+
+.scrollable-area {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.panel-footer {
+  padding: $padding-base/2 $padding-base;
+  border-top: $panel-border-width solid $panel-border-color;
+}
+
+//preview panel
+.ticket-panel,
+.ticket-list-side-panel {
+  .csr-slogan,
+  .heading {
+    margin-bottom: $padding-base;
+
+    > a {
+      color: $text-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .csr-number,
+  .csr-slogan {
+    font-weight: normal;
+  }
+
+  .csr-slogan {
+    font-size: $ticket-panel-font-size;
+    line-height: $ticket-panel-line-height;
+  }
+
+  .module {
+    margin-bottom: $padding-base + $ticket-panel-spacer;
+
+    .mod-title {
+      font-size: $ticket-panel-font-size;
+      line-height: $ticket-panel-line-height;
+    }
+  }
+
+  csr-details {
+    .property-row {
+      display: block;
+
+      .property-list {
+        max-width: 100%;
+        @media (min-width: $desktop) {
+          max-width: 100%;
+        }
+        .item {
+          .name {
+            width: $details-name-width-sm;
+            margin-left: -#{$details-name-width-sm} !important;
+          }
+
+          .wrap {
+            padding-left: $details-name-width-sm !important;
+          }
+        }
+      }
+    }
+  }
+
+  csr-investigation-lead,
+  csr-workgroups,
+  csr-participants {
+    .module {
+      .mod-header {
+        margin-bottom: $padding-base;
+      }
+    }
+  }
+
+  csr-technical-answer,
+  csr-formal-answer,
+  csr-working-problem-description,
+  csr-remedy {
+    .answer-wrapper {
+      padding-left: $answer-avatar-offset-sm;
+
+      .answer-avatar {
+        margin-left: -$answer-avatar-offset-sm !important;
+        margin-top: $padding-base/2;
+
+        .user-pic {
+          .user-pic-img {
+            width: $user-pic-small;
+            height: $user-pic-small;
+          }
+        }
+      }
+
+      .blankslate {
+        flex-flow: column;
+        align-items: flex-start !important;
+
+        > p {
+          margin-bottom: $padding-base/2 !important;
+        }
+      }
+    }
+  }
+
+  csr-participants {
+    .module {
+      margin-bottom: $ticket-panel-spacer*2;
+    }
+  }
+
+  csr-trouble-report {
+    .module {
+      .row,
+      .box {
+        display: block;
+      }
+    }
+  }
+
+  .inline-editor { margin-right: 0; }
+}
+
+// fullsize panel
+.fullsize-panel {
+  position: fixed;
+  top: $header-height;
+  left: $sidebar-width-collapsed - $panel-border-width;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  background-color: $body-bg;
+  z-index: $zindex-modal;
+  transition: left 250ms cubic-bezier(.1, .57, .1, 1);
+  box-shadow: none;
+
+  @media (min-width: $desktop-lg) {
+    left: $sidebar-width - $panel-border-width;
+
+    .sidebar-collapsed & {
+      left: $sidebar-width-collapsed - $panel-border-width;
+    }
+  }
+
+  .panel-header {
+    background-color: $layer1;
+  }
+
+  .panel-heading {
+    @include text-ellipsis(100%);
+  }
+
+  .scrollable-area {
+    overflow: auto;
+  }
+}
+
+//tabs vertical
+.tabs-vertical {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+
+  .nav-tabs {
+    flex-wrap: nowrap;
+    min-width: $tabs-vertical-nav-width-sm;
+    height: $tabs-vertical-nav-height;
+    border-bottom: 0;
+    border-right: $border-width*3 solid $border-color;
+    overflow-y: auto;
+    overflow-x: hidden;
+    @media (min-width: $tablet) {
+      min-width: $tabs-vertical-nav-width-md;
+    }
+
+    .nav-item {  margin: 0; }
+
+    .nav-link {
+      border: 0;
+      border-radius: 0;
+      color: $text-color;
+      padding: $padding-base*.75;
+      transition: all 250ms;
+
+      &:hover {
+        background-color: transparentize($blue, .9);
+        color: $text-color;
+      }
+
+      &.active {
+        background-color: $blue;
+        color: $white;
+      }
+    }
+  }
+
+  .tab-content {
+    flex: auto;
+    padding: $padding-base;
+    height: $tabs-vertical-nav-height;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}

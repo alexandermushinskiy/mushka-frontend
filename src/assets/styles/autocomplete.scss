@@ -1,0 +1,46 @@
+@import "../../variables";
+
+.completer-holder {
+  .completer-dropdown {
+    max-height: $completer-dropdown-height;
+    width: $completer-dropdown-width;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: $completer-dropdown-border;
+    padding: $completer-dropdown-padding;
+    margin-top: $completer-dropdown-margin-top;
+    box-shadow: $completer-dropdown-box-shadow;
+  }
+  .completer-row{
+    color: $completer-row-color;
+    font-size: $completer-row-font-size;
+    line-height: $completer-row-line-height;
+    padding: $completer-row-padding;
+  }
+  .completer-selected-row {
+    background-color: $completer-selected-row-background;
+    color: $completer-selected-row-color;
+  }
+}
+.completer-searching,
+.completer-no-results {
+  padding: $completer-searching-padding;
+  color: $completer-searching-color;
+}
+
+.angle {
+  position: absolute;
+  top: calc(50% - 7px);
+  right: 10px;
+}
+.value-invalid {
+  border-color: $completer-invalid-border-color;
+}
+datalist.completer-dropdown {
+  option {
+    color: $completer-row-color;
+    font-size: $completer-row-font-size;
+    line-height: $completer-row-line-height;
+  }
+}
+

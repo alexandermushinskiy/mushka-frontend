@@ -1,0 +1,12 @@
+{
+  "apiEndpoints": {
+    "csrhUrl": "https://csrhe2e.dev.sdt.ericsson.se",
+    "graphUrl": "https://graph.microsoft.com",
+    "metisApiUrl": "https://metis-uat3.internal.ericsson.com/_layouts/ericsson.metis/home.aspx",
+    "chatBotApiUrl": "https://csrh.dev.sdt.ericsson.se",
+    "suggestedEngineersApiUrl": "https://engineersuggest.csrh.dev.sdt.ericsson.se",
+    "webTerminalUrl": "http://172.29.245.15"
+  },
+  "instrumentationKey": "e6163c55-c094-4d01-99d5-1f78278c1211",
+  "metisIncidentSystem": "SMSQ40"
+}

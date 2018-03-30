@@ -1,0 +1,250 @@
+//summernote-editor wisywyg
+.note-editor {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  &.note-frame {
+    border-color: $text-editor-border-color;
+    &.fullscreen {
+      bottom: 0;
+      z-index: $zindex-modal;
+    }
+
+    .note-editing-area {
+      .note-editable,
+      .note-placeholder {
+        font-size: $font-size-small;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .note-toolbar {
+    background-color: $text-editor-toolbar-bg-color;
+    border-color: $text-editor-border-color;
+    padding-right: 200px;
+
+    .note-btn,
+    .note-btn.dropdown-toggle {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      color: $text-color;
+
+      &:hover,
+      &:focus {
+        color: $blue;
+        background-color: transparent;
+      }
+    }
+
+    .note-btn.active,
+    .show > .note-btn.dropdown-toggle {
+      background-color: transparent;
+      color: $blue;
+    }
+  }
+
+  .dropdown-style {
+    min-width: $dropdown-min-width !important;
+    font-size: $font-size-small;
+
+    p {
+      font-size: $font-size-small;
+      margin: 0;
+    }
+  }
+
+  h1 {
+    font-size: $text-editor-h1-font-size;
+    font-weight: $text-editor-heading-font-weight;
+  }
+
+  h2 {
+    font-size: $text-editor-h2-font-size;
+    font-weight: $text-editor-heading-font-weight;
+  }
+
+  blockquote {
+    border:0;
+    padding: 0 0 0 $padding-base;
+    font-size: $forum-blockquote-font-size;
+    color: $forum-blockquote-color;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 5px;
+      height: 100%;
+      border-radius: 5px;
+      background: $forum-blockquote-border;
+    }
+  }
+
+  pre {
+    margin: 0;
+    border: 0;
+    padding: $padding-base;
+    overflow: auto;
+    font-size: $font-size-small;
+    line-height: 20px;
+    background-color: $code-bg;
+    color: $text-color;
+    border-radius: $border-radius-base;
+    p:last-child {margin: 0;}
+  }
+
+  button[data-original-title="More Color"] {
+    @include fa-icon();
+
+    &:before {
+      content: $fa-var-angle-down;
+    }
+  }
+
+  .modal {
+    .close {
+      @extend .ico;
+      @extend .ico-close;
+      span {
+        display: none;
+      }
+      &:before {
+        content: '';
+      }
+      font-size: 3rem;
+    }
+
+    .modal-body {
+      overflow-x: hidden !important;
+      overflow-y: auto;
+    }
+  }
+
+  .note-group-select-from-files {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 34px;
+    cursor: pointer;
+    &:hover {
+      .note-form-label {
+        border-color: $input-focus-border-color;
+        &:after {
+          background-color: $btn-light-bg-active;
+          border-color: $btn-light-border-active;
+        }
+      }
+    }
+
+    .note-image-input {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 34px;
+      margin: 0;
+      opacity: 0;
+    }
+    .note-form-label {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1;
+      height: 34px;
+      padding: $input-padding-y $input-padding-x;
+      line-height: normal;
+      color: $text-muted;
+      background-color: $white;
+      border: $border-width solid $border-color;
+      border-radius: $border-radius-base;
+      &:after {
+        content: "Browse";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+        display: block;
+        height: 32px;
+        padding: $input-btn-padding-x $input-btn-padding-y;
+        line-height: 1.5;
+        color: $text-color;
+        content: "Browse";
+        background-color: $btn-light-bg;
+        border-left: $border-width solid $border-color;
+        border-radius: 0 $border-radius-base $border-radius-base 0;
+      }
+    }
+  }
+
+  .note-form-label {
+    color: $text-muted;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+  }
+
+  .custom-checkbox {
+    min-height: 1rem;
+    cursor: pointer;
+  }
+
+  .custom-control-input {
+    & ~ .custom-control-description:before {
+      border: $custom-control-indicator-border;
+    }
+    &:checked ~ .custom-control-description {
+      color: $text-color;
+      &:before {
+        border-color: $custom-control-indicator-checked-border;
+        background-color: $custom-control-indicator-checked-bg;
+      }
+      &:after {
+        background-image: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$custom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E"), "#", "%23");
+      }
+    }
+  }
+
+  .custom-control-description {
+    display: inline-block;
+    vertical-align: top;
+    font-size: $font-size-small;
+    line-height: $line-height-small;
+    color: $text-muted;
+    transition: color 250ms;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: $custom-control-indicator-size;
+      height: $custom-control-indicator-size;
+      pointer-events: none;
+      content: "";
+      user-select: none;
+      background-color: $custom-control-indicator-bg;
+      border-radius: $custom-checkbox-indicator-border-radius;
+    }
+
+    // Foreground (icon)
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: $custom-control-indicator-size;
+      height: $custom-control-indicator-size;
+      content: "";
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: $custom-control-indicator-bg-size;
+    }
+  }
+}
+
+

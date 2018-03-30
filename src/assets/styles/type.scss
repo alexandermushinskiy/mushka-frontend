@@ -1,0 +1,439 @@
+@font-face {
+  font-family: 'Ericsson Hilda';
+  src: local('Ericsson Hilda Bold'), local('EricssonHilda-Bold'),
+  url('assets/fonts/EricssonHilda-Bold.woff2') format('woff2'),
+  url('assets/fonts/EricssonHilda-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ericsson Hilda';
+  src: local('Ericsson Hilda Regular'), local('EricssonHilda-Regular'),
+  url('assets/fonts/EricssonHilda-Regular.woff2') format('woff2'),
+  url('assets/fonts/EricssonHilda-Regular.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ericsson Hilda';
+  src: local('Ericsson Hilda Light'), local('EricssonHilda-Light'),
+  url('assets/fonts/EricssonHilda-Light.woff2') format('woff2'),
+  url('assets/fonts/EricssonHilda-Light.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Hilda Mono';
+  src: url('assets/fonts/HildaMono02-Regular.eot');
+  src: local('Hilda Mono Regular'), local('HildaMono02-Regular'),
+  url('assets/fonts/HildaMono02-Regular.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/HildaMono02-Regular.woff') format('woff'),
+  url('assets/fonts/HildaMono02-Regular.ttf') format('truetype'),
+  url('assets/fonts/HildaMono02-Regular.svg#HildaMono02-Regular') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Hilda Mono';
+  src: url('assets/fonts/HildaMono02-Light.eot');
+  src: local('Hilda Mono Light'), local('HildaMono02-Light'),
+  url('assets/fonts/HildaMono02-Light.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/HildaMono02-Light.woff') format('woff'),
+  url('assets/fonts/HildaMono02-Light.ttf') format('truetype'),
+  url('assets/fonts/HildaMono02-Light.svg#HildaMono02-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Hilda Mono';
+  src: url('assets/fonts/HildaMono02-Bold.eot');
+  src: local('Hilda Mono Bold'), local('HildaMono02-Bold'),
+  url('assets/fonts/HildaMono02-Bold.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/HildaMono02-Bold.woff') format('woff'),
+  url('assets/fonts/HildaMono02-Bold.ttf') format('truetype'),
+  url('assets/fonts/HildaMono02-Bold.svg#HildaMono02-Bold') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+//Subtitle link
+.subtle-link {
+  border-bottom: 1px dashed $text-color;
+  color: $text-color;
+
+  &:hover {
+    border-bottom: $border-width solid $blue;
+    color: $text-color;
+    text-decoration: none;
+  }
+}
+
+//Typography
+.csr-number,
+.csr-slogan {
+  display: inline-block;
+  font-size: $csr-slogan-font-size;
+  font-weight: bold;
+  line-height: $csr-slogan-line-height;
+  margin: 0;
+  vertical-align: top;
+}
+
+.csr-slogan {
+  @include text-ellipsis(100%);
+  flex: 1;
+}
+
+.csr-number {
+  margin-right: 7px;
+  white-space: nowrap;
+  &, & * {
+    color: $text-info !important;
+  }
+  .fa-bolt {
+    margin-right: 7px;
+  }
+}
+
+// Open in SMS link
+.sms-link {
+  color: $paragraph;
+}
+
+// CSR Hot
+.csr-hot {
+  &, & * {
+    color: $text-danger !important;
+  }
+  .fa-bolt {
+    font-size: $csr-slogan-font-size;
+  }
+}
+
+//text color classes
+.text-info {
+  color: $text-info;
+}
+
+// description list
+.dl-horizontal {
+  margin-bottom: 0;
+  dt, dd {
+    line-height: 25px;
+  }
+  dt {
+    text-align: left;
+    font-weight: normal;
+    color: $text-muted;
+    @include text-ellipsis(100%);
+    @media (min-width: $mobile) {
+      float: left;
+      width: $dt-horizontal-offset;
+    }
+  }
+  dd {
+    margin-bottom: 0;
+    @media (min-width: $mobile) {
+      margin-left: $dt-horizontal-offset;
+    }
+  }
+  pre {
+    white-space: pre-wrap !important;
+    margin-bottom: 0;
+    color: $text-color;
+    font-size: inherit;
+  }
+}
+// unordered-list
+.unordered-list {
+  li {
+    margin-bottom: $padding-base/2;
+  }
+}
+
+//CSR Type
+.csr-type {
+  text-transform: uppercase;
+  csr-details & {
+    font-size: $csr-type-font-size;
+    line-height: $csr-type-line-height;
+    font-weight: bold;
+  }
+  &-problem {
+    color: $csr-type-problem;
+  }
+  &-consultation {
+    color: $csr-type-consultation;
+  }
+  &-project {
+    color: $csr-type-project;
+  }
+  &-internal {
+    color: $csr-type-internal;
+  }
+  &-warranty {
+    color: $csr-type-warranty;
+  }
+  &-hardware {
+    color: $csr-type-hardware;
+  }
+}
+
+//CSR Severity color
+@mixin csr-severity-variant($color, $csr-icon) {
+  & {
+    color: $color;
+    .csr-severity-icon {
+      @extend .#{$csr-icon};
+    }
+  }
+}
+
+.csr-severity {
+  text-transform: uppercase;
+  display: inline-flex;
+
+  csr-details & {
+    font-size: $csr-severity-font-size;
+    line-height: $csr-severity-line-height;
+    font-weight: bold;
+    align-items: baseline;
+    display: flex;
+    .csr-severity-icon {
+      margin-right: 6px;
+    }
+  }
+  // Extended csr-icons
+  .csr-severity-icon {
+    @extend .ico;
+    width: 1rem;
+    text-align: center;
+    font-size: $csr-severity-icon-size;
+  }
+}
+
+.csr-severity-low {
+  @include csr-severity-variant($csr-severity-low, ico-low);
+}
+
+.csr-severity-medium {
+  @include csr-severity-variant($csr-severity-medium, ico-medium);
+}
+
+.csr-severity-high {
+  @include csr-severity-variant($csr-severity-high, ico-high);
+}
+
+.csr-severity-emergency {
+  @include csr-severity-variant($csr-severity-emergency, ico-ban);
+}
+
+//csr dot status
+.csr-dot-status {
+  background-color: inherit;
+  border-radius: 50%;
+  display: inline-flex;
+  height: .8rem;
+  width: .8rem;
+}
+
+.csr-status-finished {
+  background-color: $csr-status-finished;
+}
+
+.csr-status-default {
+  background-color: $csr-status-default;
+}
+
+.csr-status-follow_up {
+  background-color: $csr-status-follow_up;
+}
+
+.csr-status-formal {
+  background-color: $csr-status-formal;
+}
+
+.csr-status-internal {
+  background-color: $csr-status-internal;
+}
+
+.csr-status-analysis {
+  background-color: $csr-status-analysis;
+}
+
+.csr-status-pre_analysis {
+  background-color: $csr-status-pre-analysis;
+}
+
+.csr-status-registered {
+  background-color: $csr-status-registered;
+}
+
+// Badges
+.badge {
+  color: $badge-color;
+  background-color: $badge-bg;
+  padding: $badge-padding-t $badge-padding-x $badge-padding-b;
+  &.empty {
+    background-color: $badge-empty-bg;
+    color: $badge-empty-color;
+  }
+  .btn-xs &,
+  .btn-group-xs > .btn & {
+    top: 0;
+  }
+  .btn & {
+    top: 0;
+  }
+  .btn-default & {
+    background-color: $badge-bg;
+    color: $badge-color;
+  }
+  .btn-live-pad & {
+    margin-left: 6px;
+  }
+}
+
+.badge-secondary {
+  background-color: $lighten-gray;
+  color: $text-color;
+}
+
+.sellable {
+  .badge {
+    background-color: $lnr-sellable-badge-bg;
+    margin-right: 3px;
+  }
+}
+
+// Hover state, but only for links
+a.badge {
+  &:hover,
+  &:focus {
+    color: $badge-link-hover-color;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+//circle badge
+.circle-bagde {
+  text-align: center;
+  color: $circle-bagde-color;
+  width: $circle-bagde-width;
+  height: $circle-bagde-height;
+  background-color: $circle-bagde-bg;
+  border-radius: $circle-bagde-border-radius;
+  font-size: $circle-bagde-font-size;
+  line-height: $circle-bagde-line-height;
+  padding: $circle-bagde-padding;
+}
+
+//svg loader
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+}
+
+.statement-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    background-color: transparentize($blue, 0.95);
+    border-radius: $border-radius-base;
+    padding: $padding-base/2 $padding-base;
+    margin-bottom: 2px;
+  }
+  br {
+    display: none;
+  }
+}
+
+.consumable-item {
+  color: $text-color;
+  font-size: $font-size-base;
+  font-family: $font-family-monospace;
+  line-height: 1.35;
+
+  h1, h2 {
+    color: $text-muted;
+    font-size: $font-size-base;
+    line-height: 1.35;
+    margin: 1rem 0;
+  }
+  p {
+    margin: 0 0 1rem;
+    white-space: pre-line;
+  }
+  img{
+    max-width: 100%;
+  }
+}
+
+//attachment icons types
+.file-icon {
+  @extend .fa;
+  @extend .fa-file-o;
+  font-size: 24px;
+  color: $text-color;
+  .file-archive & {
+    @extend .fa-file-archive-o;
+  }
+  .file-code & {
+    @extend .fa-file-code-o;
+  }
+  .file-excel & {
+    @extend .fa-file-excel-o;
+  }
+  .file-img & {
+    @extend .fa-file-image-o;
+  }
+  .file-pdf & {
+    @extend .fa-file-pdf-o;
+  }
+  .file-ppt & {
+    @extend .fa-file-powerpoint-o;
+  }
+  .file-video & {
+    @extend .fa-file-video-o;
+  }
+  .file-word & {
+    @extend .fa-file-word-o;
+  }
+}
+
+//task status
+@mixin task-status-variant($color) {
+  &:before {
+    color: $color;
+  }
+}
+.task-status {
+  display: inline-flex;
+  vertical-align: top;
+
+  &:before {
+    content: '\25CF';
+    line-height: 1;
+    padding-right: .3rem;
+  }
+
+  &-ongoing {
+    @include task-status-variant($orange);
+  }
+
+  &-not-started {
+    @include task-status-variant($gray);
+  }
+
+  &-successful {
+    @include task-status-variant($green);
+  }
+
+  &-failed {
+    @include task-status-variant($red);
+  }
+}

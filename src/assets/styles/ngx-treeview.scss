@@ -1,0 +1,119 @@
+//ngx-treeview
+ngx-treeview {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  min-width: 0;
+}
+.treeview-header {
+  flex: none;
+  padding: $padding-base;
+  .row-filter {
+    position: relative;
+
+    margin-bottom: 0 !important;
+
+
+
+    .ico-search {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: $input-padding-x;
+      font-size: 14px;
+      color: $paragraph;
+    }
+  }
+
+  .dropdown-divider {
+    display: none;
+  }
+
+  + div {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1 1 auto;
+  }
+}
+
+.treeview-container {
+  padding: 0 0 $padding-base !important;
+  max-height: 100% !important;
+}
+
+.treeview-item {
+  white-space: normal !important;
+  .form-check {
+    margin-bottom: 0;
+    padding: $padding-base/2 0 $padding-base/2 $padding-base*2;
+    transition: all 250ms;
+
+    &:hover {
+      background-color: $workgroups-nav-bg-hover;
+      color: $workgroups-nav-color-hover;
+      .fa { color: $workgroups-nav-color-hover; }
+    }
+    &.selected * {
+      color: $workgroups-nav-color-hover !important;
+    }
+    .fa {
+      position: absolute;
+      left: $padding-base;
+      font-size: 1.5rem;
+    }
+    .fa-angle-right {
+      top: 8px;
+      color: $workgroups-tree-icon-right-color;
+    }
+    .fa-angle-up {
+      top: 7px;
+      margin-left: -2px;
+      color: $workgroups-tree-icon-up-color;
+    }
+  }
+  > div:not(.form-check) {
+    padding: $padding-base/2 0;
+  }
+  &-link {
+    display: block;
+    color: $workgroups-tree-link-color;
+    transition: color 250ms ease;
+    word-wrap: break-word;
+    word-break: normal;
+    &.empty {
+      &:before {
+        content: '';
+        position: absolute;
+        top: $padding-base;
+        left: $padding-base;
+        width: 4px;
+        height: 4px;
+        border-radius: 100%;
+        background-color: $workgroups-tree-icon-color;
+      }
+    }
+    &.active,
+    &:hover {
+      color: $workgroups-tree-link-color-hover;
+      text-decoration: none;
+    }
+  }
+}
+.treeview-item .treeview-item {
+  margin: 0 !important;
+  .form-check {
+    padding-left: $padding-base*3 !important;
+    .fa,
+    .treeview-item-link.empty:before {
+      left: $padding-base*2;
+    }
+    .treeview-item-link.empty:before {
+      top: 14px;
+    }
+  }
+}
+
+.treeview-text {
+  padding: $padding-base !important;
+  color: $text-muted;
+}

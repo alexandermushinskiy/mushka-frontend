@@ -1,0 +1,17 @@
+@import "../../variables";
+
+ngb-timepicker {
+  .btn-link {
+    color: $timepicker-arrow-color;
+  }
+}
+
+.csr-datetimepicker {
+  ngb-timepicker {
+    .ngb-tp {
+      min-height: $timepicker-min-height;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}

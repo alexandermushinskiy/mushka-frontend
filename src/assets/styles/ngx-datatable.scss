@@ -1,0 +1,353 @@
+@import '../../variables';
+
+//ngx-datatable
+@mixin checkbox() {
+  > input[type='checkbox'] {
+    height: $custom-control-indicator-size;
+    margin: 0;
+    width: $custom-control-indicator-size;
+
+    &:before,
+    &:after {
+      border-radius: $custom-checkbox-indicator-border-radius;
+      content: '';
+      height: 100%;
+      width: 100%;
+    }
+
+    &:before {
+      border: $custom-control-indicator-border;
+      border-radius: $custom-checkbox-indicator-border-radius;
+      transition: none;
+    }
+
+    &:after {
+      background-size: $custom-control-indicator-bg-size;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &:checked {
+      &:before {
+        background-color: $custom-control-indicator-checked-bg;
+        border-color: $custom-control-indicator-checked-border;
+        transform: none;
+      }
+
+      &:after {
+        background-color: transparent;
+        background-image: $table-checkbox-content;
+        z-index: 2;
+      }
+    }
+
+    &:hover:before {
+      border-color: $custom-control-indicator-checked-border;
+    }
+  }
+}
+
+.ngx-datatable.material {
+  box-shadow: none;
+  transform: translateZ(0);
+  background: none;
+
+  &.fullscreen {
+    position: absolute !important;
+    height: auto !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .datatable-header,
+  .datatable-body,
+  .datatable-scroll,
+  .datatable-row-center,
+  .datatable-row-wrapper,
+  .datatable-body-row { width: 100% !important; }
+
+  .datatable-header {
+    background-color: $table-header-bg;
+    border-top: 0;
+    border-bottom-color: $table-header-border;
+
+    .datatable-header-inner {
+      height: 100%;
+    }
+
+    .datatable-header-cell-wrapper {
+      @include text-ellipsis(100%);
+    }
+
+    .datatable-header-cell {
+      vertical-align: middle;
+      font-weight: $table-header-font-weight;
+      font-size: $table-header-font-size;
+      line-height: $table-header-line-height;
+      padding: $table-header-padding-x $table-header-padding-y;
+      color: $table-header-color;
+      user-select: none;
+      flex: 0 0 auto;
+      height: 100%;
+
+      > div {
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        min-width: 0;
+      }
+
+      &.sort-active > div {
+        padding-right: 1.5rem;
+      }
+
+      .sort-btn {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+      }
+
+      .datatable-checkbox {
+        padding: 0;
+        width: 16px;
+        height: 16px;
+        @include checkbox();
+        + .datatable-header-cell-wrapper { display: none; }
+        + .inline-filter { display: none !important; }
+      }
+      // stylelint-disable selector-max-class
+      .inline-filter {
+        &.without-filter {
+          input.form-control {
+            display: none;
+          }
+        }
+      }
+      // stylelint-enable selector-max-class
+
+      .resize-handle {
+        border: 0 !important;
+      }
+    }
+  }
+
+  .datatable-body {
+    background-color: $table-body-bg;
+    will-change: transform;
+
+    .datatable-scroll {
+      will-change: transform;
+    }
+
+    .datatable-body-row {
+      cursor: pointer;
+
+      &.fake-row {
+        opacity: 0;
+        cursor: auto;
+      }
+
+      .datatable-body-cell {
+        padding: $table-body-cell-padding-x $table-body-cell-padding-y;
+        color: $text-color;
+        font-size: $table-body-font-size;
+        line-height: $table-body-line-height;
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        flex: 0 0 auto;
+
+        .datatable-body-cell-label {
+          .datatable-checkbox {
+            @include checkbox();
+          }
+        }
+
+        small {
+          font-size: $font-size-small;
+        }
+      }
+
+      .datatable-body-cell:not(:first-child) {
+        > div {
+          padding: .1rem 0;
+          @include text-ellipsis(100%);
+        }
+      }
+      // stylelint-disable selector-max-class
+      &.odd .datatable-body-cell { background-color: $table-body-row-odd; }
+
+      &.even .datatable-body-cell { background-color: $table-body-row-even; }
+
+      &.odd:hover .datatable-body-cell,
+      &.even:hover .datatable-body-cell { background-color: $table-body-row-hover; }
+
+      &.bold .datatable-body-cell *:not(.csr-severity-icon) { font-weight: bold !important; }
+
+      &.active .datatable-body-cell,
+      &.active .datatable-body-cell:hover { background: $table-body-row-active !important; }
+
+      &.odd:focus .datatable-body-cell,
+      &.even:focus .datatable-body-cell { background: $table-body-row-active; }
+
+      //checked
+      &.active.non-active .datatable-body-cell,
+      &.active.non-active .datatable-body-cell:hover { background: $table-body-row-checked !important; }
+      // stylelint-enable selector-max-class
+    }
+  }
+
+  .datatable-footer {
+    border-top-color: $table-header-border;
+    background-color: $table-header-bg;
+
+    &-inner {
+      font-weight: bold;
+      padding: $table-header-padding-x $table-header-padding-y;
+    }
+  }
+
+  .progress-linear {
+    z-index: 99;
+    height: $progress-linear-loader-height;
+    margin-top: -#{$border-width};
+
+    .container {
+      height: $progress-linear-loader-height;
+      background: $progress-linear-loader-bg;
+
+      .bar {
+        animation: custom-query 1s infinite cubic-bezier(.39, .575, .565, 1);
+        height: $progress-linear-loader-height;
+        background: $progress-linear-loader-bar-bg;
+      }
+    }
+  }
+
+  .table-cell-text-sm {
+    font-size: $table-cell-font-size-sm;
+  }
+
+  .empty-row {
+    text-align: center;
+    color: $text-muted;
+    font-size: 1.4rem;
+    background: $white;
+    padding: $padding-base;
+  }
+
+  .user-list {
+    display: inline-block;
+
+    &:nth-child(n + 2) {
+      margin-left: 2px;
+    }
+
+    .user-pic {
+      border-radius: 50%;
+      background-color: $gray-100;
+      overflow: hidden;
+      object-fit: cover;
+    }
+  }
+
+  .status-label {
+    font-size: $table-cell-font-size-sm;
+    line-height: 14px;
+    border-radius: $border-radius-base;
+    padding: .1rem .5rem .3rem;
+    color: $white;
+    max-width: 100%;
+    display: inline-block;
+    @include text-ellipsis(100%);
+
+    &.status {
+      &-consultation {
+        background-color: $status-consultation;
+      }
+
+      &-collaboration {
+        background-color: $status-collaboration;
+      }
+
+      &-engagement {
+        background-color: $status-engagement;
+      }
+
+      &-waiting {
+        background-color: $status-waiting;
+      }
+
+      &-answered {
+        background-color: $status-answered;
+      }
+
+      &-completed {
+        background-color: $status-completed;
+      }
+
+      &-not-assigned {
+        color: $text-color;
+        font-weight: normal;
+        font-style: italic;
+        text-transform: uppercase;
+        text-align: left;
+        padding: 0;
+        border-radius: 0;
+      }
+    }
+  }
+
+  .csr-hot {
+    font-size: 1.6rem;
+  }
+
+  .follow-csr {
+    font-size: 1.6rem;
+    color: $green;
+  }
+}
+
+.tasks-count {
+  background-color: $tasks-count-bg;
+  border-radius: $tasks-count-radius;
+  font-size: $tasks-count-font-size;
+  line-height: $tasks-count-line-height;
+  padding: $tasks-count-padding-x $tasks-count-padding-y;
+  color: $white;
+}
+
+//tasks table
+.tasks-table {
+  .btn-toggle-editor {
+    margin-left: 69px;
+    visibility: hidden;
+  }
+
+  .datatable-body-cell:hover {
+    .btn-toggle-editor {
+      visibility: visible;
+    }
+  }
+}
+
+@keyframes custom-query {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) scale(.3, 1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(50%) scale(0, 1);
+  }
+}

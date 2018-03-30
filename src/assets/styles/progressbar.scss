@@ -1,0 +1,30 @@
+ .progressbar {
+  &-completed {
+    > .progress {
+      > .progress-bar {
+        background-color: $light-green;
+      }
+    }
+
+    &.progressbar-overtime {
+      > .progress {
+        background-color: $orange;
+      }
+    }
+  }
+  &-overtime {
+    > .progress {
+      background-color: $red;
+    }
+  }
+}
+.metis-relevancy {
+  .progress {
+    background-color: $gray-200 !important;
+    max-width: 224px;
+    margin-top: .4rem;
+  }
+  .progress-bar {
+    background-color: $blue-darken !important;
+  }
+}

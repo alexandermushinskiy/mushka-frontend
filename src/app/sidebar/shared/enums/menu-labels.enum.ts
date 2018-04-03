@@ -1,6 +1,6 @@
 export enum MenuLabels {
   ORDERS = 'Заказы',
-  GOODS = 'Товары',
+  PRODUCTS = 'Товары',
   PACKAGES = 'Упаковка',
   SUPPLIERS = 'Поставщики',
   PARTNERS = 'Партнеры',

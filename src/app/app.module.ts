@@ -19,6 +19,8 @@ import 'rxjs/add/observable/fromEvent';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Ng2Webstorage } from 'ngx-webstorage';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,11 +28,9 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { HeaderModule } from './header/header.module';
-import { Ng2Webstorage } from 'ngx-webstorage';
-import { ToastrModule } from 'ngx-toastr';
 import { OrdersModule } from './orders/orders.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
-import { ProductsModule } from './goods/products.module';
+import { ProductsModule } from './products/products.module';
 import { PackagesModule } from './packages/packages.module';
 import { PartnersModule } from './partners/partners.module';
 import { LogisticsModule } from './logistics/logistics.module';

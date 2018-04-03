@@ -10,9 +10,9 @@ export const MenuItems: MenuItem[] = [
     badges: 13
   }),
   new MenuItem({
-    title: MenuLabels.GOODS,
+    title: MenuLabels.PRODUCTS,
     icon: 'fa-shopping-bag',
-    routePath: '/goods',
+    routePath: '/products',
     isEnabled: true,
     isExternal: true,
   }),

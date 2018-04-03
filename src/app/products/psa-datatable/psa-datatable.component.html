@@ -1,0 +1,111 @@
+<ngx-datatable #datatable
+               class="material fullscreen"
+               >
+</ngx-datatable>
+
+
+<ng-template #headerTpl let-column="column" let-sort="sortFn">
+  <span class="datatable-header-cell-wrapper">
+    <span [ngbTooltip]="column.name" container="body" placement="top" class="datatable-header-cell-label draggable" (click)="sort($event)">
+      {{ column.name }}
+    </span>
+    <span *ngIf="column.canBeFiltered && hasTickets" class="btn-toggle-drop"
+        [ngClass]="{'has-filters': customTextFilters[column.prop]}"
+        [ngbPopover]="dropContent"
+        #p="ngbPopover"
+        triggers="manual"
+        (click)="p.open({ column: column, popoverRef: p, sort: sort })"
+        [placement]="columnsData.indexOf(column)===columnsData.length-1 ? 'bottom-right' : 'bottom'"
+        container="body">
+      <i class="ico ico-filter2"
+         container="body"
+         [ngbTooltip]="customTextFilters[column.prop] ? 'Filters applied on this column' : 'Click to filter'"></i>
+    </span>
+  </span>
+</ng-template>
+
+<!-- <ng-template #flowColumn let-row="row" let-value="value">
+  <span *ngIf="value">
+    <csr-flow-icon [csrFlow]="value"></csr-flow-icon>
+    <span class="sr-only">CS Flow Ticket</span>
+  </span>
+</ng-template> -->
+
+<!-- <ng-template #hotColumn let-row="row" let-value="value">
+  <span *ngIf="value">
+    <i class="fa fa-bolt csr-hot" aria-hidden="true" title="Hot Ticket"></i>
+    <span class="sr-only">Hot Ticket</span>
+  </span>
+</ng-template>
+
+<ng-template #csrNumberColumn let-row="row" let-value="value">
+  <a class="subtle-link" [routerLink]="row.linkToTicket">{{ value }}</a>
+</ng-template>
+
+<ng-template #subscribersColumn let-row="row" let-value="value">
+  <span *ngIf="value" class="follow-csr">
+    <i class="fa fa-check" aria-hidden="true" title="CSR Followed By You"></i>
+    <span class="sr-only">CSR Followed By You</span>
+  </span>
+</ng-template>
+
+<ng-template #severityColumn let-value="value">
+   <span class="csr-severity" [ngClass]="'csr-severity-' + value.toLowerCase()">
+     <i class="csr-severity-icon" title="{{ value }}"></i>
+     <span class="sr-only">{{ value }}</span>
+   </span>
+</ng-template>
+
+<ng-template #tasksColumn let-row="row" let-value="value">
+  <div *ngIf="value > 0" class="tasks-count">{{ value }}</div>
+</ng-template>
+
+<ng-template #sloganColumn let-row="row" let-value="value">
+  <a (click)="readTicket(row)" [routerLink]="row.linkToTicket" class="subtle-link">{{ row.slogan }}</a>
+</ng-template>
+
+<ng-template #statusColumn let-row="row" let-value="value">
+  <small>{{ value }}</small>
+</ng-template>
+
+<ng-template #collaborationColumn let-value="value" let-row="row">
+  {{ value }}
+</ng-template>
+
+<ng-template #csrTypeColumn let-value="value">
+  <small class="csr-type" [ngClass]="'csr-type-' + value.toLowerCase()">{{ value }}</small>
+</ng-template>
+
+<ng-template #timeColumn let-value="value">
+  <small>{{ value }}</small>
+</ng-template>
+
+<ng-template #userPicsColumn let-value="value">
+  <div class="user-group">
+    <div *ngFor="let user of value | slice: 0: maxShownUsers">
+      <csr-user-pic [user]="user"
+                    [type]="userPicTypeEnum.IMAGE_ONLY"
+                    [size]="userPicSizeEnum.EXTRA_SMALL"
+                    [showPopover]="false">
+      </csr-user-pic>
+    </div>
+    <div *ngIf="value && value.length > maxShownUsers">
+      <span class="badge badge-secondary">
+        +{{ value.length - maxShownUsers }}
+      </span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #workgroupsColumn let-value="value">
+  <csr-workgroups-labels [canRemove]="false" [workgroups]="value"></csr-workgroups-labels>
+</ng-template>
+
+<ng-template #dropContent let-column="column" let-popover="popoverRef" let-sort="sort">
+  <csr-quick-filters [column]="column"
+                     [initialCheckboxOptions]="getValuesList(column)"
+                     [selectedOptions]="customTextFilters[column.prop]"
+                     (onFiltering)="onCustomColumnFilter(column, $event.filterText, $event.values)"
+                     (onSorting)="sort($event)"
+                     (onClose)="popover.close()"></csr-quick-filters>
+</ng-template> -->

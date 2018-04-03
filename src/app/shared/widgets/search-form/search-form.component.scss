@@ -1,0 +1,48 @@
+// Search Form
+
+@import "../../../../variables";
+
+:host {
+  :host-context(.data-table-header) {
+    flex: auto;
+    order: 2;
+    width: $datatable-header-search-width;
+  }
+  :host-context(.panel-controls) {
+    width: $panel-search-form-width;
+  }
+  :host-context(.forum-filters) {
+    flex: auto;
+  }
+  :host-context(.search-filters-container) {
+    margin-bottom: $padding-base;
+    display: block;
+  }
+}
+//.search-form {
+//  .input-group {
+//    width: 100%;
+//    .form-control {
+//      font-size: $font-size-small;
+//      box-shadow: none;
+//    }
+//
+//    &.large {
+//      .form-control {
+//        font-size: $large-input-font-size;
+//        line-height: $large-input-line-height;
+//        height: $large-input-height;
+//        padding: $large-input-padding;
+//      }
+//      .btn-search { padding: $large-input-submit-padding; }
+//    }
+//  }
+//  &.solid {
+//    .input-group {
+//      .form-control {
+//        background-color: $solid-input-bg;
+//        border-color: $solid-input-border-color;
+//      }
+//    }
+//  }
+//}

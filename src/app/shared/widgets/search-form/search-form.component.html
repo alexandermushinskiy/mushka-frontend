@@ -1,0 +1,14 @@
+<div class="search-form" [ngClass]="type">
+  <div class="input-group" [ngClass]="size">
+    <input [disabled]="disabled"
+           type="text"
+           #searchBox
+           (keyup)="valueChanged(searchBox.value)"
+           [value]="defaultValue"
+           class="form-control"
+           [attr.placeholder]="placeholder" />
+    <button class="btn btn-search" (click)="valueChanged(searchBox.value)">
+      <i class="ico ico-search"></i>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+@import '../../../variables';
+
+.appmain {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  min-width: 0;
+}
+
+.appbar {
+  background-color: $layer1;
+  flex: none;
+}
+
+.appbody {
+  flex: 1 1 auto;
+  margin: $padding-base $padding-base 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.user-list {
+  &:nth-child(n + 2) {
+    margin-left: 1px;
+  }
+}

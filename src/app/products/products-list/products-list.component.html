@@ -1,0 +1,17 @@
+<div class="appmain">
+  <div class="appbar">
+    <psa-datatable-header
+      [total]="total"
+      [shown]="shown"
+      [availableColumns]="availableCols"
+      [isMenuToggleShown]="false">
+    </psa-datatable-header>
+  </div>
+  <div class="appbody">
+    <psa-datatable
+      [rows]="rows"
+      [loadingIndicator]="loadingIndicator"
+      [cols]="availableCols">
+    </psa-datatable>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+@import "../../../variables";
+
+.data-table-header {
+  align-items: stretch;
+  background-color: $layer1;
+  display: flex;
+  min-height: $datatable-header-height - $panel-border-width;
+
+  .data-table-header-wrapper {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+  .data-table-header-title {
+    padding: $datatable-header-title-padding-x $datatable-header-title-padding-y;
+    display: flex;
+    align-items: center;
+    min-height: $datatable-header-height;
+    span,
+    csr-spinner{
+      display: inline-block;
+      vertical-align: top;
+    }
+    csr-spinner {
+      margin-top: .3rem;
+    }
+  }
+  .data-table-title {
+    display: flex;
+    align-items: center;
+    flex: auto;
+  }
+  .data-table-header-search {
+    display: flex;
+    align-items: center;
+    padding: $datatable-header-actions-padding-x $datatable-header-actions-padding-y;
+    flex: auto;
+  }
+  .data-table-header-actions {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .btn-set {
+    flex: auto;
+    text-align: right;
+    white-space: nowrap;
+    padding: $datatable-header-actions-padding-x $datatable-header-actions-padding-y;
+    display: flex;
+    align-items: center;
+    > :not(:first-child) {
+      margin-left: $padding-base;
+    }
+    > :not(:last-child) {
+      margin-right: $padding-base;
+    }
+  }
+  .csr-slogan {
+    flex: none;
+    display: inline-block;
+    vertical-align: top;
+    max-width: 550px;
+    margin-right: $padding-base;
+  }
+  .current-from-total-amount {
+    display: flex;
+    align-items: center;
+    margin-right: 6px;
+
+    line-height: 1.7rem;
+    .ico{
+      margin-left: 6px;
+    }
+    .ico:before {
+      font-size: 9px;
+    }
+    .total-count {
+      font-size: $font-size-base;
+      line-height: 15px;
+      white-space: nowrap;
+    }
+  }
+
+  .fa {
+    font-size: 1.7rem;
+  }
+  .add-to-favorites {
+    margin-top: .3rem;
+    cursor: pointer;
+    .fa-star-o {
+      color: $text-muted;
+    }
+    .fa-star {
+      color: $yellow;
+    }
+  }
+  .add-to-dashboard {
+    color: $text-muted;
+    margin: 0 $padding-base;
+    .ico-dashboard {
+      font-size: 2.2rem;
+    }
+  }
+  .save {
+    margin-top: .3rem;
+    margin-left: $padding-base;
+    .enabled {
+      color: #802478;
+      cursor: pointer;
+    }
+    .disabled {
+      color: $text-muted;
+    }
+  }
+}

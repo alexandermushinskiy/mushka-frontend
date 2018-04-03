@@ -1,0 +1,42 @@
+<header class="data-table-header">
+  <span *ngIf="isMenuToggleShown" class="gutter-toggle" (click)="onCollapseMenu.emit()">
+    <i class="fa fa-angle-double-left"></i>
+  </span>
+  <div class="data-table-header-wrapper">
+    <div class="data-table-header-title">
+      <h1 class="csr-slogan">{{ header }}</h1>
+    </div>
+    <div class="data-table-header-actions">
+      <div class="data-table-header-search">
+        <div class="current-from-total-amount" *ngIf="total > 0">
+           <span class="text-muted total-count">
+            <span *ngIf="shown!==total;else totalBlock">
+              {{ shown }} of {{ total }}
+            </span>
+            <ng-template #totalBlock>
+              {{ total }} total
+            </ng-template>
+          </span>
+          <button class="btn btn-icon" (click)="resetFilters()" *ngIf="shown!==total">
+            <i class="ico ico-close" aria-hidden="true" title="Reset filters"></i>
+          </button>
+        </div>
+        <psa-search-form (onSearch)="filter($event)"></psa-search-form>
+      </div>
+      <div class="btn-set">
+        <button class="btn btn-icon btn-refresh" title="Refresh table" (click)="reloadTickets()">
+          <i class="fa fa-refresh"></i>
+        </button>
+        <div ngbDropdown placement="bottom-right">
+          <button class="btn btn-icon btn-download" ngbDropdownToggle id="export-csv">
+            <i class="fa fa-download" title="Export to CSV" aria-hidden="true"></i>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="export-csv">
+            <button class="dropdown-item" (click)="exportAllToCSV()">Export all data to CSV</button>
+            <button class="dropdown-item" (click)="exportFilteredToCSV()">Export visible data to CSV</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -8,6 +8,10 @@ import { Product } from '../../shared/models/product.model';
 export class ProductsServce {
   private products$: BehaviorSubject<Product[]> = new BehaviorSubject([]);
 
+  constructor() {
+    this.loadProducts();
+  }
+
   getProducts(): Observable<Product[]> {
     return this.products$.asObservable();
   }

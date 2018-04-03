@@ -9,5 +9,5 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
-  .then(() => console.info(`MUSHKA-A app loaded`))
+  .then(() => console.info(`M-PSA app loaded`))
   .catch(err => console.log(err));

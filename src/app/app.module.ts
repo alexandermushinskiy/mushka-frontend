@@ -30,7 +30,7 @@ import { Ng2Webstorage } from 'ngx-webstorage';
 import { ToastrModule } from 'ngx-toastr';
 import { OrdersModule } from './orders/orders.module';
 import { SuppliersModule } from './suppliers/suppliers.module';
-import { GoodsModule } from './goods/goods.module';
+import { ProductsModule } from './goods/products.module';
 import { PackagesModule } from './packages/packages.module';
 import { PartnersModule } from './partners/partners.module';
 import { LogisticsModule } from './logistics/logistics.module';
@@ -48,7 +48,7 @@ import { LogisticsModule } from './logistics/logistics.module';
     HeaderModule,
     OrdersModule,
     SuppliersModule,
-    GoodsModule,
+    ProductsModule,
     PackagesModule,
     PartnersModule,
     LogisticsModule,

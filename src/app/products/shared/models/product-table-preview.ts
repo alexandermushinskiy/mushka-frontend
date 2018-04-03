@@ -2,12 +2,26 @@ export class ProductTablePreview {
   index: number;
   id: string;
   name: string;
+  vendorCode: string;
+  createdOn: string;
+  deliveriesNumber: number;
+  lastDeliveryDate: string;
+  lastDeliveryCount: number;
+  totalCount: number;
+  sizes: string[];
   className: string;
 
   constructor(elem, index: number = 0) {
     this.index = index;
     this.id = elem.id;
     this.name = elem.name;
+    this.vendorCode = elem.vendorCode;
+    this.createdOn = elem.createdOn;
+    this.deliveriesNumber = elem.deliveriesNumber;
+    this.lastDeliveryDate = elem.lastDeliveryDate;
+    this.lastDeliveryCount = elem.lastDeliveryCount;
+    this.totalCount = elem.totalCount;
+    this.sizes = elem.sizes;
     this.className = elem.className || this.getClassName(index);
   }
 

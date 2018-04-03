@@ -13,7 +13,7 @@ export class ProductsServce {
   }
 
   getProducts(): Observable<Product[]> {
-    return this.products$.asObservable();
+    return this.products$.asObservable().delay(3000);
   }
 
   private loadProducts() {

@@ -1,6 +1,22 @@
 <ngx-datatable #datatable
                class="material fullscreen"
-               >
+               [loadingIndicator]="loadingIndicator"
+               [reorderable]="true"
+               [scrollbarV]="true"
+               [scrollbarH]="true"
+               [rowClass]="getRowClass"               
+               [count]="rows?.length"
+               [trackByProp]="'vendorCode'"
+               [headerHeight]="40"
+               [rowHeight]="40"
+               [rows]="rowsData"
+               [columns]="columnsData"
+               [columnMode]="'force'"
+               [sorts]="sorts"
+               (select)="onSelect($event)"
+               (reorder)="onReorder($event)"
+               (resize)="onResize($event)"
+               (sort)="onTableSort($event)">
 </ngx-datatable>
 
 
@@ -8,18 +24,6 @@
   <span class="datatable-header-cell-wrapper">
     <span [ngbTooltip]="column.name" container="body" placement="top" class="datatable-header-cell-label draggable" (click)="sort($event)">
       {{ column.name }}
-    </span>
-    <span *ngIf="column.canBeFiltered && hasTickets" class="btn-toggle-drop"
-        [ngClass]="{'has-filters': customTextFilters[column.prop]}"
-        [ngbPopover]="dropContent"
-        #p="ngbPopover"
-        triggers="manual"
-        (click)="p.open({ column: column, popoverRef: p, sort: sort })"
-        [placement]="columnsData.indexOf(column)===columnsData.length-1 ? 'bottom-right' : 'bottom'"
-        container="body">
-      <i class="ico ico-filter2"
-         container="body"
-         [ngbTooltip]="customTextFilters[column.prop] ? 'Filters applied on this column' : 'Click to filter'"></i>
     </span>
   </span>
 </ng-template>

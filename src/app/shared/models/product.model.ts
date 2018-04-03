@@ -7,7 +7,7 @@ export class Product {
   lastDeliveryDate: string;
   lastDeliveryCount: number;
   totalCount: number;
-  sizes: string[];  
+  sizes: string[];
   
   constructor(data: any) {
     Object.assign(this, data);

@@ -23,33 +23,25 @@ export class PsaDatatableHeaderComponent implements OnInit {
   // @Input() ticketsListType: TicketsListType = TicketsListType.WORKGROUPS;
   @Input() isMenuToggleShown = true;
 
-  @Input() set selectedView(view: { name: string }) {
-    this.currentView = view;
-  }
-
   @Output() onFilter = new EventEmitter<string>();
   @Output() onCollapseMenu = new EventEmitter<any>();
-  @Output() onFavChanged = new EventEmitter<boolean>();
+  //@Output() onFavChanged = new EventEmitter<boolean>();
   @Output() onExportAllToCSV = new EventEmitter<string>();
   @Output() onExportFilteredToCSV = new EventEmitter<string>();
   @Output() onReload = new EventEmitter();
   @Output() onFilterReset = new EventEmitter();
   //@Output() onQuickFilter = new EventEmitter<DatatableQuickFilterConfig>();
-  @Output() onQuickFilterBySubgroups = new EventEmitter<boolean>();
-  @Output() onSave = new EventEmitter();
+  //@Output() onQuickFilterBySubgroups = new EventEmitter<boolean>();
+  //@Output() onSave = new EventEmitter();
 
   isLoading = false;
-  isFavorite = false;
 
-  currentWorkgroup: { id: string, name: string };
+  //currentWorkgroup: { id: string, name: string };
   currentFilter = '';
   //ticketsListTypes = TicketsListType;
-  currentView: { name: string };
-  isWorkgroupsOrFavorites: boolean;
-  header = '- HEDAER -';
+  header = '- HEADER -';
 
-  constructor(
-              private notificationsService: NotificationsService,
+  constructor(private notificationsService: NotificationsService,
               private storage: LocalStorageService) {
   }
 
@@ -79,31 +71,9 @@ export class PsaDatatableHeaderComponent implements OnInit {
   }
 
   resetFilters() {
-    // const isSubWorkgroupsActive = this.datatableSettings.quickFilterConfig.subWorkgroups;
-    // this.datatableSettings.quickFilterConfig = new DatatableQuickFilterConfig({ subWorkgroups: isSubWorkgroupsActive });
-    // this.searchForm.searchElementRef.nativeElement.value = '';
-    // this.filter('');
-    // this.onFilterReset.emit();
-  }
-
-  save() {
-    this.onSave.emit();
-  }
-
-  private onSuccess() {
-    this.notificationsService.success(
-      'Success',
-      `Successfully ${this.isFavorite ? 'added' : 'removed'} workgroup ${this.currentWorkgroup.name} from favorites`
-    );
-    this.hideLoader();
-  }
-
-  private onError(err) {
-    this.notificationsService.danger(
-      'Error',
-      err
-    );
-    this.hideLoader();
+    this.searchForm.reset();
+    this.filter('');
+    this.onFilterReset.emit();
   }
 
   private hideLoader() {

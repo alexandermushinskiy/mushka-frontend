@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ProductsServce } from '../../core/api/products.service';
 import { ProductTablePreview } from '../shared/models/product-table-preview';
 import { availableColumns } from '../shared/constants/available-columns.const';
 import { NotificationsService } from '../../core/notifications/notifications.service';
+import { PsaDatatableComponent } from '../psa-datatable/psa-datatable.component';
 
 @Component({
   selector: 'psa-products-list',
@@ -11,7 +12,8 @@ import { NotificationsService } from '../../core/notifications/notifications.ser
   styleUrls: ['./products-list.component.scss']
 })
 export class ProductsListComponent implements OnInit {
-
+  @ViewChild(PsaDatatableComponent) datatable: PsaDatatableComponent;
+  
   rows: ProductTablePreview[];
   loadingIndicator = true;
   total = 0;
@@ -31,9 +33,13 @@ export class ProductsListComponent implements OnInit {
       );
   }
 
+  onRowsUpdated(rowsAmount: number) {
+    this.shown = rowsAmount;
+  }
+
   private onSuccess(products) {
     this.rows = products.map((el, index) => new ProductTablePreview(el, index));
-    this.total = this.rows.length;
+    this.total = products.length;
     this.loadingIndicator = false;
   }
 

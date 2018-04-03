@@ -12,14 +12,13 @@ import { DatatableColumn } from '../../shared/interfaces/datatable-column.interf
 import { ColumnConfiguration } from '../../shared/models/column-configuration.model';
 import { ProductTablePreview } from '../shared/models/product-table-preview';
 import { columnsConfig } from '../shared/constants/columns-config.const';
+import { UserSettingsService } from '../../core/api/user-settings.service';
+import { propertiesToFilter } from '../shared/constants/properties-to-filter.const';
 
 // import { ReadReceiptService } from '../../core/api/read-receipt.service';
 // import { FileHelper } from '../../shared/utils/file-helper';
-// import { UserSettingsService } from '../../core/api/user-settings.service';
-//import { columnsConfig } from '../../shared/constants/columns-config.const';
 
 // import { DatatableQuickFilterConfig } from '../../shared/interfaces/datatable-quick-filter-config';
-// import { propertiesToFilter } from '../shared/constants/properties-to-filter.const';
 // import { WorklistFilterService } from '../../core/worklist-filter/worklist-filter.service';
 
 @Component({
@@ -29,35 +28,33 @@ import { columnsConfig } from '../shared/constants/columns-config.const';
 })
 export class PsaDatatableComponent extends UnsubscriberComponent implements OnInit, OnDestroy {
   @ViewChild('datatable') datatable: DatatableComponent;
-  @ViewChild('hotColumn') hotCol: TemplateRef<any>;
-  @ViewChild('flowColumn') flowCol: TemplateRef<any>;
-  @ViewChild('severityColumn') severityCol: TemplateRef<any>;
-  @ViewChild('tasksColumn') tasksCol: TemplateRef<any>;
-  @ViewChild('sloganColumn') sloganCol: TemplateRef<any>;
-  @ViewChild('statusColumn') statusCol: TemplateRef<any>;
-  @ViewChild('collaborationColumn') collaborationCol: TemplateRef<any>;
-  @ViewChild('userPicsColumn') userPicsCol: TemplateRef<any>;
-  @ViewChild('csrTypeColumn') csrTypeCol: TemplateRef<any>;
-  @ViewChild('timeColumn') timeCol: TemplateRef<any>;
-  @ViewChild('workgroupsColumn') workgroupsCol: TemplateRef<any>;
-  @ViewChild('csrNumberColumn') csrNumberCol: TemplateRef<any>;
-  @ViewChild('subscribersColumn') subscribersCol: TemplateRef<any>;
+  // @ViewChild('hotColumn') hotCol: TemplateRef<any>;
+  // @ViewChild('flowColumn') flowCol: TemplateRef<any>;
+  // @ViewChild('severityColumn') severityCol: TemplateRef<any>;
+  // @ViewChild('tasksColumn') tasksCol: TemplateRef<any>;
+  // @ViewChild('sloganColumn') sloganCol: TemplateRef<any>;
+  // @ViewChild('statusColumn') statusCol: TemplateRef<any>;
+  // @ViewChild('collaborationColumn') collaborationCol: TemplateRef<any>;
+  // @ViewChild('userPicsColumn') userPicsCol: TemplateRef<any>;
+  // @ViewChild('csrTypeColumn') csrTypeCol: TemplateRef<any>;
+  // @ViewChild('timeColumn') timeCol: TemplateRef<any>;
+  // @ViewChild('workgroupsColumn') workgroupsCol: TemplateRef<any>;
+  // @ViewChild('csrNumberColumn') csrNumberCol: TemplateRef<any>;
+  // @ViewChild('subscribersColumn') subscribersCol: TemplateRef<any>;
 
   @ViewChild('headerTpl') headerTpl: TemplateRef<any>;
 
   @Input() loadingIndicator: boolean;
-  @Input() isWorklist = false;
-  @Input() shouldCheckUnreadCsr = false;
   @Input() cols: string[];
 
   @Input() set rows(data) {
     if (data && data.length > 0) {
       this.initialRowsData = data;
-      this.hasTickets = true;
+      this.hasData = true;
       this.sort();
       this.filter();
     } else {
-      this.hasTickets = false;
+      this.hasData = false;
       this.rowsData = [];
     }
 
@@ -73,14 +70,14 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
 
   sorts: { dir: string, prop: string }[];
   columnsData: DatatableColumn[];
-  rowsData: ProductTablePreview[]; //TicketTablePreview[];
+  rowsData: ProductTablePreview[];
   userPicTypeEnum = UserPicType;
   userPicSizeEnum = UserPicSize;
   investigationLead: UserData;
   selectedTickets = [];
   headerHeight: number;
-  customTextFilters: { [name: string]: { filterText?: string, values?: string[] } } = {};
-  hasTickets = false;
+  //customTextFilters: { [name: string]: { filterText?: string, values?: string[] } } = {};
+  hasData = false;
 
   readonly maxShownUsers = 3;
 
@@ -101,16 +98,15 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
 
   constructor(private router: Router,
               private activeRoute: ActivatedRoute,
+              private userSettingsService: UserSettingsService,
               private notificationsService: NotificationsService) {
     super();
   }
 
   ngOnInit() {
     this.headerHeight = this.fixedHeaderHeight.collapsed;
-
-    this.activeRoute.queryParams
-      .takeUntil(this.ngUnsubscribe$)
-      .subscribe(({ previewId }) => this.onPreviewSelected(previewId));
+//debugger;
+    this.init(this.userSettingsService.getDefaultUserSettings(Object.keys(this.datatableConfig)));
   }
 
   readTicket(row: any) {
@@ -118,23 +114,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
 
   //   if (this.shouldCheckUnreadCsr && !row.isRead) {
   //     this.readReceiptService.updateUnread(this.isWorklist);
-  //   }
-  }
-
-  activateRow({ type, row, cellIndex, event }: { type: string, row: ProductTablePreview, cellIndex: number, event: { code: string } }) {
-  //   if (type === 'keydown' && (event.code === 'ArrowDown' || event.code === 'ArrowUp')) {
-  //     const rowIndex = this.rowsData.indexOf(row) + (event.code === 'ArrowDown' ? 1 : -1);
-  //     row = this.rowsData[rowIndex];
-  //     if (!row) {
-  //       return;
-  //     }
-  //   }
-
-  //   if ((type === 'click' && cellIndex > 0) || type === 'keydown') {
-  //     this.router.navigate([], {
-  //       relativeTo: this.activeRoute
-  //     });
-  //     this.showPreview(row);
   //   }
   }
 
@@ -157,33 +136,33 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   }
 
   onFilter(filterText: string) {
-  //   this.filterText = filterText;
-  //   this.filter();
+    this.filterText = filterText;
+    this.filter();
   }
 
   onTableSort({ sorts }, rows?: ProductTablePreview[]) {
-  //   const { dir, prop, initSort } = sorts[0];
-  //   const rowsData = rows || this.rowsData;
-  //   if (rowsData && rowsData.length > 0) {
-  //     if (!initSort) {
-  //       this.userSettingsService.changeColumnsSort(prop, dir)
-  //         .subscribe((res) => this.columnsConfigurationSnapshot = res,
-  //           (err: string) => this.onError(err)
-  //         );
-  //     }
-  //     switch (dir) {
-  //       case 'asc':
-  //         return this.updateColumnsStatus(rowsData.sort((a, b) => this.sortByProp(a[prop], b[prop])));
-  //       case 'desc':
-  //       default:
-  //         return this.updateColumnsStatus(rowsData.sort((a, b) => this.sortByProp(b[prop], a[prop])));
-  //     }
-  //   }
+    const { dir, prop, initSort } = sorts[0];
+    const rowsData = rows || this.rowsData;
+    if (rowsData && rowsData.length > 0) {
+      // if (!initSort) {
+      //   this.userSettingsService.changeColumnsSort(prop, dir)
+      //     .subscribe((res) => this.columnsConfigurationSnapshot = res,
+      //       (err: string) => this.onError(err)
+      //     );
+      // }
+      switch (dir) {
+        case 'asc':
+          return this.updateColumnsStatus(rowsData.sort((a, b) => this.sortByProp(a[prop], b[prop])));
+        case 'desc':
+        default:
+          return this.updateColumnsStatus(rowsData.sort((a, b) => this.sortByProp(b[prop], a[prop])));
+      }
+    }
   }
 
   onReorder({ prevValue, newValue }) {
-    // const firstColumnName = this.getInitialColumnName(this.columnsData[prevValue].prop);
-    // const secondColumnName = this.getInitialColumnName(this.columnsData[newValue].prop);
+    const firstColumnName = this.getInitialColumnName(this.columnsData[prevValue].prop);
+    const secondColumnName = this.getInitialColumnName(this.columnsData[newValue].prop);
     // this.columnsData = this.userSettingsService.moveElements(this.columnsData, prevValue, newValue);
     // this.userSettingsService.changeColumnsOrder(firstColumnName, secondColumnName)
     //   .subscribe(
@@ -248,11 +227,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     return row.className;
   }
 
-  openInSMS($event, linkToSms: string) {
-    window.open(linkToSms);
-    $event.stopPropagation();
-  }
-
   ngOnDestroy() {
     clearTimeout(this.routeChangeTimeout);
     super.ngOnDestroy();
@@ -281,17 +255,18 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   }
 
   resetFilter() {
-    this.customTextFilters = {};
+    //this.customTextFilters = {};
     this.filter();
   }
 
   private sort() {
-    // const sortColumn = this.columnsConfigurationSnapshot.find(c => Object.keys(c.sort).length > 0);
-    // const sort = sortColumn
-    //   ? { dir: sortColumn.sort.order, prop: sortColumn.name }
-    //   : { dir: 'desc', prop: 'changedOn' };
-    // this.sorts = [sort];
-    // this.rowsData = this.onTableSort({ sorts: [{ ...{ initSort: true }, ...sort }] }, this.initialRowsData);
+    debugger;
+    const sortColumn = this.columnsConfigurationSnapshot.find(c => Object.keys(c.sort).length > 0);
+    const sort = sortColumn
+      ? { dir: sortColumn.sort.order, prop: sortColumn.name }
+      : { dir: 'asc', prop: 'name' };
+    this.sorts = [sort];
+    this.rowsData = this.onTableSort({ sorts: [{ ...{ initSort: true }, ...sort }] }, this.initialRowsData);
   }
 
   private filter() {
@@ -301,16 +276,16 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     //   return;
     // }
 
-    // let filteredRows = this.initialRowsData ? [...this.initialRowsData] : [];
-    // if (this.filterText) {
-    //   filteredRows = this.filterByGlobalText(filteredRows);
-    // }
+    let filteredRows = this.initialRowsData ? [...this.initialRowsData] : [];
+    if (this.filterText) {
+      filteredRows = this.filterByGlobalText(filteredRows);
+    }
     // if (customFiltersList.length > 0) {
     //   filteredRows = this.filterByCustomText(customFiltersList, filteredRows);
     // }
-    // this.rowsData = this.updateColumnsStatus(this.filterWithToggles(filteredRows));
-    // this.broadcastRowsUpdated(filteredRows.length);
-    // this.recalculateTable();
+    this.rowsData = this.updateColumnsStatus(this.filterWithToggles(filteredRows));
+    this.broadcastRowsUpdated(filteredRows.length);
+    this.recalculateTable();
   }
 
   private recalculateTable() {
@@ -320,55 +295,50 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   }
 
   private filterByGlobalText(filteredRows) {
-    // const columns = this.columnsData.map(el => el.name);
-    // const propertiesToFilterKeys = Object.keys(propertiesToFilter);
-    // this.filterText = this.filterText.toLowerCase().trim();
+    const columns = this.columnsData.map(el => el.name);
+    const propertiesToFilterKeys = Object.keys(propertiesToFilter);
+    this.filterText = this.filterText.toLowerCase().trim();
 
-    // return filteredRows.filter(row => {
-    //   let filterFields = [];
-    //   columns.forEach(column => {
-    //     if (propertiesToFilterKeys.includes(column) && row[propertiesToFilter[column]]) {
-    //       filterFields.push(row[propertiesToFilter[column]].toString().toLowerCase());
-    //     }
-    //     if (column === this.ericssonResponsibleCoulumn) {
-    //       filterFields = filterFields.concat(this.getUserNamesAndSignums(row));
-    //     } else if (column === 'Workgroups') {
-    //       filterFields = filterFields.concat(this.getWorkgroups(row));
-    //     }
-    //   });
-    //   return filterFields.some(el => el.includes(this.filterText));
-    // });
+    return filteredRows.filter(row => {
+      let filterFields = [];
+      columns.forEach(column => {
+        if (propertiesToFilterKeys.includes(column) && row[propertiesToFilter[column]]) {
+          filterFields.push(row[propertiesToFilter[column]].toString().toLowerCase());
+        }
+      });
+      return filterFields.some(el => el.includes(this.filterText));
+    });
   }
 
   private filterByCustomText(customFiltersList, filteredRows) {
-    return customFiltersList.reduce((memo, filter) => (
-      memo.filter(row => {
-        let valueToFilter = row[filter] ? row[filter].toString().trim().toLowerCase() : '';
+    // return customFiltersList.reduce((memo, filter) => (
+    //   memo.filter(row => {
+    //     let valueToFilter = row[filter] ? row[filter].toString().trim().toLowerCase() : '';
 
-        if (filter === 'ericssonResponsible') {
-          valueToFilter = this.getUserNamesAndSignums(row);
-          return this.customTextFilters[filter].values.some(responsible => valueToFilter.includes(responsible.toLowerCase()));
-        }
+    //     if (filter === 'ericssonResponsible') {
+    //       valueToFilter = this.getUserNamesAndSignums(row);
+    //       return this.customTextFilters[filter].values.some(responsible => valueToFilter.includes(responsible.toLowerCase()));
+    //     }
 
-        if (filter === 'hot') {
-          valueToFilter = (!!valueToFilter ? filter : `not ${filter}`);
-        }
+    //     if (filter === 'hot') {
+    //       valueToFilter = (!!valueToFilter ? filter : `not ${filter}`);
+    //     }
 
-        if (filter === 'workgroups') {
-          valueToFilter = this.getWorkgroups(row);
-        }
+    //     if (filter === 'workgroups') {
+    //       valueToFilter = this.getWorkgroups(row);
+    //     }
 
-        if (this.customTextFilters[filter].values.length) {
-          return this.customTextFilters[filter].values.find(el => el.toLowerCase() === valueToFilter);
-        }
-        return valueToFilter.includes(this.customTextFilters[filter].filterText);
-      })
-    ), filteredRows);
+    //     if (this.customTextFilters[filter].values.length) {
+    //       return this.customTextFilters[filter].values.find(el => el.toLowerCase() === valueToFilter);
+    //     }
+    //     return valueToFilter.includes(this.customTextFilters[filter].filterText);
+    //   })
+    // ), filteredRows);
   }
 
   private filterWithToggles(rowsData) {
     // Check if filterSettings has at least one active toggle
-    // let filteredRows = rowsData;
+    let filteredRows = rowsData;
     // if (this.filterConfig && Object.values(this.filterConfig).includes(true)) {
     //   if (!this.isWorklist && this.filterConfig.unassignedOnly) {
     //     filteredRows = filteredRows.filter(this.filterByUnassigned);
@@ -379,9 +349,8 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     //   this.broadcastRowsUpdated(filteredRows.length);
     //   return filteredRows;
     // }
-    // this.broadcastRowsUpdated(rowsData.length);
-    // return rowsData;
-    return {};
+    this.broadcastRowsUpdated(rowsData.length);
+    return rowsData;
   }
 
   private broadcastRowsUpdated(length: number) {
@@ -420,8 +389,8 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     return row.workgroups.map(workgroup => workgroup.name.toLowerCase()).join(' ');
   }
 
-  private init(worklistConfiguration: ColumnConfiguration[]) {
-    this.columnsConfigurationSnapshot = [...worklistConfiguration];
+  private init(configurations: ColumnConfiguration[]) {
+    this.columnsConfigurationSnapshot = [...configurations];
     this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
     this.columnsData = this.createAvailableColumnsData(this.columnsConfigurationSnapshot);
   //   this.userSettingsService.updateAvailableColumns(this.columnsConfigurationSnapshot);
@@ -440,12 +409,12 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     //   );
   }
 
-  private onPreviewSelected(previewId: string) {
-    this.selectedRowId = previewId;
-    if (this.rowsData) {
-      this.rowsData = this.updateColumnsStatus(this.rowsData);
-    }
-  }
+  // private onPreviewSelected(previewId: string) {
+  //   this.selectedRowId = previewId;
+  //   if (this.rowsData) {
+  //     this.rowsData = this.updateColumnsStatus(this.rowsData);
+  //   }
+  // }
 
   private getInitialColumnName(prop: string) {
     return this.columnsDictionary[prop] || prop;
@@ -458,19 +427,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
       }
       return dictionary;
     }, {});
-  }
-
-  private showPreview(row) {
-    if (row.id !== this.selectedRowId && this.selectedTickets.length === 0) {
-      this.routeChangeTimeout = setTimeout(() => {
-        this.router.navigate([], {
-          queryParams: {
-            previewId: row.id
-          },
-          relativeTo: this.activeRoute
-        });
-      }, 300);
-    }
   }
 
   private sortByProp(a, b) {
@@ -524,10 +480,7 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   }
 
   private onError(err) {
-    this.notificationsService.danger(
-      'Error',
-      err
-    );
+    this.notificationsService.danger('Error', err);
   }
 
   private getFakeRow() {

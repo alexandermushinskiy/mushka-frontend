@@ -10,14 +10,14 @@
       <div class="data-table-header-search">
         <div class="current-from-total-amount" *ngIf="total > 0">
            <span class="text-muted total-count">
-            <span *ngIf="shown!==total;else totalBlock">
+            <span *ngIf="shown !== total; else totalBlock">
               {{ shown }} of {{ total }}
             </span>
             <ng-template #totalBlock>
               {{ total }} total
             </ng-template>
           </span>
-          <button class="btn btn-icon" (click)="resetFilters()" *ngIf="shown!==total">
+          <button class="btn btn-icon" (click)="resetFilters()" *ngIf="shown !== total">
             <i class="ico ico-close" aria-hidden="true" title="Reset filters"></i>
           </button>
         </div>

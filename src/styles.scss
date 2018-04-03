@@ -2,6 +2,9 @@
 @import '../node_modules/font-awesome/scss/font-awesome';
 @import '../node_modules/bootstrap/scss/bootstrap';
 @import '../node_modules/summernote/dist/summernote-bs4.css';
+@import '../node_modules/ngx-datatable-with-ie-fix/release/assets/icons.css';
+@import '../node_modules/ngx-datatable-with-ie-fix/release/index.css';
+@import '../node_modules/ngx-datatable-with-ie-fix/release/themes/material.css';
 
 @import 'assets/styles/autocomplete';
 @import 'assets/styles/boxes';
@@ -22,11 +25,8 @@
 @import 'assets/styles/panel';
 @import 'assets/styles/inline-editor';
 @import 'assets/styles/ngx-datepicker';
-@import 'assets/styles/csr-search';
-@import 'assets/styles/learning-reflection';
 @import 'assets/styles/ngb-datepicker';
 @import 'assets/styles/ngb-timepicker';
-@import 'assets/styles/csr-embargo';
 /* You can add global styles to this file, and also import other style files */
 html {
   font-size: 10px;

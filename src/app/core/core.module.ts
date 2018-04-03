@@ -10,6 +10,7 @@ import { UserNotificationsService } from './user-notifications/user-notification
 import { CurrentUserService } from './api/current-user.service';
 import { BrowserDetectorService } from './browser-detector/browser-detector.service';
 import { ProductsServce } from './api/products.service';
+import { UserSettingsService } from './api/user-settings.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ProductsServce } from './api/products.service';
     UserNotificationsService,
     CurrentUserService,
     BrowserDetectorService,
-    ProductsServce
+    ProductsServce,
+    UserSettingsService
   ],
   declarations: [],
   exports: []

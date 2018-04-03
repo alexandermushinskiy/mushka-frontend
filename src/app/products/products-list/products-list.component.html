@@ -1,17 +1,20 @@
 <div class="appmain">
   <div class="appbar">
     <psa-datatable-header
-      [total]="total"
-      [shown]="shown"
-      [availableColumns]="availableCols"
-      [isMenuToggleShown]="false">
+                    [total]="total"
+                    [shown]="shown"
+                    [availableColumns]="availableCols"
+                    [isMenuToggleShown]="false"
+                    (onFilter)="datatable.onFilter($event)"
+                    (onFilterReset)="datatable.resetFilter()">
     </psa-datatable-header>
   </div>
   <div class="appbody">
-    <psa-datatable
-      [rows]="rows"
-      [loadingIndicator]="loadingIndicator"
-      [cols]="availableCols">
+    <psa-datatable  #datatable
+                    [rows]="rows"
+                    [loadingIndicator]="loadingIndicator"
+                    [cols]="availableCols"
+                    (onRowsUpdated)="onRowsUpdated($event)">
     </psa-datatable>
   </div>
 </div>

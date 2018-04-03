@@ -1,6 +1,6 @@
 <div ngbDropdown placement="bottom-center">
   <div ngbDropdownToggle (click)="trackEvent()">
-    <mhk-header-badge [title]="'Notifications'" [icon]="'ico-bell'" [value]="activeNotificationsAmount"></mhk-header-badge>
+    <psa-header-badge [title]="'Notifications'" [icon]="'ico-bell'" [value]="activeNotificationsAmount"></psa-header-badge>
   </div>
   <div *ngIf="notifications.length" ngbDropdownMenu>
     <ng-container *ngFor="let notification of notifications">

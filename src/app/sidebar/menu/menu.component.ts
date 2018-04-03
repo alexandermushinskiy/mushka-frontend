@@ -7,7 +7,7 @@ import { BadgesService } from '../../core/api/badges.service';
 import { SidebarMenuStateService } from '../../core/sidebar-menu-state/sidebar-menu-state.service';
 
 @Component({
-  selector: 'mhk-menu',
+  selector: 'psa-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

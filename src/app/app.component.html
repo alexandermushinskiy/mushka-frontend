@@ -1,8 +1,8 @@
-<mhk-loading-screen></mhk-loading-screen>
+<psa-loading-screen></psa-loading-screen>
 <div *ngIf="isAppReady" id="app">
-  <mhk-header></mhk-header>
+  <psa-header></psa-header>
   <main id="main" [ngClass]="{'sidebar-collapsed': isCollapsed}">
-    <mhk-sidebar [ngClass]="{'sidebar-collapsed': isCollapsed}"></mhk-sidebar>
+    <psa-sidebar [ngClass]="{'sidebar-collapsed': isCollapsed}"></psa-sidebar>
     <router-outlet></router-outlet>
   </main>
 </div>

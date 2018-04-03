@@ -3,7 +3,7 @@ import { Component, ViewChild, Output, Input, EventEmitter, ElementRef } from '@
 import { NotificationsService } from '../../core/notifications/notifications.service';
 
 @Component({
-  selector: 'mhk-global-search',
+  selector: 'psa-global-search',
   templateUrl: './global-search.component.html',
   styleUrls: ['./global-search.component.scss']
 })

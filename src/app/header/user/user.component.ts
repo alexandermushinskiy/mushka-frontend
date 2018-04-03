@@ -6,7 +6,7 @@ import { UserPicType } from '../../shared/enums/user-pic-type.enum';
 import { CurrentUserService } from '../../core/api/current-user.service';
 
 @Component({
-  selector: 'mhk-user',
+  selector: 'psa-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })

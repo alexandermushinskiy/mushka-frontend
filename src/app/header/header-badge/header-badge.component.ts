@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'mhk-header-badge',
+  selector: 'psa-header-badge',
   templateUrl: './header-badge.component.html',
   styleUrls: ['./header-badge.component.scss']
 })

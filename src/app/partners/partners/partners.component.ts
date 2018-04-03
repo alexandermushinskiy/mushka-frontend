@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mhk-partners',
+  selector: 'psa-partners',
   templateUrl: './partners.component.html',
   styleUrls: ['./partners.component.scss']
 })

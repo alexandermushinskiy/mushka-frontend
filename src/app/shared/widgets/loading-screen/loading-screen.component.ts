@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppLoaderService } from '../../../core/app-loader/app-loader.service';
 
 @Component({
-  selector: 'mhk-loading-screen',
+  selector: 'psa-loading-screen',
   templateUrl: './loading-screen.component.html',
   styleUrls: ['./loading-screen.component.scss']
 })

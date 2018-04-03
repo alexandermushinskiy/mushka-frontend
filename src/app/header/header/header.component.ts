@@ -16,7 +16,7 @@ import { BadgesService } from '../../core/api/badges.service';
 // import { WorklistService } from '../../core/api/worklist.service';
 
 @Component({
-  selector: 'mhk-header',
+  selector: 'psa-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })

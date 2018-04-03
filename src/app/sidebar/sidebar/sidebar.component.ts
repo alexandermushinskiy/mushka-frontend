@@ -4,7 +4,7 @@ import { LocalStorage } from 'ngx-webstorage';
 import { SidebarMenuStateService } from '../../core/sidebar-menu-state/sidebar-menu-state.service';
 
 @Component({
-  selector: 'mhk-sidebar',
+  selector: 'psa-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })

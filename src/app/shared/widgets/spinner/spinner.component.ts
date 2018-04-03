@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BrowserDetectorService } from '../../../core/browser-detector/browser-detector.service';
 
 @Component({
-  selector: 'mhk-spinner',
+  selector: 'psa-spinner',
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss']
 })

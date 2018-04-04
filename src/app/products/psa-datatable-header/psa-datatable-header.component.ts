@@ -30,6 +30,7 @@ export class PsaDatatableHeaderComponent implements OnInit {
   @Output() onExportFilteredToCSV = new EventEmitter<string>();
   @Output() onReload = new EventEmitter();
   @Output() onFilterReset = new EventEmitter();
+  @Output() onAddItem = new EventEmitter();
   //@Output() onQuickFilter = new EventEmitter<DatatableQuickFilterConfig>();
   //@Output() onQuickFilterBySubgroups = new EventEmitter<boolean>();
   //@Output() onSave = new EventEmitter();
@@ -46,6 +47,10 @@ export class PsaDatatableHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  addItem() {
+    this.onAddItem.emit();
   }
 
   filter(value: string) {

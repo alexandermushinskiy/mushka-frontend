@@ -5,6 +5,7 @@
                     [shown]="shown"
                     [availableColumns]="availableCols"
                     [isMenuToggleShown]="false"
+                    (onAddItem)="addProduct()"
                     (onFilter)="datatable.onFilter($event)"
                     (onFilterReset)="datatable.resetFilter()">
     </psa-datatable-header>

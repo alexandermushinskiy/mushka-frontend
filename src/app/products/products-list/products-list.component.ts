@@ -37,6 +37,10 @@ export class ProductsListComponent implements OnInit {
     this.shown = rowsAmount;
   }
 
+  addProduct() {
+    console.info('addProduct');
+  }
+
   private onSuccess(products) {
     this.rows = products.map((el, index) => new ProductTablePreview(el, index));
     this.total = products.length;

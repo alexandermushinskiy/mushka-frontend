@@ -12,7 +12,7 @@ export class SearchFormComponent extends UnsubscriberComponent implements OnInit
   @Input() type: 'solid' | 'outline' = 'outline';
   @Input() disabled = false;
   @Input() size: 'default' | 'large' = 'default';
-  @Input() placeholder = 'Search...';
+  @Input() placeholder = 'Поиск...';
   @Input() defaultValue = '';
 
   @Output() onSearch = new EventEmitter();

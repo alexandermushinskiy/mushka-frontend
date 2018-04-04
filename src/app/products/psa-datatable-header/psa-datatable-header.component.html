@@ -5,16 +5,17 @@
   <div class="data-table-header-wrapper">
     <div class="data-table-header-title">
       <h1 class="csr-slogan">{{ header }}</h1>
+      <button class="btn btn-light btn-block" (click)="addItem()">Добавить</button>
     </div>
     <div class="data-table-header-actions">
       <div class="data-table-header-search">
         <div class="current-from-total-amount" *ngIf="total > 0">
            <span class="text-muted total-count">
             <span *ngIf="shown !== total; else totalBlock">
-              {{ shown }} of {{ total }}
+              {{ shown }} из {{ total }}
             </span>
             <ng-template #totalBlock>
-              {{ total }} total
+              {{ total }} всего
             </ng-template>
           </span>
           <button class="btn btn-icon" (click)="resetFilters()" *ngIf="shown !== total">

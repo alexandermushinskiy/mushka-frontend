@@ -351,3 +351,21 @@
     transform: translateX(50%) scale(0, 1);
   }
 }
+
+
+// ------------------------- MUSHKA ----------------------------------
+
+.products-count {
+  background-color: $products-count-bg;
+  border-radius: $products-count-radius;
+  font-size: $products-count-font-size;
+  line-height: $products-count-line-height;
+  padding: $products-count-padding-x $products-count-padding-y;
+  color: $white;
+  &.ends {
+    background-color: $products-count-ends-bg;
+  }
+  &.sold {
+    background-color: $products-count-sold-bg;
+  }
+}

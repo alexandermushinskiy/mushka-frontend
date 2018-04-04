@@ -29,7 +29,7 @@
 </ng-template>
 
 <ng-template #totalColumn let-row="row" let-value="value">
-  <div *ngIf="value > 0" class="tasks-count">{{ value }}</div>
+  <div class="products-count" [ngClass]="{'ends': value < 11 && value > 0, 'sold': value === 0}">{{ value }}</div>
 </ng-template>
 
 <ng-template #sizesColumn let-value="value">

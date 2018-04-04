@@ -4,7 +4,7 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
   'name': {
     name: 'Имя',
     prop: 'name',
-    width: 250,
+    width: 50,
     canBeFiltered: true,
     cellTemplateName: 'nameCol',
     predefinedValues: false

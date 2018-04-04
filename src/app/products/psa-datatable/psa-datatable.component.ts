@@ -392,7 +392,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   }
 
   private init(configurations: ColumnConfiguration[]) {
-    debugger;
     this.columnsConfigurationSnapshot = [...configurations];
     this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
     this.columnsData = this.createAvailableColumnsData(this.columnsConfigurationSnapshot);

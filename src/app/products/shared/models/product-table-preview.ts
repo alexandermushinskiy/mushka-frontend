@@ -1,3 +1,5 @@
+import { SizeItem } from '../../../shared/models/size-item.model';
+
 export class ProductTablePreview {
   index: number;
   id: string;
@@ -8,7 +10,7 @@ export class ProductTablePreview {
   lastDeliveryDate: string;
   lastDeliveryCount: number;
   totalCount: number;
-  sizes: string[];
+  sizes: SizeItem[];
   className: string;
 
   constructor(elem, index: number = 0) {

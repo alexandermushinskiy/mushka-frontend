@@ -1,3 +1,3 @@
-<span *ngFor="let size of sizes" class="workgroup-label workgroup-label-unassigned">
-  {{ size }}
+<span *ngFor="let sizeItem of sizes" class="size-label" [ngClass]="sizeItem.getCssClass()">
+  {{ sizeItem.size }} <span class="amount">({{ sizeItem.amount }})</span>
 </span>

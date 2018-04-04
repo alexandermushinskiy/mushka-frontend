@@ -1,6 +1,6 @@
 @import "../../../../variables";
 
-.workgroup-label {
+.size-label {
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
@@ -9,21 +9,21 @@
   font-size: 1.2rem;
   line-height: 1.5rem;
   text-transform: uppercase;
-  //color: $white;
   color: #fff;
   border-radius: $border-radius-base;
   margin: 0 .3rem .5rem 0;
+  background-color: $products-size-count-bg;
   :host-context(.data-table) & {
     margin-bottom: 0;
   }
-  &-assigned {
-    background-color: $workgroup-assigned-color;
+  .amount {
+    padding-left: 5px;
   }
-  &-sms-engagement {
-    background-color: $workgroup-sms-engagement-color;
+  &-ends {
+    background-color: $products-size-count-ends-bg;
   }
-  &-unassigned {
-    background-color: $workgroup-unassigned-color;
+  &-sold {
+    background-color: $products-size-count-sold-bg;
   }
 
   .close {

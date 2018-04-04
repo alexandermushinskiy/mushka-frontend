@@ -1,7 +1,7 @@
 export const availableColumns = {
   products: [
     'name',
-    'vendorCode',
+    'сode',
     'createdOn',
     'deliveriesNumber',
     'lastDeliveryDate',

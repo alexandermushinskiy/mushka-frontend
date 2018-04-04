@@ -2,23 +2,23 @@ import { DatatableColumn } from '../../../shared/interfaces/datatable-column.int
 
 export const columnsConfig: { [name: string]: DatatableColumn } = {
   'name': {
-    name: 'Name',
+    name: 'Имя',
     prop: 'name',
     width: 250,
     canBeFiltered: true,
     cellTemplateName: 'nameCol',
     predefinedValues: false
   },
-  'vendorCode': {
-    name: 'Vendor Code',
-    prop: 'vendorCode',
+  'сode': {
+    name: 'Артикул',
+    prop: 'сode',
     width: 50,
     canBeFiltered: true,
-    cellTemplateName: 'vendorCodeCol',
+    cellTemplateName: 'сodeCol',
     predefinedValues: false
   },
   'createdOn': {
-    name: 'Created On',
+    name: 'Дата добавления',
     prop: 'createdOn',
     width: 70,
     canBeFiltered: true,
@@ -26,7 +26,7 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
     predefinedValues: false
   },
   'deliveriesNumber': {
-    name: 'Deliveries No',
+    name: 'Кол-во поставок',
     prop: 'deliveriesNumber',
     width: 70,
     canBeFiltered: true,
@@ -34,7 +34,7 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
     predefinedValues: false
   },
   'lastDeliveryDate': {
-    name: 'Last Delivery Date',
+    name: 'Дата последней поставки',
     prop: 'lastDeliveryDate',
     width: 70,
     canBeFiltered: true,
@@ -42,7 +42,7 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
     predefinedValues: false
   },
   'lastDeliveryCount': {
-    name: 'Last Delivery Count',
+    name: 'Кол-во в последней поставке',
     prop: 'lastDeliveryCount',
     width: 100,
     canBeFiltered: true,
@@ -50,7 +50,7 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
     predefinedValues: false
   },
   'sizes': {
-    name: 'Sizes',
+    name: 'Размеры',
     prop: 'sizes',
     width: 150,
     canBeFiltered: true,
@@ -58,7 +58,7 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
     predefinedValues: false
   },
   'totalCount': {
-    name: 'Total',
+    name: 'Всего в наличие',
     prop: 'totalCount',
     width: 30,
     canBeFiltered: true,

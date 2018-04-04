@@ -1,7 +1,7 @@
 export class Product {
   id: string;
   name: string;
-  vendorCode: string;
+  code: string;
   createdOn: string;
   deliveriesNumber: number;
   lastDeliveryDate: string;

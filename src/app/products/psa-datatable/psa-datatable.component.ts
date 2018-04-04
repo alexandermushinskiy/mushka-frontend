@@ -263,7 +263,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   }
 
   private sort() {
-    debugger;
     const sortColumn = this.columnsConfigurationSnapshot.find(c => Object.keys(c.sort).length > 0);
     const sort = sortColumn
       ? { dir: sortColumn.sort.order, prop: sortColumn.name }
@@ -393,6 +392,7 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   }
 
   private init(configurations: ColumnConfiguration[]) {
+    debugger;
     this.columnsConfigurationSnapshot = [...configurations];
     this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
     this.columnsData = this.createAvailableColumnsData(this.columnsConfigurationSnapshot);

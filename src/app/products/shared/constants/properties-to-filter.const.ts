@@ -1,10 +1,10 @@
 export const propertiesToFilter = {
-  'Name': 'name',
-  'Vendor Code': 'vendorCode',
-  'Created On': 'createdOn',
-  'Deliveries No': 'deliveriesNumber',
-  'Last Delivery Date': 'lastDeliveryDate',
-  'Last Delivery Count': 'lastDeliveryCount',
-  'Total': 'totalCount',
-  'Sizes': 'sizes',
+  'Имя': 'name',
+  'Артикул': 'сode',
+  'Дата добавления': 'createdOn',
+  'Кол-во поставок': 'deliveriesNumber',
+  'Дата последней поставки': 'lastDeliveryDate',
+  'Кол-во в последеней поставке': 'lastDeliveryCount',
+  'Всего в наличие': 'totalCount',
+  'Размеры': 'sizes',
 };

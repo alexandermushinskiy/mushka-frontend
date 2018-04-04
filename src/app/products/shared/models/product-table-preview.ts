@@ -2,7 +2,7 @@ export class ProductTablePreview {
   index: number;
   id: string;
   name: string;
-  vendorCode: string;
+  сode: string;
   createdOn: string;
   deliveriesNumber: number;
   lastDeliveryDate: string;
@@ -15,7 +15,7 @@ export class ProductTablePreview {
     this.index = index;
     this.id = elem.id;
     this.name = elem.name;
-    this.vendorCode = elem.vendorCode;
+    this.сode = elem.сode;
     this.createdOn = elem.createdOn;
     this.deliveriesNumber = elem.deliveriesNumber;
     this.lastDeliveryDate = elem.lastDeliveryDate;

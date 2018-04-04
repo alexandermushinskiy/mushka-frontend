@@ -49,20 +49,20 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
     cellTemplateName: 'lastDeliveryCountCol',
     predefinedValues: false
   },
-  'totalCount': {
-    name: 'Total',
-    prop: 'totalCount',
-    width: 250,
-    canBeFiltered: true,
-    cellTemplateName: 'totalCol',
-    predefinedValues: false
-  },
   'sizes': {
     name: 'Sizes',
     prop: 'sizes',
-    width: 250,
+    width: 150,
     canBeFiltered: true,
     cellTemplateName: 'sizesCol',
     predefinedValues: false
   },
+  'totalCount': {
+    name: 'Total',
+    prop: 'totalCount',
+    width: 30,
+    canBeFiltered: true,
+    cellTemplateName: 'totalCol',
+    predefinedValues: false
+  }
 }

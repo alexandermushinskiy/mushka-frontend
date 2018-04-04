@@ -28,6 +28,9 @@ import { propertiesToFilter } from '../shared/constants/properties-to-filter.con
 })
 export class PsaDatatableComponent extends UnsubscriberComponent implements OnInit, OnDestroy {
   @ViewChild('datatable') datatable: DatatableComponent;
+  @ViewChild('totalColumn') totalCol: TemplateRef<any>;
+  @ViewChild('sizesColumn') sizesCol: TemplateRef<any>;
+
   // @ViewChild('hotColumn') hotCol: TemplateRef<any>;
   // @ViewChild('flowColumn') flowCol: TemplateRef<any>;
   // @ViewChild('severityColumn') severityCol: TemplateRef<any>;

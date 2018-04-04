@@ -8,6 +8,7 @@ import { NgxDatatableModule } from 'ngx-datatable-with-ie-fix';
 import { LoadingScreenComponent } from './widgets/loading-screen/loading-screen.component';
 import { SpinnerComponent } from './widgets/spinner/spinner.component';
 import { SearchFormComponent } from './widgets/search-form/search-form.component';
+import { SizesLabelsComponent } from './widgets/sizes-labels/sizes-labels.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { SearchFormComponent } from './widgets/search-form/search-form.component
   declarations: [
     LoadingScreenComponent,
     SpinnerComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    SizesLabelsComponent
   ],
   exports: [
     /* Common modules */
@@ -34,7 +36,8 @@ import { SearchFormComponent } from './widgets/search-form/search-form.component
     /* Components */
     LoadingScreenComponent,
     SpinnerComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    SizesLabelsComponent
   ]
 })
 

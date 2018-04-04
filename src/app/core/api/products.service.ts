@@ -32,7 +32,7 @@ export class ProductsServce {
         lastDeliveryDate: '2018-02-27',
         lastDeliveryCount: 100,
         totalCount: 119,
-        sizes: ['35-39', '41-45']
+        sizes: ['36-39', '41-45']
       }),
       new Product({
         id: '0402257E-2AE3-4D7F-8E44-E05B0355262C',
@@ -43,7 +43,7 @@ export class ProductsServce {
         lastDeliveryDate: '2018-02-27',
         lastDeliveryCount: 100,
         totalCount: 155,
-        sizes: ['35-39', '41-45']
+        sizes: ['36-39', '41-45']
       }),
       new Product({
         id: '20819569-183C-4F00-BB80-5634049584B8',
@@ -54,7 +54,7 @@ export class ProductsServce {
         lastDeliveryDate: '2018-02-27',
         lastDeliveryCount: 70,
         totalCount: 86,
-        sizes: ['35-39', '41-45']
+        sizes: ['36-39', '41-45']
       }),
       new Product({
         id: '1AD228C5-4569-48C4-8367-B1D45D57DD7D',
@@ -65,7 +65,7 @@ export class ProductsServce {
         lastDeliveryDate: '2018-02-27',
         lastDeliveryCount: 50,
         totalCount: 55,
-        sizes: ['35-39', '41-45']
+        sizes: ['36-39', '41-45']
       }),
       new Product({
         id: 'F24CABA2-2D83-4948-A1AA-5A1B1256156C',
@@ -76,7 +76,7 @@ export class ProductsServce {
         lastDeliveryDate: '2018-02-27',
         lastDeliveryCount: 50,
         totalCount: 30,
-        sizes: ['35-39', '41-45']
+        sizes: ['36-39', '41-45']
       }),
     ]);
   }

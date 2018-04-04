@@ -28,6 +28,14 @@
   </span>
 </ng-template>
 
+<ng-template #totalColumn let-row="row" let-value="value">
+  <div *ngIf="value > 0" class="tasks-count">{{ value }}</div>
+</ng-template>
+
+<ng-template #sizesColumn let-value="value">
+  <psa-sizes-labels [sizes]="value"></psa-sizes-labels>
+</ng-template>
+
 <!-- <ng-template #flowColumn let-row="row" let-value="value">
   <span *ngIf="value">
     <csr-flow-icon [csrFlow]="value"></csr-flow-icon>
@@ -60,9 +68,7 @@
    </span>
 </ng-template>
 
-<ng-template #tasksColumn let-row="row" let-value="value">
-  <div *ngIf="value > 0" class="tasks-count">{{ value }}</div>
-</ng-template>
+
 
 <ng-template #sloganColumn let-row="row" let-value="value">
   <a (click)="readTicket(row)" [routerLink]="row.linkToTicket" class="subtle-link">{{ row.slogan }}</a>

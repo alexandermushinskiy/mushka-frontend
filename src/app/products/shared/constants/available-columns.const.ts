@@ -6,6 +6,7 @@ export const availableColumns = {
     'deliveriesNumber',
     'lastDeliveryDate',
     'lastDeliveryCount',
-    'totalCount'
+    'totalCount',
+    'sizes'
   ]
 };

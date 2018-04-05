@@ -3,7 +3,7 @@ import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstr
 
 import { ProductsServce } from '../../core/api/products.service';
 import { ProductTablePreview } from '../shared/models/product-table-preview';
-import { availableColumns } from '../shared/constants/available-columns.const';
+import { availableColumns } from '../../shared/constants/available-columns.const';
 import { NotificationsService } from '../../core/notifications/notifications.service';
 import { PsaDatatableComponent } from '../psa-datatable/psa-datatable.component';
 import { Product } from '../../shared/models/product.model';

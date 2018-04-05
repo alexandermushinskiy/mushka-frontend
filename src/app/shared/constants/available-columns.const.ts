@@ -8,5 +8,15 @@ export const availableColumns = {
     'lastDeliveryCount',
     'totalCount',
     'sizes'
+  ],
+  suppliers: [
+    'name',
+    'address',
+    'phone',
+    'email',
+    'webSite',
+    'contactPerson',
+    'paymentCondition',
+    'services'
   ]
 };

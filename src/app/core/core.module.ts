@@ -12,6 +12,7 @@ import { BrowserDetectorService } from './browser-detector/browser-detector.serv
 import { ProductsServce } from './api/products.service';
 import { UserSettingsService } from './api/user-settings.service';
 import { CategoriesService } from './api/categories.service';
+import { SuppliersService } from './api/suppliers.service';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { CategoriesService } from './api/categories.service';
     BrowserDetectorService,
     ProductsServce,
     CategoriesService,
-    UserSettingsService
+    UserSettingsService,
+    SuppliersService
   ],
   declarations: [],
   exports: []

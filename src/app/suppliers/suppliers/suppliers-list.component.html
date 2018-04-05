@@ -1,11 +1,10 @@
 <div class="appmain">
   <div class="appbar">
     <psa-datatable-header
-                    [title]="'Товары'"
+                    [title]="'Поставщики'"
                     [total]="total"
                     [shown]="shown"
                     [availableColumns]="availableCols"
-                    (onAddItem)="addProduct(content)"
                     (onFilter)="datatable.onFilter($event)"
                     (onFilterReset)="datatable.resetFilter()"
                     (onExportAllToCSV)="datatable.onExportAllToCSV($event)"
@@ -21,11 +20,3 @@
     </psa-datatable>
   </div>
 </div>
-
-<ng-template #content>
-  <psa-product [product]="selectedProduct"
-               [isSaving]="isModalLoading"
-               (onSave)="saveProduct($event)"
-               (onClose)="closeModal()">
-  </psa-product>
-</ng-template>

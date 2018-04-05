@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
-import { SuppliersComponent } from './suppliers/suppliers.component';
+import { SuppliersListComponent } from './suppliers/suppliers-list.component';
+import { PsaDatatableComponent } from './psa-datatable/psa-datatable.component';
 
 @NgModule({
   imports: [
     SharedModule
   ],
   declarations: [
-    SuppliersComponent
+    SuppliersListComponent,
+    PsaDatatableComponent
   ],
-  exports: [SuppliersComponent]
+  exports: [SuppliersListComponent]
 })
 export class SuppliersModule { }

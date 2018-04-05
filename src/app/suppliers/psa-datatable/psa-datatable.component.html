@@ -1,0 +1,34 @@
+<ngx-datatable #datatable
+               class="material fullscreen"
+               [loadingIndicator]="loadingIndicator"
+               [reorderable]="true"
+               [scrollbarV]="true"
+               [scrollbarH]="true"
+               [rowClass]="getRowClass"               
+               [count]="rows?.length"
+               [trackByProp]="'code'"
+               [headerHeight]="40"
+               [rowHeight]="40"
+               [rows]="rowsData"
+               [columns]="columnsData"
+               [columnMode]="'force'"
+               [sorts]="sorts"
+               (select)="onSelect($event)"
+               (sort)="onTableSort($event)">
+</ngx-datatable>
+
+<ng-template #headerTpl let-column="column" let-sort="sortFn">
+  <span class="datatable-header-cell-wrapper">
+    <span [ngbTooltip]="column.name" container="body" placement="top" class="datatable-header-cell-label draggable" (click)="sort($event)">
+      {{ column.name }}
+    </span>
+  </span>
+</ng-template>
+
+<ng-template #totalColumn let-row="row" let-value="value">
+  <div class="products-count" [ngClass]="{'ends': value < 11 && value > 0, 'sold': value === 0}">{{ value }}</div>
+</ng-template>
+
+<ng-template #sizesColumn let-value="value">
+  <psa-sizes-labels [sizes]="value"></psa-sizes-labels>
+</ng-template>

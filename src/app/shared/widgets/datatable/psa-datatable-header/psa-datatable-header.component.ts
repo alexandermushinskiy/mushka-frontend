@@ -15,7 +15,7 @@ export class PsaDatatableHeaderComponent implements OnInit {
   @Input() total: number;
   @Input() availableColumns: string[];
   @Input() shown: number;
-  @Input() isMenuToggleShown = true;
+  @Input() isMenuToggleShown = false;
   @Input() title: string;
 
   @Output() onFilter = new EventEmitter<string>();

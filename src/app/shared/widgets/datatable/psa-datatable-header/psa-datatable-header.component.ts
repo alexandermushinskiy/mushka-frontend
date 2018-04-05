@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output, ViewChild, OnInit } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 
-import { NotificationsService } from '../../core/notifications/notifications.service';
-import { SearchFormComponent } from '../../shared/widgets/search-form/search-form.component';
+import { NotificationsService } from '../../../../core/notifications/notifications.service';
+import { SearchFormComponent } from '../../search-form/search-form.component';
 
 @Component({
   selector: 'psa-datatable-header',

@@ -54,7 +54,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   saveProduct(product: Product) {
-    console.info('product', product);
     this.productsService.addProduct(product)
       .subscribe(
         (res: Product) => this.onSaveSuccess(res, product.id ? 'updated' : 'created'),

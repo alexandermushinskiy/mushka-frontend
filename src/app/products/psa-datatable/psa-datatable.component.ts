@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { DatatableComponent } from 'ngx-datatable-with-ie-fix';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatatableComponent } from 'ngx-datatable-with-ie-fix';
 import { LocalStorage } from 'ngx-webstorage';
 
 import { UserPicSize } from '../../shared/enums/user-pic-size.enum';

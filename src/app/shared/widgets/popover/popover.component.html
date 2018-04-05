@@ -1,0 +1,10 @@
+<div *ngIf="isPresent" #psaPopover class="psa-popover fade"
+     [style.top]="topShift + 'px'"
+     [style.left]="leftShift + 'px'"
+     [class.in]="isPresent">
+  <div class="overlay"></div>
+  <div [ngClass]="{'psa-popover-content-with-padding': hasPadding}">
+    <ng-content></ng-content>
+  </div>
+  <div class="bottom-overlay"></div>
+</div>

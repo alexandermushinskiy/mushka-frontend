@@ -1,6 +1,6 @@
 export class SizeItem {
   constructor(public size: string,
-              public amount: number) {
+              public amount: number = 0) {
   }
 
   getCssClass() {

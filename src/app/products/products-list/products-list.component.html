@@ -5,7 +5,7 @@
                     [shown]="shown"
                     [availableColumns]="availableCols"
                     [isMenuToggleShown]="false"
-                    (onAddItem)="addProduct()"
+                    (onAddItem)="addProduct(content)"
                     (onFilter)="datatable.onFilter($event)"
                     (onFilterReset)="datatable.resetFilter()">
     </psa-datatable-header>
@@ -19,3 +19,11 @@
     </psa-datatable>
   </div>
 </div>
+
+<ng-template #content>
+  <psa-product [product]="selectedProduct"
+               [isSaving]="isModalLoading"
+               (onSave)="saveProduct($event)"
+               (onClose)="closeModal()">
+  </psa-product>
+</ng-template>

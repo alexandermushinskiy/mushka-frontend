@@ -1,0 +1,41 @@
+@import "../../../../variables";
+
+.psa-popover {
+  position: absolute;
+  display: block;
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  width: $csr-popover-width;
+  border-radius: $csr-popover-border-radius;
+  background-color: $csr-popover-bg;
+  box-shadow: $csr-popover-box-shadow;
+  z-index: $zindex-modal;
+  transform: translateZ(0);
+
+  &-content-with-padding {
+    padding: $csr-popover-padding;
+  }
+
+  .overlay {
+    width: 100%;
+    height: 10px;
+    top: -10px;
+    position: absolute;
+  }
+
+  .bottom-overlay {
+    width: 100%;
+    height: 25px;
+    position: absolute;
+  }
+}
+
+.fade {
+  opacity: 0;
+  transition: opacity .4s linear;
+  &.in {
+    opacity: 1;
+  }
+}
+

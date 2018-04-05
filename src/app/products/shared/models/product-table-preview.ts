@@ -13,15 +13,18 @@ export class ProductTablePreview {
   sizes: SizeItem[];
   className: string;
 
+  private readonly defaultValue = ' - ';
+
   constructor(elem, index: number = 0) {
+    debugger;
     this.index = index;
     this.id = elem.id;
     this.name = elem.name;
-    this.сode = elem.сode;
+    this.сode = elem.code;
     this.createdOn = elem.createdOn;
-    this.deliveriesNumber = elem.deliveriesNumber;
-    this.lastDeliveryDate = elem.lastDeliveryDate;
-    this.lastDeliveryCount = elem.lastDeliveryCount;
+    this.deliveriesNumber = elem.deliveriesNumber || this.defaultValue;
+    this.lastDeliveryDate = elem.lastDeliveryDate || this.defaultValue;
+    this.lastDeliveryCount = elem.lastDeliveryCount || this.defaultValue;
     this.totalCount = elem.totalCount;
     this.sizes = elem.sizes;
     this.className = elem.className || this.getClassName(index);

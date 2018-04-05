@@ -9,6 +9,11 @@ import { LoadingScreenComponent } from './widgets/loading-screen/loading-screen.
 import { SpinnerComponent } from './widgets/spinner/spinner.component';
 import { SearchFormComponent } from './widgets/search-form/search-form.component';
 import { SizesLabelsComponent } from './widgets/sizes-labels/sizes-labels.component';
+import { OptionsComponent } from './widgets/options/options.component';
+import { PopoverComponent } from './widgets/popover/popover.component';
+import { PopoverDirective } from './directives/popover.directive';
+import { ClosePopoverOnClickOutsideDirective } from './directives/close-popover-on-click-outside.directive';
+import { DashIfEmptyPipe } from './pipes/dash-if-empty.pipe';
 
 @NgModule({
   imports: [
@@ -23,7 +28,12 @@ import { SizesLabelsComponent } from './widgets/sizes-labels/sizes-labels.compon
     LoadingScreenComponent,
     SpinnerComponent,
     SearchFormComponent,
-    SizesLabelsComponent
+    SizesLabelsComponent,
+    OptionsComponent,
+    PopoverComponent,
+    PopoverDirective,
+    ClosePopoverOnClickOutsideDirective,
+    DashIfEmptyPipe
   ],
   exports: [
     /* Common modules */
@@ -37,7 +47,13 @@ import { SizesLabelsComponent } from './widgets/sizes-labels/sizes-labels.compon
     LoadingScreenComponent,
     SpinnerComponent,
     SearchFormComponent,
-    SizesLabelsComponent
+    SizesLabelsComponent,
+    OptionsComponent,
+    /* Directives */
+    PopoverDirective,
+    ClosePopoverOnClickOutsideDirective,
+    /* Pipes */
+    DashIfEmptyPipe
   ]
 })
 

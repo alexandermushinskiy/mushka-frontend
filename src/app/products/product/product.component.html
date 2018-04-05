@@ -1,0 +1,72 @@
+<form [formGroup]="productForm" class="product-form">
+  <div class="modal-header">
+    <h4 class="modal-title">Добаление товара</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <i class="ico ico-close"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="product-name">
+      <div class="form-group">
+        <label for="name" class="text-muted">Наименование</label>
+        <input type="text" id="name" class="form-control" formControlName="name" autocomplete="off">
+      </div>
+    </div>
+    <div class="section">
+      <div class="form-row">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="nacodeme" class="text-muted">Категория</label>
+                  <select class="form-control custom-select" formControlName="category">
+                    <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label for="nacodeme" class="text-muted">Артикул</label>
+                  <input type="text" id="code" class="form-control code" formControlName="code" autocomplete="off">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="sizes" class="text-muted">Размеры</label>
+                  <input type="text" id="sizes" class="form-control"
+                                    formControlName="sizes"
+                                    placement="bottom-left"
+                                    container="body"
+                                    readonly="readonly"
+                                    [ngModel]="sizes"
+                                    [ngbPopover]="dropContent"
+                                    #popover="ngbPopover"
+                                    [psaClosePopoverOnClickOutside]="popover"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-light btn-cancel" type="button" (click)="close()">Cancel</button>
+    <button class="btn btn-primary" type="button" (click)="save()" [disabled]="productForm.invalid">
+      <psa-spinner [isLoading]="isSaving"></psa-spinner>
+      Save</button>
+  </div>
+</form>
+
+<ng-template #dropContent>
+  <psa-options
+    [availableOptions]="availableSizes"
+    [selectedOptions]="selectedSizes"
+    (onOptionChanged)="onOptionChanged($event)">
+  </psa-options>
+</ng-template>

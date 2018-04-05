@@ -1,11 +1,5 @@
 <div class="table-options">
   <div class="table-options-header">
-    <div *ngIf="showSortingMenu" class="table-options-menu">
-      <button class="item"><i class="fa fa-sort-amount-asc"></i> Sort Ascending</button>
-      <button class="item"><i class="fa fa-sort-amount-desc"></i> Sort Descending</button>
-      <button class="item"><i class="fa fa-object-group"></i> Group by this column</button>
-      <button class="item"><i class="fa fa-repeat"></i> Reset column</button>
-    </div>
     <psa-search-form [placeholder]="'Filter by keyword'" (onSearch)="onSearch($event)"></psa-search-form>
   </div>
 

@@ -10,7 +10,6 @@ import { SearchFormComponent } from '../../shared/widgets/search-form/search-for
 })
 export class PsaDatatableOptionsComponent extends UnsubscriberComponent implements OnDestroy {
   @ViewChild(SearchFormComponent) searchFormComponent: SearchFormComponent;
-  @Input() showSortingMenu: boolean;
   @Input() showSelectAll = false;
   @Input() availableOptions: string[];
   @Input() selectedOptions: string[] = [];

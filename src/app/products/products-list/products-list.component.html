@@ -1,13 +1,16 @@
 <div class="appmain">
   <div class="appbar">
     <psa-datatable-header
+                    [title]="'Товары'"
                     [total]="total"
                     [shown]="shown"
                     [availableColumns]="availableCols"
                     [isMenuToggleShown]="false"
                     (onAddItem)="addProduct(content)"
                     (onFilter)="datatable.onFilter($event)"
-                    (onFilterReset)="datatable.resetFilter()">
+                    (onFilterReset)="datatable.resetFilter()"
+                    (onExportAllToCSV)="datatable.onExportAllToCSV($event)"
+                    (onExportFilteredToCSV)="datatable.onExportFilteredToCSV($event)">
     </psa-datatable-header>
   </div>
   <div class="appbody">

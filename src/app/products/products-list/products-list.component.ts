@@ -67,7 +67,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   private onSuccess(products) {
-    debugger;
     this.rows = products.map((el, index) => new ProductTablePreview(el, index));
     this.total = products.length;
     this.loadingIndicator = false;

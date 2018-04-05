@@ -44,7 +44,6 @@ export class ProductsServce {
   }
 
   private loadProducts() {
-    debugger;
     Observable.of(ProductsServce.fakeProducts)
       .subscribe(data => this.products$.next(data));
   }

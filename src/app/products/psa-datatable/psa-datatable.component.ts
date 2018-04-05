@@ -14,12 +14,7 @@ import { ProductTablePreview } from '../shared/models/product-table-preview';
 import { columnsConfig } from '../shared/constants/columns-config.const';
 import { UserSettingsService } from '../../core/api/user-settings.service';
 import { propertiesToFilter } from '../shared/constants/properties-to-filter.const';
-
-// import { ReadReceiptService } from '../../core/api/read-receipt.service';
-// import { FileHelper } from '../../shared/utils/file-helper';
-
-// import { DatatableQuickFilterConfig } from '../../shared/interfaces/datatable-quick-filter-config';
-// import { WorklistFilterService } from '../../core/worklist-filter/worklist-filter.service';
+import { FileHelper } from '../../shared/utils/file-helper';
 
 @Component({
   selector: 'psa-datatable',
@@ -30,21 +25,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   @ViewChild('datatable') datatable: DatatableComponent;
   @ViewChild('totalColumn') totalCol: TemplateRef<any>;
   @ViewChild('sizesColumn') sizesCol: TemplateRef<any>;
-
-  // @ViewChild('hotColumn') hotCol: TemplateRef<any>;
-  // @ViewChild('flowColumn') flowCol: TemplateRef<any>;
-  // @ViewChild('severityColumn') severityCol: TemplateRef<any>;
-  // @ViewChild('tasksColumn') tasksCol: TemplateRef<any>;
-  // @ViewChild('sloganColumn') sloganCol: TemplateRef<any>;
-  // @ViewChild('statusColumn') statusCol: TemplateRef<any>;
-  // @ViewChild('collaborationColumn') collaborationCol: TemplateRef<any>;
-  // @ViewChild('userPicsColumn') userPicsCol: TemplateRef<any>;
-  // @ViewChild('csrTypeColumn') csrTypeCol: TemplateRef<any>;
-  // @ViewChild('timeColumn') timeCol: TemplateRef<any>;
-  // @ViewChild('workgroupsColumn') workgroupsCol: TemplateRef<any>;
-  // @ViewChild('csrNumberColumn') csrNumberCol: TemplateRef<any>;
-  // @ViewChild('subscribersColumn') subscribersCol: TemplateRef<any>;
-
   @ViewChild('headerTpl') headerTpl: TemplateRef<any>;
 
   @Input() loadingIndicator: boolean;
@@ -79,19 +59,17 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   investigationLead: UserData;
   selectedTickets = [];
   headerHeight: number;
-  //customTextFilters: { [name: string]: { filterText?: string, values?: string[] } } = {};
   hasData = false;
 
   readonly maxShownUsers = 3;
 
-  private initialRowsData: ProductTablePreview[]; //TicketTablePreview[];
+  private initialRowsData: ProductTablePreview[];
   private columnsConfigurationSnapshot: ColumnConfiguration[];
   private columnsDictionary: {};
   private datatableConfig = columnsConfig;
   private routeChangeTimeout = null;
   private selectedRowId: string;
   private filterText: string;
-  private readonly ericssonResponsibleCoulumn = 'Ericsson Responsible';
   private readonly fakeRowClassName = 'fake-row';
 
   private readonly fixedHeaderHeight = {
@@ -108,16 +86,8 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
 
   ngOnInit() {
     this.headerHeight = this.fixedHeaderHeight.collapsed;
-//debugger;
+
     this.init(this.userSettingsService.getDefaultUserSettings(Object.keys(this.datatableConfig)));
-  }
-
-  readTicket(row: any) {
-  //   this.onTicketRead.emit();
-
-  //   if (this.shouldCheckUnreadCsr && !row.isRead) {
-  //     this.readReceiptService.updateUnread(this.isWorklist);
-  //   }
   }
 
   onSelect({ selected }) {
@@ -127,11 +97,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     this.router.navigate([], {
       relativeTo: this.activeRoute
     });
-  }
-
-  canBeFiltered(prop) {
-  //   const property = this.columnsDictionary[prop];
-  //   return property ? this.datatableConfig[property].canBeFiltered : false;
   }
 
   trackByIndex(index) {
@@ -163,55 +128,20 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     }
   }
 
-  onReorder({ prevValue, newValue }) {
-    const firstColumnName = this.getInitialColumnName(this.columnsData[prevValue].prop);
-    const secondColumnName = this.getInitialColumnName(this.columnsData[newValue].prop);
-    // this.columnsData = this.userSettingsService.moveElements(this.columnsData, prevValue, newValue);
-    // this.userSettingsService.changeColumnsOrder(firstColumnName, secondColumnName)
-    //   .subscribe(
-    //     (res) => this.columnsConfigurationSnapshot = res,
-    //     (err: string) => this.onError(err)
-    //   );
-  }
-
-  onResize({ column, newValue }) {
-    // const columnName = this.getInitialColumnName(column.prop);
-    // this.userSettingsService.updateColumnWidth(columnName, newValue)
-    //   .subscribe(
-    //     (res) => this.columnsConfigurationSnapshot = res,
-    //     (err: string) => this.onError(err)
-    //   );
-  }
-
   onExportAllToCSV(fileSuffix: string) {
-    // FileHelper.toCSVFormat(
-    //   `CSR-H_${fileSuffix}`,
-    //   [this.getExportedColumnTitles()].concat(this.initialRowsData),
-    //   this.getExportedProps()
-    // );
+    FileHelper.toCSVFormat(
+      `MUSHKA-PSA_${fileSuffix}`,
+      [this.getExportedColumnTitles()].concat(this.initialRowsData),
+      this.getExportedProps()
+    );
   }
 
   onExportFilteredToCSV(fileSuffix: string) {
-    // FileHelper.toCSVFormat(
-    //   `CSR-H_${fileSuffix}`,
-    //   [this.getExportedColumnTitles()].concat(this.rowsData),
-    //   this.getExportedProps()
-    // );
-  }
-
-  onCustomColumnFilter(column: DatatableColumn, filterText: string, values?: string[]) {
-    // if (!filterText && (!values || !values.length)) {
-    //   delete this.customTextFilters[column.prop];
-    // } else {
-    //   if (!this.customTextFilters[column.prop]) {
-    //     this.customTextFilters[column.prop] = {};
-    //   }
-    //   this.customTextFilters[column.prop].filterText = filterText.trim().toLowerCase();
-    //   this.customTextFilters[column.prop].values = values;
-    // }
-
-    // this.worklistFilterService.setWorklistFilters(this.customTextFilters);
-    // this.filter();
+    FileHelper.toCSVFormat(
+      `MUSHKA-PSA_${fileSuffix}`,
+      [this.getExportedColumnTitles()].concat(this.rowsData),
+      this.getExportedProps()
+    );
   }
 
   getExportedProps() {
@@ -240,17 +170,11 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
       const uniqueValues = Array.from(new Set([...this.initialRowsData.reduce((prev, row) => {
         if (!!row[column.prop] === row[column.prop]) {
           prev.push(row[column.prop] ? `${column.name}` : `Not ${column.name}`);
-        } else if (column.name === this.ericssonResponsibleCoulumn) {
-          return prev.concat(this.getUserNamesAndSignumsArray(row));
         } else {
           prev.push(row[column.prop]);
         }
         return prev;
       }, [])])).sort();
-
-      if (column.name === this.ericssonResponsibleCoulumn) {
-        uniqueValues.unshift('Unassigned');
-      }
 
       return uniqueValues;
     }
@@ -258,7 +182,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   }
 
   resetFilter() {
-    //this.customTextFilters = {};
     this.filter();
   }
 
@@ -272,20 +195,11 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   }
 
   private filter() {
-    // const customFiltersList = Object.keys(this.customTextFilters);
-    // if (!this.filterText && customFiltersList.length === 0) {
-    //   this.rowsData = this.updateColumnsStatus(this.filterWithToggles(this.initialRowsData));
-    //   return;
-    // }
-
     let filteredRows = this.initialRowsData ? [...this.initialRowsData] : [];
     if (this.filterText) {
       filteredRows = this.filterByGlobalText(filteredRows);
     }
-    // if (customFiltersList.length > 0) {
-    //   filteredRows = this.filterByCustomText(customFiltersList, filteredRows);
-    // }
-    this.rowsData = this.updateColumnsStatus(this.filterWithToggles(filteredRows));
+
     this.broadcastRowsUpdated(filteredRows.length);
     this.recalculateTable();
   }
@@ -310,49 +224,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
       });
       return filterFields.some(el => el.includes(this.filterText));
     });
-  }
-
-  private filterByCustomText(customFiltersList, filteredRows) {
-    // return customFiltersList.reduce((memo, filter) => (
-    //   memo.filter(row => {
-    //     let valueToFilter = row[filter] ? row[filter].toString().trim().toLowerCase() : '';
-
-    //     if (filter === 'ericssonResponsible') {
-    //       valueToFilter = this.getUserNamesAndSignums(row);
-    //       return this.customTextFilters[filter].values.some(responsible => valueToFilter.includes(responsible.toLowerCase()));
-    //     }
-
-    //     if (filter === 'hot') {
-    //       valueToFilter = (!!valueToFilter ? filter : `not ${filter}`);
-    //     }
-
-    //     if (filter === 'workgroups') {
-    //       valueToFilter = this.getWorkgroups(row);
-    //     }
-
-    //     if (this.customTextFilters[filter].values.length) {
-    //       return this.customTextFilters[filter].values.find(el => el.toLowerCase() === valueToFilter);
-    //     }
-    //     return valueToFilter.includes(this.customTextFilters[filter].filterText);
-    //   })
-    // ), filteredRows);
-  }
-
-  private filterWithToggles(rowsData) {
-    // Check if filterSettings has at least one active toggle
-    let filteredRows = rowsData;
-    // if (this.filterConfig && Object.values(this.filterConfig).includes(true)) {
-    //   if (!this.isWorklist && this.filterConfig.unassignedOnly) {
-    //     filteredRows = filteredRows.filter(this.filterByUnassigned);
-    //   }
-    //   if (this.filterConfig.unreadOnly) {
-    //     filteredRows = filteredRows.filter(this.filterByUnread);
-    //   }
-    //   this.broadcastRowsUpdated(filteredRows.length);
-    //   return filteredRows;
-    // }
-    this.broadcastRowsUpdated(rowsData.length);
-    return rowsData;
   }
 
   private broadcastRowsUpdated(length: number) {
@@ -395,28 +266,7 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     this.columnsConfigurationSnapshot = [...configurations];
     this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
     this.columnsData = this.createAvailableColumnsData(this.columnsConfigurationSnapshot);
-  //   this.userSettingsService.updateAvailableColumns(this.columnsConfigurationSnapshot);
   }
-
-  private onColumnToggled({ columnName, isActive }: { columnName: string, isActive: boolean }) {
-    // this.loadingIndicator = true;
-    // this.userSettingsService.updateColumnVisibility(columnName, isActive)
-    //   .subscribe(
-    //     (res) => {
-    //       this.columnsConfigurationSnapshot = res;
-    //       this.columnsData = this.createAvailableColumnsData(this.columnsConfigurationSnapshot);
-    //       this.hideLoader();
-    //     },
-    //     (err) => this.onError(err)
-    //   );
-  }
-
-  // private onPreviewSelected(previewId: string) {
-  //   this.selectedRowId = previewId;
-  //   if (this.rowsData) {
-  //     this.rowsData = this.updateColumnsStatus(this.rowsData);
-  //   }
-  // }
 
   private getInitialColumnName(prop: string) {
     return this.columnsDictionary[prop] || prop;

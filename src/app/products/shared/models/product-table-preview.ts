@@ -16,7 +16,6 @@ export class ProductTablePreview {
   private readonly defaultValue = ' - ';
 
   constructor(elem, index: number = 0) {
-    debugger;
     this.index = index;
     this.id = elem.id;
     this.name = elem.name;

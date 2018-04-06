@@ -76,7 +76,6 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
 
   sort() {
     const sort = this.sortColumn();
-    this.sorts = [sort];
     this.rowsData = this.onTableSort({ sorts: [{ ...{ initSort: true }, ...sort }] }, this.initialRowsData);
   }
 

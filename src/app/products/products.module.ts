@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { ProductComponent } from './product/product.component';
 import { ProductsListComponent } from './products-list/products-list.component';
-import { PsaDatatableComponent } from './psa-datatable/psa-datatable.component';
+import { ProductsTableComponent } from './products-table/products-table.component';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { PsaDatatableComponent } from './psa-datatable/psa-datatable.component';
     ReactiveFormsModule
   ],
   declarations: [
-    PsaDatatableComponent,
+    ProductsTableComponent,
     ProductComponent,
     ProductsListComponent
   ],

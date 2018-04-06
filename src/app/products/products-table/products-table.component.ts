@@ -1,27 +1,21 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { DatatableComponent } from 'ngx-datatable-with-ie-fix';
 import { LocalStorage } from 'ngx-webstorage';
 
-import { UserPicSize } from '../../shared/enums/user-pic-size.enum';
-import { UserPicType } from '../../shared/enums/user-pic-type.enum';
 import { UnsubscriberComponent } from '../../shared/hooks/unsubscriber.component';
-import { UserData } from '../../shared/models/user-data.model';
-import { NotificationsService } from '../../core/notifications/notifications.service';
 import { DatatableColumn } from '../../shared/interfaces/datatable-column.interface';
 import { ColumnConfiguration } from '../../shared/models/column-configuration.model';
 import { ProductTablePreview } from '../shared/models/product-table-preview';
 import { columnsConfig } from '../shared/constants/columns-config.const';
-import { UserSettingsService } from '../../core/api/user-settings.service';
 import { propertiesToFilter } from '../shared/constants/properties-to-filter.const';
 import { FileHelper } from '../../shared/utils/file-helper';
 
 @Component({
-  selector: 'psa-datatable',
-  templateUrl: './psa-datatable.component.html',
-  styleUrls: ['./psa-datatable.component.scss']
+  selector: 'psa-products-table',
+  templateUrl: './products-table.component.html',
+  styleUrls: ['./products-table.component.scss']
 })
-export class PsaDatatableComponent extends UnsubscriberComponent implements OnInit, OnDestroy {
+export class ProductsTableComponent extends UnsubscriberComponent implements OnInit, OnDestroy {
   @ViewChild('datatable') datatable: DatatableComponent;
   @ViewChild('totalColumn') totalCol: TemplateRef<any>;
   @ViewChild('sizesColumn') sizesCol: TemplateRef<any>;
@@ -42,22 +36,13 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     }
 
     this.datatable.bodyComponent.updateOffsetY(0);
-    this.selectedTickets = [];
-    this.onMultipleTicketsSelected.emit(this.selectedTickets);
   }
 
-  @Output() onMultipleTicketsSelected = new EventEmitter<any[]>();
-  @Output() onGotColumnsConfiguration = new EventEmitter<any[]>();
   @Output() onRowsUpdated = new EventEmitter<number>();
-  @Output() onTicketRead = new EventEmitter<void>();
 
   sorts: { dir: string, prop: string }[];
   columnsData: DatatableColumn[];
   rowsData: ProductTablePreview[];
-  userPicTypeEnum = UserPicType;
-  userPicSizeEnum = UserPicSize;
-  investigationLead: UserData;
-  selectedTickets = [];
   headerHeight: number;
   hasData = false;
 
@@ -71,32 +56,21 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
   private selectedRowId: string;
   private filterText: string;
   private readonly fakeRowClassName = 'fake-row';
+  private readonly defaultColumnWidth = 100;
 
   private readonly fixedHeaderHeight = {
     collapsed: 40,
     expanded: 40
   };
 
-  constructor(private router: Router,
-              private activeRoute: ActivatedRoute,
-              private userSettingsService: UserSettingsService,
-              private notificationsService: NotificationsService) {
+  constructor() {
     super();
   }
 
   ngOnInit() {
     this.headerHeight = this.fixedHeaderHeight.collapsed;
 
-    this.init(this.userSettingsService.getDefaultUserSettings(Object.keys(this.datatableConfig)));
-  }
-
-  onSelect({ selected }) {
-    this.selectedTickets.splice(0, this.selectedTickets.length);
-    this.selectedTickets.push(...selected);
-    this.onMultipleTicketsSelected.emit(selected);
-    this.router.navigate([], {
-      relativeTo: this.activeRoute
-    });
+    this.init(this.getColumnsConfigurations(Object.keys(this.datatableConfig)));
   }
 
   trackByIndex(index) {
@@ -165,21 +139,21 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     super.ngOnDestroy();
   }
 
-  getValuesList(column: DatatableColumn): string[] {
-    if (column.predefinedValues && this.initialRowsData) {
-      const uniqueValues = Array.from(new Set([...this.initialRowsData.reduce((prev, row) => {
-        if (!!row[column.prop] === row[column.prop]) {
-          prev.push(row[column.prop] ? `${column.name}` : `Not ${column.name}`);
-        } else {
-          prev.push(row[column.prop]);
-        }
-        return prev;
-      }, [])])).sort();
+  // getValuesList(column: DatatableColumn): string[] {
+  //   if (column.predefinedValues && this.initialRowsData) {
+  //     const uniqueValues = Array.from(new Set([...this.initialRowsData.reduce((prev, row) => {
+  //       if (!!row[column.prop] === row[column.prop]) {
+  //         prev.push(row[column.prop] ? `${column.name}` : `Not ${column.name}`);
+  //       } else {
+  //         prev.push(row[column.prop]);
+  //       }
+  //       return prev;
+  //     }, [])])).sort();
 
-      return uniqueValues;
-    }
-    return [];
-  }
+  //     return uniqueValues;
+  //   }
+  //   return [];
+  // }
 
   resetFilter() {
     this.filter();
@@ -301,9 +275,17 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
       this.loadingIndicator = false;
     }, 300);
   }
-
-  private onError(err) {
-    this.notificationsService.danger('Error', err);
+  
+  private getColumnsConfigurations(availableColumns: string[], isVisible: boolean = true): ColumnConfiguration[] {
+    return availableColumns.map((columnName: string) => {
+      return {
+        name: columnName,
+        width: columnsConfig[name] ? columnsConfig[name].width : this.defaultColumnWidth,
+        visible: isVisible,
+        sort: {},
+        filters: []
+      };
+    });
   }
 
   private getFakeRow() {

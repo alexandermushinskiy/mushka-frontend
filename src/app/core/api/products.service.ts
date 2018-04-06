@@ -17,7 +17,7 @@ export class ProductsServce {
   }
 
   getProducts(): Observable<Product[]> {
-    return this.products$.asObservable().delay(2000);
+    return this.products$.asObservable().delay(1000);
   }
 
   addProduct(product: Product): Observable<Product> {

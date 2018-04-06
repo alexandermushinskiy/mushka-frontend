@@ -5,7 +5,7 @@ import { ProductsServce } from '../../core/api/products.service';
 import { ProductTablePreview } from '../shared/models/product-table-preview';
 import { availableColumns } from '../../shared/constants/available-columns.const';
 import { NotificationsService } from '../../core/notifications/notifications.service';
-import { PsaDatatableComponent } from '../psa-datatable/psa-datatable.component';
+import { ProductsTableComponent } from '../products-table/products-table.component';
 import { Product } from '../../shared/models/product.model';
 
 @Component({
@@ -14,7 +14,7 @@ import { Product } from '../../shared/models/product.model';
   styleUrls: ['./products-list.component.scss']
 })
 export class ProductsListComponent implements OnInit {
-  @ViewChild(PsaDatatableComponent) datatable: PsaDatatableComponent;
+  @ViewChild(ProductsTableComponent) datatable: ProductsTableComponent;
   
   rows: ProductTablePreview[];
   loadingIndicator = true;

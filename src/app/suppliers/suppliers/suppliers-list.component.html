@@ -12,11 +12,11 @@
     </psa-datatable-header>
   </div>
   <div class="appbody">
-    <psa-datatable  #datatable
+    <psa-suppliers-table #datatable
                     [rows]="rows"
                     [loadingIndicator]="loadingIndicator"
                     [cols]="availableCols"
                     (onRowsUpdated)="onRowsUpdated($event)">
-    </psa-datatable>
+    </psa-suppliers-table>
   </div>
 </div>

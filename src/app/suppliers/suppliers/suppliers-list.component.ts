@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { SupplierTablePreview } from '../shared/models/supplier-table-preview';
-import { PsaDatatableComponent } from '../psa-datatable/psa-datatable.component';
+import { SuppliersTableComponent } from '../suppliers-table/suppliers-table.component';
 import { availableColumns } from '../../shared/constants/available-columns.const';
 import { SuppliersService } from '../../core/api/suppliers.service';
 import { NotificationsService } from '../../core/notifications/notifications.service';
@@ -12,7 +12,7 @@ import { NotificationsService } from '../../core/notifications/notifications.ser
   styleUrls: ['./suppliers-list.component.scss']
 })
 export class SuppliersListComponent implements OnInit {
-  @ViewChild(PsaDatatableComponent) datatable: PsaDatatableComponent;
+  @ViewChild(SuppliersTableComponent) datatable: SuppliersTableComponent;
   
   rows: SupplierTablePreview[];
   loadingIndicator = true;

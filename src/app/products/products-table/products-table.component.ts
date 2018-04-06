@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { DatatableComponent } from 'ngx-datatable-with-ie-fix';
-import { LocalStorage } from 'ngx-webstorage';
 
 import { UnsubscriberComponent } from '../../shared/hooks/unsubscriber.component';
 import { DatatableColumn } from '../../shared/interfaces/datatable-column.interface';
@@ -8,14 +7,14 @@ import { ColumnConfiguration } from '../../shared/models/column-configuration.mo
 import { ProductTablePreview } from '../shared/models/product-table-preview';
 import { columnsConfig } from '../shared/constants/columns-config.const';
 import { propertiesToFilter } from '../shared/constants/properties-to-filter.const';
-import { FileHelper } from '../../shared/utils/file-helper';
+import { PsaDatatableComponent } from '../../shared/hooks/psa-datatable.component';
 
 @Component({
   selector: 'psa-products-table',
   templateUrl: './products-table.component.html',
   styleUrls: ['./products-table.component.scss']
 })
-export class ProductsTableComponent extends UnsubscriberComponent implements OnInit, OnDestroy {
+export class ProductsTableComponent extends PsaDatatableComponent implements OnInit {
   @ViewChild('datatable') datatable: DatatableComponent;
   @ViewChild('totalColumn') totalCol: TemplateRef<any>;
   @ViewChild('sizesColumn') sizesCol: TemplateRef<any>;
@@ -40,41 +39,17 @@ export class ProductsTableComponent extends UnsubscriberComponent implements OnI
 
   @Output() onRowsUpdated = new EventEmitter<number>();
 
-  sorts: { dir: string, prop: string }[];
-  columnsData: DatatableColumn[];
   rowsData: ProductTablePreview[];
-  headerHeight: number;
-  hasData = false;
-
-  readonly maxShownUsers = 3;
-
   private initialRowsData: ProductTablePreview[];
-  private columnsConfigurationSnapshot: ColumnConfiguration[];
-  private columnsDictionary: {};
   private datatableConfig = columnsConfig;
-  private routeChangeTimeout = null;
-  private selectedRowId: string;
-  private filterText: string;
-  private readonly fakeRowClassName = 'fake-row';
-  private readonly defaultColumnWidth = 100;
-
-  private readonly fixedHeaderHeight = {
-    collapsed: 40,
-    expanded: 40
-  };
 
   constructor() {
     super();
   }
 
   ngOnInit() {
-    this.headerHeight = this.fixedHeaderHeight.collapsed;
-
-    this.init(this.getColumnsConfigurations(Object.keys(this.datatableConfig)));
-  }
-
-  trackByIndex(index) {
-    return index;
+    super.ngOnInit();
+    this.init();
   }
 
   onFilter(filterText: string) {
@@ -103,40 +78,11 @@ export class ProductsTableComponent extends UnsubscriberComponent implements OnI
   }
 
   onExportAllToCSV(fileSuffix: string) {
-    FileHelper.toCSVFormat(
-      `MUSHKA-PSA_${fileSuffix}`,
-      [this.getExportedColumnTitles()].concat(this.initialRowsData),
-      this.getExportedProps()
-    );
+    super.onExportToCSV(fileSuffix, this.initialRowsData);
   }
 
   onExportFilteredToCSV(fileSuffix: string) {
-    FileHelper.toCSVFormat(
-      `MUSHKA-PSA_${fileSuffix}`,
-      [this.getExportedColumnTitles()].concat(this.rowsData),
-      this.getExportedProps()
-    );
-  }
-
-  getExportedProps() {
-    return this.columnsData
-      .map((column) => column.exportProp || column.prop);
-  }
-
-  getExportedColumnTitles() {
-    return this.columnsData
-      .reduce((columnTitles, column) => {
-        return { ...columnTitles, [column.exportProp || column.prop]: column.name };
-      }, {});
-  }
-
-  getRowClass(row: any) {
-    return row.className;
-  }
-
-  ngOnDestroy() {
-    clearTimeout(this.routeChangeTimeout);
-    super.ngOnDestroy();
+    super.onExportToCSV(fileSuffix, this.rowsData);
   }
 
   // getValuesList(column: DatatableColumn): string[] {
@@ -207,14 +153,12 @@ export class ProductsTableComponent extends UnsubscriberComponent implements OnI
     }, 0);
   }
 
-  private init(configurations: ColumnConfiguration[]) {
+  private init() {
+    const configurations = this.getColumnsConfigurations(Object.keys(this.datatableConfig), columnsConfig);
+
     this.columnsConfigurationSnapshot = [...configurations];
     this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
     this.columnsData = this.createAvailableColumnsData(this.columnsConfigurationSnapshot);
-  }
-
-  private getInitialColumnName(prop: string) {
-    return this.columnsDictionary[prop] || prop;
   }
 
   private createColumnsDictionary(configurations: ColumnConfiguration[]): {} {
@@ -224,20 +168,6 @@ export class ProductsTableComponent extends UnsubscriberComponent implements OnI
       }
       return dictionary;
     }, {});
-  }
-
-  private sortByProp(a, b) {
-    const aProp = a ? a.toString().toLowerCase().trim() : '';
-    const bProp = b ? b.toString().toLowerCase().trim() : '';
-
-    if (aProp < bProp) {
-      return -1;
-    }
-    if (aProp > bProp) {
-      return 1;
-    }
-
-    return 0;
   }
 
   private updateColumnsStatus(rows: ProductTablePreview[] = []) {
@@ -270,24 +200,10 @@ export class ProductsTableComponent extends UnsubscriberComponent implements OnI
     return colsToRender;
   }
 
-  private hideLoader() {
-    setTimeout(() => {
-      this.loadingIndicator = false;
-    }, 300);
-  }
+  // private hideLoader() {
+  //   super.hideLoader(this.loadingIndicator);
+  // }
   
-  private getColumnsConfigurations(availableColumns: string[], isVisible: boolean = true): ColumnConfiguration[] {
-    return availableColumns.map((columnName: string) => {
-      return {
-        name: columnName,
-        width: columnsConfig[name] ? columnsConfig[name].width : this.defaultColumnWidth,
-        visible: isVisible,
-        sort: {},
-        filters: []
-      };
-    });
-  }
-
   private getFakeRow() {
     return new ProductTablePreview({
       name: ''

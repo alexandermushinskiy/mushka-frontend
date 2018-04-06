@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { SuppliersListComponent } from './suppliers/suppliers-list.component';
-import { PsaDatatableComponent } from './psa-datatable/psa-datatable.component';
+import { SuppliersTableComponent } from './suppliers-table/suppliers-table.component';
 
 @NgModule({
   imports: [
@@ -10,7 +10,7 @@ import { PsaDatatableComponent } from './psa-datatable/psa-datatable.component';
   ],
   declarations: [
     SuppliersListComponent,
-    PsaDatatableComponent
+    SuppliersTableComponent
   ],
   exports: [SuppliersListComponent]
 })

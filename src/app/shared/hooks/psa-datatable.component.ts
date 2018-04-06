@@ -151,4 +151,24 @@ export abstract class PsaDatatableComponent implements OnInit {
     return updatedColumns;
   }
 
+  sortTable({ dir, prop }, rowsData: any): any[] {
+    switch (dir) {
+      case 'asc':
+        return this.updateColumnsStatus(rowsData.sort((a, b) => this.sortByProp(a[prop], b[prop])));
+      case 'desc':
+      default:
+        return this.updateColumnsStatus(rowsData.sort((a, b) => this.sortByProp(b[prop], a[prop])));
+    }
+  }
+
+  sortColumn(): { dir: string, prop: string } {
+    const sortColumn = this.columnsConfigurationSnapshot.find(c => Object.keys(c.sort).length > 0);
+    const sort = sortColumn
+      ? { dir: sortColumn.sort.order, prop: sortColumn.name }
+      : { dir: 'asc', prop: 'name' };
+    
+    this.sorts = [sort];
+    return sort;
+  }
+
 }

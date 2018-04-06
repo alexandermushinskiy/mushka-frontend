@@ -61,13 +61,7 @@ export class SuppliersTableComponent extends PsaDatatableComponent implements On
     const { dir, prop, initSort } = sorts[0];
     const rowsData = rows || this.rowsData;
     if (rowsData && rowsData.length > 0) {
-      switch (dir) {
-        case 'asc':
-          return this.updateColumnsStatus(rowsData.sort((a, b) => this.sortByProp(a[prop], b[prop])));
-        case 'desc':
-        default:
-          return this.updateColumnsStatus(rowsData.sort((a, b) => this.sortByProp(b[prop], a[prop])));
-      }
+      return this.sortTable({ dir, prop }, rowsData);
     }
   }
 
@@ -89,11 +83,7 @@ export class SuppliersTableComponent extends PsaDatatableComponent implements On
   }
 
   sort() {
-    const sortColumn = this.columnsConfigurationSnapshot.find(c => Object.keys(c.sort).length > 0);
-    const sort = sortColumn
-      ? { dir: sortColumn.sort.order, prop: sortColumn.name }
-      : { dir: 'asc', prop: 'name' };
-    this.sorts = [sort];
+    const sort = this.sortColumn();
     this.rowsData = this.onTableSort({ sorts: [{ ...{ initSort: true }, ...sort }] }, this.initialRowsData);
   }
 

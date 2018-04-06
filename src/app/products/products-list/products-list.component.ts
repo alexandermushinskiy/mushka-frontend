@@ -79,7 +79,7 @@ export class ProductsListComponent implements OnInit {
   private onSaveSuccess(product: Product, action: string) {
     this.isModalLoading = false;
     this.closeModal();
-    this.notificationsService.success('Success', `Product has been successfully ${action}`);
+    this.notificationsService.success('Success', `Product \"${product.name}\" has been successfully ${action}`);
   }
 
   private onSaveError() {

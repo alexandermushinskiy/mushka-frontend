@@ -1,0 +1,22 @@
+<form [formGroup]="supplierForm" class="supplier-form">
+  <div class="modal-header">
+    <h4 class="modal-title">Добаление поставщика</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <i class="ico ico-close"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="supplier-name">
+      <div class="form-group">
+        <label for="name" class="text-muted">Наименование</label>
+        <input type="text" id="name" class="form-control" formControlName="name" autocomplete="off">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-light btn-cancel" type="button" (click)="close()">Отмена</button>
+    <button class="btn btn-primary" type="button" (click)="save()" [disabled]="supplierForm.invalid">
+      <psa-spinner [isLoading]="isSaving"></psa-spinner>
+      Сохранить</button>
+  </div>
+</form>

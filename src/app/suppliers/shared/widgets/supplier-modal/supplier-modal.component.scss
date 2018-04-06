@@ -1,0 +1,65 @@
+@import '../../../../../variables';
+
+.supplier-form {
+  .supplier-name {
+    background-color: $layer3;
+    padding: $padding-base;
+    margin: -#{$padding-base} -#{$padding-base} $padding-base;
+  }
+
+  .form-row {
+    position: relative;
+
+    .form-control[readonly] {
+      opacity: 1;
+      background-color: $white;
+    }
+
+    [class^="col-"] {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.error-message {
+  display: block;
+  position: absolute;
+  margin-top: 0.5rem;
+  padding: .5rem;
+  border-radius: $border-radius-base;
+  border: $border-width solid $red-100;
+  background: $red-200;
+  min-height: 1.8rem;
+  font-size: 1.2rem;
+  line-height: normal;
+  color: $text-danger;
+  z-index: $zindex-dropdown;
+  .arrow {
+    position: absolute;
+    display: block;
+    width: .4rem;
+    height: .2rem;
+    top: -.4rem;
+    left: 25%;
+    &:before,
+    &:after {
+      content: '';
+      margin-left: -.4rem;
+      border-top-width: 0;
+      position: absolute;
+      display: block;
+      border-color: transparent;
+      border-style: solid;
+    }
+    &:before {
+      border-width: .4rem;
+      top: -.5rem;
+      left: -.1rem;
+      border-bottom-color: $red-100;
+    }
+    &:after {
+      top: calc((.4rem - 1px) * -1);
+      border-bottom-color: $red-200;
+    }
+  }
+}

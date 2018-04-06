@@ -10,6 +10,10 @@ export class SuppliersService {
     return this.getFakeSuppliers().delay(1000);
   }
 
+  addSupplier(supplier: Supplier): Observable<Supplier> {
+    return Observable.of(supplier);
+  }
+
   private getFakeSuppliers() {
     return Observable.of([
       new Supplier({

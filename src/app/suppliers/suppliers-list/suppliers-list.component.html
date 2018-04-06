@@ -5,6 +5,7 @@
                     [total]="total"
                     [shown]="shown"
                     [availableColumns]="availableCols"
+                    (onAddItem)="addSupplier(content)"
                     (onFilter)="datatable.onFilter($event)"
                     (onFilterReset)="datatable.resetFilter()"
                     (onExportAllToCSV)="datatable.onExportAllToCSV($event)"
@@ -20,3 +21,11 @@
     </psa-suppliers-table>
   </div>
 </div>
+
+<ng-template #content>
+  <psa-supplier-modal [supplier]="selectedSupplier"
+               [isSaving]="isModalLoading"
+               (onSave)="saveSupplier($event)"
+               (onClose)="closeModal()">
+  </psa-supplier-modal>
+</ng-template>

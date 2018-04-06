@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
-import { SuppliersListComponent } from './suppliers/suppliers-list.component';
+import { SuppliersListComponent } from './suppliers-list/suppliers-list.component';
 import { SuppliersTableComponent } from './suppliers-table/suppliers-table.component';
 
 @NgModule({

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { OrdersComponent } from './orders/orders/orders.component';
-import { SuppliersListComponent } from './suppliers/suppliers/suppliers-list.component';
+import { SuppliersListComponent } from './suppliers/suppliers-list/suppliers-list.component';
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import { PackagesComponent } from './packages/packages/packages.component';
 import { PartnersComponent } from './partners/partners/partners.component';

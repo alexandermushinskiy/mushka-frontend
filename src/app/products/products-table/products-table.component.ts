@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { DatatableComponent } from 'ngx-datatable-with-ie-fix';
 
-import { UnsubscriberComponent } from '../../shared/hooks/unsubscriber.component';
-import { DatatableColumn } from '../../shared/interfaces/datatable-column.interface';
 import { ColumnConfiguration } from '../../shared/models/column-configuration.model';
 import { ProductTablePreview } from '../shared/models/product-table-preview';
 import { columnsConfig } from '../shared/constants/columns-config.const';
@@ -203,7 +201,7 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
   // private hideLoader() {
   //   super.hideLoader(this.loadingIndicator);
   // }
-  
+
   private getFakeRow() {
     return new ProductTablePreview({
       name: ''

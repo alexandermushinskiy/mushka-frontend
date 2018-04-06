@@ -17,50 +17,28 @@ export class NotificationsService {
   warning(title: string, message: string) {
     this.options.toastClass = 'notification warning';
 
-    const tempalate = this.fillDefaultTemplate(title, message);
-    this.toastrService.show(tempalate, null, this.options);
+    const template = this.fillDefaultTemplate(title, message);
+    this.toastrService.show(template, null, this.options);
   }
 
   danger(title: string, message: string) {
     this.options.toastClass = 'notification danger';
 
-    const tempalate = this.fillDefaultTemplate(title, message);
-    this.toastrService.show(tempalate, null, this.options);
+    const template = this.fillDefaultTemplate(title, message);
+    this.toastrService.show(template, null, this.options);
   }
 
   success(title: string, message: string) {
     this.options.toastClass = 'notification success';
 
-    const tempalate = this.fillDefaultTemplate(title, message);
-    this.toastrService.show(tempalate, null, this.options);
+    const template = this.fillDefaultTemplate(title, message);
+    this.toastrService.show(template, null, this.options);
   }
 
   info(title: string, message: string) {
     this.options.toastClass = 'notification info';
     this.options.timeOut = 10000;
-    const tempalate = this.fillDefaultTemplate(title, message);
-    this.toastrService.show(tempalate, null, this.options);
-  }
-
-  newForumPost() {
-    this.options.toastClass = 'notification posted';
-
-    const template = `
-     <div>
-      <h6 class="heading">Posted <i class="notification-icon"></i></h6>
-      <p>You just posted the comment</p>
-    </div>`;
-    this.toastrService.show(template, null, this.options);
-  }
-
-  csrCreated(url: string) {
-    this.options.toastClass = 'notification success';
-    const template = `
-    <div>
-      <h6 class="heading">Success</h6>
-      <p> CSR created successfully. </p>
-      <a href="${url}">Go to CSR</a>
-    </div>`;
+    const template = this.fillDefaultTemplate(title, message);
     this.toastrService.show(template, null, this.options);
   }
 

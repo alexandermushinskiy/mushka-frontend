@@ -7,9 +7,9 @@ import { SizeItem } from '../../shared/models/size-item.model';
 
 @Injectable()
 export class ProductsServce {
+  private static fakeProducts: Product[];
   private products$: BehaviorSubject<Product[]> = new BehaviorSubject([]);
 
-  private static fakeProducts: Product[];
   constructor() {
     ProductsServce.fakeProducts = this.getFakeProducts();
 

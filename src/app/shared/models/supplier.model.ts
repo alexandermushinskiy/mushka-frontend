@@ -9,7 +9,7 @@ export class Supplier {
   paymentCondition: string;
   services: string;
   comments: string;
-  
+
   constructor(data: any) {
     Object.assign(this, data);
   }

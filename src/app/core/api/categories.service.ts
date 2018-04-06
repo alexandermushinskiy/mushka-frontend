@@ -7,7 +7,7 @@ import { Category } from '../../shared/models/category.model';
 @Injectable()
 export class CategoriesService {
   private categories$: BehaviorSubject<Category[]> = new BehaviorSubject([]);
-  
+
   constructor() {
     this.loadCategories();
   }
@@ -15,7 +15,7 @@ export class CategoriesService {
   getCategories(): Observable<Category[]> {
     return this.categories$.asObservable().delay(200);
   }
-  
+
   private loadCategories() {
     this.getFakeCategories()
       .subscribe(data => this.categories$.next(data));

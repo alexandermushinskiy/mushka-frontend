@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output, ViewChild, OnInit } from '@angular/core';
-import { LocalStorageService } from 'ngx-webstorage';
 
-import { NotificationsService } from '../../../../core/notifications/notifications.service';
 import { SearchFormComponent } from '../../search-form/search-form.component';
 
 @Component({
@@ -26,11 +24,9 @@ export class PsaDatatableHeaderComponent implements OnInit {
   @Output() onFilterReset = new EventEmitter();
   @Output() onAddItem = new EventEmitter();
 
-  isLoading = false;
   currentFilter = '';
 
-  constructor(private notificationsService: NotificationsService,
-              private storage: LocalStorageService) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -61,11 +57,5 @@ export class PsaDatatableHeaderComponent implements OnInit {
     this.searchForm.reset();
     this.filter('');
     this.onFilterReset.emit();
-  }
-
-  private hideLoader() {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 300);
   }
 }

@@ -9,11 +9,9 @@ import { SidebarMenuStateService } from './core/sidebar-menu-state/sidebar-menu-
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
+
   isAppReady = false;
   isCollapsed: boolean;
-
-  private isStarted = false;
 
   constructor(private appLoaderService: AppLoaderService,
               private sidebarMenuStateService: SidebarMenuStateService,) {

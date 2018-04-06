@@ -17,7 +17,7 @@
 // import 'rxjs/add/observable/throw';
 // import 'rxjs/add/observable/fromEvent';
 
-import "rxjs/Rx";
+import 'rxjs/Rx';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';

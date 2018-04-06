@@ -25,11 +25,11 @@ export class ClosePopoverOnClickOutsideDirective {
     if (!this.active) {
       this.active = true;
       return;
-    } 
+    }
 
     const cancelClose = Array.from(document.getElementsByTagName('ngb-popover-window'))
       .find(popoverWindow => popoverWindow.contains(targetElement));
-    
+
     if (!cancelClose) {
       this.popover.close();
     }

@@ -1,7 +1,6 @@
 import { OnInit } from '@angular/core';
 
 import { DatatableColumn } from '../interfaces/datatable-column.interface';
-import { ProductTablePreview } from '../../products/shared/models/product-table-preview';
 import { ColumnConfiguration } from '../models/column-configuration.model';
 import { FileHelper } from '../utils/file-helper';
 
@@ -21,7 +20,7 @@ export abstract class PsaDatatableComponent implements OnInit {
     collapsed: 40,
     expanded: 40
   };
-  
+
   ngOnInit() {
     this.headerHeight = this.fixedHeaderHeight.collapsed;
   }
@@ -42,20 +41,16 @@ export abstract class PsaDatatableComponent implements OnInit {
       }, {});
   }
 
-  getColumnsConfigurations(availableColumns: string[], columnsConfig: { [name: string]: DatatableColumn }, isVisible: boolean = true): ColumnConfiguration[] {
+  getColumnsConfigurations(availableColumns: string[], columnsConfig: { [name: string]: DatatableColumn }): ColumnConfiguration[] {
     return availableColumns.map((columnName: string) => {
       return {
         name: columnName,
         width: columnsConfig[name] ? columnsConfig[name].width : this.defaultColumnWidth,
-        visible: isVisible,
+        visible: true,
         sort: {},
         filters: []
       };
     });
-  }
-
-  getInitialColumnName(prop: string) {
-    return this.columnsDictionary[prop] || prop;
   }
 
   onExportToCSV(fileSuffix: string, rowsData: any[]) {
@@ -80,10 +75,4 @@ export abstract class PsaDatatableComponent implements OnInit {
     return 0;
   }
 
-  hideLoader(loadingIndicator: boolean) {
-    setTimeout(() => {
-      loadingIndicator = false;
-    }, 300);
-  }
-  
 }

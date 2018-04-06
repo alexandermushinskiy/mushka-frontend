@@ -9,7 +9,7 @@ import { SizeItem } from '../../models/size-item.model';
 })
 export class SizesLabelsComponent implements OnInit {
   @Input() sizes: SizeItem[];
-  
+
   constructor() { }
 
   ngOnInit() {

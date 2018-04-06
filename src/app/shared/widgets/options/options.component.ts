@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 
 import { SearchFormComponent } from '../search-form/search-form.component';
 import { UnsubscriberComponent } from '../../hooks/unsubscriber.component';
@@ -8,7 +8,7 @@ import { UnsubscriberComponent } from '../../hooks/unsubscriber.component';
   templateUrl: './options.component.html',
   styleUrls: ['./options.component.scss']
 })
-export class OptionsComponent extends UnsubscriberComponent implements OnInit {
+export class OptionsComponent extends UnsubscriberComponent implements OnInit, OnDestroy {
   @ViewChild(SearchFormComponent) searchFormComponent: SearchFormComponent;
   @Input() showSortingMenu = false;
   @Input() showSelectAll = false;
@@ -32,7 +32,7 @@ export class OptionsComponent extends UnsubscriberComponent implements OnInit {
       ? this.availableOptions.filter(option => option.toLowerCase().includes(this.keywords.toLowerCase()))
       : this.availableOptions;
   }
-  
+
   constructor() {
     super();
   }

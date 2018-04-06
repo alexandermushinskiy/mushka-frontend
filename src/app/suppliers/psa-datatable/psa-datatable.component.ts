@@ -200,6 +200,7 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
       filteredRows = this.filterByGlobalText(filteredRows);
     }
 
+    this.rowsData = this.updateColumnsStatus(filteredRows);
     this.broadcastRowsUpdated(filteredRows.length);
     this.recalculateTable();
   }
@@ -230,36 +231,6 @@ export class PsaDatatableComponent extends UnsubscriberComponent implements OnIn
     setTimeout(() => {
       this.onRowsUpdated.emit(length);
     }, 0);
-  }
-
-  private filterByUnread(row) {
-    return !row.isRead;
-  }
-
-  private filterByUnassigned(row) {
-    return row.unassigned;
-  }
-
-  private getUserNamesAndSignums(row) {
-    return row.ericssonResponsible.reduce((prev, curr) => {
-      return prev.concat(
-        curr.username ? curr.username.toLowerCase() : '',
-        curr.originalName ? curr.originalName.toLowerCase() : '');
-    }, []).join(' ');
-  }
-
-  private getUserNamesAndSignumsArray(row) {
-    return row.ericssonResponsible.reduce((prev, curr) => {
-      if (curr.username) {
-        prev.push(`${curr.username} ${ curr.originalName ? curr.originalName : ''}`);
-      }
-
-      return prev;
-    }, []);
-  }
-
-  private getWorkgroups(row) {
-    return row.workgroups.map(workgroup => workgroup.name.toLowerCase()).join(' ');
   }
 
   private init(configurations: ColumnConfiguration[]) {

@@ -46,7 +46,7 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
 
   ngOnInit() {
     super.ngOnInit();
-    this.init();
+    this.init(this.cols, this.headerTpl);
   }
 
   onFilter(filterText: string) {
@@ -80,7 +80,7 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
     this.filter();
   }
 
-  private sort() {
+  sort() {
     const sortColumn = this.columnsConfigurationSnapshot.find(c => Object.keys(c.sort).length > 0);
     const sort = sortColumn
       ? { dir: sortColumn.sort.order, prop: sortColumn.name }
@@ -89,7 +89,7 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
     this.rowsData = this.onTableSort({ sorts: [{ ...{ initSort: true }, ...sort }] }, this.initialRowsData);
   }
 
-  private filter() {
+  filter() {
     let filteredRows = this.initialRowsData ? [...this.initialRowsData] : [];
     if (this.filterText) {
       filteredRows = this.filterByGlobalText(filteredRows);
@@ -98,6 +98,19 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
     this.rowsData = this.updateColumnsStatus(filteredRows);
     this.broadcastRowsUpdated(filteredRows.length);
     this.recalculateTable();
+  }
+
+  getFakeRow() {
+    return new ProductTablePreview({
+      name: '',
+      сode: '',
+      createdOn: '',
+      deliveriesNumber: 0,
+      lastDeliveryDate: '',
+      lastDeliveryCount: 0,
+      totalCount: 0,
+      sizes: []
+    }, 0);
   }
 
   private recalculateTable() {
@@ -112,33 +125,4 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
     }, 0);
   }
 
-  private init() {
-    const configurations = this.getColumnsConfigurations();
-
-    this.columnsConfigurationSnapshot = [...configurations];
-    this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
-    this.columnsData = this.createAvailableColumnsData(this.columnsConfigurationSnapshot);
-  }
-
-  private createAvailableColumnsData(columnsConfiguration: ColumnConfiguration[] = []): any[] {
-    const colsToRender = [];
-    columnsConfiguration.forEach((column) => {
-      const currentColumn = { ...this.datatableConfig[column.name] };
-      if (this.cols.includes(column.name) && currentColumn && column.visible) {
-        if (typeof column.width === 'number') {
-          currentColumn.width = column.width;
-        }
-        currentColumn.cellTemplate = this[currentColumn.cellTemplateName];
-        currentColumn.headerTemplate = this.headerTpl;
-        colsToRender.push(currentColumn);
-      }
-    });
-    return colsToRender;
-  }
-
-  getFakeRow() {
-    return new ProductTablePreview({
-      name: ''
-    }, 0);
-  }
 }

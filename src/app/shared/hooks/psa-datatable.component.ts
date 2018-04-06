@@ -1,4 +1,4 @@
-import { OnInit } from '@angular/core';
+import { OnInit, TemplateRef } from '@angular/core';
 
 import { DatatableColumn } from '../interfaces/datatable-column.interface';
 import { ColumnConfiguration } from '../models/column-configuration.model';
@@ -28,10 +28,45 @@ export abstract class PsaDatatableComponent implements OnInit {
     this.propertiesToFilter = propertiesToFilter;
   }
 
+  abstract sort();
+  abstract filter();
   abstract getFakeRow();
 
   ngOnInit() {
     this.headerHeight = this.fixedHeaderHeight.collapsed;
+  }
+
+  init(columns: string[], headerTpl: TemplateRef<any>) {
+    const configurations = this.getColumnsConfigurations();
+
+    this.columnsConfigurationSnapshot = [...configurations];
+    this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
+    this.columnsData = this.createAvailableColumnsData(columns, headerTpl, this.columnsConfigurationSnapshot);
+  }
+
+  createColumnsDictionary(configurations: ColumnConfiguration[]): {} {
+    return this.columnsDictionary = configurations.reduce((dictionary, cellConfig) => {
+      if (this.datatableConfig[cellConfig.name]) {
+        dictionary[this.datatableConfig[cellConfig.name].prop] = cellConfig.name;
+      }
+      return dictionary;
+    }, {});
+  }
+
+  createAvailableColumnsData(cols: string[], headerTpl: TemplateRef<any>, columnsConfiguration: ColumnConfiguration[] = []): any[] {
+    const colsToRender = [];
+    columnsConfiguration.forEach((column) => {
+      const currentColumn = { ...this.datatableConfig[column.name] };
+      if (cols.includes(column.name) && currentColumn && column.visible) {
+        if (typeof column.width === 'number') {
+          currentColumn.width = column.width;
+        }
+        currentColumn.cellTemplate = this[currentColumn.cellTemplateName];
+        currentColumn.headerTemplate = headerTpl;
+        colsToRender.push(currentColumn);
+      }
+    });
+    return colsToRender;
   }
 
   getRowClass(row: any) {
@@ -100,15 +135,6 @@ export abstract class PsaDatatableComponent implements OnInit {
       });
       return filterFields.some(el => el.includes(this.filterText));
     });
-  }
-
-  createColumnsDictionary(configurations: ColumnConfiguration[]): {} {
-    return this.columnsDictionary = configurations.reduce((dictionary, cellConfig) => {
-      if (this.datatableConfig[cellConfig.name]) {
-        dictionary[this.datatableConfig[cellConfig.name].prop] = cellConfig.name;
-      }
-      return dictionary;
-    }, {});
   }
 
   updateColumnsStatus(rows: any[] = []) {

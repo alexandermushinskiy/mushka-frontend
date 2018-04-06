@@ -1,8 +1,7 @@
 import { SizeItem } from '../../../shared/models/size-item.model';
+import { DataTablePreview } from '../../../shared/models/data-table-preview';
 
-export class ProductTablePreview {
-  index: number;
-  id: string;
+export class ProductTablePreview extends DataTablePreview {
   name: string;
   сode: string;
   createdOn: string;
@@ -11,13 +10,10 @@ export class ProductTablePreview {
   lastDeliveryCount: number;
   totalCount: number;
   sizes: SizeItem[];
-  className: string;
-
-  private readonly defaultValue = ' - ';
 
   constructor(elem, index: number = 0) {
-    this.index = index;
-    this.id = elem.id;
+    super(elem, index);
+
     this.name = elem.name;
     this.сode = elem.code;
     this.createdOn = elem.createdOn;
@@ -26,11 +22,5 @@ export class ProductTablePreview {
     this.lastDeliveryCount = elem.lastDeliveryCount || this.defaultValue;
     this.totalCount = elem.totalCount;
     this.sizes = elem.sizes;
-    this.className = elem.className || this.getClassName(index);
-  }
-
-  getClassName(index: number, isActive: boolean = false) {
-    const isOdd = (index % 2 === 0);
-    return `${isOdd ? 'odd' : 'even'} ${isActive ? 'active' : 'non-active'}`;
   }
 }

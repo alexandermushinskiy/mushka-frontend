@@ -13,6 +13,8 @@ export abstract class PsaDatatableComponent implements OnInit {
   columnsDictionary: {};
   selectedRowId: string;
   filterText: string;
+  datatableConfig: { [name: string]: DatatableColumn };
+  propertiesToFilter: { [name: string]: string };
 
   readonly fakeRowClassName = 'fake-row';
   readonly defaultColumnWidth = 100;
@@ -20,6 +22,13 @@ export abstract class PsaDatatableComponent implements OnInit {
     collapsed: 40,
     expanded: 40
   };
+
+  constructor(datatableConfig, propertiesToFilter) {
+    this.datatableConfig = datatableConfig;
+    this.propertiesToFilter = propertiesToFilter;
+  }
+
+  abstract getFakeRow();
 
   ngOnInit() {
     this.headerHeight = this.fixedHeaderHeight.collapsed;
@@ -41,11 +50,13 @@ export abstract class PsaDatatableComponent implements OnInit {
       }, {});
   }
 
-  getColumnsConfigurations(availableColumns: string[], columnsConfig: { [name: string]: DatatableColumn }): ColumnConfiguration[] {
+  getColumnsConfigurations(): ColumnConfiguration[] {
+    const availableColumns = Object.keys(this.datatableConfig);
+
     return availableColumns.map((columnName: string) => {
       return {
         name: columnName,
-        width: columnsConfig[name] ? columnsConfig[name].width : this.defaultColumnWidth,
+        width: this.datatableConfig[name] ? this.datatableConfig[name].width : this.defaultColumnWidth,
         visible: true,
         sort: {},
         filters: []
@@ -73,6 +84,45 @@ export abstract class PsaDatatableComponent implements OnInit {
     }
 
     return 0;
+  }
+
+  filterByGlobalText(filteredRows) {
+    const columns = this.columnsData.map(el => el.name);
+    const propertiesToFilterKeys = Object.keys(this.propertiesToFilter);
+    this.filterText = this.filterText.toLowerCase().trim();
+
+    return filteredRows.filter(row => {
+      let filterFields = [];
+      columns.forEach(column => {
+        if (propertiesToFilterKeys.includes(column) && row[this.propertiesToFilter[column]]) {
+          filterFields.push(row[this.propertiesToFilter[column]].toString().toLowerCase());
+        }
+      });
+      return filterFields.some(el => el.includes(this.filterText));
+    });
+  }
+
+  createColumnsDictionary(configurations: ColumnConfiguration[]): {} {
+    return this.columnsDictionary = configurations.reduce((dictionary, cellConfig) => {
+      if (this.datatableConfig[cellConfig.name]) {
+        dictionary[this.datatableConfig[cellConfig.name].prop] = cellConfig.name;
+      }
+      return dictionary;
+    }, {});
+  }
+
+  updateColumnsStatus(rows: any[] = []) {
+    const updatedColumns = rows.map((el: any, index) => {
+      return Object.assign(el, {
+        className: (rows.length === 1 && el.className === this.fakeRowClassName)
+          ? el.className
+          : el.getClassName(index, el.id === this.selectedRowId)
+      });
+    });
+    if (updatedColumns.length === 0) {
+      return [this.getFakeRow()];
+    }
+    return updatedColumns;
   }
 
 }

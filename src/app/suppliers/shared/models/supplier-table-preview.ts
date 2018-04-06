@@ -1,6 +1,6 @@
-export class SupplierTablePreview {
-  index: number;
-  id: string;
+import { DataTablePreview } from "../../../shared/models/data-table-preview";
+
+export class SupplierTablePreview extends DataTablePreview {
   name: string;
   address: string;
   phone: string;
@@ -10,13 +10,10 @@ export class SupplierTablePreview {
   paymentCondition: string;
   services: string;
   comments: string;
-  className: string;
-
-  private readonly defaultValue = ' - ';
 
   constructor(elem, index: number = 0) {
-    this.index = index;
-    this.id = elem.id;
+    super(elem, index);
+
     this.name = elem.name;
     this.address = elem.address;
     this.phone = elem.phone;
@@ -26,11 +23,5 @@ export class SupplierTablePreview {
     this.paymentCondition = elem.paymentCondition;
     this.services = elem.services;
     this.comments = elem.comments;
-    this.className = elem.className || this.getClassName(index);
-  }
-
-  getClassName(index: number, isActive: boolean = false) {
-    const isOdd = (index % 2 === 0);
-    return `${isOdd ? 'odd' : 'even'} ${isActive ? 'active' : 'non-active'}`;
   }
 }

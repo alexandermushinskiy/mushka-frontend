@@ -39,10 +39,9 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
 
   rowsData: ProductTablePreview[];
   private initialRowsData: ProductTablePreview[];
-  private datatableConfig = columnsConfig;
 
   constructor() {
-    super();
+    super(columnsConfig, propertiesToFilter);
   }
 
   ngOnInit() {
@@ -59,12 +58,6 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
     const { dir, prop, initSort } = sorts[0];
     const rowsData = rows || this.rowsData;
     if (rowsData && rowsData.length > 0) {
-      // if (!initSort) {
-      //   this.userSettingsService.changeColumnsSort(prop, dir)
-      //     .subscribe((res) => this.columnsConfigurationSnapshot = res,
-      //       (err: string) => this.onError(err)
-      //     );
-      // }
       switch (dir) {
         case 'asc':
           return this.updateColumnsStatus(rowsData.sort((a, b) => this.sortByProp(a[prop], b[prop])));
@@ -82,22 +75,6 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
   onExportFilteredToCSV(fileSuffix: string) {
     super.onExportToCSV(fileSuffix, this.rowsData);
   }
-
-  // getValuesList(column: DatatableColumn): string[] {
-  //   if (column.predefinedValues && this.initialRowsData) {
-  //     const uniqueValues = Array.from(new Set([...this.initialRowsData.reduce((prev, row) => {
-  //       if (!!row[column.prop] === row[column.prop]) {
-  //         prev.push(row[column.prop] ? `${column.name}` : `Not ${column.name}`);
-  //       } else {
-  //         prev.push(row[column.prop]);
-  //       }
-  //       return prev;
-  //     }, [])])).sort();
-
-  //     return uniqueValues;
-  //   }
-  //   return [];
-  // }
 
   resetFilter() {
     this.filter();
@@ -129,22 +106,6 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
     }, 0);
   }
 
-  private filterByGlobalText(filteredRows) {
-    const columns = this.columnsData.map(el => el.name);
-    const propertiesToFilterKeys = Object.keys(propertiesToFilter);
-    this.filterText = this.filterText.toLowerCase().trim();
-
-    return filteredRows.filter(row => {
-      let filterFields = [];
-      columns.forEach(column => {
-        if (propertiesToFilterKeys.includes(column) && row[propertiesToFilter[column]]) {
-          filterFields.push(row[propertiesToFilter[column]].toString().toLowerCase());
-        }
-      });
-      return filterFields.some(el => el.includes(this.filterText));
-    });
-  }
-
   private broadcastRowsUpdated(length: number) {
     setTimeout(() => {
       this.onRowsUpdated.emit(length);
@@ -152,34 +113,11 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
   }
 
   private init() {
-    const configurations = this.getColumnsConfigurations(Object.keys(this.datatableConfig), columnsConfig);
+    const configurations = this.getColumnsConfigurations();
 
     this.columnsConfigurationSnapshot = [...configurations];
     this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
     this.columnsData = this.createAvailableColumnsData(this.columnsConfigurationSnapshot);
-  }
-
-  private createColumnsDictionary(configurations: ColumnConfiguration[]): {} {
-    return this.columnsDictionary = configurations.reduce((dictionary, cellConfig) => {
-      if (this.datatableConfig[cellConfig.name]) {
-        dictionary[this.datatableConfig[cellConfig.name].prop] = cellConfig.name;
-      }
-      return dictionary;
-    }, {});
-  }
-
-  private updateColumnsStatus(rows: ProductTablePreview[] = []) {
-    const updatedColumns = rows.map((el: ProductTablePreview, index) => {
-      return Object.assign(el, {
-        className: (rows.length === 1 && el.className === this.fakeRowClassName)
-          ? el.className
-          : el.getClassName(index, el.id === this.selectedRowId)
-      });
-    });
-    if (updatedColumns.length === 0) {
-      return [this.getFakeRow()];
-    }
-    return updatedColumns;
   }
 
   private createAvailableColumnsData(columnsConfiguration: ColumnConfiguration[] = []): any[] {
@@ -198,11 +136,7 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
     return colsToRender;
   }
 
-  // private hideLoader() {
-  //   super.hideLoader(this.loadingIndicator);
-  // }
-
-  private getFakeRow() {
+  getFakeRow() {
     return new ProductTablePreview({
       name: ''
     }, 0);

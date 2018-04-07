@@ -16,7 +16,7 @@ export const availableColumns = {
     'email',
     'webSite',
     'contactPerson',
-    'paymentCondition',
+    'paymentConditions',
     'services'
   ]
 };

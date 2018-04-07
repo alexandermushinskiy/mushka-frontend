@@ -28,17 +28,12 @@ export class ProductsServce {
   }
 
   private addProductInternal(product: Product): Observable<any> {
-    const addedProduct = new Product({
-      id: '',
-      name: product.name,
-      sizes: product.sizes,
-      code: product.code,
+    const addedProduct = Object.assign({}, product, {
+      id: '11111111-C9B6-4ACF-A478-5185A07C39BF',
       createdOn: '2018-04-05',
-      deliveriesNumber: null,
-      lastDeliveryDate: null,
-      lastDeliveryCount: null,
       totalCount: 0
     });
+
     ProductsServce.fakeProducts.push(addedProduct);
     return Observable.of({data: addedProduct});
   }

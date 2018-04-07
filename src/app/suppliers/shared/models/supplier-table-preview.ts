@@ -7,7 +7,7 @@ export class SupplierTablePreview extends DataTablePreview {
   email: string;
   webSite: string;
   contactPerson: string;
-  paymentCondition: string;
+  paymentConditions: string;
   services: string;
   comments: string;
 
@@ -20,7 +20,7 @@ export class SupplierTablePreview extends DataTablePreview {
     this.email = elem.email || this.defaultValue;
     this.webSite = elem.webSite || this.defaultValue;
     this.contactPerson = elem.contactPerson;
-    this.paymentCondition = elem.paymentCondition;
+    this.paymentConditions = elem.paymentConditions;
     this.services = elem.services;
     this.comments = elem.comments;
   }

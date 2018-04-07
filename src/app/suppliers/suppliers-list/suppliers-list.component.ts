@@ -53,7 +53,6 @@ export class SuppliersListComponent implements OnInit {
   }
 
   saveSupplier(supplier: Supplier) {
-    console.info(supplier);
     this.suppliersService.addSupplier(supplier)
       .subscribe(
         (res: Supplier) => this.onSaveSuccess(res, supplier.id ? 'изменен' : 'добавлен'),

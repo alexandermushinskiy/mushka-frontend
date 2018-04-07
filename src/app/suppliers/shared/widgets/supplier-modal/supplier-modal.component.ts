@@ -18,6 +18,13 @@ export class SupplierModalComponent implements OnInit {
   supplierForm: FormGroup;
   isEdit = false;
   name: string;
+  address: string;
+  email: string;
+  phone: string;
+  webSite: string;
+  contactPerson: string;
+  paymentConditions: string;
+  services: string;
 
   constructor(private formBuilder: FormBuilder,
               private suppliersService: SuppliersService) { }
@@ -39,7 +46,14 @@ export class SupplierModalComponent implements OnInit {
       this.supplier.name = supplierFormValue.name;
     } else {
       this.supplier = new Supplier({
-        name: supplierFormValue.name
+        name: supplierFormValue.name,
+        address: supplierFormValue.address,
+        email: supplierFormValue.address,
+        phone: supplierFormValue.phone,
+        webSite: supplierFormValue.webSite,
+        contactPerson: supplierFormValue.contactPerson,
+        paymentConditions: supplierFormValue.paymentConditions,
+        services: supplierFormValue.services
       });
     }
 
@@ -52,7 +66,14 @@ export class SupplierModalComponent implements OnInit {
 
   private buildForm() {
     this.supplierForm = this.formBuilder.group({
-      name: [this.name, Validators.required]
+      name: [this.name, Validators.required],
+      address: [this.address],
+      email: [this.email],
+      phone: [this.phone],
+      webSite: [this.webSite],
+      contactPerson: [this.contactPerson],
+      paymentConditions: [this.paymentConditions],
+      services: [this.services]
     });
   }
 

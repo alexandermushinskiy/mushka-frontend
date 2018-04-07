@@ -1,21 +1,48 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Supplier } from '../../shared/models/supplier.model';
 
 @Injectable()
 export class SuppliersService {
+  private static fakeSuppliers: Supplier[];
+  private suppliers$: BehaviorSubject<Supplier[]> = new BehaviorSubject([]);
+  
+  constructor() {
+    SuppliersService.fakeSuppliers = this.getFakeSuppliers();
+
+    this.loadSuppliers();
+  }
 
   getSuppliers(): Observable<Supplier[]> {
-    return this.getFakeSuppliers().delay(1000);
+    return this.suppliers$.asObservable().delay(1000);
   }
 
   addSupplier(supplier: Supplier): Observable<Supplier> {
-    return Observable.of(supplier);
+    return this.addSupplierInternal(supplier)
+      .map((res: any) => res.data)
+      .catch(() => Observable.throw('Ошибка добавление поставщика'))
+      .finally(() => this.loadSuppliers());
   }
 
-  private getFakeSuppliers() {
-    return Observable.of([
+  private addSupplierInternal(supplier: Supplier): Observable<any> {
+    const addedSupplier = new Supplier(Object.assign({}, supplier, {
+      id: '11111111-C9B6-4ACF-A478-5185A07C39BF',
+      createdOn: '2018-04-05'
+    }));
+
+    SuppliersService.fakeSuppliers.push(addedSupplier);
+    return Observable.of({data: addedSupplier});
+  }
+
+  private loadSuppliers() {
+    Observable.of(SuppliersService.fakeSuppliers)
+      .subscribe(data => this.suppliers$.next(data));
+  }
+
+  private getFakeSuppliers(): Supplier[] {
+    return [
       new Supplier({
         id: 'FE5570E0-FE4E-492E-933E-EACD6A31E22D',
         name: 'ТОВ "Новая Линия"',
@@ -24,7 +51,7 @@ export class SuppliersService {
         email: 'info@socks.com',
         webSite: 'socks.com.ua',
         contactPerson: 'Иванов Иван Иванович',
-        paymentCondition: 'Наличный, безналичный',
+        paymentConditions: 'Наличный, безналичный',
         services: 'Носки',
         comments: ''
       }),
@@ -36,10 +63,10 @@ export class SuppliersService {
         email: 'hello@vova-zi-lvova.com',
         webSite: 'vova-zi-lvova.com.ua',
         contactPerson: 'Сахаров Владимир Сергеевич',
-        paymentCondition: 'Безналичный',
+        paymentConditions: 'Безналичный',
         services: 'Бирки',
         comments: ''
       })
-    ]);
+    ];
   }
 }

@@ -49,12 +49,12 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
     cellTemplateName: 'contactPersonCol',
     predefinedValues: false
   },
-  'paymentCondition': {
+  'paymentConditions': {
     name: 'Условия оплаты',
-    prop: 'paymentCondition',
+    prop: 'paymentConditions',
     width: 150,
     canBeFiltered: true,
-    cellTemplateName: 'paymentConditionCol',
+    cellTemplateName: 'paymentConditionsCol',
     predefinedValues: false
   },
   'services': {

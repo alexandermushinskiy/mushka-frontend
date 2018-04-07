@@ -9,7 +9,7 @@
 
   .form-row {
     position: relative;
-
+    
     .form-control[readonly] {
       opacity: 1;
       background-color: $white;
@@ -61,5 +61,15 @@
       top: calc((.4rem - 1px) * -1);
       border-bottom-color: $red-200;
     }
+  }
+}
+
+.text-area-vertical { resize: vertical;}
+
+.form-group {
+  margin-bottom: $padding-base;
+  position: relative;
+  label {
+    color: $text-muted;
   }
 }

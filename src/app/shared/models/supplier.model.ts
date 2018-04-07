@@ -6,9 +6,10 @@ export class Supplier {
   email: string;
   webSite: string;
   contactPerson: string;
-  paymentCondition: string;
+  paymentConditions: string;
   services: string;
   comments: string;
+  createdOn: string;
 
   constructor(data: any) {
     Object.assign(this, data);

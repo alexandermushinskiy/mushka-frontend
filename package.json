@@ -31,6 +31,7 @@
     "i": "^0.3.6",
     "jquery": "^3.3.1",
     "moment": "^2.22.0",
+    "ng2-currency-mask": "^5.3.1",
     "ngx-bootstrap": "^2.0.3",
     "ngx-datatable-with-ie-fix": "^2.0.0",
     "ngx-toastr": "^8.3.2",
@@ -42,7 +43,7 @@
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.8",
+    "@angular/cli": "^1.7.4",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
     "@types/jasmine": "~2.8.3",

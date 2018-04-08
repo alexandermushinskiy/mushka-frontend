@@ -1,17 +1,13 @@
-<div class="form-group">
-  <label for="dropdown">Поставщик</label>
-  <div ngbDropdown class="dropdown">
-    <button type="button" class="btn form-control" [ngClass]="(!selectedSupplier && required) ? 'required-dropdown' : ''" ngbDropdownToggle id="dropdown">
-      {{ selectedSupplier ? selectedSupplier.name : '' }}
-      <i class="ico-chevron-down"></i>
+<div ngbDropdown class="dropdown">
+  <button type="button" class="btn form-control" [ngClass]="(!selectedSupplier && required) ? 'required-dropdown' : ''" ngbDropdownToggle id="dropdown">
+    <span [ngClass]="{'placeholder': !selectedSupplier}">{{ selectedSupplier ? selectedSupplier.name : 'Выберите поставщика из списка' }}</span>
+    <i class="ico-chevron-down"></i>
+  </button>
+  <div ngbDropdownMenu aria-labelledby="dropdown" class="dropdown-max-height">
+    <button class="dropdown-item" *ngFor="let supplier of suppliers" (click)="onOptionSelect(supplier)">
+      {{ supplier.name }}
+      <br/>
+      <small class="text-muted">{{ supplier.address }}</small>
     </button>
-    <div ngbDropdownMenu aria-labelledby="dropdown" class="dropdown-max-height">
-      <button class="dropdown-item" *ngFor="let supplier of suppliers" (click)="onOptionSelect(supplier)">
-        {{ supplier.name }}
-        <br/>
-        <small class="text-muted">{{ supplier.address }}</small>
-      </button>
-    </div>
   </div>
 </div>
-  

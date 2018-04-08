@@ -8,7 +8,8 @@
     <psa-global-search #search (onSearch)="jumpToCsr($event)" [isLoading]="isLoadingInProgress"></psa-global-search>
   </div>
   <div class="actions-right">
-    <a class="btn btn-outline-light" aria-label="addNew" [routerLink]="'/delivery'">Поступление</a>
+    <a class="btn btn-outline-light" aria-label="Сделка" [routerLink]="'/delivery'">Сделка</a>
+    <a class="btn btn-outline-light" aria-label="Поступление" [routerLink]="'/delivery'">Поступление</a>
     <psa-user-notification></psa-user-notification>
     <div class="badge-group">
       <psa-header-badge (click)="openModal(csrRate)" [title]="'Unrated'" [icon]="'ico-favorites'" [value]="totalUnrated"></psa-header-badge>

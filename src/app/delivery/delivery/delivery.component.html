@@ -8,14 +8,38 @@
           <a tabindex="0" (click)="goBack()" class="link-back">
             <i class="ico ico-arrow-up ico-arrow-left"></i>
           </a>
-          <h1 class="app-page-title">НОВАЯ ПОСТАВКА ТОВАРА</h1>
+          <h1 class="app-page-title">ПОСТУПЛЕНИЕ ТОВАРОВ И УСЛУГ</h1>
         </div>
       </div>
       <div class="content-body">
         <div class="form-row">
-          <div class="col-lg-3">
+          <div class="col-md-2">
             <div class="form-group">
-              <label>Дата поставки:</label>
+              <label>Тип:</label>
+              <psa-dropdown [options]="deliveryTypesList" (onSelectedValue)="onDeliveryTypeSelected($event)"></psa-dropdown>
+            </div>
+          </div>
+          <div class="offset-md-2 col-md-2">
+            <div class="form-group">
+              <label>Дата заявки:</label>
+              <psa-datetimepicker [date]="requestDate"
+                                  [dateFormat]="'YYYY-MM-DD'"
+                                  [pickerType]="'calendar'"
+                                  [isNow]="true"
+                                  (onDateChanged)="onDateChanged($event)">
+                <div class="input-wrapper datepicker-input">
+                  <input class="form-control requestDate"
+                          [(ngModel)]="requestDate"
+                          placeholder="Введите дату"
+                          formControlName="requestDate"/>
+                  <i class="fa fa-calendar-o"></i>
+                </div>
+              </psa-datetimepicker>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Дата поступления:</label>
               <psa-datetimepicker [date]="deliveryDate"
                                   [dateFormat]="'YYYY-MM-DD'"
                                   [pickerType]="'calendar'"
@@ -24,43 +48,54 @@
                 <div class="input-wrapper datepicker-input">
                   <input class="form-control deliveryDate"
                           [(ngModel)]="deliveryDate"
-                          placeholder="Select date"
+                          placeholder="Введите дату"
                           formControlName="deliveryDate"/>
                   <i class="fa fa-calendar-o"></i>
                 </div>
               </psa-datetimepicker>
             </div>
           </div>
-          <div class="col-lg-3">
+        </div>
+        <div class="form-row">
+          <div class="col-lg-8">
             <div class="form-group">
-              <label>Номер партии:</label>
-              <input type="text" class="form-control" formControlName="batchNumber" />
+              <label for="dropdown">Поставщик:</label>
+              <psa-suppliers-dropdown onSelectedSupplier="onSelectedSupplier($event)"></psa-suppliers-dropdown>
             </div>
           </div>
-          <div class="col-lg-3">
-            <psa-suppliers-dropdown onSelectedSupplier="onSelectedSupplier($event)"></psa-suppliers-dropdown>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <label for="dropdown">Кол-во предыдущих заказов:</label>
+              <input class="form-control" readonly="readonly" />
+            </div>
           </div>
         </div>
-
         <div class="form-row">
           <div class="col-lg-3">
+            <div class="form-group">
+              <label for="dropdown">Способ оплаты:</label>
+              <psa-dropdown [options]="PaymentMethodsList" (onSelectedValue)="onPaymentMethodSelected($event)"></psa-dropdown>
+            </div>
+          </div>
+          <div class="offset-md-1 col-lg-2">
+            <div class="form-group">
+              <label>Общая стоимость:</label>
+              <psa-currency-input formControlName="totalCost"></psa-currency-input>
+            </div>
+          </div>
+          <div class="col-lg-2">
             <div class="form-group">
               <label>Стоимость доставки:</label>
-              <div class="input-wrapper">
-                <input type="text" class="form-control cost" formControlName="cost" />
-                <i class="fa fa-money money-icon"></i>
-              </div>
+              <psa-currency-input formControlName="cost"></psa-currency-input>
             </div>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="col-lg-3">
+          <div class="col-lg-2">
             <div class="form-group">
               <label>Комиссия за перевод:</label>
-              <input type="text" class="form-control transferFee" formControlName="transferFee" />
-              
+              <psa-currency-input formControlName="transferFee"></psa-currency-input>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
@@ -69,6 +104,7 @@
     <div class="app-page-aside">
       <div class="aside-body">
         <div class="aside-body-inner">
+          История
         </div>
       </div>
     </div>

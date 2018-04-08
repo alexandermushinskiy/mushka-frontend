@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDatatableModule } from 'ngx-datatable-with-ie-fix';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import { LoadingScreenComponent } from './widgets/loading-screen/loading-screen.component';
 import { SpinnerComponent } from './widgets/spinner/spinner.component';
@@ -16,6 +17,8 @@ import { ClosePopoverOnClickOutsideDirective } from './directives/close-popover-
 import { DashIfEmptyPipe } from './pipes/dash-if-empty.pipe';
 import { PsaDatatableHeaderComponent } from './widgets/datatable/psa-datatable-header/psa-datatable-header.component';
 import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker.component';
+import { CurrencyInputComponent } from './widgets/currency-input/currency-input.component';
+import { DropdownComponent } from './widgets/dropdown/dropdown.component';
 
 @NgModule({
   imports: [
@@ -23,6 +26,7 @@ import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker
     RouterModule,
     FormsModule,
     NgxDatatableModule,
+    CurrencyMaskModule,
     NgbModule.forRoot(),
     //NgxMyDatePickerModule.forRoot()
   ],
@@ -37,7 +41,9 @@ import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker
     ClosePopoverOnClickOutsideDirective,
     DashIfEmptyPipe,
     PsaDatatableHeaderComponent,
-    DatetimepickerComponent
+    DatetimepickerComponent,
+    CurrencyInputComponent,
+    DropdownComponent
   ],
   exports: [
     /* Common modules */
@@ -46,7 +52,11 @@ import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker
     FormsModule,
     RouterModule,
     NgxDatatableModule,
-    //NgxMyDatePickerModule,
+    /* Directives */
+    PopoverDirective,
+    ClosePopoverOnClickOutsideDirective,
+    /* Pipes */
+    DashIfEmptyPipe,
     /* Components */
     LoadingScreenComponent,
     SpinnerComponent,
@@ -55,11 +65,8 @@ import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker
     OptionsComponent,
     PsaDatatableHeaderComponent,
     DatetimepickerComponent,
-    /* Directives */
-    PopoverDirective,
-    ClosePopoverOnClickOutsideDirective,
-    /* Pipes */
-    DashIfEmptyPipe
+    CurrencyInputComponent,
+    DropdownComponent
   ]
 })
 

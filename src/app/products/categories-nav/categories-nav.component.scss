@@ -1,0 +1,37 @@
+@import "../../../variables";
+
+:host {
+  width: $workgroups-nav-width;
+  transition: width 250ms cubic-bezier(0.1,.57,.1,1);
+  overflow: hidden;
+
+  :host-context(.collapsed) {
+    width: $workgroups-nav-width-collapsed;
+  }
+  .workgroups-nav {
+    width: $workgroups-nav-width;
+    height: 100%;
+    border-right: $border-width*3 solid $layer1;
+    background-color: $workgroups-nav-bg;
+
+  }
+
+  .loading-indicator {
+    text-align: center;
+    color: $text-muted;
+    font-size: $workgroups-nav-loading-size;
+    padding: $workgroups-nav-loading-padding;
+  }
+
+  .form-check {
+    .treeview-item-link {
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .treeview-item-link:hover {
+      color: $blue;
+    }
+  }
+}
+
+

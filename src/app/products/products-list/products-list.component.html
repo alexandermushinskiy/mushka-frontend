@@ -13,12 +13,18 @@
     </psa-datatable-header>
   </div>
   <div class="appbody">
+    <psa-categories-nav
+      [categories]="categories"
+      [parentRoute]="'/products'">
+    </psa-categories-nav>
+    <div class="appcontent">
     <psa-products-table #datatable
                     [rows]="rows"
                     [loadingIndicator]="loadingIndicator"
                     [cols]="availableCols"
                     (onRowsUpdated)="onRowsUpdated($event)">
     </psa-products-table>
+    </div>
   </div>
 </div>
 

@@ -25,7 +25,11 @@ export class CategoriesService {
     return Observable.of([
       new Category({
         id: '400F9E05-FD3F-449E-B252-5D59265ADD69',
-        name: 'Socks'
+        name: 'Носки'
+      }),
+      new Category({
+        id: '123F9E05-FD3F-449E-B252-5D59265ADD00',
+        name: 'Упаковка'
       })
     ]);
   }

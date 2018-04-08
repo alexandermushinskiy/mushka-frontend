@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TreeviewItem } from 'ngx-treeview';
 
 import { ProductsServce } from '../../core/api/products.service';
 import { ProductTablePreview } from '../shared/models/product-table-preview';
@@ -7,6 +8,8 @@ import { availableColumns } from '../../shared/constants/available-columns.const
 import { NotificationsService } from '../../core/notifications/notifications.service';
 import { ProductsTableComponent } from '../products-table/products-table.component';
 import { Product } from '../../shared/models/product.model';
+import { CategoriesService } from '../../core/api/categories.service';
+import { Category } from '../../shared/models/category.model';
 
 @Component({
   selector: 'psa-products-list',
@@ -23,6 +26,7 @@ export class ProductsListComponent implements OnInit {
   shown = 0;
   availableCols = availableColumns.products;
   selectedProduct: Product = null;
+  categories: TreeviewItem[];
 
   private modalRef: NgbModalRef;
   private readonly modalConfig: NgbModalOptions = {
@@ -33,6 +37,7 @@ export class ProductsListComponent implements OnInit {
   
   constructor(private modalService: NgbModal,
               private productsService: ProductsServce,
+              private categoriesService: CategoriesService,
               private notificationsService: NotificationsService) { }
 
   ngOnInit() {
@@ -43,6 +48,11 @@ export class ProductsListComponent implements OnInit {
         res => this.onSuccess(res),
         () => this.onError()
       );
+
+    this.categoriesService.getCategories()
+      .subscribe((categories: Category[]) => {
+        this.categories = categories.map((category: Category) => this.createCategoryTreeviewItem(category));
+      });
   }
 
   onRowsUpdated(rowsAmount: number) {
@@ -87,4 +97,14 @@ export class ProductsListComponent implements OnInit {
     this.isModalLoading = false;
   }
 
+  private createCategoryTreeviewItem(category) {
+    const { id, name } = category;
+    const parsedCategory = {
+      children: null,
+      value: id,
+      text: name,
+      collapsed: true
+    };
+    return new TreeviewItem(parsedCategory);
+  }
 }

@@ -1,0 +1,33 @@
+<nav class="workgroups-nav" *ngIf="!isLoading; else loading">
+  <ngx-treeview
+    [config]="config"
+    [items]="internalCategories"
+    [headerTemplate]="headerTemplate"
+    [itemTemplate]="itemTemplate">
+  </ngx-treeview>
+</nav>
+
+<ng-template #loading>
+  <div class="loading-indicator">
+    <psa-spinner [isLoading]="true"></psa-spinner>
+  </div>
+</ng-template>
+
+<ng-template #headerTemplate let-onFilterTextChange="onFilterTextChange">
+    <div class="row-filter">
+      <input class="form-control" type="text" placeholder="Search Category" [(ngModel)]="filterText" (ngModelChange)="onFilterChange($event, onFilterTextChange)"/>
+      <i class="ico ico-search"></i>
+    </div>
+</ng-template>
+
+<ng-template #itemTemplate let-item="item" let-onCollapseExpand="onCollapseExpand">
+  <div class="form-check" [ngClass]="{'selected': item.value === selectedCategoryId}">
+    <i *ngIf="item.children" (click)="onExpandCategoryp(item, onCollapseExpand)" aria-hidden="true" class="fa" [class.fa-angle-right]="item.collapsed"
+        [class.fa-angle-up]="!item.collapsed"></i>
+    <a class="treeview-item-link"
+        [ngClass]="{'empty': !item.children}"
+        (click)="onSelectCategory(item)"
+        [attr.title]="item.text">{{ item.text }}</a>
+  </div>
+</ng-template>
+  

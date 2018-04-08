@@ -50,14 +50,14 @@ export class ProductComponent extends UnsubscriberComponent implements OnInit {
         this.categoryFormGroup.setValue(categories[0]);
       });
 
-      if (this.isEdit) {
-        this.name = this.product.name;
-        this.code = this.product.code;
-        this.category = this.product.category;
-        this.sizes = this.product.sizes.map(s => s.size).join(this.sizesDelimiter);
-      }
+    if (this.isEdit) {
+      this.name = this.product.name;
+      this.code = this.product.code;
+      this.category = this.product.category;
+      this.sizes = this.product.sizes.map(s => s.size).join(this.sizesDelimiter);
+    }
 
-      this.buildForm();
+    this.buildForm();
   }
 
   save() {

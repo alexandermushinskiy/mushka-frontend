@@ -13,10 +13,17 @@
 }
 
 .appbody {
+  display: flex;
   flex: 1 1 auto;
-  margin: $padding-base $padding-base 0;
+  flex-flow: row nowrap;
   overflow: hidden;
   position: relative;
+}
+
+.appcontent {
+  flex: auto;
+  position: relative;
+  margin: 16px 16px 0;
 }
 
 .user-list {

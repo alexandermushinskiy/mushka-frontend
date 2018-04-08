@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: 'orders', component: OrdersComponent, pathMatch: 'full' },
   { path: 'suppliers', component: SuppliersListComponent, pathMatch: 'full' },
   { path: 'products', component: ProductsListComponent, pathMatch: 'full' },
-  { path: 'packages', component: PackagesComponent, pathMatch: 'full' },
   { path: 'logistics', component: LogisticsComponent, pathMatch: 'full' },
   { path: 'partners', component: PartnersComponent, pathMatch: 'full' },
   { path: 'delivery', component: DeliveryComponent, pathMatch: 'full' }

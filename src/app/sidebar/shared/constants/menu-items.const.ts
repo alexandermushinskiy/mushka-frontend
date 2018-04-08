@@ -17,13 +17,6 @@ export const MenuItems: MenuItem[] = [
     isExternal: true,
   }),
   new MenuItem({
-    title: MenuLabels.PACKAGES,
-    icon: 'fa-archive',
-    routePath: '/packages',
-    isEnabled: true,
-    badges: 0
-  }),
-  new MenuItem({
     title: MenuLabels.SUPPLIERS,
     icon: 'fa-users',
     routePath: '/suppliers',

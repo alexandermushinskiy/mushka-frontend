@@ -1,0 +1,76 @@
+<form [formGroup]="newDeliveryForm" class="new-csr w-100" autocomplete="off">
+  <div class="app-page-body row flex-nowrap">
+    <!-- left side -->
+    <div class="app-page-content">
+      <div class="app-page-header">
+        <div class="app-page-description">
+          <!-- left pointing back arrow -->
+          <a tabindex="0" (click)="goBack()" class="link-back">
+            <i class="ico ico-arrow-up ico-arrow-left"></i>
+          </a>
+          <h1 class="app-page-title">НОВАЯ ПОСТАВКА ТОВАРА</h1>
+        </div>
+      </div>
+      <div class="content-body">
+        <div class="form-row">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label>Дата поставки:</label>
+              <psa-datetimepicker [date]="deliveryDate"
+                                  [dateFormat]="'YYYY-MM-DD'"
+                                  [pickerType]="'calendar'"
+                                  [isNow]="true"
+                                  (onDateChanged)="onDateChanged($event)">
+                <div class="input-wrapper datepicker-input">
+                  <input class="form-control deliveryDate"
+                          [(ngModel)]="deliveryDate"
+                          placeholder="Select date"
+                          formControlName="deliveryDate"/>
+                  <i class="fa fa-calendar-o"></i>
+                </div>
+              </psa-datetimepicker>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label>Номер партии:</label>
+              <input type="text" class="form-control" formControlName="batchNumber" />
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <psa-suppliers-dropdown onSelectedSupplier="onSelectedSupplier($event)"></psa-suppliers-dropdown>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label>Стоимость доставки:</label>
+              <div class="input-wrapper">
+                <input type="text" class="form-control cost" formControlName="cost" />
+                <i class="fa fa-money money-icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label>Комиссия за перевод:</label>
+              <input type="text" class="form-control transferFee" formControlName="transferFee" />
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- right side -->
+    <div class="app-page-aside">
+      <div class="aside-body">
+        <div class="aside-body-inner">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

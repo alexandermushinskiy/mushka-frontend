@@ -76,5 +76,4 @@ export class SupplierModalComponent implements OnInit {
       services: [this.services]
     });
   }
-
 }

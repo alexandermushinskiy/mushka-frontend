@@ -1,0 +1,36 @@
+<div class="csr-datetimepicker" #root>
+    <div class="custom-content" #outsideContent (click)="open()">
+      <ng-content></ng-content>
+    </div>
+  
+    <div class="csr-datetimepicker-dialog"
+         #dialog
+         [ngClass]="{opened: isOpen}"
+         [style.top]="dialogPosition && dialogPosition.top + 'px'"
+         [style.left]="dialogPosition && dialogPosition.left + 'px'">
+      <ngb-datepicker #ngbdatepicker
+                      *ngIf="isDatePicker"
+                      [(ngModel)]="dateModel"
+                      [disabled]="disabled"
+                      [navigation]="navigation"
+                      [maxDate]="maxDate"
+                      [minDate]="minDate"
+                      [firstDayOfWeek]="firstDayOfWeek"
+                      [displayMonths]="displayMonths"
+                      [outsideDays]="outsideDays"
+                      [showWeekdays]="showWeekdays"
+                      [showWeekNumbers]="showWeekNumbers"
+                      (select)="dayChanged($event)"></ngb-datepicker>
+      <ngb-timepicker *ngIf="isTimePicker"
+                      [(ngModel)]="timeModel"
+                      [disabled]="disabled"
+                      [meridian]="meridian"
+                      [spinners]="showTimeArrows"
+                      [seconds]="seconds"></ngb-timepicker>
+      <div class="csr-datetimepicker-footer" data-toggle="buttons">
+        <span class="btn btn-light btn-cancel" (click)="close()">Close</span>
+        <span class="btn btn-primary btn-submit" (click)="confirm()">Confirm</span>
+      </div>
+    </div>
+  </div>
+  

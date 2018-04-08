@@ -7,6 +7,7 @@ import { ProductsListComponent } from './products/products-list/products-list.co
 import { PackagesComponent } from './packages/packages/packages.component';
 import { PartnersComponent } from './partners/partners/partners.component';
 import { LogisticsComponent } from './logistics/logistics/logistics.component';
+import { DeliveryComponent } from './delivery/delivery/delivery.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'orders', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'products', component: ProductsListComponent, pathMatch: 'full' },
   { path: 'packages', component: PackagesComponent, pathMatch: 'full' },
   { path: 'logistics', component: LogisticsComponent, pathMatch: 'full' },
-  { path: 'partners', component: PartnersComponent, pathMatch: 'full' }
+  { path: 'partners', component: PartnersComponent, pathMatch: 'full' },
+  { path: 'delivery', component: DeliveryComponent, pathMatch: 'full' }
 ];
 
 @NgModule({

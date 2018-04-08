@@ -1,0 +1,54 @@
+@import "../../../../variables";
+
+.csr-datetimepicker {
+  position: relative;
+
+  &-dialog {
+    position: absolute;
+    top: -999px;
+    left: -999px;
+    opacity: 0;
+    min-width: 200px;
+    background-color: $white;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.5rem;
+    visibility: hidden;
+    transition: opacity 250ms ease, visibility 250ms ease;
+    z-index: 99;
+
+    &.opened {
+      top: 0;
+      left: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    ngb-datepicker {
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      border-radius: 0;
+    }
+
+    ngb-timepicker {
+      display: block;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+
+    .btn-submit,
+    .btn-cancel {
+      width: 45%;
+    }
+  }
+
+  .custom-content {
+    display: inline-block;
+    position: relative;
+  }
+}

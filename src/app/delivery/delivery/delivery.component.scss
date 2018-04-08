@@ -1,0 +1,237 @@
+@import '../../../variables';
+@import '../../../assets/styles/thumbnails';
+
+:host {
+  display: flex;
+  height: calc(100vh - #{$header-height});
+  width: 100%;
+}
+
+.app-page-header {
+  align-items: center;
+  display: flex;
+  flex: none;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: $padding-base/2;
+}
+
+.app-page-title {
+  color: $blue;
+  font-size: 1.8rem;
+  line-height: 2.1rem;
+  margin: 0;
+}
+
+.app-page-description {
+  align-items: center;
+  display: flex;
+  padding: $padding-base/2;
+}
+
+.create-actions {
+  padding: $padding-base/2;
+
+  > :not(:first-child) { margin-left: .5rem; }
+  > :not(:last-child) { margin-right: .5rem; }
+}
+
+.app-page-body {
+  height: 100%;
+  margin: 0;
+}
+
+.app-page-content {
+  display: flex;
+  flex: auto;
+  flex-flow: column;
+  height: 100%;
+  min-width: 0;
+  width: calc(100% - #{$app-page-aside-min-width});
+
+  .content-body {
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: $padding-base;
+    transform: translateZ(0);
+  }
+}
+
+.app-page-aside {
+  background-color: $layer2;
+  border-left: $aside-border-width solid $aside-border-color;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  min-width: $app-page-aside-min-width-md;
+  position: relative;
+  width: $app-page-aside-min-width-md;
+  z-index: 2;
+
+  @media (min-width: $desktop) {
+    min-width: $app-page-aside-min-width;
+    width: $app-page-aside-min-width;
+  }
+
+  .aside-body {
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    transform: translateZ(0);
+  }
+
+  .aside-body-inner,
+  .aside-footer {
+    padding: $padding-base;
+  }
+}
+
+.buttons-flex {
+  display: flex;
+  justify-content: space-between;
+
+  .btn{
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  > :not(:first-child) { margin-left: .75rem; }
+  > :not(:last-child) { margin-right: .75rem; }
+}
+
+.subtitle {
+  font-size: $font-size-base;
+  font-weight: normal;
+  line-height: 1.35;
+  margin: 0 0 1.3rem;
+  text-transform: uppercase;
+}
+
+.block {
+  &-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $padding-base;
+
+    .subtitle {
+      margin: 0;
+    }
+  }
+}
+
+.optional {
+  align-items: center;
+  display: flex;
+  margin-bottom: $padding-base;
+
+  &-text {
+    color: $text-muted;
+    font-size: 1.2rem;
+  }
+
+  > :not(:first-child) { margin-left: .75rem; }
+  > :not(:last-child) { margin-right: .75rem; }
+
+}
+
+//new CSR form controls
+.new-csr {
+  label {
+    color: $text-muted;
+    font-size: 1.2rem;
+    line-height: 1.9rem;
+    margin-bottom: .5rem;
+
+  }
+
+  .form-row {
+    margin-left: -#{$padding-base/2};
+    margin-right: -#{$padding-base/2};
+    > .col,
+    > [class*='col-'] {
+      padding-left: $padding-base/2;
+      padding-right: $padding-base/2;
+    }
+  }
+}
+
+.input-wrapper {
+  csr-spinner {
+    color: $text-muted;
+    position: absolute;
+    right: $input-padding-x;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+.blankslate {
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  height: calc(100% - #{$panel-header-height});
+  justify-content: center;
+
+  p { margin-top: 1rem; }
+}
+
+.service-contract {
+  border: $border-width dashed $border-dark-color;
+  margin-bottom: $padding-base + 5;
+  min-height: 230px;
+  padding: $padding-base;
+  position: relative;
+  transition: all 250ms;
+
+  &.selected {
+    background-color: $white;
+    border: $border-width solid $white;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .15);
+  }
+
+  .blankslate {
+    color: $text-muted;
+    font-size: 1.2rem;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 100%;
+  }
+}
+
+.csr-severity {
+  align-items: center;
+  display: flex;
+
+  .csr-severity-icon {
+    margin-right: .6rem;
+  }
+}
+
+.required-select {
+  box-shadow: -1px 0 0 0 $orange;
+}
+
+.close-icon-spacing {
+  padding-right: 20px;
+  position: absolute;
+}
+
+
+//-----------------------------
+.deliveryDate, .cost, .transferFee {
+  width: 200px;
+}
+
+.input-wrapper {
+  flex: auto;
+}
+.money-icon {
+  right: 95px;
+}

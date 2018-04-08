@@ -15,6 +15,7 @@ import { PopoverDirective } from './directives/popover.directive';
 import { ClosePopoverOnClickOutsideDirective } from './directives/close-popover-on-click-outside.directive';
 import { DashIfEmptyPipe } from './pipes/dash-if-empty.pipe';
 import { PsaDatatableHeaderComponent } from './widgets/datatable/psa-datatable-header/psa-datatable-header.component';
+import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { PsaDatatableHeaderComponent } from './widgets/datatable/psa-datatable-h
     PopoverDirective,
     ClosePopoverOnClickOutsideDirective,
     DashIfEmptyPipe,
-    PsaDatatableHeaderComponent
+    PsaDatatableHeaderComponent,
+    DatetimepickerComponent
   ],
   exports: [
     /* Common modules */
@@ -52,6 +54,7 @@ import { PsaDatatableHeaderComponent } from './widgets/datatable/psa-datatable-h
     SizesLabelsComponent,
     OptionsComponent,
     PsaDatatableHeaderComponent,
+    DatetimepickerComponent,
     /* Directives */
     PopoverDirective,
     ClosePopoverOnClickOutsideDirective,

@@ -1,3 +1,4 @@
 export enum Product {
-  SOCKS = 'Socks'
+  SOCKS = 'Socks',
+  PACKGE = 'Package'
 }

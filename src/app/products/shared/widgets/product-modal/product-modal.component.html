@@ -20,7 +20,8 @@
               <div class="col">
                 <div class="form-group">
                   <label for="nacodeme" class="text-muted">Категория</label>
-                  <select class="form-control custom-select" formControlName="category">
+                  <select class="form-control custom-select" formControlName="category"
+                            (change)="onCategoryChanged(productForm.value.category)">
                     <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
                   </select>
                 </div>
@@ -67,6 +68,7 @@
   <psa-options
     [availableOptions]="availableSizes"
     [selectedOptions]="selectedSizes"
+    [isMultipleAllowed]="true"
     (onOptionChanged)="onOptionChanged($event)">
   </psa-options>
 </ng-template>

@@ -1,21 +1,22 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { UnsubscriberComponent } from '../../shared/hooks/unsubscriber.component';
-import { Product } from '../../shared/models/product.model';
-import { ProductsServce } from '../../core/api/products.service';
-import { CategoriesService } from '../../core/api/categories.service';
-import { productSizes } from '../shared/constants/product-sizes';
-import { SizeItem } from '../../shared/models/size-item.model';
-import { Category } from '../../shared/models/category.model';
+import { UnsubscriberComponent } from '../../../../shared/hooks/unsubscriber.component';
+import { Product } from '../../../../shared/models/product.model';
+import { ProductsServce } from '../../../../core/api/products.service';
+import { CategoriesService } from '../../../../core/api/categories.service';
+import { productSizes } from '../../constants/product-sizes';
+import { SizeItem } from '../../../../shared/models/size-item.model';
+import { Category } from '../../../../shared/models/category.model';
 
 @Component({
-  selector: 'psa-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  selector: 'psa-product-modal',
+  templateUrl: './product-modal.component.html',
+  styleUrls: ['./product-modal.component.scss']
 })
-export class ProductComponent extends UnsubscriberComponent implements OnInit {
+export class ProductModalComponent extends UnsubscriberComponent implements OnInit {
   @Input() product: Product = null;
+  @Input() categoryId: string;
   @Input() isSaving = false;
   @Output() onClose = new EventEmitter<void>();
   @Output() onSave = new EventEmitter<Product>();
@@ -26,7 +27,7 @@ export class ProductComponent extends UnsubscriberComponent implements OnInit {
   code: string;
   category: Category;
   sizes: string;
-  availableSizes = productSizes.Socks;
+  availableSizes: string[] = [];// = productSizes.Socks;
   categories: Category[] = [];
   selectedSizes: string[] = [];
   private readonly sizesDelimiter = ';';
@@ -47,7 +48,11 @@ export class ProductComponent extends UnsubscriberComponent implements OnInit {
     this.categoriesService.getCategories()
       .subscribe((categories: Category[]) => {
         this.categories = categories;
-        this.categoryFormGroup.setValue(categories[0]);
+        if (this.categoryId) {
+          const category = categories.find(cat => cat.id === this.categoryId);
+          this.availableSizes = this.getAvailableSizes(category.name);
+          this.categoryFormGroup.setValue(category);
+        }
       });
 
     if (this.isEdit) {
@@ -85,14 +90,18 @@ export class ProductComponent extends UnsubscriberComponent implements OnInit {
   }
 
   onOptionChanged(sizes: string) {
-    this.sizes= sizes;
+    this.sizes = sizes;
     this.selectedSizes = this.convertStringToArray(sizes);
+  }
+
+  onCategoryChanged(category) {
+    this.availableSizes = this.getAvailableSizes(category.name);
   }
 
   private buildForm() {
     this.productForm = this.formBuilder.group({
       name: [this.name, Validators.required],
-      category: [{value: this.category, disabled: true}, Validators.required],
+      category: [{value: this.category, /*disabled: true*/}, Validators.required],
       code: [this.code, Validators.required],
       sizes: [this.name, Validators.required]
     });
@@ -102,5 +111,16 @@ export class ProductComponent extends UnsubscriberComponent implements OnInit {
     return !value
       ? []
       : value.split(this.sizesDelimiter).map(param => param.trim());
+  }
+  
+  private getAvailableSizes(categoryName: string): string[] {
+    switch(categoryName) {
+      case 'Упаковка':
+        return productSizes.Package;
+
+      case 'Носки':
+      default:
+        return productSizes.Socks;
+    }
   }
 }

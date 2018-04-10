@@ -4,27 +4,28 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Product } from '../../shared/models/product.model';
 import { SizeItem } from '../../shared/models/size-item.model';
+import { Category } from '../../shared/models/category.model';
 
 @Injectable()
 export class ProductsServce {
   private static fakeProducts: Product[];
-  private products$: BehaviorSubject<Product[]> = new BehaviorSubject([]);
+  private categoryProducts$: BehaviorSubject<Product[]> = new BehaviorSubject([]);
 
   constructor() {
     ProductsServce.fakeProducts = this.getFakeProducts();
-
-    this.loadProducts();
   }
 
-  getProducts(): Observable<Product[]> {
-    return this.products$.asObservable().delay(1000);
+  getProductsByCategory(categoryId: string): Observable<Product[]> {
+    this.loadCategoryProducts(categoryId);
+
+    return this.categoryProducts$.asObservable().delay(1000);
   }
 
   addProduct(product: Product): Observable<Product> {
     return this.addProductInternal(product)
       .map((res: any) => res.data)
-      .catch(() => Observable.throw('Ошибка добавление товара'))
-      .finally(() => this.loadProducts());
+      .catch(() => Observable.throw('Ошибка при добавлении товара'))
+      .finally(() => this.loadCategoryProducts(product.category.id));
   }
 
   private addProductInternal(product: Product): Observable<any> {
@@ -38,13 +39,67 @@ export class ProductsServce {
     return Observable.of({data: addedProduct});
   }
 
-  private loadProducts() {
-    Observable.of(ProductsServce.fakeProducts)
-      .subscribe(data => this.products$.next(data));
+  private loadCategoryProducts(categoryId: string) {
+    Observable.of(ProductsServce.fakeProducts
+      .filter(prod => prod.category.id === categoryId))
+      .subscribe(data => this.categoryProducts$.next(data));
   }
 
   private getFakeProducts(): Product[] {
+
+    const socksCategory = new Category({
+      id: '400F9E05-FD3F-449E-B252-5D59265ADD69',
+      name: 'Носки'
+    });
+
+    const packageCategory = new Category({
+      id: '123F9E05-FD3F-449E-B252-5D59265ADD00',
+      name: 'Упаковка'
+    });
+
     return [
+      new Product({
+        id: '3A560849-A3AB-41BA-B236-B86C86EC7B75',
+        name: 'Банка',
+        code: 'BNK01',
+        createdOn: '2018-04-10',
+        deliveriesNumber: 1,
+        lastDeliveryDate: '2018-03-11',
+        lastDeliveryCount: 300,
+        totalCount: 300,
+        sizes: [
+          new SizeItem('1', 300)
+        ],
+        category: packageCategory
+      }),
+      new Product({
+        id: '87A904E3-B90A-47A3-A928-7680379EEB19',
+        name: 'Упаковка язык',
+        code: 'PKG03',
+        createdOn: '2018-04-10',
+        deliveriesNumber: 1,
+        lastDeliveryDate: '2018-03-01',
+        lastDeliveryCount: 250,
+        totalCount: 250,
+        sizes: [
+          new SizeItem('3', 250)
+        ],
+        category: packageCategory
+      }),
+      new Product({
+        id: '583CE713-ABF9-4593-A5A3-7DBF417FA2B1',
+        name: 'Упаковка большая',
+        code: 'PKG09',
+        createdOn: '2018-04-10',
+        deliveriesNumber: 1,
+        lastDeliveryDate: '2018-01-27',
+        lastDeliveryCount: 210,
+        totalCount: 210,
+        sizes: [
+          new SizeItem('6 / 9', 210)
+        ],
+        category: packageCategory
+      }),
       new Product({
         id: 'F1B501FA-14DB-4682-8C53-95D0D8E9DDE8',
         name: 'Festival',
@@ -57,7 +112,8 @@ export class ProductsServce {
         sizes: [
           new SizeItem('36-39', 59),
           new SizeItem('41-45', 60)
-        ]
+        ],
+        category: socksCategory
       }),
       new Product({
         id: '0402257E-2AE3-4D7F-8E44-E05B0355262C',
@@ -71,7 +127,8 @@ export class ProductsServce {
         sizes: [
           new SizeItem('36-39', 95),
           new SizeItem('41-45', 65)
-        ]
+        ],
+        category: socksCategory
       }),
       new Product({
         id: '20819569-183C-4F00-BB80-5634049584B8',
@@ -85,7 +142,8 @@ export class ProductsServce {
         sizes: [
           new SizeItem('36-39', 7),
           new SizeItem('41-45', 24)
-        ]
+        ],
+        category: socksCategory
       }),
       new Product({
         id: '1AD228C5-4569-48C4-8367-B1D45D57DD7D',
@@ -99,7 +157,8 @@ export class ProductsServce {
         sizes: [
           new SizeItem('36-39', 7),
           new SizeItem('41-45', 8)
-        ]
+        ],
+        category: socksCategory
       }),
       new Product({
         id: 'F24CABA2-2D83-4948-A1AA-5A1B1256156C',
@@ -113,7 +172,8 @@ export class ProductsServce {
         sizes: [
           new SizeItem('36-39', 10),
           new SizeItem('41-45', 0)
-        ]
+        ],
+        category: socksCategory
       }),
       new Product({
         id: 'F24CABA2-2D83-4948-A1AA-331B1256156C',
@@ -127,7 +187,8 @@ export class ProductsServce {
         sizes: [
           new SizeItem('36-39', 0),
           new SizeItem('41-45', 0)
-        ]
+        ],
+        category: socksCategory
       }),
       new Product({
         id: 'F24CABA2-2773-4948-A1AA-331B1256156C',
@@ -141,7 +202,8 @@ export class ProductsServce {
         sizes: [
           new SizeItem('36-39', 61),
           new SizeItem('41-45', 62)
-        ]
+        ],
+        category: socksCategory
       }),
       new Product({
         id: 'F20ABA2-2773-4958-A1AA-331B1256156C',
@@ -155,7 +217,8 @@ export class ProductsServce {
         sizes: [
           new SizeItem('36-39', 36),
           new SizeItem('41-45', 36)
-        ]
+        ],
+        category: socksCategory
       })
     ];
   }

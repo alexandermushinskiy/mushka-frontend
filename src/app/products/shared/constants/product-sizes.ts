@@ -6,5 +6,10 @@ export const productSizes = {
     '39-42',
     '41-45',
     '43-46'
+  ],
+  [Product.PACKGE]: [
+    'Single',
+    'Triple',
+    'Big'
   ]
 };

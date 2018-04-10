@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { TreeviewItem } from 'ngx-treeview';
 
@@ -21,6 +21,7 @@ export class CategoriesNavComponent extends UnsubscriberComponent implements OnI
   @Input() parentRoute: string;
   @Input() isLoading = false;
   @Input() disallowClickOnTopLevelItems = false;
+  @Output() onCategotySelected = new EventEmitter<{ id: string, name: string }>();
 
   config = treeviewConfig;
   filterText: string;
@@ -48,7 +49,9 @@ export class CategoriesNavComponent extends UnsubscriberComponent implements OnI
   }
 
   onSelectCategory(item: TreeviewItem) {
-    this.router.navigate([this.parentRoute, { id: item.value }]);
+    this.selectedCategoryId = item.value;
+    this.onCategotySelected.emit({ id: item.value, name: item.text })
+    //this.router.navigate([this.parentRoute, { id: item.value }]);
   }
 
   // isTopLevel(value: string) {

@@ -19,14 +19,19 @@ import { Category } from '../../shared/models/category.model';
 export class ProductsListComponent implements OnInit {
   @ViewChild(ProductsTableComponent) datatable: ProductsTableComponent;
   
+  isCollapsed = false;
   rows: ProductTablePreview[];
-  loadingIndicator = true;
+  loadingIndicator = false;
   isModalLoading = false;
   total = 0;
   shown = 0;
   availableCols = availableColumns.products;
-  selectedProduct: Product = null;
+  // selectedProduct: Product = null;
   categories: TreeviewItem[];
+  selectedCategoryId: string;
+  title = 'Товары';
+  isMenuToggleShown = false;
+  isAddButtonShown = false;
 
   private modalRef: NgbModalRef;
   private readonly modalConfig: NgbModalOptions = {
@@ -41,14 +46,6 @@ export class ProductsListComponent implements OnInit {
               private notificationsService: NotificationsService) { }
 
   ngOnInit() {
-    this.loadingIndicator = true;
-
-    this.productsService.getProducts()
-      .subscribe(
-        res => this.onSuccess(res),
-        () => this.onError()
-      );
-
     this.categoriesService.getCategories()
       .subscribe((categories: Category[]) => {
         this.categories = categories.map((category: Category) => this.createCategoryTreeviewItem(category));
@@ -57,6 +54,18 @@ export class ProductsListComponent implements OnInit {
 
   onRowsUpdated(rowsAmount: number) {
     this.shown = rowsAmount;
+  }
+
+  onCategotySelected(category: { id: string, name: string }) {
+    this.title = category.name;
+    this.selectedCategoryId = category.id;
+
+    this.loadingIndicator = true;
+    this.productsService.getProductsByCategory(category.id)
+      .subscribe(
+        res => this.onSuccess(res),
+        () => this.onError()
+      );
   }
 
   addProduct(content: ElementRef) {
@@ -75,9 +84,14 @@ export class ProductsListComponent implements OnInit {
     this.modalRef.close();
   }
 
+  toggleCollapseMode() {
+    this.isCollapsed = !this.isCollapsed;
+  }
+
   private onSuccess(products) {
     this.rows = products.map((el, index) => new ProductTablePreview(el, index));
     this.total = products.length;
+    this.isAddButtonShown = true;
     this.loadingIndicator = false;
   }
 

@@ -5,7 +5,8 @@
   <div class="data-table-header-wrapper">
     <div class="data-table-header-title">
       <h1 class="csr-slogan">{{ title }}</h1>
-      <button class="btn btn-light btn-block" (click)="addItem()">Добавить</button>
+      <button *ngIf="isAddButtonShown" class="btn btn-light btn-block btn-xs" (click)="addItem()">Добавить</button>
+      <!-- <span *ngIf="isAddButtonShown" class="btn-add"><i class="fa fa-plus fa-border"></i></span> -->
     </div>
     <div class="data-table-header-actions">
       <div class="data-table-header-search">

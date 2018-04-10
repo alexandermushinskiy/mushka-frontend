@@ -35,31 +35,13 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
     this.datatable.bodyComponent.updateOffsetY(0);
   }
 
-  @Output() onRowsUpdated = new EventEmitter<number>();
-
-  rowsData: ProductTablePreview[];
-  private initialRowsData: ProductTablePreview[];
-
   constructor() {
     super(columnsConfig, propertiesToFilter);
   }
 
   ngOnInit() {
     super.ngOnInit();
-    this.init(this.cols, this.headerTpl);
-  }
-
-  onFilter(filterText: string) {
-    this.filterText = filterText;
-    this.filter();
-  }
-
-  onTableSort({ sorts }, rows?: ProductTablePreview[]) {
-    const { dir, prop, initSort } = sorts[0];
-    const rowsData = rows || this.rowsData;
-    if (rowsData && rowsData.length > 0) {
-      return this.sortTable({ dir, prop }, rowsData);
-    }
+    this.init(this.datatable, this.cols, this.headerTpl);
   }
 
   onExportAllToCSV(fileSuffix: string) {
@@ -68,26 +50,6 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
 
   onExportFilteredToCSV(fileSuffix: string) {
     super.onExportToCSV(fileSuffix, this.rowsData);
-  }
-
-  resetFilter() {
-    this.filter();
-  }
-
-  sort() {
-    const sort = this.sortColumn();
-    this.rowsData = this.onTableSort({ sorts: [{ ...{ initSort: true }, ...sort }] }, this.initialRowsData);
-  }
-
-  filter() {
-    let filteredRows = this.initialRowsData ? [...this.initialRowsData] : [];
-    if (this.filterText) {
-      filteredRows = this.filterByGlobalText(filteredRows);
-    }
-
-    this.rowsData = this.updateColumnsStatus(filteredRows);
-    this.broadcastRowsUpdated(filteredRows.length);
-    this.recalculateTable();
   }
 
   getFakeRow() {
@@ -102,17 +64,4 @@ export class ProductsTableComponent extends PsaDatatableComponent implements OnI
       sizes: []
     }, 0);
   }
-
-  private recalculateTable() {
-    setTimeout(() => {
-      this.datatable.recalculate();
-    }, 0);
-  }
-
-  private broadcastRowsUpdated(length: number) {
-    setTimeout(() => {
-      this.onRowsUpdated.emit(length);
-    }, 0);
-  }
-
 }

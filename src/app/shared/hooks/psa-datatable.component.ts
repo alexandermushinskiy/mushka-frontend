@@ -1,10 +1,13 @@
-import { OnInit, TemplateRef } from '@angular/core';
+import { OnInit, TemplateRef, Output, EventEmitter } from '@angular/core';
 
 import { DatatableColumn } from '../interfaces/datatable-column.interface';
 import { ColumnConfiguration } from '../models/column-configuration.model';
 import { FileHelper } from '../utils/file-helper';
+import { DatatableComponent } from 'ngx-datatable-with-ie-fix';
 
 export abstract class PsaDatatableComponent implements OnInit {
+  @Output() onRowsUpdated = new EventEmitter<number>();
+  datatable: DatatableComponent
   sorts: { dir: string, prop: string }[];
   columnsData: DatatableColumn[];
   headerHeight: number;
@@ -15,6 +18,9 @@ export abstract class PsaDatatableComponent implements OnInit {
   filterText: string;
   datatableConfig: { [name: string]: DatatableColumn };
   propertiesToFilter: { [name: string]: string };
+
+  rowsData: any[];
+  initialRowsData: any[];
 
   readonly fakeRowClassName = 'fake-row';
   readonly defaultColumnWidth = 100;
@@ -28,15 +34,15 @@ export abstract class PsaDatatableComponent implements OnInit {
     this.propertiesToFilter = propertiesToFilter;
   }
 
-  abstract sort();
-  abstract filter();
+  //abstract filter();
   abstract getFakeRow();
 
   ngOnInit() {
     this.headerHeight = this.fixedHeaderHeight.collapsed;
   }
 
-  init(columns: string[], headerTpl: TemplateRef<any>) {
+  init(datatable: DatatableComponent, columns: string[], headerTpl: TemplateRef<any>) {
+    this.datatable = datatable;
     const configurations = this.getColumnsConfigurations();
 
     this.columnsConfigurationSnapshot = [...configurations];
@@ -107,6 +113,19 @@ export abstract class PsaDatatableComponent implements OnInit {
     );
   }
 
+  onTableSort({ sorts }, rows?: any[]) {
+    const { dir, prop, initSort } = sorts[0];
+    const rowsData = rows || this.rowsData;
+    if (rowsData && rowsData.length > 0) {
+      return this.sortTable({ dir, prop }, rowsData);
+    }
+  }
+
+  sort() {
+    const sort = this.sortColumn();
+    this.rowsData = this.onTableSort({ sorts: [{ ...{ initSort: true }, ...sort }] }, this.initialRowsData);
+  }
+
   sortByProp(a, b) {
     const aProp = a ? a.toString().toLowerCase().trim() : '';
     const bProp = b ? b.toString().toLowerCase().trim() : '';
@@ -119,6 +138,26 @@ export abstract class PsaDatatableComponent implements OnInit {
     }
 
     return 0;
+  }
+
+  onFilter(filterText: string) {
+    this.filterText = filterText;
+    this.filter();
+  }
+
+  filter() {
+    let filteredRows = this.initialRowsData ? [...this.initialRowsData] : [];
+    if (this.filterText) {
+      filteredRows = this.filterByGlobalText(filteredRows);
+    }
+
+    this.rowsData = this.updateColumnsStatus(filteredRows);
+    this.broadcastRowsUpdated(filteredRows.length);
+    this.recalculateTable();
+  }
+
+  resetFilter() {
+    this.filter();
   }
 
   filterByGlobalText(filteredRows) {
@@ -171,4 +210,15 @@ export abstract class PsaDatatableComponent implements OnInit {
     return sort;
   }
 
+  private recalculateTable() {
+    setTimeout(() => {
+      this.datatable.recalculate();
+    }, 0);
+  }
+
+  private broadcastRowsUpdated(length: number) {
+    setTimeout(() => {
+      this.onRowsUpdated.emit(length);
+    }, 0);
+  }
 }

@@ -1,4 +1,5 @@
 export enum DeliveryType {
   PRODUCT = 'Товар',
-  SERVICE = 'Услуга'
+  SERVICE = 'Услуга',
+  EQUIPMENT = 'Оборудование'
 }

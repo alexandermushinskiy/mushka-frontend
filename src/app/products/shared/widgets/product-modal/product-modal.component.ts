@@ -5,7 +5,6 @@ import { UnsubscriberComponent } from '../../../../shared/hooks/unsubscriber.com
 import { Product } from '../../../../shared/models/product.model';
 import { ProductsServce } from '../../../../core/api/products.service';
 import { CategoriesService } from '../../../../core/api/categories.service';
-import { productSizes } from '../../constants/product-sizes';
 import { SizeItem } from '../../../../shared/models/size-item.model';
 import { Category } from '../../../../shared/models/category.model';
 
@@ -27,7 +26,7 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
   code: string;
   category: Category;
   sizes: string;
-  availableSizes: string[] = [];// = productSizes.Socks;
+  availableSizes: string[] = [];
   categories: Category[] = [];
   selectedSizes: string[] = [];
   private readonly sizesDelimiter = ';';
@@ -50,7 +49,7 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
         this.categories = categories;
         if (this.categoryId) {
           const category = categories.find(cat => cat.id === this.categoryId);
-          this.availableSizes = this.getAvailableSizes(category.name);
+          this.availableSizes = category.sizes;
           this.categoryFormGroup.setValue(category);
         }
       });
@@ -95,7 +94,7 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
   }
 
   onCategoryChanged(category) {
-    this.availableSizes = this.getAvailableSizes(category.name);
+    this.availableSizes = category.sizes;
   }
 
   private buildForm() {
@@ -111,16 +110,5 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
     return !value
       ? []
       : value.split(this.sizesDelimiter).map(param => param.trim());
-  }
-  
-  private getAvailableSizes(categoryName: string): string[] {
-    switch(categoryName) {
-      case 'Упаковка':
-        return productSizes.Package;
-
-      case 'Носки':
-      default:
-        return productSizes.Socks;
-    }
   }
 }

@@ -68,7 +68,7 @@ export class ProductsServce {
         lastDeliveryCount: 300,
         totalCount: 300,
         sizes: [
-          new SizeItem('1', 300)
+          new SizeItem('Single', 300)
         ],
         category: packageCategory
       }),
@@ -82,7 +82,7 @@ export class ProductsServce {
         lastDeliveryCount: 250,
         totalCount: 250,
         sizes: [
-          new SizeItem('3', 250)
+          new SizeItem('Triple', 250)
         ],
         category: packageCategory
       }),
@@ -96,7 +96,7 @@ export class ProductsServce {
         lastDeliveryCount: 210,
         totalCount: 210,
         sizes: [
-          new SizeItem('6 / 9', 210)
+          new SizeItem('Big', 210)
         ],
         category: packageCategory
       }),

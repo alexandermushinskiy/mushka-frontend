@@ -1,9 +1,10 @@
 <div class="input-currency">
-  <input  type="text" 
+  <input  type="text"
           class="form-control"
           currencyMask
           [options]="{ prefix: '', thousands: '.', decimal: ',' }"
           [disabled]="disabled"
           [attr.placeholder]="placeholder"
-          [(ngModel)]="value" />
+          [(ngModel)]="currencyValue"
+          (ngModelChange)="onChanged()" />
 </div>

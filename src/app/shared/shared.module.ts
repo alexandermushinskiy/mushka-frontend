@@ -19,6 +19,7 @@ import { PsaDatatableHeaderComponent } from './widgets/datatable/psa-datatable-h
 import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker.component';
 import { CurrencyInputComponent } from './widgets/currency-input/currency-input.component';
 import { DropdownComponent } from './widgets/dropdown/dropdown.component';
+import { NumberFieldDirective } from './directives/number-field.directive';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { DropdownComponent } from './widgets/dropdown/dropdown.component';
     PopoverComponent,
     PopoverDirective,
     ClosePopoverOnClickOutsideDirective,
+    NumberFieldDirective,
     DashIfEmptyPipe,
     PsaDatatableHeaderComponent,
     DatetimepickerComponent,
@@ -55,6 +57,7 @@ import { DropdownComponent } from './widgets/dropdown/dropdown.component';
     /* Directives */
     PopoverDirective,
     ClosePopoverOnClickOutsideDirective,
+    NumberFieldDirective,
     /* Pipes */
     DashIfEmptyPipe,
     /* Components */

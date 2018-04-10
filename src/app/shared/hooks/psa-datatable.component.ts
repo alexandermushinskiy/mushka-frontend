@@ -34,7 +34,6 @@ export abstract class PsaDatatableComponent implements OnInit {
     this.propertiesToFilter = propertiesToFilter;
   }
 
-  //abstract filter();
   abstract getFakeRow();
 
   ngOnInit() {
@@ -48,6 +47,20 @@ export abstract class PsaDatatableComponent implements OnInit {
     this.columnsConfigurationSnapshot = [...configurations];
     this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
     this.columnsData = this.createAvailableColumnsData(columns, headerTpl, this.columnsConfigurationSnapshot);
+  }
+
+  initRows(data: any) {
+    if (data && data.length > 0) {
+      this.initialRowsData = data;
+      this.hasData = true;
+      this.sort();
+      this.filter();
+    } else {
+      this.hasData = false;
+      this.rowsData = [];
+    }
+
+    this.datatable.bodyComponent.updateOffsetY(0);
   }
 
   createColumnsDictionary(configurations: ColumnConfiguration[]): {} {
@@ -76,6 +89,7 @@ export abstract class PsaDatatableComponent implements OnInit {
   }
 
   getRowClass(row: any) {
+    //debugger;
     return row.className;
   }
 
@@ -181,7 +195,7 @@ export abstract class PsaDatatableComponent implements OnInit {
       return Object.assign(el, {
         className: (rows.length === 1 && el.className === this.fakeRowClassName)
           ? el.className
-          : el.getClassName(index, el.id === this.selectedRowId)
+          : el.getClassName(index, !!el.id && el.id === this.selectedRowId)
       });
     });
     if (updatedColumns.length === 0) {

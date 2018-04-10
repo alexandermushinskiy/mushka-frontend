@@ -140,13 +140,13 @@
 
 //new CSR form controls
 .new-csr {
-  label {
-    color: $text-muted;
-    font-size: 1.2rem;
-    line-height: 1.9rem;
-    margin-bottom: .5rem;
+  // label {
+  //   color: $text-muted;
+  //   font-size: 1.2rem;
+  //   line-height: 1.9rem;
+  //   margin-bottom: .5rem;
 
-  }
+  // }
 
   .form-row {
     margin-left: -#{$padding-base/2};
@@ -226,3 +226,12 @@
 
 //-----------------------------
 
+.delivery-items {
+  padding-top: 50px;
+}
+
+.delivery-type {
+  font-size: 15px;
+  line-height: 20px;
+  color: rgb(78, 78, 78);
+}

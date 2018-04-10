@@ -1,0 +1,27 @@
+@import "../../../variables";
+
+.inline-filter {
+  padding-right: 1rem;
+}
+
+.datatable-header-cell-wrapper {
+  padding-right: 10px;
+  min-width: 30px;
+  .btn-toggle-drop {
+    font-size: 1rem;
+    cursor: pointer;
+    background: none;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    z-index: 1000;
+
+    &.has-filters {
+      color: $blue;
+    }
+  }
+}
+
+.test {
+  height: auto !important;
+}

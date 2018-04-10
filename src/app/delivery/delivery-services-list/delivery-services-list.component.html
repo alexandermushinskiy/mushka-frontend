@@ -1,0 +1,31 @@
+<div class="appmain">
+    <div class="appbar">
+      <psa-datatable-header
+                  [total]="total"
+                  [shown]="shown"
+                  [availableColumns]="availableColumns"
+                  [showAddButton]="true"
+                  [showOptions]="false"
+                  [showTitle]="false"
+                  (onAddItem)="addDeliveryItem(content)"
+                  (onFilter)="datatable.onFilter($event)"
+                  (onFilterReset)="datatable.resetFilter()">
+      </psa-datatable-header>
+    </div>
+    <div class="appcontent">
+      <psa-delivery-table 
+                  #datatable
+                  [rows]="deliveryItemRows"
+                  [cols]="availableColumns"
+                  (onRowsUpdated)="onRowsUpdated($event)">
+      </psa-delivery-table>
+    </div>
+  </div>
+  
+  <ng-template #content>
+    <psa-delivery-product-modal
+                [isSaving]="isModalLoading"
+                (onSave)="saveDeliveryItem($event)"
+                (onClose)="closeModal()">
+    </psa-delivery-product-modal>
+  </ng-template>

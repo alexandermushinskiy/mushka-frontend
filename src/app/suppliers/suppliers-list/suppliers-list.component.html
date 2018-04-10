@@ -23,9 +23,10 @@
 </div>
 
 <ng-template #content>
-  <psa-supplier-modal [supplier]="selectedSupplier"
-               [isSaving]="isModalLoading"
-               (onSave)="saveSupplier($event)"
-               (onClose)="closeModal()">
+  <psa-supplier-modal
+                    [supplier]="selectedSupplier"
+                    [isSaving]="isModalLoading"
+                    (onSave)="saveSupplier($event)"
+                    (onClose)="closeModal()">
   </psa-supplier-modal>
 </ng-template>

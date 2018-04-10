@@ -6,6 +6,8 @@ import * as moment from 'moment';
 import { Supplier } from '../../shared/models/supplier.model';
 import { DeliveryType } from '../shared/enums/delivery-type.enum';
 import { PaymentMethod } from '../shared/enums/payment-method.enum';
+import { DeliveryItemTablePreview } from '../shared/models/delivery-item-table-preview';
+import { availableColumns } from '../../shared/constants/available-columns.const';
 
 @Component({
   selector: 'psa-delivery',
@@ -13,7 +15,6 @@ import { PaymentMethod } from '../shared/enums/payment-method.enum';
   styleUrls: ['./delivery.component.scss']
 })
 export class DeliveryComponent implements OnInit {
-
   newDeliveryForm: FormGroup;
   deliveryDate: string;
   batchNumber: string;
@@ -22,16 +23,17 @@ export class DeliveryComponent implements OnInit {
   datePickerOptions: any;
   deliveryTypesList = Object.values(DeliveryType);
   PaymentMethodsList = Object.values(PaymentMethod);
-
   dateFormat = 'YYYY-MM-DD';
+  deliveryType = DeliveryType;
+  selectedDeliveryType: DeliveryType = DeliveryType.PRODUCTS;
 
   constructor(private formBuilder: FormBuilder,
               private location: Location) { }
 
   ngOnInit() {
-    //this.deliveryDate = moment().format(this.dateFormat);
     this.cost = 110.82;
     this.transferFee = 223.50;
+
     this.buildForm();
   }
 
@@ -53,6 +55,10 @@ export class DeliveryComponent implements OnInit {
 
   onPaymentMethodSelected(paymentMethod: PaymentMethod) {
 
+  }
+
+  changeDeliveryType(deliveryType: DeliveryType) {
+    this.selectedDeliveryType = deliveryType;
   }
 
   private buildForm() {

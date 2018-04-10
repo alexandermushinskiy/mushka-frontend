@@ -37,7 +37,7 @@ import { ProductsModule } from './products/products.module';
 import { PackagesModule } from './packages/packages.module';
 import { PartnersModule } from './partners/partners.module';
 import { LogisticsModule } from './logistics/logistics.module';
-import { DeliveryModule } from './delivery/deliver.module';
+import { DeliveryModule } from './delivery/delivery.module';
 
 @NgModule({
   declarations: [

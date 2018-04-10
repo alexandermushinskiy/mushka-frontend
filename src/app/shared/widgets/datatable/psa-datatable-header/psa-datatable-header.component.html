@@ -1,11 +1,11 @@
 <header class="data-table-header">
-  <span *ngIf="isMenuToggleShown" class="gutter-toggle" (click)="onCollapseMenu.emit()">
+  <span *ngIf="showMenuToggle" class="gutter-toggle" (click)="onCollapseMenu.emit()">
     <i class="fa fa-angle-double-left"></i>
   </span>
   <div class="data-table-header-wrapper">
     <div class="data-table-header-title">
-      <h1 class="csr-slogan">{{ title }}</h1>
-      <button *ngIf="isAddButtonShown" class="btn btn-light btn-block btn-xs" (click)="addItem()">Добавить</button>
+      <h1 class="csr-slogan" *ngIf="showTitle">{{ title }}</h1>
+      <button *ngIf="showAddButton" class="btn btn-light btn-block btn-xs" (click)="addItem()">Добавить</button>
       <!-- <span *ngIf="isAddButtonShown" class="btn-add"><i class="fa fa-plus fa-border"></i></span> -->
     </div>
     <div class="data-table-header-actions">
@@ -25,7 +25,7 @@
         </div>
         <psa-search-form (onSearch)="filter($event)"></psa-search-form>
       </div>
-      <div class="btn-set">
+      <div class="btn-set" *ngIf="showOptions">
         <button class="btn btn-icon btn-refresh" title="Refresh table" (click)="reloadTickets()">
           <i class="fa fa-refresh"></i>
         </button>

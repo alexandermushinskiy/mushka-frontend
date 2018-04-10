@@ -1,0 +1,53 @@
+<form [formGroup]="deliveryItemForm" class="delivery-item-form">
+  <div class="modal-header">
+    <h4 class="modal-title">Добаление товара</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <i class="ico ico-close"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="product-name">
+      <div class="form-group">
+        <label for="name" class="text-muted">Наименование</label>
+        <input #item
+          type="text"
+          id="name"
+          class="form-control"
+          placeholder="Начните печать"
+          autocomplete="off"
+          formControlName="name"
+          [(ngModel)]="displayValue"
+          [typeahead]="items"
+          [typeaheadMinLength]="1"
+          [typeaheadOptionsLimit]="7"
+          [typeaheadWaitMs]="300"
+          typeaheadOptionField="name"
+          [typeaheadItemTemplate]="itemAutocompleteTpl"
+          (typeaheadLoading)="onLoading($event)"
+          (typeaheadOnSelect)="onSelectItem($event)" />
+      </div>
+    </div>
+    <div class="form-group w-50">
+      <label for="amount" class="text-muted">Количество:</label>
+      <input psaNumberField type="number" class="form-control amount" id="amount" formControlName="amount">
+    </div>
+    <div class="form-group w-50">
+      <label for="costPerItem" class="text-muted">Стоимость за единицу:</label>
+      <psa-currency-input id="costPerItem" [placeholder]="''" formControlName="costPerItem"></psa-currency-input>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-light btn-cancel" type="button" (click)="close()">Отмена</button>
+    <button class="btn btn-primary" type="button" (click)="save()" [disabled]="deliveryItemForm.invalid">
+      <psa-spinner [isLoading]="isSaving"></psa-spinner>
+      Сохранить</button>
+  </div>
+</form>
+
+<ng-template #itemAutocompleteTpl let-model="item">
+  <p>
+    {{ model.name }} ({{ model.code }})
+    <br>
+    <small>{{ model.category.name }}</small>
+  </p>
+</ng-template>

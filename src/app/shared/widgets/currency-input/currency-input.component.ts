@@ -1,6 +1,6 @@
 import { Component, OnInit, forwardRef, Input } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, NG_VALIDATORS, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'psa-currency-input',
@@ -10,23 +10,34 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CurrencyInputComponent),
     multi: true
-  }]
+  },
+  {
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(() => CurrencyInputComponent),
+    multi: true,
+  } ]
 })
-export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
-  @Input() value: number;
+export class CurrencyInputComponent implements OnInit, ControlValueAccessor, Validator {
   @Input() disabled = false;
   @Input() placeholder = 'Введите сумму';
+
+  currencyValue: number | null = null;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onChanged() {
+    console.info(this.currencyValue);
+    this.onChangeCallback(this.currencyValue);
+  }
+
   writeValue(value: any): void {
     if (!value) {
       return;
     }
-    this.value = value;
+    this.currencyValue = value;
   }
 
   registerOnChange(fn: any) {
@@ -35,6 +46,17 @@ export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched() {
   }
+  
+  validate(control: FormControl): { [key: string]: any; } {
+    return (!this.currencyValue) ? null : {
+      jsonParseError: {
+          valid: false,
+      },
+  };
+  }
+  // registerOnValidatorChange?(fn: () => void): void {
+  //   throw new Error("Method not implemented.");
+  // }
 
   private onChangeCallback: any = () => {};
 }

@@ -15,6 +15,15 @@ export class ProductsServce {
     ProductsServce.fakeProducts = this.getFakeProducts();
   }
 
+  getProducts(criteria: string): Observable<Product[]> {
+    const fountProducts = ProductsServce.fakeProducts
+      .filter(prod => prod.name.toLowerCase().includes(criteria.toLowerCase()) || 
+                      prod.code.toLowerCase().includes(criteria.toLowerCase()));
+
+    return Observable.of(fountProducts)
+      .delay(300);
+  }
+
   getProductsByCategory(categoryId: string): Observable<Product[]> {
     this.loadCategoryProducts(categoryId);
 

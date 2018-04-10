@@ -18,5 +18,15 @@ export const availableColumns = {
     'contactPerson',
     'paymentConditions',
     'services'
+  ],
+  deliveryProducts: [
+    'name',
+    'amount',
+    'costPerItem',
+    'totalCost'
+  ],
+  deliveryServices: [
+    'name',
+    'cost'
   ]
 };

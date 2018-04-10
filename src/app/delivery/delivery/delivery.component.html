@@ -115,7 +115,9 @@
             <div *ngSwitchCase="deliveryType.PRODUCTS">
               <psa-delivery-products-list></psa-delivery-products-list>
             </div>
-            <div *ngSwitchCase="deliveryType.SERVICES">Услуги</div>
+            <div *ngSwitchCase="deliveryType.SERVICES">
+              <psa-delivery-services-list></psa-delivery-services-list>
+            </div>
             <div *ngSwitchCase="deliveryType.EQUIPMENT">Оборудывание (не готово)</div>
           </div>
         </div>

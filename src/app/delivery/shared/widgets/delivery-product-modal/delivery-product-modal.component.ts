@@ -4,7 +4,7 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { DeliveryProductItem } from '../../models/delivery-product-item';
+import { ProductItem } from '../../models/product-item.model';
 import { ProductsServce } from '../../../../core/api/products.service';
 
 @Component({
@@ -15,7 +15,7 @@ import { ProductsServce } from '../../../../core/api/products.service';
 export class DeliveryProductModalComponent implements OnInit {
   @Input() isSaving = false;
   @Output() onClose = new EventEmitter<void>();
-  @Output() onSave = new EventEmitter<DeliveryProductItem>();
+  @Output() onSave = new EventEmitter<ProductItem>();
   
   deliveryItemForm: FormGroup;
   name: string;
@@ -23,8 +23,8 @@ export class DeliveryProductModalComponent implements OnInit {
   costPerItem: number;
 
   displayValue: string;
-  items: Observable<DeliveryProductItem>;
-  foundItems: Observable<DeliveryProductItem>;
+  items: Observable<ProductItem>;
+  foundItems: Observable<ProductItem>;
   isLoadingItems: false;
   private requestedItem$ = new Subject<string>();
   
@@ -50,7 +50,7 @@ export class DeliveryProductModalComponent implements OnInit {
 
     const deliveryItemFormValue = this.deliveryItemForm.value;
 
-    const deliveryItem = new DeliveryProductItem({
+    const deliveryItem = new ProductItem({
       name: deliveryItemFormValue.name,
       amount: deliveryItemFormValue.amount,
       costPerItem: deliveryItemFormValue.costPerItem

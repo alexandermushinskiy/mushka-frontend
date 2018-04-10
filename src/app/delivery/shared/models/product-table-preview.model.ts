@@ -1,6 +1,6 @@
 import { DataTablePreview } from '../../../shared/models/data-table-preview';
 
-export class DeliveryItemTablePreview extends DataTablePreview {
+export class ProductTablePreview extends DataTablePreview {
   id: string;
   name: string;
   amount: number;

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
+import { DatatableComponent } from 'ngx-datatable-with-ie-fix';
 
 import { PsaDatatableComponent } from '../../shared/hooks/psa-datatable.component';
-import { DeliveryItemTablePreview } from '../shared/models/delivery-item-table-preview';
-import { DatatableComponent } from 'ngx-datatable-with-ie-fix';
+import { ProductTablePreview } from '../shared/models/product-table-preview.model';
 import { columnsConfig } from '../shared/constants/columns-config.const';
 import { availableColumns } from '../../shared/constants/available-columns.const';
 
@@ -41,7 +41,7 @@ export class DeliveryTableComponent extends PsaDatatableComponent implements OnI
   }
 
   getFakeRow() {
-    return new DeliveryItemTablePreview({
+    return new ProductTablePreview({
       name: '',
       amount: 0,
       costPerItem: 0,

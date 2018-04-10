@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import { Supplier } from '../../shared/models/supplier.model';
 import { DeliveryType } from '../shared/enums/delivery-type.enum';
 import { PaymentMethod } from '../shared/enums/payment-method.enum';
-import { DeliveryItemTablePreview } from '../shared/models/delivery-item-table-preview';
 import { availableColumns } from '../../shared/constants/available-columns.const';
 
 @Component({

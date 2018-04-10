@@ -1,4 +1,4 @@
-export class DeliveryProductItem {
+export class ProductItem {
   id: string;
   name: string;
   amount: number;

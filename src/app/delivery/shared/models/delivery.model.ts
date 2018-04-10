@@ -1,4 +1,4 @@
-import { DeliveryProductItem } from "./delivery-product-item";
+import { ProductItem } from "./product-item.model";
 
 export class Delivery {
   deliveryDate: string;
@@ -6,7 +6,7 @@ export class Delivery {
   supplier: string;
   cost: string;
   transferFee: string;
-  products: DeliveryProductItem[];
+  products: ProductItem[];
 
   constructor(data: any) {
     Object.assign(this, data);

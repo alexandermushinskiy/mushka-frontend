@@ -32,5 +32,13 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
     canBeFiltered: true,
     cellTemplateName: 'totalCostCol',
     predefinedValues: false
+  },
+  'cost': {
+    name: 'Cтоимость',
+    prop: 'cost',
+    width: 130,
+    canBeFiltered: true,
+    cellTemplateName: 'costCol',
+    predefinedValues: false
   }
 }

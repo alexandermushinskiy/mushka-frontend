@@ -31,6 +31,9 @@ export class DeliveryComponent implements OnInit {
   deliveryProducts: ProductItem[] = [];
   deliveryServices: ServiceItem[] = [];
 
+  optionsList = ['История', 'Черновики'];
+  selectedOption = 'История';
+
   constructor(private formBuilder: FormBuilder,
               private location: Location) { }
 

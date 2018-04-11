@@ -131,7 +131,26 @@
     <div class="app-page-aside">
       <div class="aside-body">
         <div class="aside-body-inner">
-          История
+            <div ngbRadioGroup
+                    class="btn-group btn-group-toggle btn-group-underline" 
+                    name="options" 
+                    data-toggle="buttons"
+                    [ngModel]="selectedOption"
+                    [ngModelOptions]="{standalone: true}">
+            <label ngbButtonLabel 
+                    class="btn btn-underline delivery-type"
+                    *ngFor="let option of optionsList"
+                    [ngClass]="{'active': selectedDeliveryType === option}">
+              <input ngbButton type="radio" [value]="option"> {{ option }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="aside-footer">
+        <!-- buttons -->
+        <div class="buttons-flex">
+          <button type="button" class="btn btn-lg btn-light">Сохранить как черновик</button>
+          <button type="submit" class="btn btn-lg btn-primary btn-submit">Сохранить <psa-spinner [isLoading]="isSubmitting"></psa-spinner></button>
         </div>
       </div>
     </div>

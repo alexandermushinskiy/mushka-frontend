@@ -17,6 +17,7 @@
           autocomplete="off"
           formControlName="name"
           [(ngModel)]="displayValue"
+          [ngClass]="{'ng-invalid': invalidProduct}"
           [typeahead]="items"
           [typeaheadMinLength]="1"
           [typeaheadOptionsLimit]="7"
@@ -24,7 +25,13 @@
           typeaheadOptionField="name"
           [typeaheadItemTemplate]="itemAutocompleteTpl"
           (typeaheadLoading)="onLoading($event)"
-          (typeaheadOnSelect)="onSelectItem($event)" />
+          (typeaheadOnSelect)="onSelectItem($event)"
+          (keyup)="onKeyup()" />
+        <div class="error-message" *ngIf="deliveryItemForm.get('name').valid && deliveryItemForm.get('name').touched && deliveryItemForm.get('name').dirty && !selectedProduct">
+          <i class="arrow"></i>
+          Данного товара нет в системе, добавьте его во вкладке 
+          <a aria-label="Товары" [routerLink]="'/products'" (click)="close()">"Товары"</a>
+        </div>
       </div>
     </div>
     <div class="form-group w-50">
@@ -35,12 +42,16 @@
       <label for="costPerItem" class="text-muted">Стоимость за единицу:</label>
       <psa-currency-input id="costPerItem" [placeholder]="''" formControlName="costPerItem"></psa-currency-input>
     </div>
+    <div class="form-group">
+      <label for="notes" class="text-muted">Примечание:</label>
+      <textarea class="form-control text-area-vertical" rows="3" id="notes" formControlName="notes"></textarea>
+    </div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-light btn-cancel" type="button" (click)="close()">Отмена</button>
-    <button class="btn btn-primary" type="button" (click)="save()" [disabled]="deliveryItemForm.invalid">
+    <button class="btn btn-primary" type="button" (click)="save()" [disabled]="!(deliveryItemForm.valid && !!selectedProduct)">
       <psa-spinner [isLoading]="isSaving"></psa-spinner>
-      Сохранить</button>
+      Добавить</button>
   </div>
 </form>
 

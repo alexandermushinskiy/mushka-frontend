@@ -1,9 +1,9 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { availableColumns } from '../../shared/constants/available-columns.const';
 import { ServiceItem } from '../shared/models/service-item.model';
-import { ServiceTablePreview } from '../shared/models/service-table-preview.model';
+import { ServiceItemTablePreview } from '../shared/models/service-item-table-preview.model';
 
 @Component({
   selector: 'psa-delivery-services-list',
@@ -11,10 +11,18 @@ import { ServiceTablePreview } from '../shared/models/service-table-preview.mode
   styleUrls: ['./delivery-services-list.component.scss']
 })
 export class DeliveryServicesListComponent implements OnInit {
+  @Input() set serviceItems(data: ServiceItem[]) {
+    if (data) {
+      this.serviceItemRows = data.map((el, index) => new ServiceItemTablePreview(el, index));
+      this.total = data.length;
+    }
+  }
+  @Output() onServiceItemAdded = new EventEmitter<ServiceItem>();
+  
   availableColumns = availableColumns.deliveryServices;
   total = 0;
   shown = 0;
-  serviceItemRows: ServiceTablePreview[] = [];
+  serviceItemRows: ServiceItemTablePreview[] = [];
 
   private modalRef: NgbModalRef;
   private readonly modalConfig: NgbModalOptions = {
@@ -26,15 +34,6 @@ export class DeliveryServicesListComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
-    const deliveryProducts = [
-      new ServiceItem({ name: 'Фотосессия товара', cost: 270.00 }),
-      new ServiceItem({ name: 'Разработка вебсайта', cost: 7000.00 })
-    ]
-
-    setTimeout(() => {
-      this.serviceItemRows = deliveryProducts.map((el, index) => new ServiceTablePreview(el, index));
-      this.total = deliveryProducts.length;
-    }, 0);
   }
 
   onRowsUpdated(rowsAmount: number) {
@@ -49,8 +48,9 @@ export class DeliveryServicesListComponent implements OnInit {
     this.modalRef.close();
   }
 
-  saveDeliveryItem(deliveryItem: ServiceItem) {
-    console.info(deliveryItem);
+  saveServiceItem(serviceItem: ServiceItem) {
+    this.onServiceItemAdded.emit(serviceItem);
+    this.closeModal();
   }
 
 }

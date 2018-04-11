@@ -7,6 +7,9 @@ import { Supplier } from '../../shared/models/supplier.model';
 import { DeliveryType } from '../shared/enums/delivery-type.enum';
 import { PaymentMethod } from '../shared/enums/payment-method.enum';
 import { availableColumns } from '../../shared/constants/available-columns.const';
+import { ProductItem } from '../shared/models/product-item.model';
+import { ServiceItem } from '../shared/models/service-item.model';
+import { Product } from '../../shared/models/product.model';
 
 @Component({
   selector: 'psa-delivery',
@@ -25,6 +28,8 @@ export class DeliveryComponent implements OnInit {
   dateFormat = 'YYYY-MM-DD';
   deliveryType = DeliveryType;
   selectedDeliveryType: DeliveryType = DeliveryType.PRODUCTS;
+  deliveryProducts: ProductItem[] = [];
+  deliveryServices: ServiceItem[] = [];
 
   constructor(private formBuilder: FormBuilder,
               private location: Location) { }
@@ -32,6 +37,20 @@ export class DeliveryComponent implements OnInit {
   ngOnInit() {
     this.cost = 110.82;
     this.transferFee = 223.50;
+
+    setTimeout(() => {
+      this.deliveryProducts = [
+        new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
+        new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
+        new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 })
+      ]
+
+      this.deliveryServices = [
+        new ServiceItem({ name: 'Фотосессия товара', cost: 270.00 }),
+        new ServiceItem({ name: 'Разработка вебсайта', cost: 7000.00 })
+      ]
+    }, 200);
+    
 
     this.buildForm();
   }
@@ -55,9 +74,19 @@ export class DeliveryComponent implements OnInit {
   onPaymentMethodSelected(paymentMethod: PaymentMethod) {
 
   }
+  
+  onProductItemAdded(productItem: ProductItem) {
+    this.deliveryProducts = [...this.deliveryProducts, productItem];
+  }
+
+  onServiceItemAdded(serviceItem: ServiceItem) {
+    this.deliveryServices = [...this.deliveryServices, serviceItem];
+  }
 
   changeDeliveryType(deliveryType: DeliveryType) {
-    this.selectedDeliveryType = deliveryType;
+    setTimeout(() => {
+      this.selectedDeliveryType = deliveryType;
+    }, 200);
   }
 
   private buildForm() {

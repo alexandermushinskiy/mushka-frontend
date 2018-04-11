@@ -23,7 +23,8 @@ export const availableColumns = {
     'name',
     'amount',
     'costPerItem',
-    'totalCost'
+    'totalCost',
+    'notes'
   ],
   deliveryServices: [
     'name',

@@ -106,19 +106,22 @@
             <label ngbButtonLabel 
                     class="btn btn-underline delivery-type"
                     *ngFor="let type of deliveryTypesList"
-                    [ngClass]="{'active': selectedDeliveryType === type}"
-                    (click)="changeDeliveryType(deliveryType.value)">
-              <input #deliveryType ngbButton type="radio" [value]="type" class=""> {{ type }}
+                    [ngClass]="{'active': selectedDeliveryType === type, 'not-implemented': type === deliveryType.EQUIPMENT}"
+                    (click)="changeDeliveryType(deliveryTypeInput.value)">
+              <input #deliveryTypeInput ngbButton type="radio" [value]="type"> {{ type }}
             </label>
           </div>
           <div [ngSwitch]="selectedDeliveryType">
-            <div *ngSwitchCase="deliveryType.PRODUCTS">
-              <psa-delivery-products-list></psa-delivery-products-list>
+            <div [hidden]="selectedDeliveryType !== deliveryType.PRODUCTS">
+              <psa-delivery-products-list
+                    [productItems]="deliveryProducts"
+                    (onProductItemAdded)="onProductItemAdded($event)"></psa-delivery-products-list>
             </div>
-            <div *ngSwitchCase="deliveryType.SERVICES">
-              <psa-delivery-services-list></psa-delivery-services-list>
+            <div [hidden]="selectedDeliveryType !== deliveryType.SERVICES">
+              <psa-delivery-services-list
+                    [serviceItems]="deliveryServices"
+                    (onServiceItemAdded)="onServiceItemAdded($event)"></psa-delivery-services-list>
             </div>
-            <div *ngSwitchCase="deliveryType.EQUIPMENT">Оборудывание (не готово)</div>
           </div>
         </div>
       </div>

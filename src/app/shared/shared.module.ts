@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDatatableModule } from 'ngx-datatable-with-ie-fix';
 import { CurrencyMaskModule } from "ng2-currency-mask";
@@ -20,12 +20,15 @@ import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker
 import { CurrencyInputComponent } from './widgets/currency-input/currency-input.component';
 import { DropdownComponent } from './widgets/dropdown/dropdown.component';
 import { NumberFieldDirective } from './directives/number-field.directive';
+import { PsaCurrencyPipe } from './pipes/psa-currency.pipe';
+import { ProductModalComponent } from './widgets/product-modal/product-modal.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxDatatableModule,
     CurrencyMaskModule,
     NgbModule.forRoot(),
@@ -42,10 +45,12 @@ import { NumberFieldDirective } from './directives/number-field.directive';
     ClosePopoverOnClickOutsideDirective,
     NumberFieldDirective,
     DashIfEmptyPipe,
+    PsaCurrencyPipe,
     PsaDatatableHeaderComponent,
     DatetimepickerComponent,
     CurrencyInputComponent,
-    DropdownComponent
+    DropdownComponent,
+    ProductModalComponent
   ],
   exports: [
     /* Common modules */
@@ -60,6 +65,7 @@ import { NumberFieldDirective } from './directives/number-field.directive';
     NumberFieldDirective,
     /* Pipes */
     DashIfEmptyPipe,
+    PsaCurrencyPipe,
     /* Components */
     LoadingScreenComponent,
     SpinnerComponent,
@@ -69,7 +75,8 @@ import { NumberFieldDirective } from './directives/number-field.directive';
     PsaDatatableHeaderComponent,
     DatetimepickerComponent,
     CurrencyInputComponent,
-    DropdownComponent
+    DropdownComponent,
+    ProductModalComponent
   ]
 })
 

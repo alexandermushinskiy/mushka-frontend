@@ -10,6 +10,8 @@ import { DeliveryTableComponent } from './delivery-table/delivery-table.componen
 import { DeliveryProductsListComponent } from './delivery-products-list/delivery-products-list.component';
 import { DeliveryProductModalComponent } from './shared/widgets/delivery-product-modal/delivery-product-modal.component';
 import { DeliveryServicesListComponent } from './delivery-services-list/delivery-services-list.component';
+import { ServicesTableComponent } from './services-table/services-table.component';
+import { DeliveryServiceModalComponent } from './shared/widgets/delivery-service-modal/delivery-service-modal.component';
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import { DeliveryServicesListComponent } from './delivery-services-list/delivery
     DeliveryTableComponent,
     DeliveryProductsListComponent,
     DeliveryProductModalComponent,
-    DeliveryServicesListComponent
+    DeliveryServicesListComponent,
+    ServicesTableComponent,
+    DeliveryServiceModalComponent
   ],
   exports: [DeliveryComponent]
 })

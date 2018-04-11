@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { ProductItem } from '../../models/product-item.model';
 import { ProductsServce } from '../../../../core/api/products.service';
+import { Product } from '../../../../shared/models/product.model';
 
 @Component({
   selector: 'psa-delivery-product-modal',
@@ -21,11 +22,14 @@ export class DeliveryProductModalComponent implements OnInit {
   name: string;
   amount: number;
   costPerItem: number;
+  notes: string;
 
   displayValue: string;
-  items: Observable<ProductItem>;
-  foundItems: Observable<ProductItem>;
+  selectedProduct: Product;
+  items: Observable<Product[]>;
+  foundItems: Product[];
   isLoadingItems: false;
+  isCreateProduct = false;
   private requestedItem$ = new Subject<string>();
   
   constructor(private formBuilder: FormBuilder,
@@ -33,9 +37,10 @@ export class DeliveryProductModalComponent implements OnInit {
 
   ngOnInit() {
     this.items = Observable.create((observer: any) => {
-      this.productsServce.getProducts(this.displayValue).subscribe((result: any) => {
-        this.foundItems = result;
-        observer.next(result);
+      this.productsServce.getProducts(this.displayValue)
+        .subscribe((result: Product[]) => {
+          this.foundItems = result;
+          observer.next(result);
       });
     });
 
@@ -47,13 +52,13 @@ export class DeliveryProductModalComponent implements OnInit {
   }
 
   save() {
-
     const deliveryItemFormValue = this.deliveryItemForm.value;
 
     const deliveryItem = new ProductItem({
-      name: deliveryItemFormValue.name,
+      product: this.selectedProduct,
       amount: deliveryItemFormValue.amount,
-      costPerItem: deliveryItemFormValue.costPerItem
+      costPerItem: deliveryItemFormValue.costPerItem,
+      notes: deliveryItemFormValue.notes
     });
 
     this.onSave.emit(deliveryItem);
@@ -68,18 +73,21 @@ export class DeliveryProductModalComponent implements OnInit {
   }
   
   onSelectItem(match: TypeaheadMatch) {
-    // const fullName = `${match.item.firstName} ${match.item.lastName}`;
-    // const signum = match.item.userId;
-// debugger;
-//     this.displayValue = match.item.name;
-    //this.requestedParticipantSignum$.next(signum);
+    this.selectedProduct = match.item;
+  }
+
+  onKeyup() {
+    if (this.selectedProduct) {
+      this.selectedProduct = null;
+    }
   }
 
   private buildForm() {
     this.deliveryItemForm = this.formBuilder.group({
       name: [this.name, Validators.required],
       amount: [this.amount, Validators.required],
-      costPerItem: [this.costPerItem, Validators.required]
+      costPerItem: [this.costPerItem, Validators.required],
+      notes: this.notes
     });
   }
 }

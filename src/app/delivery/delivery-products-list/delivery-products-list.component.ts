@@ -1,7 +1,7 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, EventEmitter, Output } from '@angular/core';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
-import { ProductTablePreview } from '../shared/models/product-table-preview.model';
+import { ProductItemTablePreview } from '../shared/models/product-item-table-preview.model';
 import { availableColumns } from '../../shared/constants/available-columns.const';
 import { ProductItem } from '../shared/models/product-item.model';
 
@@ -11,8 +11,16 @@ import { ProductItem } from '../shared/models/product-item.model';
   styleUrls: ['./delivery-products-list.component.scss']
 })
 export class DeliveryProductsListComponent implements OnInit {
+  @Input() set productItems(data: ProductItem[]) {
+    if (data) {
+      this.deliveryItemRows = data.map((el, index) => new ProductItemTablePreview(el, index));
+      this.total = data.length;
+    }
+  }
+  @Output() onProductItemAdded = new EventEmitter<ProductItem>();
+  
   availableColumns = availableColumns.deliveryProducts;
-  deliveryItemRows: ProductTablePreview[] = [];
+  deliveryItemRows: ProductItemTablePreview[] = [];
   total = 0;
   shown = 0;
   isModalLoading: false;
@@ -27,30 +35,6 @@ export class DeliveryProductsListComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
-
-    const deliveryProducts = [
-      new ProductItem({ name: 'Имя товара 1', amount: 100, costPerItem: 27.00 }),
-      new ProductItem({ name: 'Имя товара 2', amount: 320, costPerItem: 7.50 }),
-      new ProductItem({ name: 'Имя товара 3', amount: 500, costPerItem: 11.30 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 1', amount: 100, costPerItem: 27.00 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 2', amount: 320, costPerItem: 7.50 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 3', amount: 500, costPerItem: 11.30 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 1', amount: 100, costPerItem: 27.00 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 2', amount: 320, costPerItem: 7.50 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 3', amount: 500, costPerItem: 11.30 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 1', amount: 100, costPerItem: 27.00 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 2', amount: 320, costPerItem: 7.50 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 3', amount: 500, costPerItem: 11.30 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 1', amount: 100, costPerItem: 27.00 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 2', amount: 320, costPerItem: 7.50 }),
-      // new DeliveryItem({ name: 'Имя товара/услуги 3', amount: 500, costPerItem: 11.30 }),
-    ]
-
-    setTimeout(() => {
-      this.deliveryItemRows = deliveryProducts.map((el, index) => new ProductTablePreview(el, index));
-      this.total = deliveryProducts.length;
-    }, 0);
-
   }
 
   onRowsUpdated(rowsAmount: number) {
@@ -66,6 +50,7 @@ export class DeliveryProductsListComponent implements OnInit {
   }
 
   saveDeliveryItem(deliveryItem: ProductItem) {
-    console.info(deliveryItem);
+    this.onProductItemAdded.emit(deliveryItem);
+    this.closeModal();
   }
 }

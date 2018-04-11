@@ -20,7 +20,7 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
   'costPerItem': {
     name: 'Стоимость за единицу',
     prop: 'costPerItem',
-    width: 130,
+    width: 50,
     canBeFiltered: true,
     cellTemplateName: 'costPerItemCol',
     predefinedValues: false
@@ -28,7 +28,7 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
   'totalCost': {
     name: 'Общая стоимость',
     prop: 'totalCost',
-    width: 130,
+    width: 50,
     canBeFiltered: true,
     cellTemplateName: 'totalCostCol',
     predefinedValues: false
@@ -36,9 +36,16 @@ export const columnsConfig: { [name: string]: DatatableColumn } = {
   'cost': {
     name: 'Cтоимость',
     prop: 'cost',
-    width: 130,
+    width: 150,
     canBeFiltered: true,
     cellTemplateName: 'costCol',
+    predefinedValues: false
+  },
+  'notes': {
+    name: 'Примечание',
+    prop: 'notes',
+    width: 530,
+    canBeFiltered: false,
     predefinedValues: false
   }
 }

@@ -1,7 +1,7 @@
 @import '../../../../variables';
 
 .form-control.ng-invalid {
-  box-shadow: 2px 0 0 $orange inset;
+  box-shadow: 1px 0 0 $orange inset;
   &:focus{
     box-shadow: none;
   }

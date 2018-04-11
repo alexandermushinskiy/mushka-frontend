@@ -235,3 +235,8 @@
   line-height: 20px;
   color: rgb(78, 78, 78);
 }
+
+.not-implemented {
+  pointer-events: none;
+  color: $lighten-gray;
+}

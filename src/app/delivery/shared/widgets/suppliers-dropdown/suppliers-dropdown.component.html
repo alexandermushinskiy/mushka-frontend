@@ -4,7 +4,7 @@
     <i class="ico-chevron-down"></i>
   </button>
   <div ngbDropdownMenu aria-labelledby="dropdown" class="dropdown-max-height">
-    <button class="dropdown-item" *ngFor="let supplier of suppliers" (click)="onOptionSelect(supplier)">
+    <button class="dropdown-item" *ngFor="let supplier of suppliers" (click)="onOptionSelected(supplier)">
       {{ supplier.name }}
       <br/>
       <small class="text-muted">{{ supplier.address }}</small>

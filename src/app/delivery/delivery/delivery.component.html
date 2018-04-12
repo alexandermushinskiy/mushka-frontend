@@ -1,4 +1,4 @@
-<form [formGroup]="newDeliveryForm" class="new-csr w-100" autocomplete="off">
+<form [formGroup]="deliveryForm" class="new-csr w-100" autocomplete="off">
   <div class="app-page-body row flex-nowrap">
     <!-- left side -->
     <div class="app-page-content">
@@ -26,7 +26,7 @@
                                   [dateFormat]="'YYYY-MM-DD'"
                                   [pickerType]="'calendar'"
                                   [isNow]="true"
-                                  (onDateChanged)="onDateChanged($event)">
+                                  (onDateChanged)="onReuestDateChanged($event)">
                 <div class="input-wrapper datepicker-input">
                   <input class="form-control requestDate"
                           [(ngModel)]="requestDate"
@@ -44,7 +44,7 @@
                                   [dateFormat]="'YYYY-MM-DD'"
                                   [pickerType]="'calendar'"
                                   [isNow]="true"
-                                  (onDateChanged)="onDateChanged($event)">
+                                  (onDateChanged)="onDeliveryDateChanged($event)">
                 <div class="input-wrapper datepicker-input">
                   <input class="form-control deliveryDate"
                           [(ngModel)]="deliveryDate"
@@ -60,13 +60,13 @@
           <div class="col-lg-8">
             <div class="form-group">
               <label for="dropdown">Поставщик:</label>
-              <psa-suppliers-dropdown onSelectedSupplier="onSelectedSupplier($event)"></psa-suppliers-dropdown>
+              <psa-suppliers-dropdown (onSupplierSelected)="onSupplierSelected($event)"></psa-suppliers-dropdown>
             </div>
           </div>
           <div class="col-lg-2">
             <div class="form-group">
               <label for="dropdown">Кол-во предыдущих заказов:</label>
-              <input class="form-control" readonly="readonly" />
+              <input class="form-control" readonly="readonly" formControlName="previousOrdersNumber" />
             </div>
           </div>
         </div>
@@ -131,7 +131,7 @@
     <div class="app-page-aside">
       <div class="aside-body">
         <div class="aside-body-inner">
-            <div ngbRadioGroup
+          <div ngbRadioGroup
                     class="btn-group btn-group-toggle btn-group-underline" 
                     name="options" 
                     data-toggle="buttons"
@@ -143,6 +143,12 @@
                     [ngClass]="{'active': selectedDeliveryType === option}">
               <input ngbButton type="radio" [value]="option"> {{ option }}
             </label>
+          </div>
+          <div class="historical-deliveries" >
+            <psa-delivery-item
+                    class="delivery-item-wrapper"
+                    [delivery]="delivery"
+                    *ngFor="let delivery of deliveries"></psa-delivery-item>
           </div>
         </div>
       </div>

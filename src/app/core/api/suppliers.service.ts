@@ -16,7 +16,7 @@ export class SuppliersService {
   }
 
   getSuppliers(): Observable<Supplier[]> {
-    return this.suppliers$.asObservable().delay(1000);
+    return this.suppliers$.asObservable().delay(500);
   }
 
   addSupplier(supplier: Supplier): Observable<Supplier> {

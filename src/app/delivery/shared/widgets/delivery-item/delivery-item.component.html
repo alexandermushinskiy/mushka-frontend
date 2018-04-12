@@ -1,0 +1,29 @@
+<div class="lr-item-wrapper" [ngClass]="{'collapsed': !isExpanded}">
+  <div class="lr-item">
+    <div class="lr-item-header">
+      <div class="title"> {{ delivery.supplier.name }} </div>
+      <div class="lr-area-row">
+        <span class="lr-area">{{ delivery.supplier.address }}</span>
+        <time class="timestamp"> {{ delivery.deliveryDate }} </time>
+      </div>
+    </div>
+    <div class="lr-item-body" [ngbCollapse]="!isExpanded">
+      <div class="lr-item-row">
+        <div class="lr-item-label">Способ оплаты:</div>
+        <div> {{ delivery.paymentMethod }} </div>
+      </div>  
+      <div class="lr-item-row">
+        <div class="lr-item-label">Общая стоимость:</div>
+        <div> {{ delivery.totalCost | psaCurrency}} </div>
+      </div>
+      <div class="lr-item-row">
+        <div class="lr-item-label">Дата заявки:</div>
+        <div> {{ delivery.requestDate }} </div>
+      </div>
+    </div>
+  </div>
+  <button (click)="editItem()" class="btn btn-xs btn-toggle-editor">
+    <i class="fa fa-pencil fa-border"></i>
+  </button>
+  <button class="btn btn-toggle" (click)="toggleCollapseItemMode()"><i class="ico ico-chevron-down"></i></button>
+</div>

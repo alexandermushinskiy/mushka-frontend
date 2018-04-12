@@ -13,7 +13,7 @@ import { SuppliersService } from '../../../../core/api/suppliers.service';
 export class SuppliersDropdownComponent implements OnInit {
   @Input() initialValue: Supplier;
   @Input() required: boolean;
-  @Output() onSelectedSupplier = new EventEmitter<Supplier>();
+  @Output() onSupplierSelected = new EventEmitter<Supplier>();
 
   selectedSupplier: Supplier;
   suppliers: Supplier[];
@@ -25,12 +25,12 @@ export class SuppliersDropdownComponent implements OnInit {
       .subscribe((suppliers: Supplier[]) => this.suppliers = suppliers);
   }
 
-  reset() {
-    this.selectedSupplier = null;
-  }
+  // reset() {
+  //   this.selectedSupplier = null;
+  // }
 
-  onOptionSelect(supplier: Supplier) {
+  onOptionSelected(supplier: Supplier) {
     this.selectedSupplier = supplier;
-    this.onSelectedSupplier.emit(supplier);
+    this.onSupplierSelected.emit(supplier);
   }  
 }

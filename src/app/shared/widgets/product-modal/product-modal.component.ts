@@ -31,7 +31,7 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
   selectedSizes: string[] = [];
   private readonly sizesDelimiter = ';';
 
-  get categoryFormGroup(): FormGroup {
+  private get categoryFormGroup(): FormGroup {
     return <FormGroup>this.productForm.get('category');
   }
 

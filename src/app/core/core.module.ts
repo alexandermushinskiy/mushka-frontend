@@ -13,6 +13,7 @@ import { ProductsServce } from './api/products.service';
 import { UserSettingsService } from './api/user-settings.service';
 import { CategoriesService } from './api/categories.service';
 import { SuppliersService } from './api/suppliers.service';
+import { DeliveriesService } from './api/deliveries.service';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { SuppliersService } from './api/suppliers.service';
     ProductsServce,
     CategoriesService,
     UserSettingsService,
-    SuppliersService
+    SuppliersService,
+    DeliveriesService
   ],
   declarations: [],
   exports: []

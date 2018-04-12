@@ -230,6 +230,10 @@
   padding-top: 50px;
 }
 
+.historical-deliveries {
+
+}
+
 .delivery-type {
   font-size: 15px;
   line-height: 20px;
@@ -239,4 +243,16 @@
 .not-implemented {
   pointer-events: none;
   color: $lighten-gray;
+}
+
+.delivery-item-wrapper {
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  // padding: $padding-base/2 0;
+  // position: relative;
+
+  &:not(:last-child) {
+    border-bottom: $border-width solid $border-color;
+  }
 }

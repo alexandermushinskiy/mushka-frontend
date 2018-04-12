@@ -10,6 +10,8 @@ import { availableColumns } from '../../shared/constants/available-columns.const
 import { ProductItem } from '../shared/models/product-item.model';
 import { ServiceItem } from '../shared/models/service-item.model';
 import { Product } from '../../shared/models/product.model';
+import { DeliveriesService } from '../../core/api/deliveries.service';
+import { Delivery } from '../shared/models/delivery.model';
 
 @Component({
   selector: 'psa-delivery',
@@ -17,8 +19,10 @@ import { Product } from '../../shared/models/product.model';
   styleUrls: ['./delivery.component.scss']
 })
 export class DeliveryComponent implements OnInit {
-  newDeliveryForm: FormGroup;
+  deliveryForm: FormGroup;
+  requestDate: string;
   deliveryDate: string;
+  previousOrdersNumber = '';
   batchNumber: string;
   cost: number;
   transferFee: number;
@@ -31,15 +35,17 @@ export class DeliveryComponent implements OnInit {
   deliveryProducts: ProductItem[] = [];
   deliveryServices: ServiceItem[] = [];
 
+  deliveries: Delivery[];
+
   optionsList = ['История', 'Черновики'];
   selectedOption = 'История';
 
   constructor(private formBuilder: FormBuilder,
-              private location: Location) { }
+              private location: Location,
+              private deliveryService: DeliveriesService) {
+  }
 
   ngOnInit() {
-    this.cost = 110.82;
-    this.transferFee = 223.50;
 
     setTimeout(() => {
       this.deliveryProducts = [
@@ -53,7 +59,11 @@ export class DeliveryComponent implements OnInit {
         new ServiceItem({ name: 'Разработка вебсайта', cost: 7000.00 })
       ]
     }, 200);
-    
+
+    this.deliveryService.getDeliveries()
+      .subscribe(res => {
+        this.deliveries = res;
+      })
 
     this.buildForm();
   }
@@ -62,12 +72,17 @@ export class DeliveryComponent implements OnInit {
     this.location.back();
   }
 
-  onDateChanged(date) {
-    this.deliveryDate = moment(date).format(this.dateFormat);
+  onReuestDateChanged(date) {
+    this.requestDate = this.getFormattedDate(date);
   }
 
-  onSelectedSupplier(supplier: Supplier) {
+  onDeliveryDateChanged(date) {
+    this.deliveryDate = this.getFormattedDate(date);
+  }
 
+  onSupplierSelected(supplier: Supplier) {
+    const ctrl = this.deliveryForm.controls['previousOrdersNumber'];
+    ctrl.setValue(supplier.address.length);
   }
 
   onDeliveryTypeSelected(deliveryType: DeliveryType) {
@@ -93,14 +108,19 @@ export class DeliveryComponent implements OnInit {
   }
 
   private buildForm() {
-    this.newDeliveryForm = this.formBuilder.group({
-      requestDate: [],
+    this.deliveryForm = this.formBuilder.group({
+      requestDate: [this.requestDate, Validators.required],
       deliveryDate: [this.deliveryDate, Validators.required],
+      previousOrdersNumber: [this.previousOrdersNumber],
       batchNumber: [this.batchNumber],
       cost: [this.cost],
       transferFee: [this.transferFee],
       totalCost: []
     });
+  }
+
+  private getFormattedDate(date: string): string {
+    return moment(date).format(this.dateFormat);
   }
 
 }

@@ -17,6 +17,7 @@ export class PsaDatatableHeaderComponent implements OnInit {
   @Input() showAddButton = true;
   @Input() showTitle = true;
   @Input() showOptions = true;
+  @Input() showActions = true;
   @Input() title: string = '';
 
   @Output() onFilter = new EventEmitter<string>();

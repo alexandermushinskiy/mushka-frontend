@@ -53,4 +53,18 @@ export class DeliveryServicesListComponent implements OnInit {
     this.closeModal();
   }
 
+
+  
+  getRowClass(row) {
+    return row.className;
+  }
+
+  activateRow({ type, row, cellElement }: { type: string, row: ServiceItemTablePreview, cellElement: any }) {
+    // if (type === 'click') {
+    //   this.editedTimeReport = row;
+    //   cellElement.blur();
+    //   this.openTimeReportModal();
+    //   row.className += ' active';
+    // }
+  }
 }

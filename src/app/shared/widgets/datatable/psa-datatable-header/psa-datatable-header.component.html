@@ -8,7 +8,7 @@
       <button *ngIf="showAddButton" class="btn btn-light btn-block btn-xs" (click)="addItem()">Добавить</button>
       <!-- <span *ngIf="isAddButtonShown" class="btn-add"><i class="fa fa-plus fa-border"></i></span> -->
     </div>
-    <div class="data-table-header-actions">
+    <div class="data-table-header-actions" *ngIf="showActions">
       <div class="data-table-header-search">
         <div class="current-from-total-amount" *ngIf="total > 0">
            <span class="text-muted total-count">

@@ -108,18 +108,20 @@
                     *ngFor="let type of deliveryTypesList"
                     [ngClass]="{'active': selectedDeliveryType === type, 'not-implemented': type === deliveryType.EQUIPMENT}"
                     (click)="changeDeliveryType(deliveryTypeInput.value)">
-              <input #deliveryTypeInput ngbButton type="radio" [value]="type"> {{ type }}
+              <input #deliveryTypeInput ngbButton type="radio" [value]="type"> {{ deliveryItems[type].displayName }} ({{ deliveryItems[type].amount }} поз.)
             </label>
           </div>
           <div [ngSwitch]="selectedDeliveryType">
-            <div [hidden]="selectedDeliveryType !== deliveryType.PRODUCTS">
+            <div *ngSwitchCase="deliveryType.PRODUCTS">
+              <!-- [hidden]="selectedDeliveryType !== deliveryType.PRODUCTS"> -->
               <psa-delivery-products-list
-                    [productItems]="deliveryProducts"
+                    [productItems]="deliveryItems[selectedDeliveryType].data"
                     (onProductItemAdded)="onProductItemAdded($event)"></psa-delivery-products-list>
             </div>
-            <div [hidden]="selectedDeliveryType !== deliveryType.SERVICES">
+            <div *ngSwitchCase="deliveryType.SERVICES">
+            <!-- [hidden]="selectedDeliveryType !== deliveryType.SERVICES"> -->
               <psa-delivery-services-list
-                    [serviceItems]="deliveryServices"
+                    [serviceItems]="deliveryItems[selectedDeliveryType].data"
                     (onServiceItemAdded)="onServiceItemAdded($event)"></psa-delivery-services-list>
             </div>
           </div>

@@ -53,4 +53,13 @@ export class DeliveryProductsListComponent implements OnInit {
     this.onProductItemAdded.emit(deliveryItem);
     this.closeModal();
   }
+
+  activateRow({ type, row, cellElement }: { type: string, row: ProductItemTablePreview, cellElement: any }) {
+    // if (type === 'click') {
+    //   this.editedTimeReport = row;
+    //   cellElement.blur();
+    //   this.openTimeReportModal();
+    //   row.className += ' active';
+    // }
+  }
 }

@@ -1,13 +1,13 @@
 <div class="list-view">
   <psa-datatable-header
-    [total]="total"
-    [shown]="shown"
-    [availableColumns]="availableColumns"
-    [showAddButton]="true"
-    [showOptions]="false"
-    [showTitle]="false"
-    [showActions]="false"
-    (onAddItem)="addDeliveryItem(content)">
+                [total]="total"
+                [shown]="shown"
+                [availableColumns]="availableColumns"
+                [showAddButton]="true"
+                [showOptions]="false"
+                [showTitle]="false"
+                [showActions]="false"
+                (onAddItem)="addDeliveryItem(content)">
   </psa-datatable-header>
   <ngx-datatable #datatable
                  class="material"
@@ -22,7 +22,7 @@
 
     <ngx-datatable-column name="name" [width]="240">
       <ng-template let-column="column" ngx-datatable-header-template>
-        Name
+        Наименование
       </ng-template>
       <ng-template let-value="value" ngx-datatable-cell-template>
         <span [title]="value">{{ value }}</span>
@@ -31,10 +31,19 @@
 
     <ngx-datatable-column name="cost" [width]="80">
       <ng-template let-column="column" ngx-datatable-header-template>
-        Cost
+        Стоимость
       </ng-template>
       <ng-template let-value="value" ngx-datatable-cell-template>
        <span [title]="value">{{ value | psaCurrency }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="notes" [width]="150">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        Примичания
+      </ng-template>
+      <ng-template let-value="value" ngx-datatable-cell-template>
+       <span [title]="value">{{ value }}</span>
       </ng-template>
     </ngx-datatable-column>
   </ngx-datatable>

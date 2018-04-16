@@ -1,19 +1,43 @@
 @import '../../../variables';
 
-.appmain {
+// .appmain {
+//   display: flex;
+//   flex-flow: column;
+//   height: 100%;
+//   min-width: 0;
+// }
+
+// .appbar {
+//   background-color: $layer1;
+//   flex: none;
+// }
+
+// .appcontent {
+//   flex: auto;
+//   position: relative;
+//   //margin: 16px 16px 0;
+// }
+
+
+:host {
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
+  flex: 1;
+  //height: 200px;//calc(100vh - #{$header-height});
+  //max-width: $panel-width;
+  //min-width: $panel-width;
+  width: 100%;
+}
+
+.report-body {
   height: 100%;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
 }
 
-.appbar {
-  background-color: $layer1;
-  flex: none;
-}
-
-.appcontent {
-  flex: auto;
+.list-view {
+  flex: 1 1 auto;
   position: relative;
-  //margin: 16px 16px 0;
 }

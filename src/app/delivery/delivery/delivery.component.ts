@@ -55,20 +55,7 @@ export class DeliveryComponent implements OnInit {
     this.deliveryTypesList
       .map(type => this.deliveryItems[type] = new DeliveryItem(type, deliveryTypeNames[type], [])); //{ displayName: deliveryTypeNames[type], amount: 0});
 
-    setTimeout(() => {
-      this.deliveryProducts = [
-        new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
-        new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
-        new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 })
-      ];
-      this.deliveryItems[DeliveryType.PRODUCTS].data = this.deliveryProducts;
-
-      this.deliveryServices = [
-        new ServiceItem({ name: 'Фотосессия товара', cost: 270.00 }),
-        new ServiceItem({ name: 'Разработка вебсайта', cost: 7000.00 })
-      ];
-      this.deliveryItems[DeliveryType.SERVICES].data = this.deliveryServices;
-    }, 200);
+    this.setFakeData();
 
     this.deliveryService.getDeliveries()
       .subscribe(res => {
@@ -114,9 +101,10 @@ export class DeliveryComponent implements OnInit {
   }
 
   changeDeliveryType(deliveryType: DeliveryType) {
-    setTimeout(() => {
-      this.selectedDeliveryType = deliveryType;
-    }, 200);
+    this.selectedDeliveryType = deliveryType;
+    // setTimeout(() => {
+    //   this.selectedDeliveryType = deliveryType;
+    // }, 200);
   }
 
   private buildForm() {
@@ -135,4 +123,18 @@ export class DeliveryComponent implements OnInit {
     return moment(date).format(this.dateFormat);
   }
 
+  private setFakeData() {
+    this.deliveryProducts = [
+      new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
+      new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
+      new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 })
+    ];
+    this.deliveryItems[DeliveryType.PRODUCTS].data = this.deliveryProducts;
+
+    this.deliveryServices = [
+      new ServiceItem({ name: 'Фотосессия товара', cost: 270.00, notes: 'какие-то там заметки' }),
+      new ServiceItem({ name: 'Разработка вебсайта', cost: 7000.00 })
+    ];
+    this.deliveryItems[DeliveryType.SERVICES].data = this.deliveryServices;
+  }
 }

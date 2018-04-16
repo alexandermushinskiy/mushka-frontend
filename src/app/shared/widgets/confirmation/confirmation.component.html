@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ headerText }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <i class="ico ico-close"></i>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="section">
+    {{ text }}
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-sm btn-light" (click)="closeModal()" [disabled]="isSaving">{{ cancelText }}</button>
+  <button class="btn btn-sm btn-primary" (click)="onConfirm.emit()" [disabled]="isSaving">
+    <psa-spinner [isLoading]="isSaving"></psa-spinner>
+    {{ confirmButtonText }}
+  </button>
+</div>
+  

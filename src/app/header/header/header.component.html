@@ -12,7 +12,7 @@
     <a class="btn btn-outline-light" aria-label="Поступление" [routerLink]="'/delivery'">Поступление</a>
     <psa-user-notification></psa-user-notification>
     <div class="badge-group">
-      <psa-header-badge (click)="openModal(csrRate)" [title]="'Unrated'" [icon]="'ico-favorites'" [value]="totalUnrated"></psa-header-badge>
+      <psa-header-badge [title]="'Unrated'" [icon]="'ico-favorites'" [value]="totalUnrated"></psa-header-badge>
       <psa-header-badge [title]="'Unassigned'" [icon]="'ico-eye'" [value]="totalUnassigned"></psa-header-badge>
       <psa-header-badge [title]="'Unread'" [icon]="'ico-csr-new'" [value]="totalUnseen"></psa-header-badge>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { ProductItemTablePreview } from '../shared/models/product-item-table-preview.model';
@@ -11,6 +11,7 @@ import { ProductItem } from '../shared/models/product-item.model';
   styleUrls: ['./delivery-products-list.component.scss']
 })
 export class DeliveryProductsListComponent implements OnInit {
+  @ViewChild('removeConfirmation') removeConfirmation: ElementRef;
   @Input() set productItems(data: ProductItem[]) {
     if (data) {
       this.deliveryItemRows = data.map((el, index) => new ProductItemTablePreview(el, index));
@@ -26,6 +27,7 @@ export class DeliveryProductsListComponent implements OnInit {
   shown = 0;
   isModalLoading: false;
   editing = {};
+  indexToDelete: number;
 
   private modalRef: NgbModalRef;
   private readonly modalConfig: NgbModalOptions = {
@@ -67,6 +69,16 @@ export class DeliveryProductsListComponent implements OnInit {
     //   this.openTimeReportModal();
     //   row.className += ' active';
     // }
+  }
+
+  deleteItem(rowIndex) {
+    this.indexToDelete = rowIndex;
+    this.modalRef = this.modalService.open(this.removeConfirmation);
+  }
+
+  confirmDelete() {
+    this.deliveryItemRows.splice(this.indexToDelete, 1);
+    this.deliveryItemRows = [...this.deliveryItemRows];
   }
 
   startEditing(cellKey: string) {

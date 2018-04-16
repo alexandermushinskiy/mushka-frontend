@@ -22,6 +22,7 @@ import { DropdownComponent } from './widgets/dropdown/dropdown.component';
 import { NumberFieldDirective } from './directives/number-field.directive';
 import { PsaCurrencyPipe } from './pipes/psa-currency.pipe';
 import { ProductModalComponent } from './widgets/product-modal/product-modal.component';
+import { ConfirmationComponent } from './widgets/confirmation/confirmation.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { ProductModalComponent } from './widgets/product-modal/product-modal.com
     DatetimepickerComponent,
     CurrencyInputComponent,
     DropdownComponent,
-    ProductModalComponent
+    ProductModalComponent,
+    ConfirmationComponent
   ],
   exports: [
     /* Common modules */
@@ -76,7 +78,8 @@ import { ProductModalComponent } from './widgets/product-modal/product-modal.com
     DatetimepickerComponent,
     CurrencyInputComponent,
     DropdownComponent,
-    ProductModalComponent
+    ProductModalComponent,
+    ConfirmationComponent
   ]
 })
 

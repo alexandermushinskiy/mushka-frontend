@@ -1,5 +1,5 @@
 <div ngbDropdown placement="bottom-center">
-  <div ngbDropdownToggle (click)="trackEvent()">
+  <div ngbDropdownToggle>
     <psa-header-badge [title]="'Notifications'" [icon]="'ico-bell'" [value]="activeNotificationsAmount"></psa-header-badge>
   </div>
   <div *ngIf="notifications.length" ngbDropdownMenu>

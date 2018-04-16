@@ -39,7 +39,7 @@
     align-items: flex-end;
 
     &:hover {
-      box-shadow: 0 1px 4px 0 transparentize($black, .88);
+      //box-shadow: 0 1px 4px 0 transparentize($black, .88);
       z-index: 2;
 
       .btn-toggle-editor {

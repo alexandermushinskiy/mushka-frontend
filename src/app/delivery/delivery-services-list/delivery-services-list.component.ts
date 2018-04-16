@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { availableColumns } from '../../shared/constants/available-columns.const';
@@ -11,6 +11,7 @@ import { ServiceItemTablePreview } from '../shared/models/service-item-table-pre
   styleUrls: ['./delivery-services-list.component.scss']
 })
 export class DeliveryServicesListComponent implements OnInit {
+  @ViewChild('removeConfirmation') removeConfirmation: ElementRef;
   @Input() set serviceItems(data: ServiceItem[]) {
     if (data) {
       this.serviceItemRows = data.map((el, index) => new ServiceItemTablePreview(el, index));
@@ -23,6 +24,7 @@ export class DeliveryServicesListComponent implements OnInit {
   total = 0;
   shown = 0;
   serviceItemRows: ServiceItemTablePreview[] = [];
+  indexToDelete: number;
 
   private modalRef: NgbModalRef;
   private readonly modalConfig: NgbModalOptions = {
@@ -64,5 +66,15 @@ export class DeliveryServicesListComponent implements OnInit {
     //   this.openTimeReportModal();
     //   row.className += ' active';
     // }
+  }
+
+  deleteItem(rowIndex) {
+    this.indexToDelete = rowIndex;
+    this.modalRef = this.modalService.open(this.removeConfirmation);
+  }
+
+  confirmDelete() {
+    this.serviceItemRows.splice(this.indexToDelete, 1);
+    this.serviceItemRows = [...this.serviceItemRows];
   }
 }

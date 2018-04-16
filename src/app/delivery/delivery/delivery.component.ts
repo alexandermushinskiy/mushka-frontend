@@ -39,11 +39,10 @@ export class DeliveryComponent implements OnInit {
   deliveryServices: ServiceItem[] = [];
 
   deliveryItems: { [type: number]: DeliveryItem } = {};
-
   deliveries: Delivery[];
-
   optionsList = ['История', 'Черновики'];
   selectedOption = 'История';
+  isSubmitting = false;
 
   constructor(private formBuilder: FormBuilder,
               private location: Location,

@@ -55,6 +55,10 @@ export class SuppliersTableComponent extends PsaDatatableComponent implements On
     super.onExportToCSV(fileSuffix, this.rowsData);
   }
 
+  onSelect(row: SupplierTablePreview) {
+
+  }
+
   getFakeRow() {
     return new SupplierTablePreview({
       name: ''

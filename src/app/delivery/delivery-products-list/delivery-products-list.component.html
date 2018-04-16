@@ -33,7 +33,7 @@
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="amount" [width]="30">
+    <ngx-datatable-column name="amount" [width]="100">
       <ng-template let-column="column" ngx-datatable-header-template>
         Количество
       </ng-template>
@@ -49,7 +49,7 @@
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="costPerItem" [width]="50">
+    <ngx-datatable-column name="costPerItem" [width]="100">
       <ng-template let-column="column" ngx-datatable-header-template>
         Стоимость за единицу
       </ng-template>
@@ -63,7 +63,7 @@
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="totalCost" [width]="50">
+    <ngx-datatable-column name="totalCost" [width]="100">
       <ng-template let-column="column" ngx-datatable-header-template>
         Общая стоимость
       </ng-template>
@@ -72,7 +72,7 @@
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="notes" [width]="200">
+    <ngx-datatable-column name="notes" [width]="300">
       <ng-template let-column="column" ngx-datatable-header-template>
         Примечание
       </ng-template>
@@ -81,32 +81,14 @@
       </ng-template>
     </ngx-datatable-column>
 
+    <ngx-datatable-column [width]="40">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex">
+        <button class="btn btn-light btn-block btn-xs" (click)="deleteItem(rowIndex)">Удалить</button>
+      </ng-template>
+    </ngx-datatable-column>
+
   </ngx-datatable>
 </div>
-
-<!-- <div class="appmain">
-  <div class="appbar">
-    <psa-datatable-header
-                [total]="total"
-                [shown]="shown"
-                [availableColumns]="availableColumns"
-                [showAddButton]="true"
-                [showOptions]="false"
-                [showTitle]="false"
-                (onAddItem)="addDeliveryItem(content)"
-                (onFilter)="datatable.onFilter($event)"
-                (onFilterReset)="datatable.resetFilter()">
-    </psa-datatable-header>
-  </div>
-  <div class="appcontent">
-    <psa-delivery-table 
-                #datatable
-                [rows]="deliveryItemRows"
-                [cols]="availableColumns"
-                (onRowsUpdated)="onRowsUpdated($event)">
-    </psa-delivery-table>
-  </div>
-</div> -->
 
 <ng-template #content>
   <psa-delivery-product-modal
@@ -114,4 +96,13 @@
               (onSave)="saveDeliveryItem($event)"
               (onClose)="closeModal()">
   </psa-delivery-product-modal>
+</ng-template>
+
+<ng-template #removeConfirmation let-c="close">
+  <psa-confirmation
+    (onClose)="c()"
+    (onConfirm)="confirmDelete(); c();"
+    [confirmButtonText]="'Удалить'"
+    [text]="'Вы уверены, что хотите удалить выбранный товар?'">
+  </psa-confirmation>
 </ng-template>

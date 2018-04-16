@@ -17,13 +17,15 @@ export class DeliveryProductsListComponent implements OnInit {
       this.total = data.length;
     }
   }
-  @Output() onProductItemAdded = new EventEmitter<ProductItem>();
+  @Output() onItemAdded = new EventEmitter<ProductItem>();
+  @Output() onItemUpdated = new EventEmitter<ProductItem>();
   
   availableColumns = availableColumns.deliveryProducts;
   deliveryItemRows: ProductItemTablePreview[] = [];
   total = 0;
   shown = 0;
   isModalLoading: false;
+  editing = {};
 
   private modalRef: NgbModalRef;
   private readonly modalConfig: NgbModalOptions = {
@@ -49,8 +51,12 @@ export class DeliveryProductsListComponent implements OnInit {
     this.modalRef.close();
   }
 
+  getRowClass(row) {
+    return row.className;
+  }
+
   saveDeliveryItem(deliveryItem: ProductItem) {
-    this.onProductItemAdded.emit(deliveryItem);
+    this.onItemAdded.emit(deliveryItem);
     this.closeModal();
   }
 
@@ -61,5 +67,17 @@ export class DeliveryProductsListComponent implements OnInit {
     //   this.openTimeReportModal();
     //   row.className += ' active';
     // }
+  }
+
+  startEditing(cellKey: string) {
+    this.editing = {};
+    this.editing[cellKey] = true;
+  }
+
+  updateValue(value, cell, rowIndex) {
+    this.editing[rowIndex + '-' + cell] = false;
+    this.deliveryItemRows[rowIndex][cell] = value;
+    this.deliveryItemRows = [...this.deliveryItemRows];
+    //console.log('UPDATED!', this.deliveryItemRows[rowIndex][cell]);
   }
 }

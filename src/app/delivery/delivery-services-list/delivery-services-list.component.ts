@@ -17,7 +17,7 @@ export class DeliveryServicesListComponent implements OnInit {
       this.total = data.length;
     }
   }
-  @Output() onServiceItemAdded = new EventEmitter<ServiceItem>();
+  @Output() onItemAdded = new EventEmitter<ServiceItem>();
   
   availableColumns = availableColumns.deliveryServices;
   total = 0;
@@ -49,12 +49,10 @@ export class DeliveryServicesListComponent implements OnInit {
   }
 
   saveServiceItem(serviceItem: ServiceItem) {
-    this.onServiceItemAdded.emit(serviceItem);
+    this.onItemAdded.emit(serviceItem);
     this.closeModal();
   }
 
-
-  
   getRowClass(row) {
     return row.className;
   }

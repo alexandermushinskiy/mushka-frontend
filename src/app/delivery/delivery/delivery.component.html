@@ -74,7 +74,7 @@
           <div class="col-lg-3">
             <div class="form-group">
               <label for="dropdown">Способ оплаты:</label>
-              <psa-dropdown [options]="PaymentMethodsList" (onSelectedValue)="onPaymentMethodSelected($event)"></psa-dropdown>
+              <psa-dropdown [options]="PaymentMethodsList" [required]="true" (onSelectedValue)="onPaymentMethodSelected($event)"></psa-dropdown>
             </div>
           </div>
           <div class="offset-md-1 col-lg-2">
@@ -115,12 +115,12 @@
             <div *ngSwitchCase="deliveryType.PRODUCTS">
               <psa-delivery-products-list
                     [productItems]="deliveryItems[selectedDeliveryType].data"
-                    (onProductItemAdded)="onProductItemAdded($event)"></psa-delivery-products-list>
+                    (onItemAdded)="onProductItemAdded($event)"></psa-delivery-products-list>
             </div>
             <div *ngSwitchCase="deliveryType.SERVICES">
               <psa-delivery-services-list
                     [serviceItems]="deliveryItems[selectedDeliveryType].data"
-                    (onServiceItemAdded)="onServiceItemAdded($event)"></psa-delivery-services-list>
+                    (onItemAdded)="onServiceItemAdded($event)"></psa-delivery-services-list>
             </div>
           </div>
         </div>

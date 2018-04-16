@@ -6,6 +6,7 @@
         [options]="{ prefix: '', thousands: ' ', decimal: ',' }"
         [disabled]="disabled"
         [attr.placeholder]="placeholder"
-        [(ngModel)]="currencyValue"
-        (ngModelChange)="onChanged()" />
+        [(ngModel)]="value"
+        (ngModelChange)="onChanged()"
+        (blur)="blur()" />
 </div>

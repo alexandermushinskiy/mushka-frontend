@@ -41,3 +41,17 @@
   flex: 1 1 auto;
   position: relative;
 }
+
+.products-list {
+  max-height: 320px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

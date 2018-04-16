@@ -6,3 +6,8 @@
     box-shadow: none;
   }
 }
+
+/* webkit solution */
+::-webkit-input-placeholder { text-align:left; }
+/* mozilla solution */
+input:-moz-placeholder { text-align:left; }

@@ -12,7 +12,7 @@ import { SuppliersService } from '../../../../core/api/suppliers.service';
 })
 export class SuppliersDropdownComponent implements OnInit {
   @Input() initialValue: Supplier;
-  @Input() required: boolean;
+  @Input() required = true;
   @Output() onSupplierSelected = new EventEmitter<Supplier>();
 
   selectedSupplier: Supplier;

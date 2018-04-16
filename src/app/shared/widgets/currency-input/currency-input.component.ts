@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, Input } from '@angular/core';
+import { Component, OnInit, forwardRef, Input, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -13,10 +13,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   }]
 })
 export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
+  @Input() value: number | null = null;
   @Input() disabled = false;
   @Input() placeholder = 'Введите сумму';
-
-  currencyValue: number | null = null;
+  @Output() onBlur = new EventEmitter<number>();
 
   constructor() { }
 
@@ -24,12 +24,12 @@ export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
   }
 
   onChanged() {
-    this.onChangeCallback(this.currencyValue);
+    this.onChangeCallback(this.value);
   }
 
   writeValue(value: any): void {
     if (value) {
-      this.currencyValue = value;
+      this.value = value;
     }
   }
 
@@ -38,6 +38,11 @@ export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
   }
 
   registerOnTouched() {
+  }
+
+  blur() {
+    console.info('blur', this.value);
+    this.onBlur.emit(this.value);
   }
 
   private onChangeCallback: any = () => {};

@@ -2,6 +2,7 @@
 
 .csr-datetimepicker {
   position: relative;
+  display: inline-block;
 
   &-dialog {
     position: absolute;
@@ -48,7 +49,7 @@
   }
 
   .custom-content {
-    display: inline-block;
+    //display: inline-block;
     position: relative;
   }
 }

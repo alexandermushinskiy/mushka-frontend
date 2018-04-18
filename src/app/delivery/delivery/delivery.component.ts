@@ -26,7 +26,7 @@ export class DeliveryComponent implements OnInit {
   requestDate: string;
   deliveryDate: string;
   previousOrdersNumber = '';
-  batchNumber: string;
+  batchNumber: string = '1234567890';
   cost: number;
   transferFee: number;
   datePickerOptions: any;

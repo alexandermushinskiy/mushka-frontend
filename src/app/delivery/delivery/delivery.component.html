@@ -13,59 +13,67 @@
       </div>
       <div class="content-body">
         <div class="form-row">
-          <!-- <div class="col-md-2">
-            <div class="form-group">
-              <label>Тип:</label>
-              <psa-dropdown [options]="deliveryTypesList" (onSelectedValue)="onDeliveryTypeSelected($event)"></psa-dropdown>
-            </div>
-          </div> -->
-          <div class="col-md-2">
-            <div class="form-group">
-              <label>Дата заявки:</label>
-              <psa-datetimepicker [date]="requestDate"
-                                  [dateFormat]="'YYYY-MM-DD'"
-                                  [pickerType]="'calendar'"
-                                  [isNow]="true"
-                                  (onDateChanged)="onReuestDateChanged($event)">
-                <div class="input-wrapper datepicker-input">
-                  <input class="form-control requestDate"
-                                  [(ngModel)]="requestDate"
-                                  placeholder="Введите дату"
-                                  formControlName="requestDate"/>
-                  <i class="fa fa-calendar-o"></i>
+          <div class="col-lg-9">
+              <div class="form-row">
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label>Номер:</label>
+                    <input class="form-control" readonly="readonly" formControlName="batchNumber" />
+                  </div>
                 </div>
-              </psa-datetimepicker>
-            </div>
-          </div>
-          <div class="col-md-2">
-            <div class="form-group">
-              <label>Дата поступления:</label>
-              <psa-datetimepicker [date]="deliveryDate"
-                                  [dateFormat]="'YYYY-MM-DD'"
-                                  [pickerType]="'calendar'"
-                                  [isNow]="true"
-                                  (onDateChanged)="onDeliveryDateChanged($event)">
-                <div class="input-wrapper datepicker-input">
-                  <input class="form-control deliveryDate"
-                                  [(ngModel)]="deliveryDate"
-                                  placeholder="Введите дату"
-                                  formControlName="deliveryDate"/>
-                  <i class="fa fa-calendar-o"></i>
+                <div class="col-lg-5">
+                  <div class="form-row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Дата заявки:</label>
+                        <psa-datetimepicker [date]="requestDate"
+                                            [dateFormat]="'YYYY-MM-DD'"
+                                            [pickerType]="'calendar'"
+                                            [isNow]="true"
+                                            (onDateChanged)="onReuestDateChanged($event)">
+                          <div class="input-wrapper datepicker-input">
+                            <input class="form-control requestDate"
+                                            [(ngModel)]="requestDate"
+                                            placeholder="Введите дату"
+                                            formControlName="requestDate"/>
+                            <i class="fa fa-calendar-o"></i>
+                          </div>
+                        </psa-datetimepicker>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label>Дата поступления:</label>
+                        <psa-datetimepicker [date]="deliveryDate"
+                                            [dateFormat]="'YYYY-MM-DD'"
+                                            [pickerType]="'calendar'"
+                                            [isNow]="true"
+                                            (onDateChanged)="onDeliveryDateChanged($event)">
+                          <div class="input-wrapper datepicker-input">
+                            <input class="form-control deliveryDate"
+                                            [(ngModel)]="deliveryDate"
+                                            placeholder="Введите дату"
+                                            formControlName="deliveryDate"/>
+                            <i class="fa fa-calendar-o"></i>
+                          </div>
+                        </psa-datetimepicker>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </psa-datetimepicker>
-            </div>
+              </div>
           </div>
         </div>
         <div class="form-row">
-          <div class="col-lg-8">
+          <div class="col-lg-6">
             <div class="form-group">
-              <label for="dropdown">Поставщик:</label>
+              <label for="dropdown">Организация:</label>
               <psa-suppliers-dropdown (onSupplierSelected)="onSupplierSelected($event)"></psa-suppliers-dropdown>
             </div>
           </div>
-          <div class="col-lg-2">
+          <div class="col-lg-2 col-lg-auto">
             <div class="form-group">
-              <label for="dropdown">Кол-во предыдущих заказов:</label>
+              <label for="dropdown">Прошлые заказы:</label>
               <input class="form-control" readonly="readonly" formControlName="previousOrdersNumber" />
             </div>
           </div>
@@ -77,19 +85,19 @@
               <psa-dropdown [options]="PaymentMethodsList" [required]="true" (onSelectedValue)="onPaymentMethodSelected($event)"></psa-dropdown>
             </div>
           </div>
-          <div class="offset-md-1 col-lg-2">
+          <div class="col-md-3">
             <div class="form-group">
               <label>Общая стоимость:</label>
               <psa-currency-input formControlName="totalCost"></psa-currency-input>
             </div>
           </div>
-          <div class="col-lg-2">
+          <div class="col-md-3">
             <div class="form-group">
               <label>Стоимость доставки:</label>
               <psa-currency-input formControlName="cost"></psa-currency-input>
             </div>
           </div>
-          <div class="col-lg-2">
+          <div class="col-md-3">
             <div class="form-group">
               <label>Комиссия за перевод:</label>
               <psa-currency-input formControlName="transferFee"></psa-currency-input>

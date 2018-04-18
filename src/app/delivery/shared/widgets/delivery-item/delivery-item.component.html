@@ -16,10 +16,6 @@
         <div class="lr-item-label">Общая стоимость:</div>
         <div> {{ delivery.totalCost | psaCurrency}} </div>
       </div>
-      <div class="lr-item-row">
-        <div class="lr-item-label">Дата заявки:</div>
-        <div> {{ delivery.requestDate }} </div>
-      </div>
     </div>
   </div>
   <button (click)="editItem()" class="btn btn-xs btn-toggle-editor">

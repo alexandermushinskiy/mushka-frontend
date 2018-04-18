@@ -93,7 +93,7 @@ export class DeliveriesService {
         totalCost: 1200.00,
         products: [],
         services: [],
-        isDraft: false
+        isDraft: true
       })
     ];
   }

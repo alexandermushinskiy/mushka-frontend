@@ -148,15 +148,26 @@
             <label ngbButtonLabel 
                     class="btn btn-underline delivery-type"
                     *ngFor="let option of optionsList"
-                    [ngClass]="{'active': selectedDeliveryType === option}">
+                    [ngClass]="{'active': selectedOption === option}"
+                    (click)="selectedOption = option">
               <input ngbButton type="radio" [value]="option"> {{ option }}
             </label>
           </div>
-          <div class="historical-deliveries" >
-            <psa-delivery-item
+          <div [ngSwitch]="selectedOption">
+              <div *ngSwitchCase="deliveryOption.DRAFTS">
+                <psa-delivery-item
+                      class="delivery-item-wrapper"
+                      [delivery]="delivery"
+                      *ngFor="let delivery of draftDeliveries">
+                </psa-delivery-item>
+              </div>
+            <div *ngSwitchCase="deliveryOption.HISTORY">
+              <psa-delivery-item
                     class="delivery-item-wrapper"
                     [delivery]="delivery"
-                    *ngFor="let delivery of deliveries"></psa-delivery-item>
+                    *ngFor="let delivery of historicalDeliveries">
+              </psa-delivery-item>
+            </div>
           </div>
         </div>
       </div>

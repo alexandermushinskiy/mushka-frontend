@@ -15,6 +15,7 @@ import { Delivery } from '../shared/models/delivery.model';
 import { KeyValuePair } from '../../shared/models/key-value-pair.model';
 import { deliveryTypeNames } from '../shared/constants/delivery-type-names.const';
 import { DeliveryItem } from '../shared/models/delivery-item.model';
+import { DeliveryOption } from '../shared/enums/delivery-option.enum';
 
 @Component({
   selector: 'psa-delivery',
@@ -27,10 +28,11 @@ export class DeliveryComponent implements OnInit {
   deliveryDate: string;
   previousOrdersNumber = '';
   batchNumber: string = '1234567890';
+  paymentMethod: string;
   cost: number;
   transferFee: number;
   datePickerOptions: any;
-  deliveryTypesList = [DeliveryType.PRODUCTS, DeliveryType.SERVICES, DeliveryType.EQUIPMENT]; //Object.values(DeliveryType);
+  deliveryTypesList = [DeliveryType.PRODUCTS, DeliveryType.SERVICES, DeliveryType.EQUIPMENT];
   PaymentMethodsList = Object.values(PaymentMethod);
   dateFormat = 'YYYY-MM-DD';
   deliveryType = DeliveryType;
@@ -39,9 +41,11 @@ export class DeliveryComponent implements OnInit {
   deliveryServices: ServiceItem[] = [];
 
   deliveryItems: { [type: number]: DeliveryItem } = {};
-  deliveries: Delivery[];
-  optionsList = ['История', 'Черновики'];
-  selectedOption = 'История';
+  historicalDeliveries: Delivery[];
+  draftDeliveries: Delivery[];
+  optionsList = [DeliveryOption.DRAFTS, DeliveryOption.HISTORY];
+  selectedOption = DeliveryOption.DRAFTS;
+  deliveryOption = DeliveryOption;
   isSubmitting = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -52,13 +56,14 @@ export class DeliveryComponent implements OnInit {
   ngOnInit() {
 
     this.deliveryTypesList
-      .map(type => this.deliveryItems[type] = new DeliveryItem(type, deliveryTypeNames[type], [])); //{ displayName: deliveryTypeNames[type], amount: 0});
+      .map(type => this.deliveryItems[type] = new DeliveryItem(type, deliveryTypeNames[type], []));
 
     this.setFakeData();
 
     this.deliveryService.getDeliveries()
-      .subscribe(res => {
-        this.deliveries = res;
+      .subscribe((deliveries: Delivery[]) => {
+        this.historicalDeliveries = deliveries.filter((del: Delivery) => !del.isDraft);
+        this.draftDeliveries = deliveries.filter((del: Delivery) => del.isDraft);
       })
 
     this.buildForm();
@@ -81,12 +86,9 @@ export class DeliveryComponent implements OnInit {
     ctrl.setValue(supplier.address.length);
   }
 
-  onDeliveryTypeSelected(deliveryType: DeliveryType) {
-
-  }
-
   onPaymentMethodSelected(paymentMethod: PaymentMethod) {
-
+    const ctrl = this.deliveryForm.controls['paymentMethod'];
+    ctrl.setValue(paymentMethod);
   }
   
   onProductItemAdded(productItem: ProductItem) {
@@ -109,6 +111,7 @@ export class DeliveryComponent implements OnInit {
       deliveryDate: [this.deliveryDate, Validators.required],
       previousOrdersNumber: [this.previousOrdersNumber],
       batchNumber: [this.batchNumber],
+      paymentMethod: [this.paymentMethod, Validators.required],
       cost: [this.cost],
       transferFee: [this.transferFee],
       totalCost: []

@@ -56,7 +56,11 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.btn-remove {
+.btn-del {
+  color: $text-muted;
   background-color: transparent;
-  display: inline-block;
+  font-size: 18px;
+  &:hover {
+    color: $red;
+  }
 }

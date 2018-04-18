@@ -46,6 +46,11 @@
   max-height: 320px;
 }
 
-.btn-remove {
-  //display: inline-block;
+.btn-del {
+  color: $text-muted;
+  background-color: transparent;
+  font-size: 18px;
+  &:hover {
+    color: $red;
+  }
 }

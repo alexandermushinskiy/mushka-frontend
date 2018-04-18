@@ -81,9 +81,13 @@
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column [width]="40">
+    <ngx-datatable-column [width]="50"
+                          [canAutoResize]="false"
+                          [resizeable]="false">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex">
-        <button class="btn btn-light btn-block btn-xs" (click)="deleteItem(rowIndex)">Удалить</button>
+        <button class="btn btn-xs btn-del" (click)="deleteItem(rowIndex)">
+          <i class="fa fa-trash"></i>
+        </button>
       </ng-template>
     </ngx-datatable-column>
 

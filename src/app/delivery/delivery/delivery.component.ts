@@ -128,7 +128,9 @@ export class DeliveryComponent implements OnInit {
       paymentMethod: [this.paymentMethod, Validators.required],
       deliveryCost: [this.deliveryCost, Validators.required],
       transferFee: [this.transferFee, Validators.required],
-      totalCost: [this.totalCost, Validators.required]
+      totalCost: [this.totalCost, Validators.required],
+      products: [this.deliveryItems[DeliveryType.PRODUCTS].data],
+      services: [this.deliveryItems[DeliveryType.SERVICES].data]
     });
   }
 

@@ -256,7 +256,7 @@
   background-color: $layer3;
   text-align: right;
   
-  .btns {
+  &-buttons {
     > :first-child {
       margin-right: 10px;
     }

@@ -26,19 +26,21 @@ export class DeliveryComponent implements OnInit {
   deliveryForm: FormGroup;
   requestDate: string;
   deliveryDate: string;
-  previousOrdersNumber = '';
+  previousOrdersAmount;
   batchNumber: string = '1234567890';
   paymentMethod: string;
-  cost: number;
+  deliveryCost: number;
   transferFee: number;
+  totalCost: number;
+
   datePickerOptions: any;
   deliveryTypesList = [DeliveryType.PRODUCTS, DeliveryType.SERVICES, DeliveryType.EQUIPMENT];
   PaymentMethodsList = Object.values(PaymentMethod);
   dateFormat = 'YYYY-MM-DD';
   deliveryType = DeliveryType;
   selectedDeliveryType: DeliveryType = DeliveryType.PRODUCTS;
-  deliveryProducts: ProductItem[] = [];
-  deliveryServices: ServiceItem[] = [];
+  //deliveryProducts: ProductItem[] = [];
+  //deliveryServices: ServiceItem[] = [];
 
   deliveryItems: { [type: number]: DeliveryItem } = {};
   historicalDeliveries: Delivery[];
@@ -82,7 +84,7 @@ export class DeliveryComponent implements OnInit {
   }
 
   onSupplierSelected(supplier: Supplier) {
-    const ctrl = this.deliveryForm.controls['previousOrdersNumber'];
+    const ctrl = this.deliveryForm.controls['previousOrdersAmount'];
     ctrl.setValue(supplier.address.length);
   }
 
@@ -92,13 +94,25 @@ export class DeliveryComponent implements OnInit {
   }
   
   onProductItemAdded(productItem: ProductItem) {
-    this.deliveryProducts = [...this.deliveryProducts, productItem];
-    this.deliveryItems[DeliveryType.PRODUCTS].data = this.deliveryProducts;
+    const productItems = this.deliveryItems[DeliveryType.PRODUCTS].data;
+    this.deliveryItems[DeliveryType.PRODUCTS].data = [...productItems, productItem];
+  }
+
+  onProductItemDeleted(rowIndex: number) {
+    const productItems = this.deliveryItems[DeliveryType.PRODUCTS].data;
+    productItems.splice(rowIndex, 1);
+    this.deliveryItems[DeliveryType.PRODUCTS].data = [...productItems];
   }
 
   onServiceItemAdded(serviceItem: ServiceItem) {
-    this.deliveryServices = [...this.deliveryServices, serviceItem];
-    this.deliveryItems[DeliveryType.SERVICES].data = this.deliveryServices;
+    const serviceItems = this.deliveryItems[DeliveryType.SERVICES].data;
+    this.deliveryItems[DeliveryType.SERVICES].data = [...serviceItems, serviceItem];
+  }
+
+  onServiceItemDeleted(rowIndex: number) {
+    const serviceItems = this.deliveryItems[DeliveryType.SERVICES].data;
+    serviceItems.splice(rowIndex, 1);
+    this.deliveryItems[DeliveryType.SERVICES].data = [...serviceItems];
   }
 
   changeDeliveryType(deliveryType: DeliveryType) {
@@ -107,14 +121,14 @@ export class DeliveryComponent implements OnInit {
 
   private buildForm() {
     this.deliveryForm = this.formBuilder.group({
+      batchNumber: [this.batchNumber],
       requestDate: [this.requestDate, Validators.required],
       deliveryDate: [this.deliveryDate, Validators.required],
-      previousOrdersNumber: [this.previousOrdersNumber],
-      batchNumber: [this.batchNumber],
+      previousOrdersAmount: [this.previousOrdersAmount],
       paymentMethod: [this.paymentMethod, Validators.required],
-      cost: [this.cost],
-      transferFee: [this.transferFee],
-      totalCost: []
+      deliveryCost: [this.deliveryCost, Validators.required],
+      transferFee: [this.transferFee, Validators.required],
+      totalCost: [this.totalCost, Validators.required]
     });
   }
 
@@ -123,12 +137,12 @@ export class DeliveryComponent implements OnInit {
   }
 
   private setFakeData() {
-    this.deliveryProducts = [
+    const deliveryProducts = [
       new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
       new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
       new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 }),
-      // new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
-      // new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
+      new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
+      new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
       // new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 }),
       // new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
       // new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
@@ -140,12 +154,12 @@ export class DeliveryComponent implements OnInit {
       // new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
       // new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 })
     ];
-    this.deliveryItems[DeliveryType.PRODUCTS].data = this.deliveryProducts;
+    this.deliveryItems[DeliveryType.PRODUCTS].data = deliveryProducts;
 
-    this.deliveryServices = [
+    const deliveryServices = [
       new ServiceItem({ name: 'Фотосессия товара', cost: 270.00, notes: 'какие-то там заметки' }),
       new ServiceItem({ name: 'Разработка вебсайта', cost: 7000.00 })
     ];
-    this.deliveryItems[DeliveryType.SERVICES].data = this.deliveryServices;
+    this.deliveryItems[DeliveryType.SERVICES].data = deliveryServices;
   }
 }

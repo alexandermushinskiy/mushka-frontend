@@ -18,6 +18,14 @@
                  [rowClass]="getRowClass"
                  (activate)="activateRow($event)">
 
+    <ngx-datatable-column [width]="28"
+                          [canAutoResize]="false"
+                          [resizeable]="false">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex">
+        <span>{{ rowIndex + 1 }}.</span>
+      </ng-template>
+    </ngx-datatable-column>
+
     <ngx-datatable-column name="name" [width]="250">
       <ng-template let-column="column" ngx-datatable-header-template>
         Наименование

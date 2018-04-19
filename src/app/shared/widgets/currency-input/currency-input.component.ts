@@ -17,6 +17,7 @@ export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
   @Input() disabled = false;
   @Input() placeholder = 'Введите сумму';
   @Output() onBlur = new EventEmitter<number>();
+  @Output() onClickOutside = new EventEmitter<number>();
 
   constructor() { }
 
@@ -41,8 +42,11 @@ export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
   }
 
   blur() {
-    console.info('blur', this.value);
     this.onBlur.emit(this.value);
+  }
+
+  clickOutside() {
+    this.onClickOutside.emit(this.value);
   }
 
   private onChangeCallback: any = () => {};

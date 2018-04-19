@@ -23,6 +23,7 @@ import { NumberFieldDirective } from './directives/number-field.directive';
 import { PsaCurrencyPipe } from './pipes/psa-currency.pipe';
 import { ProductModalComponent } from './widgets/product-modal/product-modal.component';
 import { ConfirmationComponent } from './widgets/confirmation/confirmation.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { ConfirmationComponent } from './widgets/confirmation/confirmation.compo
     PopoverDirective,
     ClosePopoverOnClickOutsideDirective,
     NumberFieldDirective,
+    ClickOutsideDirective,
     DashIfEmptyPipe,
     PsaCurrencyPipe,
     PsaDatatableHeaderComponent,
@@ -65,6 +67,7 @@ import { ConfirmationComponent } from './widgets/confirmation/confirmation.compo
     PopoverDirective,
     ClosePopoverOnClickOutsideDirective,
     NumberFieldDirective,
+    ClickOutsideDirective,
     /* Pipes */
     DashIfEmptyPipe,
     PsaCurrencyPipe,

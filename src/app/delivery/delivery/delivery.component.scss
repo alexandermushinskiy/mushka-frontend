@@ -230,10 +230,6 @@
   padding-top: 50px;
 }
 
-.historical-deliveries {
-
-}
-
 .delivery-type {
   font-size: 15px;
   line-height: 20px;
@@ -246,13 +242,30 @@
 }
 
 .delivery-item-wrapper {
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-between;
-  // padding: $padding-base/2 0;
-  // position: relative;
-
   &:not(:last-child) {
     border-bottom: $border-width solid $border-color;
+  }
+}
+
+.footer {
+  position: absolute;
+  right: $app-page-aside-min-width-md;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: $layer3;
+  text-align: right;
+  
+  .btns {
+    > :first-child {
+      margin-right: 10px;
+    }
+    .btn {
+      width: 160px;
+    }
+  }
+
+  @media (min-width: $desktop) {
+    right: $app-page-aside-min-width;
   }
 }

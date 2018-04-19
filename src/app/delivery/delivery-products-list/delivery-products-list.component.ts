@@ -20,6 +20,7 @@ export class DeliveryProductsListComponent implements OnInit {
   }
   @Output() onItemAdded = new EventEmitter<ProductItem>();
   @Output() onItemUpdated = new EventEmitter<ProductItem>();
+  @Output() onItemDeleted = new EventEmitter<number>();
   
   availableColumns = availableColumns.deliveryProducts;
   deliveryItemRows: ProductItemTablePreview[] = [];
@@ -77,8 +78,7 @@ export class DeliveryProductsListComponent implements OnInit {
   }
 
   confirmDelete() {
-    this.deliveryItemRows.splice(this.indexToDelete, 1);
-    this.deliveryItemRows = [...this.deliveryItemRows];
+    this.onItemDeleted.emit(this.indexToDelete);
   }
 
   startEditing(cellKey: string) {

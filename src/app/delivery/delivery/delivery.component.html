@@ -74,7 +74,7 @@
           <div class="col-lg-2 col-lg-auto">
             <div class="form-group">
               <label for="dropdown">Прошлые заказы:</label>
-              <input class="form-control" readonly="readonly" formControlName="previousOrdersNumber" />
+              <input class="form-control" readonly="readonly" formControlName="previousOrdersAmount" />
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label>Стоимость доставки:</label>
-              <psa-currency-input formControlName="cost"></psa-currency-input>
+              <psa-currency-input formControlName="deliveryCost"></psa-currency-input>
             </div>
           </div>
           <div class="col-md-3">
@@ -123,12 +123,16 @@
             <div *ngSwitchCase="deliveryType.PRODUCTS">
               <psa-delivery-products-list
                     [productItems]="deliveryItems[selectedDeliveryType].data"
-                    (onItemAdded)="onProductItemAdded($event)"></psa-delivery-products-list>
+                    (onItemAdded)="onProductItemAdded($event)"
+                    (onItemDeleted)="onProductItemDeleted($event)">
+              </psa-delivery-products-list>
             </div>
             <div *ngSwitchCase="deliveryType.SERVICES">
               <psa-delivery-services-list
                     [serviceItems]="deliveryItems[selectedDeliveryType].data"
-                    (onItemAdded)="onServiceItemAdded($event)"></psa-delivery-services-list>
+                    (onItemAdded)="onServiceItemAdded($event)"
+                    (onItemDeleted)="onServiceItemDeleted($event)">
+              </psa-delivery-services-list>
             </div>
           </div>
         </div>
@@ -173,11 +177,17 @@
       </div>
       <div class="aside-footer">
         <!-- buttons -->
-        <div class="buttons-flex">
+        <!-- <div class="buttons-flex">
           <button type="button" class="btn btn-lg btn-light">Сохранить как черновик</button>
           <button type="submit" class="btn btn-lg btn-primary btn-submit">Сохранить <psa-spinner [isLoading]="isSubmitting"></psa-spinner></button>
-        </div>
+        </div> -->
       </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="btns">
+      <button type="button" class="btn btn-md btn-light">Сохранить как черновик</button>
+      <button type="submit" class="btn btn-md btn-primary btn-submit" [disabled]="deliveryForm.invalid">Сохранить <psa-spinner [isLoading]="isSubmitting"></psa-spinner></button>
     </div>
   </div>
 </form>

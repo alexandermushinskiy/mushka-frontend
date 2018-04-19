@@ -19,6 +19,7 @@ export class DeliveryServicesListComponent implements OnInit {
     }
   }
   @Output() onItemAdded = new EventEmitter<ServiceItem>();
+  @Output() onItemDeleted = new EventEmitter<number>();
   
   availableColumns = availableColumns.deliveryServices;
   total = 0;
@@ -74,7 +75,6 @@ export class DeliveryServicesListComponent implements OnInit {
   }
 
   confirmDelete() {
-    this.serviceItemRows.splice(this.indexToDelete, 1);
-    this.serviceItemRows = [...this.serviceItemRows];
+    this.onItemDeleted.emit(this.indexToDelete);
   }
 }

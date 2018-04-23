@@ -170,7 +170,8 @@
               <psa-delivery-item
                     class="delivery-item-wrapper"
                     [delivery]="delivery"
-                    *ngFor="let delivery of historicalDeliveries">
+                    *ngFor="let delivery of historicalDeliveries"
+                    (onEdit)="edit($event)">
               </psa-delivery-item>
             </div>
           </div>
@@ -182,7 +183,7 @@
   </div>
   <div class="footer">
     <div class="footer-buttons">
-      <button type="button" class="btn btn-md btn-light" [disabled]="!isDraftValid" (click)="saveAsDraft()">Сохранить как черновик <psa-spinner [isLoading]="isDraftSaving"></psa-spinner></button>
+      <button type="button" class="btn btn-md btn-light" [disabled]="!isDraftValid" (click)="saveAsDraft()">Сохранить как черновик<psa-spinner [isLoading]="isDraftSaving"></psa-spinner></button>
       <button type="submit" class="btn btn-md btn-primary" [disabled]="deliveryForm.invalid" (click)="save()">Сохранить <psa-spinner [isLoading]="isSaving"></psa-spinner></button>
     </div>
   </div>

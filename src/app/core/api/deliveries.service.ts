@@ -8,6 +8,7 @@ import { ProductItem } from "../../delivery/shared/models/product-item.model";
 import { ServiceItem } from "../../delivery/shared/models/service-item.model";
 import { PaymentMethod } from "../../delivery/shared/enums/payment-method.enum";
 import { GuidGenerator } from "../guid-generator/guid.generator";
+import { Product } from "../../shared/models/product.model";
 
 @Injectable()
 export class DeliveriesService {
@@ -64,67 +65,107 @@ export class DeliveriesService {
   private getFakeDeliveries(): Delivery[] {
     return [
       new Delivery({
+        id: '2A689E03-8D4A-4397-9292-2ECBD1DAEEB3',
         requestDate: 'Янв 13, 2018',
         deliveryDate:  'Янв 17, 2018',
         supplier: new Supplier({
-          name: 'Какой-то там поставщик',
-          address: 'ул.Абрикосовая 27/Б, г.Киев, УКРАИНА'
+          id: 'FE557110-FE4E-492E-933E-EACD6A31E22D',
+          name: 'Вова-Зи-Львов',
+          address: 'ул. Шевченка 41, г.Львов, УКРАИНА',
+          phone: '+380(50)921-7654',
+          email: 'hello@vova-zi-lvova.com',
+          contactPerson: 'Сахаров Владимир Сергеевич',
+          paymentConditions: 'Безналичный',
+          services: 'Бирки',
+          webSite: 'vova-zi-lvova.com.ua'
         }),
         paymentMethod:  PaymentMethod.CREDIT_CARD,
         batchNumber:  'D00001',
         transferFee: 10.00,
-        deiveryCost: 70.00,
+        deliveryCost: 70.00,
         totalCost: 1200.00,
-        products: [],
+        products: [
+          new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
+          new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' })
+        ],
         services: [],
         isDraft: false
       }),
       new Delivery({
+        id: '3D62C4A9-6A0A-473C-B82D-FF3BDC0E14D5',
         requestDate: 'Янв 21, 2018',
         deliveryDate:  'Янв 22, 2018',
         supplier: new Supplier({
-          name: 'Таки да, поставщик',
-          address: 'ул.Янтарная 3, г.Львов, УКРАИНА'
+          id: 'FE557110-FE4E-492E-933E-EACD6A31E22D',
+          name: 'Вова-Зи-Львов',
+          address: 'ул. Шевченка 41, г.Львов, УКРАИНА',
+          phone: '+380(50)921-7654',
+          email: 'hello@vova-zi-lvova.com',
+          contactPerson: 'Сахаров Владимир Сергеевич',
+          paymentConditions: 'Безналичный',
+          services: 'Бирки',
+          webSite: 'vova-zi-lvova.com.ua'
         }),
         paymentMethod:  PaymentMethod.TRANSFER_TO_CARD,
         batchNumber:  'D00331',
         transferFee: 10.00,
-        deiveryCost: 70.00,
+        deliveryCost: 70.00,
         totalCost: 1200.00,
-        products: [],
+        products: [
+          new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 })
+        ],
         services: [],
         isDraft: false
       }),
       new Delivery({
+        id: '4225E8B0-D56E-488B-B2AB-9B511D0AF22F',
         requestDate: 'Фев 05, 2018',
         deliveryDate:  'Фев 11, 2018',
         supplier: new Supplier({
-          name: 'Да-да, там был поставщик',
-          address: 'ул.Лазурная 55, г.Одесса, УКРАИНА'
+          id: 'FE557110-FE4E-492E-933E-EACD6A31E22D',
+          name: 'Вова-Зи-Львов',
+          address: 'ул. Шевченка 41, г.Львов, УКРАИНА',
+          phone: '+380(50)921-7654',
+          email: 'hello@vova-zi-lvova.com',
+          contactPerson: 'Сахаров Владимир Сергеевич',
+          paymentConditions: 'Безналичный',
+          services: 'Бирки',
+          webSite: 'vova-zi-lvova.com.ua'
         }),
         paymentMethod:  PaymentMethod.CASH,
         batchNumber:  'D00515',
         transferFee: 10.00,
-        deiveryCost: 70.00,
+        deliveryCost: 70.00,
         totalCost: 1200.00,
-        products: [],
+        products: [
+          new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' })
+        ],
         services: [],
         isDraft: false
       }),
       new Delivery({
-
+        id: 'C1FECCED-9182-4B41-BF49-FA9B7FFABD79',
         requestDate: 'Март 15, 2018',
         deliveryDate:  'Фев 16, 2018',
         supplier: new Supplier({
-          name: 'Не успел дописать',
-          address: 'Где-то на окраине села'
+          id: 'FE557110-FE4E-492E-933E-EACD6A31E22D',
+          name: 'Вова-Зи-Львов',
+          address: 'ул. Шевченка 41, г.Львов, УКРАИНА',
+          phone: '+380(50)921-7654',
+          email: 'hello@vova-zi-lvova.com',
+          contactPerson: 'Сахаров Владимир Сергеевич',
+          paymentConditions: 'Безналичный',
+          services: 'Бирки',
+          webSite: 'vova-zi-lvova.com.ua'
         }),
         paymentMethod:  PaymentMethod.CREDIT_CARD,
         batchNumber:  'D00775',
         transferFee: 10.00,
-        deiveryCost: 70.00,
+        deliveryCost: 70.00,
         totalCost: 1200.00,
-        products: [],
+        products: [
+          new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' })
+        ],
         services: [],
         isDraft: true
       })

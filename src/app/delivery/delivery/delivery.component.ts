@@ -59,6 +59,7 @@ export class DeliveryComponent implements OnInit {
   deliveryOption = DeliveryOption;
   isSaving = false;
   isDraftSaving = false;
+  canBeSavedAsDraft = true;
 
   constructor(private formBuilder: FormBuilder,
               private location: Location,
@@ -67,7 +68,7 @@ export class DeliveryComponent implements OnInit {
   }
 
   get isDraftValid(): boolean {
-    return this.deliveryForm.value.requestDate && this.deliveryForm.value.supplier;
+    return this.canBeSavedAsDraft && this.deliveryForm.value.requestDate && this.deliveryForm.value.supplier;
   }
 
   ngOnInit() {
@@ -133,10 +134,17 @@ export class DeliveryComponent implements OnInit {
 
   edit(delivery: Delivery) {
     this.deliverId = delivery.id;
-    this.deliveryForm.patchValue(delivery);
-
+    this.canBeSavedAsDraft = delivery.isDraft;
     this.deliveryItems[DeliveryType.PRODUCTS].data = delivery.products;
     this.deliveryItems[DeliveryType.SERVICES].data = delivery.services;
+    
+    this.deliveryForm.patchValue(delivery);
+
+    const productsList = this.getDeliveryItemsControl(DeliveryType.PRODUCTS);
+    delivery.products.map(prod => productsList.push(this.formBuilder.group(prod)));
+
+    const servicesList = this.getDeliveryItemsControl(DeliveryType.SERVICES);
+    delivery.services.map(prod => productsList.push(this.formBuilder.group(prod)));
   }
 
   private getDeliveryItemsControl(deliveryType: DeliveryType): FormArray {
@@ -146,7 +154,7 @@ export class DeliveryComponent implements OnInit {
 
   private saveDelivery(isDraft: boolean) {
     const delivery = this.createDelivery(isDraft);
-console.info('delivery', delivery);
+
     (this.deliverId ? this.deliveryService.update(delivery) : this.deliveryService.create(delivery))
       .subscribe(
         (res: Delivery) => this.onSavedSucces(res, delivery.id ? 'updated' : 'created'),

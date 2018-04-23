@@ -27,28 +27,38 @@
     </ngx-datatable-column>
 
     <ngx-datatable-column name="name" [width]="250">
-      <ng-template let-column="column" ngx-datatable-header-template>
+      <ng-template ngx-datatable-header-template let-column="column">
         Наименование
       </ng-template>
-      <ng-template let-value="value" ngx-datatable-cell-template>
+      <ng-template ngx-datatable-cell-template let-value="value">
         <span [title]="value">{{ value }}</span>
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="cost" [width]="150">
-      <ng-template let-column="column" ngx-datatable-header-template>
+      <ng-template ngx-datatable-header-template let-column="column">
         Стоимость
       </ng-template>
-      <ng-template let-value="value" ngx-datatable-cell-template>
-       <span [title]="value">{{ value | psaCurrency }}</span>
+      <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex">
+       <span [title]="value"
+              *ngIf="!editing[rowIndex + '-cost']"
+              (dblclick)="startEditing(rowIndex + '-cost')">
+          {{ value | psaCurrency }}
+        </span>
+        <psa-currency-input *ngIf="editing[rowIndex + '-cost']"
+                            [placeholder]="''"
+                            [value]="value"
+                            (onBlur)="updateValue($event, 'cost', rowIndex)"
+                            (onClickOutside)="updateValue($event, 'cost', rowIndex)">
+        </psa-currency-input>
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="notes">
-      <ng-template let-column="column" ngx-datatable-header-template>
+      <ng-template ngx-datatable-header-template let-column="column">
         Примечание
       </ng-template>
-      <ng-template let-value="value" ngx-datatable-cell-template>
+      <ng-template ngx-datatable-cell-template let-value="value">
        <span [title]="value">{{ value }}</span>
       </ng-template>
     </ngx-datatable-column>

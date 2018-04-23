@@ -8,11 +8,15 @@
   <div class="modal-body">
     <div class="form-group">
       <label for="name" class="text-muted">Наименование:</label>
-      <input type="text" class="form-control name" id="name" formControlName="name">
+      <input type="text" class="form-control name" id="name" formControlName="name" autocomplete="off">
     </div>
     <div class="form-group w-50">
       <label for="cost" class="text-muted">Стоимость:</label>
       <psa-currency-input id="cost" [placeholder]="''" formControlName="cost"></psa-currency-input>
+    </div>
+    <div class="form-group">
+      <label for="notes" class="text-muted">Примечание:</label>
+      <textarea class="form-control text-area-vertical" rows="3" id="notes" formControlName="notes"></textarea>
     </div>
   </div>
   <div class="modal-footer">

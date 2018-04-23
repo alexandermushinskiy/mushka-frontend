@@ -14,8 +14,6 @@ export class DeliveryServiceModalComponent implements OnInit {
   @Output() onSave = new EventEmitter<ServiceItem>();
   
   serviceItemForm: FormGroup;
-  name: string;
-  cost: number;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -28,7 +26,8 @@ export class DeliveryServiceModalComponent implements OnInit {
 
     const deliveryItem = new ServiceItem({
       name: serviceItemFormValue.name,
-      cost: serviceItemFormValue.cost
+      cost: serviceItemFormValue.cost,
+      notes: serviceItemFormValue.notes
     });
 
     this.onSave.emit(deliveryItem);
@@ -40,8 +39,9 @@ export class DeliveryServiceModalComponent implements OnInit {
 
   private buildForm() {
     this.serviceItemForm = this.formBuilder.group({
-      name: [this.name, Validators.required],
-      cost: [this.cost]
+      name: [null, Validators.required],
+      cost: [null, Validators.required],
+      notes: null
     });
   }
 }

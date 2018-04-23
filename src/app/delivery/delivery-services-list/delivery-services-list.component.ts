@@ -26,6 +26,7 @@ export class DeliveryServicesListComponent implements OnInit {
   shown = 0;
   serviceItemRows: ServiceItemTablePreview[] = [];
   indexToDelete: number;
+  editing = {};
 
   private modalRef: NgbModalRef;
   private readonly modalConfig: NgbModalOptions = {
@@ -76,5 +77,16 @@ export class DeliveryServicesListComponent implements OnInit {
 
   confirmDelete() {
     this.onItemDeleted.emit(this.indexToDelete);
+  }
+
+  startEditing(cellKey: string) {
+    this.editing = {};
+    this.editing[cellKey] = true;
+  }
+
+  updateValue(value, cell, rowIndex) {
+    this.editing[rowIndex + '-' + cell] = false;
+    this.serviceItemRows[rowIndex][cell] = value;
+    this.serviceItemRows = [...this.serviceItemRows];
   }
 }

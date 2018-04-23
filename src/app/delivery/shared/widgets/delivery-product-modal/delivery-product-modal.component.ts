@@ -19,11 +19,7 @@ export class DeliveryProductModalComponent implements OnInit {
   @Output() onSave = new EventEmitter<ProductItem>();
   
   deliveryItemForm: FormGroup;
-  name: string;
-  amount: number;
-  costPerItem: number;
-  notes: string;
-
+  
   displayValue: string;
   selectedProduct: Product;
   items: Observable<Product[]>;
@@ -84,10 +80,10 @@ export class DeliveryProductModalComponent implements OnInit {
 
   private buildForm() {
     this.deliveryItemForm = this.formBuilder.group({
-      name: [this.name, Validators.required],
-      amount: [this.amount, Validators.required],
-      costPerItem: [this.costPerItem, Validators.required],
-      notes: this.notes
+      name: [null, Validators.required],
+      amount: [null, Validators.required],
+      costPerItem: [null, Validators.required],
+      notes: null
     });
   }
 }

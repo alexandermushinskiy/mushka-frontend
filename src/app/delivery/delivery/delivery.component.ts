@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NG_VALIDATORS, FormArray } from '@angular/forms';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
 
@@ -16,6 +16,7 @@ import { KeyValuePair } from '../../shared/models/key-value-pair.model';
 import { deliveryTypeNames } from '../shared/constants/delivery-type-names.const';
 import { DeliveryItem } from '../shared/models/delivery-item.model';
 import { DeliveryOption } from '../shared/enums/delivery-option.enum';
+import { DeliveryItemsValidator } from '../shared/validators/delivery-items.validator';
 
 @Component({
   selector: 'psa-delivery',
@@ -39,8 +40,6 @@ export class DeliveryComponent implements OnInit {
   dateFormat = 'YYYY-MM-DD';
   deliveryType = DeliveryType;
   selectedDeliveryType: DeliveryType = DeliveryType.PRODUCTS;
-  //deliveryProducts: ProductItem[] = [];
-  //deliveryServices: ServiceItem[] = [];
 
   deliveryItems: { [type: number]: DeliveryItem } = {};
   historicalDeliveries: Delivery[];
@@ -60,7 +59,7 @@ export class DeliveryComponent implements OnInit {
     this.deliveryTypesList
       .map(type => this.deliveryItems[type] = new DeliveryItem(type, deliveryTypeNames[type], []));
 
-    this.setFakeData();
+    //this.setFakeData();
 
     this.deliveryService.getDeliveries()
       .subscribe((deliveries: Delivery[]) => {
@@ -94,25 +93,19 @@ export class DeliveryComponent implements OnInit {
   }
   
   onProductItemAdded(productItem: ProductItem) {
-    const productItems = this.deliveryItems[DeliveryType.PRODUCTS].data;
-    this.deliveryItems[DeliveryType.PRODUCTS].data = [...productItems, productItem];
+    this.addDeliveryItem(DeliveryType.PRODUCTS, 'products', productItem);
   }
 
   onProductItemDeleted(rowIndex: number) {
-    const productItems = this.deliveryItems[DeliveryType.PRODUCTS].data;
-    productItems.splice(rowIndex, 1);
-    this.deliveryItems[DeliveryType.PRODUCTS].data = [...productItems];
+    this.removeDeliveryItem(DeliveryType.PRODUCTS, 'products', rowIndex);
   }
 
   onServiceItemAdded(serviceItem: ServiceItem) {
-    const serviceItems = this.deliveryItems[DeliveryType.SERVICES].data;
-    this.deliveryItems[DeliveryType.SERVICES].data = [...serviceItems, serviceItem];
+    this.addDeliveryItem(DeliveryType.SERVICES, 'services', serviceItem);
   }
 
   onServiceItemDeleted(rowIndex: number) {
-    const serviceItems = this.deliveryItems[DeliveryType.SERVICES].data;
-    serviceItems.splice(rowIndex, 1);
-    this.deliveryItems[DeliveryType.SERVICES].data = [...serviceItems];
+    this.removeDeliveryItem(DeliveryType.SERVICES, 'services', rowIndex);
   }
 
   changeDeliveryType(deliveryType: DeliveryType) {
@@ -129,13 +122,32 @@ export class DeliveryComponent implements OnInit {
       deliveryCost: [this.deliveryCost, Validators.required],
       transferFee: [this.transferFee, Validators.required],
       totalCost: [this.totalCost, Validators.required],
-      products: [this.deliveryItems[DeliveryType.PRODUCTS].data],
-      services: [this.deliveryItems[DeliveryType.SERVICES].data]
-    });
+      products: this.formBuilder.array(
+        this.deliveryItems[DeliveryType.PRODUCTS].data.map(param => param)),
+      services: this.formBuilder.array(
+        this.deliveryItems[DeliveryType.SERVICES].data.map(param => param))
+    }, {validator: DeliveryItemsValidator.required});
   }
 
   private getFormattedDate(date: string): string {
     return moment(date).format(this.dateFormat);
+  }
+
+  private addDeliveryItem(deliveryType: DeliveryType, controlName: 'products' | 'services', deliveryItem: ProductItem | ServiceItem) {
+    const deliveryItems = this.deliveryItems[deliveryType].data;
+    this.deliveryItems[deliveryType].data = [...deliveryItems, deliveryItem];
+
+    const productsCtrl = <FormArray>this.deliveryForm.get(controlName);
+    productsCtrl.push(this.formBuilder.group(deliveryItem));
+  }
+
+  private removeDeliveryItem(deliveryType: DeliveryType, controlName: 'products' | 'services', rowIndex: number) {
+    const deliveryItems = this.deliveryItems[deliveryType].data;
+    deliveryItems.splice(rowIndex, 1);
+    this.deliveryItems[deliveryType].data = [...deliveryItems];
+
+    const productsCtrl = <FormArray>this.deliveryForm.get(controlName);
+    productsCtrl.removeAt(rowIndex);
   }
 
   private setFakeData() {

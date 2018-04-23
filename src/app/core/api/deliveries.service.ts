@@ -7,6 +7,7 @@ import { Supplier } from "../../shared/models/supplier.model";
 import { ProductItem } from "../../delivery/shared/models/product-item.model";
 import { ServiceItem } from "../../delivery/shared/models/service-item.model";
 import { PaymentMethod } from "../../delivery/shared/enums/payment-method.enum";
+import { GuidGenerator } from "../guid-generator/guid.generator";
 
 @Injectable()
 export class DeliveriesService {
@@ -23,10 +24,18 @@ export class DeliveriesService {
     return this.deliveries$.asObservable().delay(500);
   }
 
-  addDelivery(delivery: Delivery): Observable<Delivery> {
+  create(delivery: Delivery): Observable<Delivery> {
     return this.addDeliveryInternal(delivery)
       .map((res: any) => res.data)
-      .catch(() => Observable.throw('Ошибка при добавлении товара'))
+      .catch(() => Observable.throw('Ошибка при добавлении поступления'))
+      .finally(() => this.loadDeliveries())
+      .delay(500);
+  }
+
+  update(delivery: Delivery): Observable<Delivery> {
+    return this.updateDeliveryInternal(delivery)
+      .map((res: any) => res.data)
+      .catch(() => Observable.throw('Ошибка при редактировании поступления'))
       .finally(() => this.loadDeliveries())
       .delay(500);
   }
@@ -38,11 +47,18 @@ export class DeliveriesService {
 
   private addDeliveryInternal(delivery: Delivery): Observable<any> {
     const addedDelivery = new Delivery(Object.assign({}, delivery, {
-      id: '11111111-AAAA-BBBB-A478-5185A07C39BF'
+      id: GuidGenerator.newGuid() //'11111111-AAAA-BBBB-A478-5185A07C39BF'
     }));
 
     DeliveriesService.fakeDeliveries.push(addedDelivery);
     return Observable.of({data: addedDelivery});
+  }
+
+  private updateDeliveryInternal(delivery: Delivery): Observable<any> {
+    let storedDelivery = DeliveriesService.fakeDeliveries.find(del => del.id === delivery.id);
+    storedDelivery = Object.assign(storedDelivery, delivery);
+
+    return Observable.of({data: storedDelivery});
   }
 
   private getFakeDeliveries(): Delivery[] {

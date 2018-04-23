@@ -16,6 +16,9 @@ export class DeliveryProductsListComponent implements OnInit {
     if (data) {
       this.deliveryItemRows = data.map((el, index) => new ProductItemTablePreview(el, index));
       this.total = data.length;
+    } else {
+      this.deliveryItemRows = [];
+      this.total = 0;
     }
   }
   @Output() onItemAdded = new EventEmitter<ProductItem>();
@@ -92,4 +95,9 @@ export class DeliveryProductsListComponent implements OnInit {
     this.deliveryItemRows = [...this.deliveryItemRows];
     //console.log('UPDATED!', this.deliveryItemRows[rowIndex][cell]);
   }
+
+  // reset() {
+  //   this.deliveryItemRows = [];
+  //   this.total = 0;
+  // }
 }

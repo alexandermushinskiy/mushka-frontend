@@ -16,6 +16,9 @@ export class DeliveryServicesListComponent implements OnInit {
     if (data) {
       this.serviceItemRows = data.map((el, index) => new ServiceItemTablePreview(el, index));
       this.total = data.length;
+    } else {
+      this.serviceItemRows = [];
+      this.total = 0;
     }
   }
   @Output() onItemAdded = new EventEmitter<ServiceItem>();
@@ -89,4 +92,9 @@ export class DeliveryServicesListComponent implements OnInit {
     this.serviceItemRows[rowIndex][cell] = value;
     this.serviceItemRows = [...this.serviceItemRows];
   }
+
+  // reset() {
+  //   this.serviceItemRows = [];
+  //   this.total = 0;
+  // }
 }

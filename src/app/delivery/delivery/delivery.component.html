@@ -68,7 +68,7 @@
           <div class="col-lg-6">
             <div class="form-group">
               <label for="dropdown">Организация:</label>
-              <psa-suppliers-dropdown (onSupplierSelected)="onSupplierSelected($event)"></psa-suppliers-dropdown>
+              <psa-suppliers-dropdown #suppliersList (onSupplierSelected)="onSupplierSelected($event)" formControlName="supplier"></psa-suppliers-dropdown>
             </div>
           </div>
           <div class="col-lg-2 col-lg-auto">
@@ -82,7 +82,7 @@
           <div class="col-lg-3">
             <div class="form-group">
               <label for="dropdown">Способ оплаты:</label>
-              <psa-dropdown [options]="PaymentMethodsList" [required]="true" (onSelectedValue)="onPaymentMethodSelected($event)"></psa-dropdown>
+              <psa-dropdown [options]="PaymentMethodsList" [required]="true" formControlName="paymentMethod"></psa-dropdown>
             </div>
           </div>
           <div class="col-md-3">
@@ -121,14 +121,14 @@
           </div>
           <div [ngSwitch]="selectedDeliveryType">
             <div *ngSwitchCase="deliveryType.PRODUCTS">
-              <psa-delivery-products-list
+              <psa-delivery-products-list #productsList
                     [productItems]="deliveryItems[selectedDeliveryType].data"
                     (onItemAdded)="addDeliveryItem(deliveryType.PRODUCTS, $event)"
                     (onItemDeleted)="removeDeliveryItem(deliveryType.PRODUCTS, $event)">
               </psa-delivery-products-list>
             </div>
             <div *ngSwitchCase="deliveryType.SERVICES">
-              <psa-delivery-services-list
+              <psa-delivery-services-list #servicesList
                     [serviceItems]="deliveryItems[selectedDeliveryType].data"
                     (onItemAdded)="addDeliveryItem(deliveryType.SERVICES, $event)"
                     (onItemDeleted)="removeDeliveryItem(deliveryType.SERVICES, $event)">
@@ -162,7 +162,8 @@
                 <psa-delivery-item
                       class="delivery-item-wrapper"
                       [delivery]="delivery"
-                      *ngFor="let delivery of draftDeliveries">
+                      *ngFor="let delivery of draftDeliveries"
+                      (onEdit)="edit($event)">
                 </psa-delivery-item>
               </div>
             <div *ngSwitchCase="deliveryOption.HISTORY">

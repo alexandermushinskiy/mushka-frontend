@@ -29,9 +29,7 @@ export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value: any): void {
-    if (value) {
-      this.value = value;
-    }
+    this.value = value;
   }
 
   registerOnChange(fn: any) {

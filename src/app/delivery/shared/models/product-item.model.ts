@@ -10,6 +10,6 @@ export class ProductItem {
 
   constructor(data: any) {
     Object.assign(this, data);
-    this.totalCost = this.costPerItem * this.amount;
+    this.totalCost = Math.round((this.costPerItem * this.amount) * 100) / 100;
   }
 }

@@ -123,15 +123,15 @@
             <div *ngSwitchCase="deliveryType.PRODUCTS">
               <psa-delivery-products-list
                     [productItems]="deliveryItems[selectedDeliveryType].data"
-                    (onItemAdded)="onProductItemAdded($event)"
-                    (onItemDeleted)="onProductItemDeleted($event)">
+                    (onItemAdded)="addDeliveryItem(deliveryType.PRODUCTS, $event)"
+                    (onItemDeleted)="removeDeliveryItem(deliveryType.PRODUCTS, $event)">
               </psa-delivery-products-list>
             </div>
             <div *ngSwitchCase="deliveryType.SERVICES">
               <psa-delivery-services-list
                     [serviceItems]="deliveryItems[selectedDeliveryType].data"
-                    (onItemAdded)="onServiceItemAdded($event)"
-                    (onItemDeleted)="onServiceItemDeleted($event)">
+                    (onItemAdded)="addDeliveryItem(deliveryType.SERVICES, $event)"
+                    (onItemDeleted)="removeDeliveryItem(deliveryType.SERVICES, $event)">
               </psa-delivery-services-list>
             </div>
           </div>
@@ -176,18 +176,13 @@
         </div>
       </div>
       <div class="aside-footer">
-        <!-- buttons -->
-        <!-- <div class="buttons-flex">
-          <button type="button" class="btn btn-lg btn-light">Сохранить как черновик</button>
-          <button type="submit" class="btn btn-lg btn-primary btn-submit">Сохранить <psa-spinner [isLoading]="isSubmitting"></psa-spinner></button>
-        </div> -->
       </div>
     </div>
   </div>
   <div class="footer">
     <div class="footer-buttons">
-      <button type="button" class="btn btn-md btn-light">Сохранить как черновик</button>
-      <button type="submit" class="btn btn-md btn-primary" [disabled]="deliveryForm.invalid">Сохранить <psa-spinner [isLoading]="isSubmitting"></psa-spinner></button>
+      <button type="button" class="btn btn-md btn-light" [disabled]="!isDraftValid" (click)="saveAsDraft()">Сохранить как черновик <psa-spinner [isLoading]="isDraftSaving"></psa-spinner></button>
+      <button type="submit" class="btn btn-md btn-primary" [disabled]="deliveryForm.invalid" (click)="save()">Сохранить <psa-spinner [isLoading]="isSaving"></psa-spinner></button>
     </div>
   </div>
 </form>

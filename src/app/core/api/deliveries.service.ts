@@ -23,9 +23,26 @@ export class DeliveriesService {
     return this.deliveries$.asObservable().delay(500);
   }
 
+  addDelivery(delivery: Delivery): Observable<Delivery> {
+    return this.addDeliveryInternal(delivery)
+      .map((res: any) => res.data)
+      .catch(() => Observable.throw('Ошибка при добавлении товара'))
+      .finally(() => this.loadDeliveries())
+      .delay(500);
+  }
+
   private loadDeliveries() {
     Observable.of(DeliveriesService.fakeDeliveries)
       .subscribe(data => this.deliveries$.next(data));
+  }
+
+  private addDeliveryInternal(delivery: Delivery): Observable<any> {
+    const addedDelivery = new Delivery(Object.assign({}, delivery, {
+      id: '11111111-AAAA-BBBB-A478-5185A07C39BF'
+    }));
+
+    DeliveriesService.fakeDeliveries.push(addedDelivery);
+    return Observable.of({data: addedDelivery});
   }
 
   private getFakeDeliveries(): Delivery[] {
@@ -69,7 +86,7 @@ export class DeliveriesService {
           name: 'Да-да, там был поставщик',
           address: 'ул.Лазурная 55, г.Одесса, УКРАИНА'
         }),
-        paymentMethod:  PaymentMethod.CACH,
+        paymentMethod:  PaymentMethod.CASH,
         batchNumber:  'D00515',
         transferFee: 10.00,
         deiveryCost: 70.00,

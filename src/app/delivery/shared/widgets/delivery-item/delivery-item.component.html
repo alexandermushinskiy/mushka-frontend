@@ -1,14 +1,14 @@
 <div class="lr-item-wrapper" [ngClass]="{'collapsed': !isExpanded}">
   <div class="lr-item">
     <div class="lr-item-header">
-      <div class="title"> {{ delivery.supplier.name }} </div>
+      <div class="title" *ngIf="delivery.supplier"> {{ delivery.supplier.name }} </div>
       <div class="lr-area-row">
-        <span class="lr-area text-muted">{{ delivery.supplier.address }}</span>
+        <span class="lr-area text-muted" *ngIf="delivery.supplier">{{ delivery.supplier.address }}</span>
         <time class="timestamp"> {{ delivery.deliveryDate }} </time>
       </div>
     </div>
     <div class="lr-item-body" [ngbCollapse]="!isExpanded">
-      <div class="lr-item-row">
+      <div class="lr-item-row" *ngIf="delivery.paymentMethod">
         <div class="lr-item-label">Способ оплаты:</div>
         <div> {{ delivery.paymentMethod }} </div>
       </div>  

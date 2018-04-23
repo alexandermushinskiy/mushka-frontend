@@ -1,6 +1,7 @@
 import { ProductItem } from "./product-item.model";
 import { ServiceItem } from "./service-item.model";
 import { Supplier } from "../../../shared/models/supplier.model";
+import { PaymentMethod } from "../enums/payment-method.enum";
 
 export class Delivery {
   id: string;
@@ -8,9 +9,9 @@ export class Delivery {
   requestDate: string;
   deliveryDate: string;
   supplier: Supplier;
-  paymentMethod: string;
+  paymentMethod: PaymentMethod;
   transferFee: number;
-  deiveryCost: number;
+  deliveryCost: number;
   totalCost: number;
   products: ProductItem[];
   services: ServiceItem[];

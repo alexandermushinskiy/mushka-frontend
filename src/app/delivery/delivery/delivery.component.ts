@@ -17,6 +17,7 @@ import { deliveryTypeNames } from '../shared/constants/delivery-type-names.const
 import { DeliveryItem } from '../shared/models/delivery-item.model';
 import { DeliveryOption } from '../shared/enums/delivery-option.enum';
 import { DeliveryItemsValidator } from '../shared/validators/delivery-items.validator';
+import { NotificationsService } from '../../core/notifications/notifications.service';
 
 @Component({
   selector: 'psa-delivery',
@@ -27,7 +28,8 @@ export class DeliveryComponent implements OnInit {
   deliveryForm: FormGroup;
   requestDate: string;
   deliveryDate: string;
-  previousOrdersAmount;
+  supplier: Supplier;
+  previousOrdersAmount: number;
   batchNumber: string = '1234567890';
   paymentMethod: string;
   deliveryCost: number;
@@ -47,11 +49,17 @@ export class DeliveryComponent implements OnInit {
   optionsList = [DeliveryOption.DRAFTS, DeliveryOption.HISTORY];
   selectedOption = DeliveryOption.DRAFTS;
   deliveryOption = DeliveryOption;
-  isSubmitting = false;
+  isSaving = false;
+  isDraftSaving = false;
 
   constructor(private formBuilder: FormBuilder,
               private location: Location,
-              private deliveryService: DeliveriesService) {
+              private deliveryService: DeliveriesService,
+              private notificationsService: NotificationsService) {
+  }
+
+  get isDraftValid(): boolean {
+    return this.deliveryForm.value.requestDate && this.deliveryForm.value.supplier;
   }
 
   ngOnInit() {
@@ -83,6 +91,9 @@ export class DeliveryComponent implements OnInit {
   }
 
   onSupplierSelected(supplier: Supplier) {
+    const supplierCtrl = this.deliveryForm.controls['supplier'];
+    supplierCtrl.setValue(supplier);
+
     const ctrl = this.deliveryForm.controls['previousOrdersAmount'];
     ctrl.setValue(supplier.address.length);
   }
@@ -91,25 +102,43 @@ export class DeliveryComponent implements OnInit {
     const ctrl = this.deliveryForm.controls['paymentMethod'];
     ctrl.setValue(paymentMethod);
   }
-  
-  onProductItemAdded(productItem: ProductItem) {
-    this.addDeliveryItem(DeliveryType.PRODUCTS, 'products', productItem);
-  }
-
-  onProductItemDeleted(rowIndex: number) {
-    this.removeDeliveryItem(DeliveryType.PRODUCTS, 'products', rowIndex);
-  }
-
-  onServiceItemAdded(serviceItem: ServiceItem) {
-    this.addDeliveryItem(DeliveryType.SERVICES, 'services', serviceItem);
-  }
-
-  onServiceItemDeleted(rowIndex: number) {
-    this.removeDeliveryItem(DeliveryType.SERVICES, 'services', rowIndex);
-  }
 
   changeDeliveryType(deliveryType: DeliveryType) {
     this.selectedDeliveryType = deliveryType;
+  }
+
+  saveAsDraft() {
+    this.isDraftSaving = true;
+    const delivery = this.createDelivery();
+    this.deliveryService.addDelivery(delivery)
+      .subscribe(
+        (res: Delivery) => this.onSavedSucces(res, delivery.id ? 'updated' : 'created'),
+        () => this.onSavedError());
+  }
+
+  save() {
+    this.isSaving = true;
+    const delivery = this.createDelivery(false);
+    this.deliveryService.addDelivery(delivery)
+      .subscribe(
+        (res: Delivery) => this.onSavedSucces(res, delivery.id ? 'updated' : 'created'),
+        () => this.onSavedError());
+  }
+
+  private onSavedSucces(delivery: Delivery, action: string) {
+    this.stopLoadingIndicators();
+    this.deliveryForm.reset();
+    this.notificationsService.success('Success', `Delivery has been successfully ${action}`);
+  }
+
+  private onSavedError() {
+    this.stopLoadingIndicators();
+    this.notificationsService.danger('Error', 'Unable to save delivery data');
+  }
+
+  private stopLoadingIndicators() {
+    this.isDraftSaving = false;
+    this.isSaving = false;
   }
 
   private buildForm() {
@@ -117,6 +146,7 @@ export class DeliveryComponent implements OnInit {
       batchNumber: [this.batchNumber],
       requestDate: [this.requestDate, Validators.required],
       deliveryDate: [this.deliveryDate, Validators.required],
+      supplier: [this.supplier, Validators.required],
       previousOrdersAmount: [this.previousOrdersAmount],
       paymentMethod: [this.paymentMethod, Validators.required],
       deliveryCost: [this.deliveryCost, Validators.required],
@@ -133,21 +163,63 @@ export class DeliveryComponent implements OnInit {
     return moment(date).format(this.dateFormat);
   }
 
-  private addDeliveryItem(deliveryType: DeliveryType, controlName: 'products' | 'services', deliveryItem: ProductItem | ServiceItem) {
+  private addDeliveryItem(deliveryType: DeliveryType, deliveryItem: ProductItem | ServiceItem) {
     const deliveryItems = this.deliveryItems[deliveryType].data;
     this.deliveryItems[deliveryType].data = [...deliveryItems, deliveryItem];
 
+    const controlName: 'products' | 'services' = deliveryType === DeliveryType.PRODUCTS ? 'products' : 'services';
     const productsCtrl = <FormArray>this.deliveryForm.get(controlName);
     productsCtrl.push(this.formBuilder.group(deliveryItem));
   }
 
-  private removeDeliveryItem(deliveryType: DeliveryType, controlName: 'products' | 'services', rowIndex: number) {
+  private removeDeliveryItem(deliveryType: DeliveryType, rowIndex: number) {
     const deliveryItems = this.deliveryItems[deliveryType].data;
     deliveryItems.splice(rowIndex, 1);
     this.deliveryItems[deliveryType].data = [...deliveryItems];
 
+    const controlName: 'products' | 'services' = deliveryType === DeliveryType.PRODUCTS ? 'products' : 'services';
     const productsCtrl = <FormArray>this.deliveryForm.get(controlName);
     productsCtrl.removeAt(rowIndex);
+  }
+
+  createDelivery(isDraft: boolean = true): Delivery {
+    const deliveryFormValue = this.deliveryForm.value;
+
+    return new Delivery({
+      batchNumber: deliveryFormValue.batchNumber,
+      requestDate: deliveryFormValue.requestDate || null,
+      deliveryDate: deliveryFormValue.deliveryDate || null,
+      supplier: deliveryFormValue.supplier || null,
+      paymentMethod: deliveryFormValue.paymentMethod,
+      transferFee: deliveryFormValue.transferFee,
+      deliveryCost: deliveryFormValue.deliveryCost,
+      totalCost: deliveryFormValue.totalCost,
+      products: this.createProducts(),
+      services: this.createServices(),
+      isDraft: isDraft
+    });
+  }
+
+  createProducts(): ProductItem[] {
+    return this.deliveryForm.value.products.map((prop: any) => {
+      return new ProductItem({
+        product: prop.product,
+        amount: prop.amount,
+        costPerItem: prop.costPerItem,
+        totalCost: prop.totalCost,
+        notes: prop.notes
+      });
+    });
+  }
+
+  createServices(): ServiceItem[] {
+    return this.deliveryForm.value.services.map((prop: any) => {
+      return new ServiceItem({
+        name: prop.name,
+        cost: prop.cost,
+        notes: prop.notes
+      });
+    });
   }
 
   private setFakeData() {

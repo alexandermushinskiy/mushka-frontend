@@ -261,11 +261,15 @@
       margin-right: 10px;
     }
     .btn {
-      width: 160px;
+      width: 170px;
     }
   }
 
   @media (min-width: $desktop) {
     right: $app-page-aside-min-width;
   }
+}
+
+.btn-light.disabled, .btn-light:disabled {
+  border-color: $gray;
 }

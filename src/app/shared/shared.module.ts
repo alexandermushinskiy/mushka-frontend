@@ -15,12 +15,13 @@ import { PopoverComponent } from './widgets/popover/popover.component';
 import { PopoverDirective } from './directives/popover.directive';
 import { ClosePopoverOnClickOutsideDirective } from './directives/close-popover-on-click-outside.directive';
 import { DashIfEmptyPipe } from './pipes/dash-if-empty.pipe';
+import { PsaCurrencyPipe } from './pipes/psa-currency.pipe';
+import { FormatDatePipe } from './pipes/format-data.pipe';
 import { PsaDatatableHeaderComponent } from './widgets/datatable/psa-datatable-header/psa-datatable-header.component';
 import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker.component';
 import { CurrencyInputComponent } from './widgets/currency-input/currency-input.component';
 import { DropdownComponent } from './widgets/dropdown/dropdown.component';
 import { NumberFieldDirective } from './directives/number-field.directive';
-import { PsaCurrencyPipe } from './pipes/psa-currency.pipe';
 import { ProductModalComponent } from './widgets/product-modal/product-modal.component';
 import { ConfirmationComponent } from './widgets/confirmation/confirmation.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
@@ -49,6 +50,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     ClickOutsideDirective,
     DashIfEmptyPipe,
     PsaCurrencyPipe,
+    FormatDatePipe,
     PsaDatatableHeaderComponent,
     DatetimepickerComponent,
     CurrencyInputComponent,
@@ -71,6 +73,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     /* Pipes */
     DashIfEmptyPipe,
     PsaCurrencyPipe,
+    FormatDatePipe,
     /* Components */
     LoadingScreenComponent,
     SpinnerComponent,

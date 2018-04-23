@@ -66,8 +66,8 @@ export class DeliveriesService {
     return [
       new Delivery({
         id: '2A689E03-8D4A-4397-9292-2ECBD1DAEEB3',
-        requestDate: 'Янв 13, 2018',
-        deliveryDate:  'Янв 17, 2018',
+        requestDate: '2018-01-13',
+        deliveryDate:  '2018-01-17',
         supplier: new Supplier({
           id: 'FE557110-FE4E-492E-933E-EACD6A31E22D',
           name: 'Вова-Зи-Львов',
@@ -93,8 +93,8 @@ export class DeliveriesService {
       }),
       new Delivery({
         id: '3D62C4A9-6A0A-473C-B82D-FF3BDC0E14D5',
-        requestDate: 'Янв 21, 2018',
-        deliveryDate:  'Янв 22, 2018',
+        requestDate: '2018-01-21',
+        deliveryDate:  '2018-01-22',
         supplier: new Supplier({
           id: 'FE557110-FE4E-492E-933E-EACD6A31E22D',
           name: 'Вова-Зи-Львов',
@@ -119,8 +119,8 @@ export class DeliveriesService {
       }),
       new Delivery({
         id: '4225E8B0-D56E-488B-B2AB-9B511D0AF22F',
-        requestDate: 'Фев 05, 2018',
-        deliveryDate:  'Фев 11, 2018',
+        requestDate: '2018-02-05',
+        deliveryDate:  '2018-02-11',
         supplier: new Supplier({
           id: 'FE557110-FE4E-492E-933E-EACD6A31E22D',
           name: 'Вова-Зи-Львов',
@@ -145,8 +145,8 @@ export class DeliveriesService {
       }),
       new Delivery({
         id: 'C1FECCED-9182-4B41-BF49-FA9B7FFABD79',
-        requestDate: 'Март 15, 2018',
-        deliveryDate:  'Фев 16, 2018',
+        requestDate: '2018-03-15',
+        deliveryDate:  '2018-02-16',
         supplier: new Supplier({
           id: 'FE557110-FE4E-492E-933E-EACD6A31E22D',
           name: 'Вова-Зи-Львов',

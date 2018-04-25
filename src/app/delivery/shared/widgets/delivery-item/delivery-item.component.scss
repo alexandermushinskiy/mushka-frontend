@@ -63,9 +63,10 @@
   position: absolute;
   bottom: $padding-base/2;
   right: $padding-base;
-  // opacity: 0;
-  // display: none;
-  // transition: opacity 250ms;
+}
+
+.btn-view {
+  right: $padding-base/2;
 }
 
 .delivery-item {

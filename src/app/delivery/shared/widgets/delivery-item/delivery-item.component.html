@@ -21,6 +21,9 @@
   <button class="btn btn-xs btn-toggle-editor" *ngIf="canEdit" (click)="edit()">
     <i class="fa fa-pencil fa-border"></i>
   </button>
+  <button class="btn btn-xs btn-toggle-editor btn-view" *ngIf="!canEdit" (click)="view()">
+    <i class="fa fa-eye fa-border"></i>
+  </button>
   <button class="btn btn-xs btn-toggle-editor btn-delete" *ngIf="canDelete" (click)="delete()">
     <i class="fa fa-times fa-border"></i>
   </button>

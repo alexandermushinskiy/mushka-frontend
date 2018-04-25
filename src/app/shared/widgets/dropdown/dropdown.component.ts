@@ -15,6 +15,7 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
   @Input() options: string[];
   @Input() initialValue: string;
   @Input() required: boolean;
+  @Input() isDisabled = false;
   @Output() onSelectedValue = new EventEmitter<string>();
 
   value: string;
@@ -33,6 +34,10 @@ export class DropdownComponent implements OnInit, ControlValueAccessor {
 
   registerOnChange(fn: any) {
     this.onChangeCallback = fn;
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.isDisabled = isDisabled;
   }
 
   registerOnTouched() {

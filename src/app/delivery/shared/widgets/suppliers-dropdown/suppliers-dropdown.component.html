@@ -1,5 +1,10 @@
 <div ngbDropdown class="dropdown">
-  <button type="button" class="btn form-control" [ngClass]="(!selectedSupplier && required) ? 'required-dropdown' : ''" ngbDropdownToggle id="dropdown">
+  <button type="button"
+          class="btn form-control"
+          id="dropdown"
+          [disabled]="isDisabled"
+          [ngClass]="(!selectedSupplier && isRequired) ? 'required-dropdown' : ''"
+          ngbDropdownToggle>
     <span [ngClass]="{'placeholder': !selectedSupplier}">{{ selectedSupplier ? selectedSupplier.name : 'Выберите поставщика из списка' }}</span>
     <i class="ico-chevron-down"></i>
   </button>

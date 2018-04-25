@@ -18,7 +18,8 @@ import { SuppliersService } from '../../../../core/api/suppliers.service';
   }]
 })
 export class SuppliersDropdownComponent implements OnInit, ControlValueAccessor {
-  @Input() required = true;
+  @Input() isRequired = true;
+  @Input() isDisabled = false;
   @Output() onSupplierSelected = new EventEmitter<Supplier>();
 
   selectedSupplier: Supplier;
@@ -40,6 +41,10 @@ export class SuppliersDropdownComponent implements OnInit, ControlValueAccessor 
   }
 
   registerOnTouched() {
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.isDisabled = isDisabled;
   }
 
   onOptionSelected(supplier: Supplier) {

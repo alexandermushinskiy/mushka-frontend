@@ -3,7 +3,7 @@
                 [total]="total"
                 [shown]="shown"
                 [availableColumns]="availableColumns"
-                [showAddButton]="true"
+                [showAddButton]="!isReadOnly"
                 [showOptions]="false"
                 [showTitle]="false"
                 [showActions]="false"
@@ -63,7 +63,8 @@
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column [width]="50"
+    <ngx-datatable-column *ngIf="!isReadOnly"
+                          [width]="50"
                           [canAutoResize]="false"
                           [resizeable]="false">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex">

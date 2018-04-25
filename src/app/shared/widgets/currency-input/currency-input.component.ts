@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
   @Input() value: number | null = null;
-  @Input() disabled = false;
+  @Input() isDisabled = false;
   @Input() placeholder = 'Введите сумму';
   @Output() onBlur = new EventEmitter<number>();
   @Output() onClickOutside = new EventEmitter<number>();
@@ -34,6 +34,10 @@ export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
 
   registerOnChange(fn: any) {
     this.onChangeCallback = fn;
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.isDisabled = isDisabled;
   }
 
   registerOnTouched() {

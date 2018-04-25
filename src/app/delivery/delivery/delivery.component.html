@@ -126,6 +126,7 @@
             <div *ngSwitchCase="deliveryType.PRODUCTS">
               <psa-delivery-products-list #productsList
                     [productItems]="deliveryItems[selectedDeliveryType].data"
+                    [isReadOnly]="isReadOnly"
                     (onItemAdded)="addDeliveryItem(deliveryType.PRODUCTS, $event)"
                     (onItemDeleted)="removeDeliveryItem(deliveryType.PRODUCTS, $event)">
               </psa-delivery-products-list>
@@ -133,6 +134,7 @@
             <div *ngSwitchCase="deliveryType.SERVICES">
               <psa-delivery-services-list #servicesList
                     [serviceItems]="deliveryItems[selectedDeliveryType].data"
+                    [isReadOnly]="isReadOnly"
                     (onItemAdded)="addDeliveryItem(deliveryType.SERVICES, $event)"
                     (onItemDeleted)="removeDeliveryItem(deliveryType.SERVICES, $event)">
               </psa-delivery-services-list>
@@ -168,7 +170,7 @@
                       [delivery]="delivery"
                       [canEdit]="true"
                       [canDelete]="true"
-                      (onEdit)="editDraft($event)"
+                      (onEdit)="viewDelivery($event)"
                       (onDelete)="deleteDraft($event, removetConfirmation)">
                 </psa-delivery-item>
               </div>
@@ -176,7 +178,8 @@
               <psa-delivery-item
                     class="delivery-item-wrapper"
                     *ngFor="let delivery of historicalDeliveries"
-                    [delivery]="delivery">
+                    [delivery]="delivery"
+                    (onView)="viewDelivery($event)">
               </psa-delivery-item>
             </div>
           </div>
@@ -188,8 +191,8 @@
   </div>
   <div class="footer">
     <div class="footer-buttons">
-      <button type="button" class="btn btn-md btn-light" [disabled]="!isDraftValid" (click)="saveAsDraft()">Сохранить как черновик<psa-spinner [isLoading]="isDraftSaving"></psa-spinner></button>
-      <button type="submit" class="btn btn-md btn-primary" [disabled]="deliveryForm.invalid" (click)="save()">Сохранить <psa-spinner [isLoading]="isSaving"></psa-spinner></button>
+      <button type="button" class="btn btn-md btn-light" [disabled]="isReadOnly || !isDraftValid" (click)="saveAsDraft()">Сохранить как черновик <psa-spinner [isLoading]="isDraftSaving"></psa-spinner></button>
+      <button type="submit" class="btn btn-md btn-primary" [disabled]="isReadOnly || deliveryForm.invalid" (click)="save()">Сохранить <psa-spinner [isLoading]="isSaving"></psa-spinner></button>
     </div>
   </div>
 </form>

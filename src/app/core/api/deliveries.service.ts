@@ -55,7 +55,7 @@ export class DeliveriesService {
 
   private addDeliveryInternal(delivery: Delivery): Observable<any> {
     const addedDelivery = new Delivery(Object.assign({}, delivery, {
-      id: GuidGenerator.newGuid() //'11111111-AAAA-BBBB-A478-5185A07C39BF'
+      id: GuidGenerator.newGuid()
     }));
 
     DeliveriesService.fakeDeliveries.push(addedDelivery);
@@ -96,8 +96,8 @@ export class DeliveriesService {
         paymentMethod:  PaymentMethod.CREDIT_CARD,
         batchNumber:  'D00001',
         transferFee: 10.00,
-        deliveryCost: 70.00,
-        totalCost: 1200.00,
+        deliveryCost: 55.30,
+        totalCost: 723.10,
         products: [
           new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
           new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' })
@@ -122,9 +122,9 @@ export class DeliveriesService {
         }),
         paymentMethod:  PaymentMethod.TRANSFER_TO_CARD,
         batchNumber:  'D00331',
-        transferFee: 10.00,
-        deliveryCost: 70.00,
-        totalCost: 1200.00,
+        transferFee: 23.00,
+        deliveryCost: 23.70,
+        totalCost: 812.10,
         products: [
           new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 })
         ],
@@ -148,9 +148,9 @@ export class DeliveriesService {
         }),
         paymentMethod:  PaymentMethod.CASH,
         batchNumber:  'D00515',
-        transferFee: 10.00,
-        deliveryCost: 70.00,
-        totalCost: 1200.00,
+        transferFee: 13.13,
+        deliveryCost: 88.02,
+        totalCost: 2323.20,
         products: [
           new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' })
         ],

@@ -12,6 +12,7 @@ import { ServiceItemTablePreview } from '../shared/models/service-item-table-pre
 })
 export class DeliveryServicesListComponent implements OnInit {
   @ViewChild('removeConfirmation') removeConfirmation: ElementRef;
+  @Input() isReadOnly = false;
   @Input() set serviceItems(data: ServiceItem[]) {
     if (data) {
       this.serviceItemRows = data.map((el, index) => new ServiceItemTablePreview(el, index));

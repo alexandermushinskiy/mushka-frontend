@@ -60,8 +60,8 @@ export class DeliveryComponent implements OnInit {
   deliveryOption = DeliveryOption;
   isSaving = false;
   isDraftSaving = false;
-  canBeSavedAsDraft = true;
   deliveryToDelete: Delivery;
+  isReadOnly = false;
 
   private modalRef: NgbModalRef;
   private readonly modalConfig: NgbModalOptions = {
@@ -78,7 +78,7 @@ export class DeliveryComponent implements OnInit {
   }
 
   get isDraftValid(): boolean {
-    return this.canBeSavedAsDraft && this.deliveryForm.value.requestDate && this.deliveryForm.value.supplier;
+    return !!this.deliveryForm.value.requestDate && !!this.deliveryForm.value.supplier;
   }
 
   ngOnInit() {
@@ -142,9 +142,16 @@ export class DeliveryComponent implements OnInit {
     productsCtrl.removeAt(rowIndex);
   }
 
-  editDraft(delivery: Delivery) {
+  viewDelivery(delivery: Delivery) {
     this.deliverId = delivery.id;
-    this.canBeSavedAsDraft = delivery.isDraft;
+    this.isReadOnly = !delivery.isDraft;
+    
+    if (this.isReadOnly) {
+      this.deliveryForm.disable();
+    } else {
+      this.deliveryForm.enable();
+    }
+
     this.deliveryItems[DeliveryType.PRODUCTS].data = delivery.products;
     this.deliveryItems[DeliveryType.SERVICES].data = delivery.services;
     
@@ -166,11 +173,14 @@ export class DeliveryComponent implements OnInit {
     this.deliveryService.delete(this.deliveryToDelete.id)
       .subscribe(
         (res: Delivery) => this.onDeletedSucces(),
-        () => this.onDeletedError());
+        () => this.onError('Unable to delete draft delivery'));
   }
 
   reset() {
+    this.isReadOnly = false;
+
     this.deliveryForm.reset();
+    this.deliveryForm.enable();
 
     this.deliveryItems[DeliveryType.PRODUCTS].data = [];
     this.deliveryItems[DeliveryType.SERVICES].data = [];
@@ -187,7 +197,7 @@ export class DeliveryComponent implements OnInit {
     (this.deliverId ? this.deliveryService.update(delivery) : this.deliveryService.create(delivery))
       .subscribe(
         (res: Delivery) => this.onSavedSucces(res, delivery.id ? 'updated' : 'created'),
-        () => this.onSavedError());
+        () => this.onError('Unable to save delivery data'));
   }
 
   private onSavedSucces(delivery: Delivery, action: string) {
@@ -197,13 +207,9 @@ export class DeliveryComponent implements OnInit {
     this.notificationsService.success('Success', `Delivery has been successfully ${action}`);
   }
 
-  private onSavedError() {
-    this.stopLoadingIndicators();
-    this.notificationsService.danger('Error', 'Unable to save delivery data');
-  }
-
   private onDeletedSucces() {
     this.stopLoadingIndicators();
+
     if (this.deliverId === this.deliveryToDelete.id) {
       this.deliveryToDelete = null;
       this.reset();
@@ -212,9 +218,9 @@ export class DeliveryComponent implements OnInit {
     this.notificationsService.success('Success', 'Draft delivery has been successfully deleted');
   }
 
-  private onDeletedError() {
+  private onError(message: string) {
     this.stopLoadingIndicators();
-    this.notificationsService.danger('Error', 'Unable to delete draft delivery');
+    this.notificationsService.danger('Error', message);
   }
 
   private stopLoadingIndicators() {

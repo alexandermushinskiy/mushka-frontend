@@ -1,5 +1,8 @@
 <div ngbDropdown class="dropdown">
-  <button type="button" class="btn form-control" [ngClass]="(!value && required) ? 'required-dropdown' : ''" ngbDropdownToggle id="dropdown">
+  <button type="button"
+          class="btn form-control"
+          [disabled]="isDisabled"
+          [ngClass]="(!value && required) ? 'required-dropdown' : ''" ngbDropdownToggle id="dropdown">
     <span [ngClass]="{'placeholder': !value}">{{ value ? value : 'Выберите значение' }}</span>
     <i class="ico-chevron-down"></i>
   </button>

@@ -12,6 +12,7 @@ import { ProductItem } from '../shared/models/product-item.model';
 })
 export class DeliveryProductsListComponent implements OnInit {
   @ViewChild('removeConfirmation') removeConfirmation: ElementRef;
+  @Input() isReadOnly = false;
   @Input() set productItems(data: ProductItem[]) {
     if (data) {
       this.deliveryItemRows = data.map((el, index) => new ProductItemTablePreview(el, index));

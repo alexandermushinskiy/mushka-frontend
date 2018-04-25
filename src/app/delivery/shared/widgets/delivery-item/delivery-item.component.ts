@@ -13,6 +13,7 @@ export class DeliveryItemComponent implements OnInit {
   @Input() canDelete = false;
   @Output() onEdit = new EventEmitter<Delivery>();
   @Output() onDelete = new EventEmitter<Delivery>();
+  @Output() onView = new EventEmitter<Delivery>();
 
   expandedItemsStates: { [id: string]: boolean } = {};
   isExpanded = false;
@@ -29,7 +30,12 @@ export class DeliveryItemComponent implements OnInit {
   edit() {
     this.onEdit.emit(this.delivery);
   }
+
   delete() {
     this.onDelete.emit(this.delivery);
+  }
+
+  view() {
+    this.onView.emit(this.delivery);
   }
 }

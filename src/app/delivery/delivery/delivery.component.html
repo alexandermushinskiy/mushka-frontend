@@ -9,6 +9,9 @@
             <i class="ico ico-arrow-up ico-arrow-left"></i>
           </a>
           <h1 class="app-page-title">ПОСТУПЛЕНИЕ ТОВАРОВ И УСЛУГ</h1>
+          <a>
+            <span class="btn-add btn-add-delivery" (click)="reset()"><i class="fa fa-plus fa-border"></i></span>
+          </a>
         </div>
       </div>
       <div class="content-body">
@@ -161,17 +164,19 @@
               <div *ngSwitchCase="deliveryOption.DRAFTS">
                 <psa-delivery-item
                       class="delivery-item-wrapper"
-                      [delivery]="delivery"
                       *ngFor="let delivery of draftDeliveries"
-                      (onEdit)="edit($event)">
+                      [delivery]="delivery"
+                      [canEdit]="true"
+                      [canDelete]="true"
+                      (onEdit)="editDraft($event)"
+                      (onDelete)="deleteDraft($event, removetConfirmation)">
                 </psa-delivery-item>
               </div>
             <div *ngSwitchCase="deliveryOption.HISTORY">
               <psa-delivery-item
                     class="delivery-item-wrapper"
-                    [delivery]="delivery"
                     *ngFor="let delivery of historicalDeliveries"
-                    (onEdit)="edit($event)">
+                    [delivery]="delivery">
               </psa-delivery-item>
             </div>
           </div>
@@ -188,3 +193,12 @@
     </div>
   </div>
 </form>
+
+<ng-template #removetConfirmation let-c="close">
+  <psa-confirmation
+    (onClose)="c()"
+    (onConfirm)="confirmDeleteDraft(); c();"
+    [confirmButtonText]="'Удалить'"
+    [text]="'Вы уверены, что хотите удалить черновик?'">
+  </psa-confirmation>
+</ng-template>

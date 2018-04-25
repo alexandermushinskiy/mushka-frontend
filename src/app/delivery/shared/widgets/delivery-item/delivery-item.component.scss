@@ -24,25 +24,20 @@
   p { margin-top: 1rem; }
 }
 
-.lr-item-wrapper {
+.delivery-item-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: $padding-base/2 0;
   position: relative;
 
-  // &:not(:last-child) {
-  //   border-bottom: $border-width solid $border-color;
-  // }
-
   &:not(.collapsed) {
     align-items: flex-end;
 
     &:hover {
-      //box-shadow: 0 1px 4px 0 transparentize($black, .88);
       z-index: 2;
 
-      .btn-toggle-editor {
+      .btn-toggle-editor, .btn-delete {
         display: block;
         opacity: 1;
       }
@@ -58,13 +53,22 @@
 .btn-toggle-editor {
   position: absolute;
   bottom: $padding-base/2;
-  right: $padding-base;
+  right: $padding-base*3;
   opacity: 0;
   display: none;
   transition: opacity 250ms;
 }
 
-.lr-item {
+.btn-delete {
+  position: absolute;
+  bottom: $padding-base/2;
+  right: $padding-base;
+  // opacity: 0;
+  // display: none;
+  // transition: opacity 250ms;
+}
+
+.delivery-item {
   flex: auto;
   order: 1;
 
@@ -84,128 +88,9 @@
     line-height: 1.9rem;
   }
 
-  .lr-area-row {
+  .delivery-supplier-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-}
-
-.lr-attendees {
-  position: relative;
-  padding-right: $btn-add-size-xs;
-  margin-top: .5rem;
-
-  .btn-toggle-editor {
-    opacity: 1;
-    right: 0;
-    top: 0;
-    display: block;
-  }
-}
-
-.lr-session-actions {
-  padding: $padding-base;
-  .form-group {
-    margin-bottom: $padding-base;
-    label {
-      color: $text-muted;
-    }
-  }
-}
-
-.lr-attendees {
-  .badge {
-    min-width: 2.4rem;
-    margin-left: 1rem;
-  }
-}
-
-.attendees-popover {
-  width: 22rem;
-  background-color: $layer0;
-  box-shadow: $dropdown-box-shadow;
-  color: $white;
-  font-size: 1.2rem;
-  line-height: 1.5rem;
-  position: relative;
-  margin-top: -#{$padding-base*2};
-  margin-right: 1rem;
-  &-body {
-    max-height: calc(100vh - 15rem);
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: $padding-base;
-  }
-  .arrow {
-    position: absolute;
-    display: block;
-    width: .5rem;
-    height: .5rem;
-    top: 3.6rem;
-    left: 100%;
-    &:before{
-      content: "";
-      position: absolute;
-      right: 0;
-      margin-top: -.3rem;
-      border-width: .5rem 0 .5rem .5rem;
-      border-style: solid;
-      border-color: transparent transparent transparent $dark-gray;
-    }
-  }
-  .user-name {
-    margin-left: $padding-base/2;
-  }
-  .attendee {
-    display: flex;
-    align-items: center;
-    padding: .5rem 0;
-    .signum {
-      color: transparentize($white, .5);
-    }
-  }
-}
-
-
-.session-item-type {
-  color: #949597;
-}
-
-.session-header {
-  padding: 10px 10px 10px 10px;
-  min-height: 40px;
-
-  .date {
-    font-weight: bold;
-    font-size: 16px;
-    position: relative;
-    top: 7px;
-    left: 10px;
-    text-transform: uppercase;
-  }
-}
-
-.no-session-items {
-  padding: 0;
-}
-
-.buttons-session-group {
-  > :not(:first-child) { margin-left: .5rem !important; }
-  > :not(:last-child) { margin-right: .5rem !important; }
-  > .btn {
-    margin-bottom: 0;
-    border-radius: $border-radius-base !important;
-    background-color: $body-bg;
-    width: 100%;
-    &:hover,
-    &.active {
-      background-color: $blue;
-      border-color: $blue;
-      color: $white;
-    }
-    &.active {
-      pointer-events: none;
-    }
   }
 }

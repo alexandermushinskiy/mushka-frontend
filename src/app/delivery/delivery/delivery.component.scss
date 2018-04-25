@@ -21,6 +21,7 @@
   font-size: 1.8rem;
   line-height: 2.1rem;
   margin: 0;
+  padding-right: 50px;
 }
 
 .app-page-description {
@@ -272,4 +273,12 @@
 
 .btn-light.disabled, .btn-light:disabled {
   border-color: $gray;
+}
+
+.btn-add-delivery {
+  .fa-border {
+    width: 2.4rem;
+    height: 2.4rem;
+    line-height: 2.2rem !important;
+  }
 }

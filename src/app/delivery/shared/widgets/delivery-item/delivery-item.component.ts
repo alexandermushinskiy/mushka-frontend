@@ -9,7 +9,10 @@ import { Delivery } from '../../models/delivery.model';
 })
 export class DeliveryItemComponent implements OnInit {
   @Input() delivery: Delivery;
+  @Input() canEdit = false;
+  @Input() canDelete = false;
   @Output() onEdit = new EventEmitter<Delivery>();
+  @Output() onDelete = new EventEmitter<Delivery>();
 
   expandedItemsStates: { [id: string]: boolean } = {};
   isExpanded = false;
@@ -23,7 +26,10 @@ export class DeliveryItemComponent implements OnInit {
     this.isExpanded = !this.isExpanded;
   }
 
-  editItem() {
+  edit() {
     this.onEdit.emit(this.delivery);
+  }
+  delete() {
+    this.onDelete.emit(this.delivery);
   }
 }

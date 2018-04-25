@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NG_VALIDATORS, FormArray } from '@angular/forms';
 import { Location } from '@angular/common';
+import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 
 import { Supplier } from '../../shared/models/supplier.model';
@@ -60,9 +61,18 @@ export class DeliveryComponent implements OnInit {
   isSaving = false;
   isDraftSaving = false;
   canBeSavedAsDraft = true;
+  deliveryToDelete: Delivery;
+
+  private modalRef: NgbModalRef;
+  private readonly modalConfig: NgbModalOptions = {
+    windowClass: 'remove-draft-confirmation',
+    backdrop: 'static',
+    size: 'sm'
+  };
 
   constructor(private formBuilder: FormBuilder,
               private location: Location,
+              private modalService: NgbModal,
               private deliveryService: DeliveriesService,
               private notificationsService: NotificationsService) {
   }
@@ -132,7 +142,7 @@ export class DeliveryComponent implements OnInit {
     productsCtrl.removeAt(rowIndex);
   }
 
-  edit(delivery: Delivery) {
+  editDraft(delivery: Delivery) {
     this.deliverId = delivery.id;
     this.canBeSavedAsDraft = delivery.isDraft;
     this.deliveryItems[DeliveryType.PRODUCTS].data = delivery.products;
@@ -141,10 +151,29 @@ export class DeliveryComponent implements OnInit {
     this.deliveryForm.patchValue(delivery);
 
     const productsList = this.getDeliveryItemsControl(DeliveryType.PRODUCTS);
-    delivery.products.map(prod => productsList.push(this.formBuilder.group(prod)));
+    delivery.products.map(product => productsList.push(this.formBuilder.group(product)));
 
     const servicesList = this.getDeliveryItemsControl(DeliveryType.SERVICES);
-    delivery.services.map(prod => productsList.push(this.formBuilder.group(prod)));
+    delivery.services.map(service => servicesList.push(this.formBuilder.group(service)));
+  }
+
+  deleteDraft(delivery: Delivery, content) {
+    this.deliveryToDelete = delivery;
+    this.modalRef = this.modalService.open(content);
+  }
+
+  confirmDeleteDraft() {
+    this.deliveryService.delete(this.deliveryToDelete.id)
+      .subscribe(
+        (res: Delivery) => this.onDeletedSucces(),
+        () => this.onDeletedError());
+  }
+
+  reset() {
+    this.deliveryForm.reset();
+
+    this.deliveryItems[DeliveryType.PRODUCTS].data = [];
+    this.deliveryItems[DeliveryType.SERVICES].data = [];
   }
 
   private getDeliveryItemsControl(deliveryType: DeliveryType): FormArray {
@@ -163,17 +192,29 @@ export class DeliveryComponent implements OnInit {
 
   private onSavedSucces(delivery: Delivery, action: string) {
     this.stopLoadingIndicators();
+    this.reset();
 
-    this.deliveryForm.reset();
-    this.deliveryItems[DeliveryType.PRODUCTS].data = [];
-    this.deliveryItems[DeliveryType.SERVICES].data = [];
-    
     this.notificationsService.success('Success', `Delivery has been successfully ${action}`);
   }
 
   private onSavedError() {
     this.stopLoadingIndicators();
     this.notificationsService.danger('Error', 'Unable to save delivery data');
+  }
+
+  private onDeletedSucces() {
+    this.stopLoadingIndicators();
+    if (this.deliverId === this.deliveryToDelete.id) {
+      this.deliveryToDelete = null;
+      this.reset();
+    }
+
+    this.notificationsService.success('Success', 'Draft delivery has been successfully deleted');
+  }
+
+  private onDeletedError() {
+    this.stopLoadingIndicators();
+    this.notificationsService.danger('Error', 'Unable to delete draft delivery');
   }
 
   private stopLoadingIndicators() {
@@ -243,31 +284,4 @@ export class DeliveryComponent implements OnInit {
       });
     });
   }
-
-  // private setFakeData() {
-  //   const deliveryProducts = [
-  //     new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
-  //     new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
-  //     new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 }),
-  //     new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
-  //     new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
-  //     // new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 }),
-  //     // new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
-  //     // new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
-  //     // new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 }),
-  //     // new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
-  //     // new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
-  //     // new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 }),
-  //     // new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
-  //     // new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' }),
-  //     // new ProductItem({ product: new Product({name: 'Football (FTB01)'}), amount: 25, costPerItem: 1234.55 })
-  //   ];
-  //   this.deliveryItems[DeliveryType.PRODUCTS].data = deliveryProducts;
-
-  //   const deliveryServices = [
-  //     new ServiceItem({ name: 'Фотосессия товара', cost: 270.00, notes: 'какие-то там заметки' }),
-  //     new ServiceItem({ name: 'Разработка вебсайта', cost: 7000.00 })
-  //   ];
-  //   this.deliveryItems[DeliveryType.SERVICES].data = deliveryServices;
-  // }
 }

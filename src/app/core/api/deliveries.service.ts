@@ -41,6 +41,13 @@ export class DeliveriesService {
       .delay(500);
   }
 
+  delete(deliveryId: string) {
+    return this.deleteDeliveryInternal(deliveryId)
+      .catch(() => Observable.throw('Ошибка при удалении черновика поступления'))
+      .finally(() => this.loadDeliveries())
+      .delay(500);
+  }
+
   private loadDeliveries() {
     Observable.of(DeliveriesService.fakeDeliveries)
       .subscribe(data => this.deliveries$.next(data));
@@ -60,6 +67,13 @@ export class DeliveriesService {
     storedDelivery = Object.assign(storedDelivery, delivery);
 
     return Observable.of({data: storedDelivery});
+  }
+
+  private deleteDeliveryInternal(deliveryId: string) {
+    const deliveryIndex = DeliveriesService.fakeDeliveries.findIndex(del => del.id === deliveryId);
+    DeliveriesService.fakeDeliveries.splice(deliveryIndex, 1);
+
+    return Observable.of({data: deliveryId});
   }
 
   private getFakeDeliveries(): Delivery[] {

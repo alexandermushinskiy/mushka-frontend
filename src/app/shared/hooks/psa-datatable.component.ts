@@ -89,7 +89,6 @@ export abstract class PsaDatatableComponent implements OnInit {
   }
 
   getRowClass(row: any) {
-    //debugger;
     return row.className;
   }
 
@@ -111,7 +110,7 @@ export abstract class PsaDatatableComponent implements OnInit {
     return availableColumns.map((columnName: string) => {
       return {
         name: columnName,
-        width: this.datatableConfig[name] ? this.datatableConfig[name].width : this.defaultColumnWidth,
+        width: this.datatableConfig[columnName] ? this.datatableConfig[columnName].width : this.defaultColumnWidth,
         visible: true,
         sort: {},
         filters: []

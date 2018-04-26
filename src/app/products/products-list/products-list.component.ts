@@ -26,7 +26,6 @@ export class ProductsListComponent implements OnInit {
   total = 0;
   shown = 0;
   availableCols = availableColumns.products;
-  // selectedProduct: Product = null;
   categories: TreeviewItem[];
   selectedCategoryId: string;
   title = 'Товары';
@@ -63,8 +62,8 @@ export class ProductsListComponent implements OnInit {
     this.loadingIndicator = true;
     this.productsService.getProductsByCategory(category.id)
       .subscribe(
-        res => this.onSuccess(res),
-        () => this.onError()
+        res => this.onLoadSuccess(res),
+        () => this.onError('Unable to load products')
       );
   }
 
@@ -76,7 +75,7 @@ export class ProductsListComponent implements OnInit {
     this.productsService.addProduct(product)
       .subscribe(
         (res: Product) => this.onSaveSuccess(res, product.id ? 'updated' : 'created'),
-        () => this.onSaveError()
+        () => this.onError('Unable to save Product')
       );
   }
 
@@ -88,27 +87,26 @@ export class ProductsListComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  private onSuccess(products) {
+  private onLoadSuccess(products) {
     this.rows = products.map((el, index) => new ProductTablePreview(el, index));
     this.total = products.length;
     this.isAddButtonShown = true;
     this.loadingIndicator = false;
   }
 
-  private onError() {
+  private onError(message: string) {
     this.loadingIndicator = false;
     this.notificationsService.danger('Error', 'Unable to load products');
   }
   
   private onSaveSuccess(product: Product, action: string) {
+    if (this.selectedCategoryId !== product.category.id) {
+      this.onCategotySelected(product.category);
+    }
+
     this.isModalLoading = false;
     this.closeModal();
     this.notificationsService.success('Success', `Product \"${product.name}\" has been successfully ${action}`);
-  }
-
-  private onSaveError() {
-    this.notificationsService.danger('Error', 'Unable to save Product data');
-    this.isModalLoading = false;
   }
 
   private createCategoryTreeviewItem(category) {

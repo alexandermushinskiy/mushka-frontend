@@ -26,6 +26,7 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
   code: string;
   category: Category;
   sizes: string;
+  isSizesRequired: boolean;
   availableSizes: string[] = [];
   categories: Category[] = [];
   selectedSizes: string[] = [];
@@ -42,42 +43,44 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
   }
 
   ngOnInit() {
-    this.isEdit = !!this.product;
-    
     this.categoriesService.getCategories()
       .subscribe((categories: Category[]) => {
         this.categories = categories;
         if (this.categoryId) {
           const category = categories.find(cat => cat.id === this.categoryId);
-          this.availableSizes = category.sizes;
           this.categoryFormGroup.setValue(category);
+
+          this.onCategoryChanged(category);
         }
       });
 
-    if (this.isEdit) {
-      this.name = this.product.name;
-      this.code = this.product.code;
-      this.category = this.product.category;
-      this.sizes = this.product.sizes.map(s => s.size).join(this.sizesDelimiter);
-    }
+    this.isEdit = !!this.product;
+
+    // if (this.isEdit) {
+    //   this.name = this.product.name;
+    //   this.code = this.product.code;
+    //   this.category = this.product.category;
+    //   this.sizes = this.product.sizes.map(s => s.size).join(this.sizesDelimiter);
+    // }
 
     this.buildForm();
   }
 
   save() {
     const productFormValue = this.productForm.value;
+    const sizes = this.convertStringToArray(productFormValue.sizes).map(size => new SizeItem(size));
 
     if (this.isEdit) {
       this.product.name = productFormValue.name;
       this.product.code = productFormValue.code;
       this.product.category = this.categoryFormGroup.value;
-      //this.product.sizes
+      this.product.sizes = sizes;
     } else {
       this.product = new Product({
         name: productFormValue.name,
         code: productFormValue.code.toUpperCase(),
         category: this.categoryFormGroup.value,
-        sizes: this.convertStringToArray(productFormValue.sizes).map(size => new SizeItem(size))
+        sizes: sizes
       });
     }
 
@@ -94,15 +97,18 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
   }
 
   onCategoryChanged(category) {
-    this.availableSizes = category.sizes;
+    this.isSizesRequired = category.isSizesRequired;
+    this.availableSizes = category.sizes || [];
+
+    this.updateSizesValidity(category.isSizesRequired);
   }
 
   private buildForm() {
     this.productForm = this.formBuilder.group({
       name: [this.name, Validators.required],
-      category: [{value: this.category, /*disabled: true*/}, Validators.required],
+      category: [this.category, Validators.required],
       code: [this.code, Validators.required],
-      sizes: [this.name, Validators.required]
+      sizes: [this.sizes]
     });
   }
 
@@ -110,5 +116,17 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
     return !value
       ? []
       : value.split(this.sizesDelimiter).map(param => param.trim());
+  }
+  
+  private updateSizesValidity(isRequired: boolean) {
+    const valueCtrl = this.productForm.controls['sizes'];
+
+    if (isRequired) {
+      valueCtrl.setValidators(Validators.required);
+    } else {
+      valueCtrl.clearValidators();
+    }
+
+    valueCtrl.updateValueAndValidity();
   }
 }

@@ -18,6 +18,7 @@ export class CategoriesNavComponent extends UnsubscriberComponent implements OnI
     }
   }
 
+  @Input() selectedCategoryId: string;
   @Input() parentRoute: string;
   @Input() isLoading = false;
   @Input() disallowClickOnTopLevelItems = false;
@@ -27,8 +28,7 @@ export class CategoriesNavComponent extends UnsubscriberComponent implements OnI
   filterText: string;
   internalCategories: TreeviewItem[];
   topLevelCategories: string[];
-  selectedCategoryId: string;
-  
+    
   constructor(private router: Router) {
     super();
   }

@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Product } from '../../shared/models/product.model';
 import { SizeItem } from '../../shared/models/size-item.model';
 import { Category } from '../../shared/models/category.model';
+import { GuidGenerator } from '../guid-generator/guid.generator';
 
 @Injectable()
 export class ProductsServce {
@@ -39,7 +40,7 @@ export class ProductsServce {
 
   private addProductInternal(product: Product): Observable<any> {
     const addedProduct = Object.assign({}, product, {
-      id: '11111111-C9B6-4ACF-A478-5185A07C39BF',
+      id: GuidGenerator.newGuid(),
       createdOn: '2018-04-05',
       totalCount: 0
     });
@@ -57,13 +58,21 @@ export class ProductsServce {
   private getFakeProducts(): Product[] {
 
     const socksCategory = new Category({
-      id: '400F9E05-FD3F-449E-B252-5D59265ADD69',
-      name: 'Носки'
+      id: '88CD0F34-9D4A-4E45-BE97-8899A97FB82C',
+      name: 'Носки',
+      isSizesRequired: true
     });
 
     const packageCategory = new Category({
-      id: '123F9E05-FD3F-449E-B252-5D59265ADD00',
-      name: 'Упаковка'
+      id: '0E7BE1DE-267C-4C0A-8EE9-ABA0A267F27A',
+      name: 'Упаковка',
+      isSizesRequired: true
+    });
+
+    const additionalsCategory = new Category({
+      id: 'B425D75B-2E72-45F0-A55D-3BA400051E5F',
+      name: 'Вспомогательные товары',
+      isSizesRequired: false
     });
 
     return [
@@ -228,6 +237,39 @@ export class ProductsServce {
           new SizeItem('41-45', 36)
         ],
         category: socksCategory
+      }),
+      new Product({
+        id: 'EDA1DB1E-475F-4DBC-9EEA-BBFC26088A84',
+        name: 'Круглая желтая наклейка MUSHKA',
+        code: 'NKL01',
+        createdOn: '2017-07-13',
+        deliveriesNumber: 1,
+        lastDeliveryDate: '2018-02-01',
+        lastDeliveryCount: 200,
+        totalCount: 200,
+        category: additionalsCategory
+      }),
+      new Product({
+        id: 'C24408F2-72BB-4CDA-9EBB-FB2E4BDE0252',
+        name: 'Прозрачная наклейка "Раскрась День Эмоциями"',
+        code: 'NKL02',
+        createdOn: '2018-17-02',
+        deliveriesNumber: 1,
+        lastDeliveryDate: '2018-17-02',
+        lastDeliveryCount: 121,
+        totalCount: 121,
+        category: additionalsCategory
+      }),
+      new Product({
+        id: 'B2E117C8-E404-4E5B-80BB-3A964BFA3C1A',
+        name: 'Визитка',
+        code: 'VIZ11',
+        createdOn: '2018-17-02',
+        deliveriesNumber: 1,
+        lastDeliveryDate: '2018-17-02',
+        lastDeliveryCount: 136,
+        totalCount: 332,
+        category: additionalsCategory
       })
     ];
   }

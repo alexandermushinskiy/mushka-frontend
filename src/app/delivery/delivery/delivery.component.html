@@ -128,6 +128,7 @@
                     [productItems]="deliveryItems[selectedDeliveryType].data"
                     [isReadOnly]="isReadOnly"
                     (onItemAdded)="addDeliveryItem(deliveryType.PRODUCTS, $event)"
+                    (onItemUpdated)="updateDeliveryItem(deliveryType.PRODUCTS, $event)"
                     (onItemDeleted)="removeDeliveryItem(deliveryType.PRODUCTS, $event)">
               </psa-delivery-products-list>
             </div>
@@ -136,6 +137,7 @@
                     [serviceItems]="deliveryItems[selectedDeliveryType].data"
                     [isReadOnly]="isReadOnly"
                     (onItemAdded)="addDeliveryItem(deliveryType.SERVICES, $event)"
+                    (onItemUpdated)="updateDeliveryItem(deliveryType.SERVICES, $event)"
                     (onItemDeleted)="removeDeliveryItem(deliveryType.SERVICES, $event)">
               </psa-delivery-services-list>
             </div>

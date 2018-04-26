@@ -48,8 +48,7 @@
         <psa-currency-input *ngIf="editing[rowIndex + '-cost']"
                             [placeholder]="''"
                             [value]="value"
-                            (onBlur)="updateValue($event, 'cost', rowIndex)"
-                            (onClickOutside)="updateValue($event, 'cost', rowIndex)">
+                            (onBlur)="updateValue($event, 'cost', rowIndex)">
         </psa-currency-input>
       </ng-template>
     </ngx-datatable-column>

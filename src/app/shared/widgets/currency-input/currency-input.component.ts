@@ -24,7 +24,8 @@ export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
   }
 
-  onChanged() {
+  onChanged(value) {
+    this.value = value;
     this.onChangeCallback(this.value);
   }
 
@@ -44,11 +45,9 @@ export class CurrencyInputComponent implements OnInit, ControlValueAccessor {
   }
 
   blur() {
-    this.onBlur.emit(this.value);
-  }
-
-  clickOutside() {
-    this.onClickOutside.emit(this.value);
+    if (this.value) {
+      this.onBlur.emit(this.value);
+    }
   }
 
   private onChangeCallback: any = () => {};

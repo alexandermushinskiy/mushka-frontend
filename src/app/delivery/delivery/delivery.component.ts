@@ -133,6 +133,17 @@ export class DeliveryComponent implements OnInit {
     productsCtrl.push(this.formBuilder.group(deliveryItem));
   }
 
+  updateDeliveryItem(deliveryType: DeliveryType, updates: {rowIndex: number, property: string, value: any}) {
+    const deliveryItems = this.deliveryItems[deliveryType].data;
+    const updatingItem = deliveryItems[updates.rowIndex];
+    updatingItem[updates.property] = updates.value;
+
+    this.deliveryItems[deliveryType].data = [...deliveryItems];
+
+    const productsCtrl = this.getDeliveryItemsControl(deliveryType);
+    productsCtrl.at(updates.rowIndex).setValue(updatingItem);
+  }
+
   removeDeliveryItem(deliveryType: DeliveryType, rowIndex: number) {
     const deliveryItems = this.deliveryItems[deliveryType].data;
     deliveryItems.splice(rowIndex, 1);
@@ -154,14 +165,14 @@ export class DeliveryComponent implements OnInit {
 
     this.deliveryItems[DeliveryType.PRODUCTS].data = delivery.products;
     this.deliveryItems[DeliveryType.SERVICES].data = delivery.services;
-    
+
     this.deliveryForm.patchValue(delivery);
 
     const productsList = this.getDeliveryItemsControl(DeliveryType.PRODUCTS);
-    delivery.products.map(product => productsList.push(this.formBuilder.group(product)));
+    productsList.reset(delivery.products.map(product => this.formBuilder.group(product)));
 
     const servicesList = this.getDeliveryItemsControl(DeliveryType.SERVICES);
-    delivery.services.map(service => servicesList.push(this.formBuilder.group(service)));
+    servicesList.reset(delivery.services.map(service => this.formBuilder.group(service)));
   }
 
   deleteDraft(delivery: Delivery, content) {
@@ -273,8 +284,8 @@ export class DeliveryComponent implements OnInit {
     return this.deliveryForm.value.products.map((prop: any) => {
       return new ProductItem({
         product: prop.product,
-        amount: prop.amount,
-        costPerItem: prop.costPerItem,
+        amount: +prop.amount,
+        costPerItem: +prop.costPerItem,
         totalCost: prop.totalCost,
         notes: prop.notes
       });

@@ -69,8 +69,7 @@
         <psa-currency-input *ngIf="editing[rowIndex + '-costPerItem']"
                             [placeholder]="''"
                             [value]="value"
-                            (onBlur)="updateValue($event, 'costPerItem', rowIndex)"
-                            (onClickOutside)="updateValue($event, 'costPerItem', rowIndex)">
+                            (onBlur)="updateValue($event, 'costPerItem', rowIndex)">
         </psa-currency-input>
       </ng-template>
     </ngx-datatable-column>
@@ -79,18 +78,8 @@
       <ng-template ngx-datatable-header-template let-column="column">
         Общая стоимость
       </ng-template>
-      <ng-template ngx-datatable-cell-template let-value="value" let-rowIndex="rowIndex">
-        <span [title]="value" 
-              *ngIf="!editing[rowIndex + '-totalCost']"
-              (dblclick)="startEditing(rowIndex + '-totalCost')">
-          {{ value | psaCurrency }}
-        </span>
-        <psa-currency-input *ngIf="editing[rowIndex + '-totalCost']"
-                            [placeholder]="''"
-                            [value]="value"
-                            (onBlur)="updateValue($event, 'totalCost', rowIndex)"
-                            (onClickOutside)="updateValue($event, 'totalCost', rowIndex)">
-        </psa-currency-input>
+      <ng-template ngx-datatable-cell-template let-value="value">
+        <span [title]="value">{{ value | psaCurrency }}</span>
       </ng-template>
     </ngx-datatable-column>
 

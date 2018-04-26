@@ -6,8 +6,8 @@
         [options]="{ prefix: '', thousands: ' ', decimal: ',', align:'left' }"
         [disabled]="isDisabled"
         [attr.placeholder]="placeholder"
-        [(ngModel)]="value"
-        (ngModelChange)="onChanged()"
-        (clickOutside)="clickOutside()"
+        [ngModel]="value"
+        (ngModelChange)="onChanged($event)"
+        (clickOutside)="blur()"
         (blur)="blur()" />
 </div>

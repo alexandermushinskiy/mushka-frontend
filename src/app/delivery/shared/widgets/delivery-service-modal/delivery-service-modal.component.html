@@ -1,6 +1,6 @@
 <form [formGroup]="serviceItemForm" class="delivery-item-form">
   <div class="modal-header">
-    <h4 class="modal-title">Добаление товара</h4>
+    <h4 class="modal-title">Добаление сервиса</h4>
     <button type="button" class="close" aria-label="Close" (click)="close()">
       <i class="ico ico-close"></i>
     </button>
@@ -22,7 +22,7 @@
   <div class="modal-footer">
     <button class="btn btn-light btn-cancel" type="button" (click)="close()">Отмена</button>
     <button class="btn btn-primary" type="button" (click)="save()" [disabled]="serviceItemForm.invalid">
-      <psa-spinner [isLoading]="isSaving"></psa-spinner>
+      <psa-spinner [isLoading]="isSaving"></psa-spinner> 
       Добавить</button>
   </div>
 </form>

@@ -23,6 +23,7 @@ export class DeliveryServicesListComponent implements OnInit {
     }
   }
   @Output() onItemAdded = new EventEmitter<ServiceItem>();
+  @Output() onItemUpdated = new EventEmitter<{rowIndex: number, property: string, value: number | string}>();
   @Output() onItemDeleted = new EventEmitter<number>();
   
   availableColumns = availableColumns.deliveryServices;
@@ -90,12 +91,6 @@ export class DeliveryServicesListComponent implements OnInit {
 
   updateValue(value, cell, rowIndex) {
     this.editing[rowIndex + '-' + cell] = false;
-    this.serviceItemRows[rowIndex][cell] = value;
-    this.serviceItemRows = [...this.serviceItemRows];
+    this.onItemUpdated.emit({rowIndex: rowIndex, property: cell, value: value});
   }
-
-  // reset() {
-  //   this.serviceItemRows = [];
-  //   this.total = 0;
-  // }
 }

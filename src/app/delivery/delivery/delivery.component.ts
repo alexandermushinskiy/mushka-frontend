@@ -167,12 +167,8 @@ export class DeliveryComponent implements OnInit {
     this.deliveryItems[DeliveryType.SERVICES].data = delivery.services;
 
     this.deliveryForm.patchValue(delivery);
-
-    const productsList = this.getDeliveryItemsControl(DeliveryType.PRODUCTS);
-    productsList.reset(delivery.products.map(product => this.formBuilder.group(product)));
-
-    const servicesList = this.getDeliveryItemsControl(DeliveryType.SERVICES);
-    servicesList.reset(delivery.services.map(service => this.formBuilder.group(service)));
+    this.deliveryForm.setControl('products', this.formBuilder.array(delivery.products.map(param => param)));
+    this.deliveryForm.setControl('services', this.formBuilder.array(delivery.services.map(param => param)));
   }
 
   deleteDraft(delivery: Delivery, content) {

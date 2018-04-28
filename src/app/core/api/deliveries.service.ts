@@ -102,7 +102,9 @@ export class DeliveriesService {
           new ProductItem({ product: new Product({name: 'Galaxy (GLX01)'}), amount: 100, costPerItem: 27.00, notes: 'Два носка брака' }),
           new ProductItem({ product: new Product({name: 'Potato (PTT01)'}), amount: 320, costPerItem: 7.50, notes: 'Неправильно пришиты бирки и что-то там еще есть' })
         ],
-        services: [],
+        services: [
+          new ServiceItem({ name: 'Услуги фотографа', cost: 250.00, notes: 'Студия "ОЛИМП"'})
+        ],
         isDraft: false
       }),
       new Delivery({

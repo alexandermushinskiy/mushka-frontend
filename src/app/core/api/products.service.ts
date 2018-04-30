@@ -17,25 +17,26 @@ export class ProductsServce {
   }
 
   getProducts(criteria: string): Observable<Product[]> {
-    const fountProducts = ProductsServce.fakeProducts
+    const foundProducts = ProductsServce.fakeProducts
       .filter(prod => prod.name.toLowerCase().includes(criteria.toLowerCase()) || 
                       prod.code.toLowerCase().includes(criteria.toLowerCase()));
 
-    return Observable.of(fountProducts)
+    return Observable.of(foundProducts)
       .delay(300);
   }
 
   getProductsByCategory(categoryId: string): Observable<Product[]> {
-    this.loadCategoryProducts(categoryId);
+    const foundProducts = ProductsServce.fakeProducts
+      .filter(prod => prod.category.id === categoryId);
 
-    return this.categoryProducts$.asObservable().delay(1000);
+    return Observable.of(foundProducts).delay(1000);
   }
 
   addProduct(product: Product): Observable<Product> {
     return this.addProductInternal(product)
       .map((res: any) => res.data)
       .catch(() => Observable.throw('Ошибка при добавлении товара'))
-      .finally(() => this.loadCategoryProducts(product.category.id));
+      .finally(() => this.getProductsByCategory(product.category.id));
   }
 
   private addProductInternal(product: Product): Observable<any> {
@@ -49,11 +50,11 @@ export class ProductsServce {
     return Observable.of({data: addedProduct});
   }
 
-  private loadCategoryProducts(categoryId: string) {
-    Observable.of(ProductsServce.fakeProducts
-      .filter(prod => prod.category.id === categoryId))
-      .subscribe(data => this.categoryProducts$.next(data));
-  }
+  // private loadCategoryProducts(categoryId: string) {
+  //   Observable.of(ProductsServce.fakeProducts
+  //     .filter(prod => prod.category.id === categoryId))
+  //     .subscribe(data => this.categoryProducts$.next(data));
+  // }
 
   private getFakeProducts(): Product[] {
 

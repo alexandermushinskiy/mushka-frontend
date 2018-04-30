@@ -7,7 +7,9 @@ import { DatatableComponent } from 'ngx-datatable-with-ie-fix';
 
 export abstract class PsaDatatableComponent implements OnInit {
   @Output() onRowsUpdated = new EventEmitter<number>();
-  datatable: DatatableComponent
+
+  datatable: DatatableComponent;
+  headerTpl: TemplateRef<any>;
   sorts: { dir: string, prop: string }[];
   columnsData: DatatableColumn[];
   headerHeight: number;
@@ -42,11 +44,19 @@ export abstract class PsaDatatableComponent implements OnInit {
 
   init(datatable: DatatableComponent, columns: string[], headerTpl: TemplateRef<any>) {
     this.datatable = datatable;
+    this.headerTpl = headerTpl;
     const configurations = this.getColumnsConfigurations();
 
     this.columnsConfigurationSnapshot = [...configurations];
     this.columnsDictionary = this.createColumnsDictionary(this.columnsConfigurationSnapshot);
-    this.columnsData = this.createAvailableColumnsData(columns, headerTpl, this.columnsConfigurationSnapshot);
+    this.columnsData = this.createAvailableColumnsData(columns, this.columnsConfigurationSnapshot);
+  }
+
+  updateColumns(columns: string[]) {
+    const configurations = this.getColumnsConfigurations();
+    this.columnsConfigurationSnapshot = [...configurations];
+
+    this.columnsData = this.createAvailableColumnsData(columns, this.columnsConfigurationSnapshot);
   }
 
   initRows(data: any) {
@@ -72,7 +82,7 @@ export abstract class PsaDatatableComponent implements OnInit {
     }, {});
   }
 
-  createAvailableColumnsData(cols: string[], headerTpl: TemplateRef<any>, columnsConfiguration: ColumnConfiguration[] = []): any[] {
+  createAvailableColumnsData(cols: string[], columnsConfiguration: ColumnConfiguration[] = []): any[] {
     const colsToRender = [];
     columnsConfiguration.forEach((column) => {
       const currentColumn = { ...this.datatableConfig[column.name] };
@@ -81,7 +91,7 @@ export abstract class PsaDatatableComponent implements OnInit {
           currentColumn.width = column.width;
         }
         currentColumn.cellTemplate = this[currentColumn.cellTemplateName];
-        currentColumn.headerTemplate = headerTpl;
+        currentColumn.headerTemplate = this.headerTpl;
         colsToRender.push(currentColumn);
       }
     });

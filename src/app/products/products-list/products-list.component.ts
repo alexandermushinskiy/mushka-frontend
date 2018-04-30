@@ -10,6 +10,7 @@ import { ProductsTableComponent } from '../products-table/products-table.compone
 import { Product } from '../../shared/models/product.model';
 import { CategoriesService } from '../../core/api/categories.service';
 import { Category } from '../../shared/models/category.model';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'psa-products-list',
@@ -60,11 +61,19 @@ export class ProductsListComponent implements OnInit {
     this.selectedCategoryId = category.id;
 
     this.loadingIndicator = true;
-    this.productsService.getProductsByCategory(category.id)
-      .subscribe(
-        res => this.onLoadSuccess(res),
-        () => this.onError('Unable to load products')
-      );
+
+    Observable.forkJoin(
+        this.categoriesService.getById(category.id),
+        this.productsService.getProductsByCategory(category.id)
+      )
+      .finally(() => this.loadingIndicator = false)
+      .subscribe(([category, products]) => {
+        const availableCols = category.isSizesRequired
+          ? availableColumns.products
+          : availableColumns.products.filter(col => col !== 'sizes');
+        this.datatable.updateColumns(availableCols);
+        this.onLoadProductsSuccess(products);
+      });
   }
 
   addProduct(content: ElementRef) {
@@ -87,7 +96,7 @@ export class ProductsListComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  private onLoadSuccess(products) {
+  private onLoadProductsSuccess(products) {
     this.rows = products.map((el, index) => new ProductTablePreview(el, index));
     this.total = products.length;
     this.isAddButtonShown = true;

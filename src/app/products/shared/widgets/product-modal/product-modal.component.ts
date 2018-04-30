@@ -44,6 +44,17 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
   }
 
   ngOnInit() {
+    this.isEdit = !!this.product;
+
+    if (this.isEdit) {
+      this.name = this.product.name;
+      this.code = this.product.code;
+      this.category = this.product.category;
+      this.sizes = this.sizesHelperServices.convertToString(this.product.sizes.map(s => s.size));
+    }
+
+    this.buildForm();
+
     this.categoriesService.getCategories()
       .subscribe((categories: Category[]) => {
         this.categories = categories;
@@ -54,17 +65,6 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
           this.onCategoryChanged(category);
         }
       });
-
-    this.isEdit = !!this.product;
-
-    // if (this.isEdit) {
-    //   this.name = this.product.name;
-    //   this.code = this.product.code;
-    //   this.category = this.product.category;
-    //   this.sizes = this.product.sizes.map(s => s.size).join(this.sizesDelimiter);
-    // }
-
-    this.buildForm();
   }
 
   save() {
@@ -107,7 +107,7 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
   private buildForm() {
     this.productForm = this.formBuilder.group({
       name: [this.name, Validators.required],
-      category: [this.category, Validators.required],
+      category: [null, Validators.required],
       code: [this.code, Validators.required],
       sizes: [this.sizes]
     });

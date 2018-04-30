@@ -22,7 +22,6 @@ import { DatetimepickerComponent } from './widgets/datetimepicker/datetimepicker
 import { CurrencyInputComponent } from './widgets/currency-input/currency-input.component';
 import { DropdownComponent } from './widgets/dropdown/dropdown.component';
 import { NumberFieldDirective } from './directives/number-field.directive';
-import { ProductModalComponent } from './widgets/product-modal/product-modal.component';
 import { ConfirmationComponent } from './widgets/confirmation/confirmation.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 
@@ -55,7 +54,6 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     DatetimepickerComponent,
     CurrencyInputComponent,
     DropdownComponent,
-    ProductModalComponent,
     ConfirmationComponent
   ],
   exports: [
@@ -84,7 +82,6 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
     DatetimepickerComponent,
     CurrencyInputComponent,
     DropdownComponent,
-    ProductModalComponent,
     ConfirmationComponent
   ]
 })

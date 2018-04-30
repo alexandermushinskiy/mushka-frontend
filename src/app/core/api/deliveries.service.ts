@@ -29,23 +29,23 @@ export class DeliveriesService {
     return this.addDeliveryInternal(delivery)
       .map((res: any) => res.data)
       .catch(() => Observable.throw('Ошибка при добавлении поступления'))
-      .finally(() => this.loadDeliveries())
-      .delay(500);
+      .delay(2000)
+      .finally(() => this.loadDeliveries());
   }
 
   update(delivery: Delivery): Observable<Delivery> {
     return this.updateDeliveryInternal(delivery)
       .map((res: any) => res.data)
       .catch(() => Observable.throw('Ошибка при редактировании поступления'))
-      .finally(() => this.loadDeliveries())
-      .delay(500);
+      .delay(2000)
+      .finally(() => this.loadDeliveries());
   }
 
   delete(deliveryId: string) {
     return this.deleteDeliveryInternal(deliveryId)
       .catch(() => Observable.throw('Ошибка при удалении черновика поступления'))
-      .finally(() => this.loadDeliveries())
-      .delay(500);
+      .delay(2000)
+      .finally(() => this.loadDeliveries());
   }
 
   private loadDeliveries() {
@@ -54,24 +54,36 @@ export class DeliveriesService {
   }
 
   private addDeliveryInternal(delivery: Delivery): Observable<any> {
-    const addedDelivery = new Delivery(Object.assign({}, delivery, {
+    const newDelivery = new Delivery(Object.assign({}, delivery, {
       id: GuidGenerator.newGuid()
     }));
 
-    DeliveriesService.fakeDeliveries.push(addedDelivery);
-    return Observable.of({data: addedDelivery});
+    Observable.of(DeliveriesService.fakeDeliveries)
+      .delay(2000)
+      .subscribe(data => data.push(newDelivery));
+
+    return Observable.of({data: newDelivery});
   }
 
   private updateDeliveryInternal(delivery: Delivery): Observable<any> {
     let storedDelivery = DeliveriesService.fakeDeliveries.find(del => del.id === delivery.id);
-    storedDelivery = Object.assign(storedDelivery, delivery);
+
+    Observable.of(DeliveriesService.fakeDeliveries)
+      .delay(2000)
+      .subscribe(() => {
+        storedDelivery = Object.assign(storedDelivery, delivery);
+      });
 
     return Observable.of({data: storedDelivery});
   }
 
   private deleteDeliveryInternal(deliveryId: string) {
-    const deliveryIndex = DeliveriesService.fakeDeliveries.findIndex(del => del.id === deliveryId);
-    DeliveriesService.fakeDeliveries.splice(deliveryIndex, 1);
+    Observable.of(DeliveriesService.fakeDeliveries)
+      .delay(2000)
+      .subscribe(data => {
+        const index = data.findIndex(del => del.id === deliveryId);
+        data.splice(index, 1);
+      });
 
     return Observable.of({data: deliveryId});
   }

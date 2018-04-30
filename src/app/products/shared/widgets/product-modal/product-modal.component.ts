@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { UnsubscriberComponent } from '../../hooks/unsubscriber.component';
-import { Product } from '../../models/product.model';
-import { Category } from '../../models/category.model';
-import { ProductsServce } from '../../../core/api/products.service';
-import { CategoriesService } from '../../../core/api/categories.service';
-import { SizeItem } from '../../models/size-item.model';
+import { UnsubscriberComponent } from '../../../../shared/hooks/unsubscriber.component';
+import { Product } from '../../../../shared/models/product.model';
+import { Category } from '../../../../shared/models/category.model';
+import { ProductsServce } from '../../../../core/api/products.service';
+import { CategoriesService } from '../../../../core/api/categories.service';
+import { SizeItem } from '../../../../shared/models/size-item.model';
+import { SizesHelperServices } from '../../services/sizes-helper.service';
 
 @Component({
   selector: 'psa-product-modal',
@@ -30,7 +31,6 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
   availableSizes: string[] = [];
   categories: Category[] = [];
   selectedSizes: string[] = [];
-  private readonly sizesDelimiter = ';';
 
   private get categoryFormGroup(): FormGroup {
     return <FormGroup>this.productForm.get('category');
@@ -38,7 +38,8 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
 
   constructor(private formBuilder: FormBuilder,
               private categoriesService: CategoriesService,
-              private productsService: ProductsServce) {
+              private productsService: ProductsServce,
+              private sizesHelperServices: SizesHelperServices) {
     super();
   }
 
@@ -68,7 +69,7 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
 
   save() {
     const productFormValue = this.productForm.value;
-    const sizes = this.convertStringToArray(productFormValue.sizes).map(size => new SizeItem(size));
+    const sizes = this.sizesHelperServices.convertToArray(productFormValue.sizes).map(size => new SizeItem(size));
 
     if (this.isEdit) {
       this.product.name = productFormValue.name;
@@ -93,7 +94,7 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
 
   onOptionChanged(sizes: string) {
     this.sizes = sizes;
-    this.selectedSizes = this.convertStringToArray(sizes);
+    this.selectedSizes = this.sizesHelperServices.convertToArray(sizes);
   }
 
   onCategoryChanged(category) {
@@ -112,12 +113,6 @@ export class ProductModalComponent extends UnsubscriberComponent implements OnIn
     });
   }
 
-  private convertStringToArray(value: string): string[] {
-    return !value
-      ? []
-      : value.split(this.sizesDelimiter).map(param => param.trim());
-  }
-  
   private updateSizesValidity(isRequired: boolean) {
     const valueCtrl = this.productForm.controls['sizes'];
 

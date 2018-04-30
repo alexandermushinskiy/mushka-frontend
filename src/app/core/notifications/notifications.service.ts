@@ -12,7 +12,7 @@ export class NotificationsService {
     timeOut: 5000
   };
 
-  constructor( private toastrService: ToastrService) { }
+  constructor(private toastrService: ToastrService) { }
 
   warning(title: string, message: string) {
     this.options.toastClass = 'notification warning';

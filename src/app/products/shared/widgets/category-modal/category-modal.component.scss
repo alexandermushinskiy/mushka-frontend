@@ -1,7 +1,7 @@
-@import "../../../../variables";
+@import "../../../../../variables";
 
-.product-form {
-  .product-name {
+.category-form {
+  .category-name {
     background-color: $layer3;
     padding: $padding-base;
     margin: -#{$padding-base} -#{$padding-base} $padding-base;
@@ -21,8 +21,11 @@
   }
 }
 
-.code {
-  text-transform: uppercase;
+.toggle {
+  .toggle-description {
+    font-size: 14px;
+    line-height: 1.5rem;
+  }
 }
 
 .error-message {

@@ -27,8 +27,8 @@ export class ProductsListComponent implements OnInit {
   total = 0;
   shown = 0;
   availableCols = availableColumns.products;
-  categories: TreeviewItem[];
-  selectedCategoryId: string;
+  //categories: TreeviewItem[];
+  selectedCategory: Category;
   title = 'Товары';
   isMenuToggleShown = false;
   isAddButtonShown = false;
@@ -46,19 +46,19 @@ export class ProductsListComponent implements OnInit {
               private notificationsService: NotificationsService) { }
 
   ngOnInit() {
-    this.categoriesService.getCategories()
-      .subscribe((categories: Category[]) => {
-        this.categories = categories.map((category: Category) => this.createCategoryTreeviewItem(category));
-      });
+    // this.categoriesService.getCategories()
+    //   .subscribe((categories: Category[]) => {
+    //     this.categories = categories.map((category: Category) => this.createCategoryTreeviewItem(category));
+    //   });
   }
 
   onRowsUpdated(rowsAmount: number) {
     this.shown = rowsAmount;
   }
 
-  onCategotySelected(category: { id: string, name: string }) {
+  onCategotySelected(category: Category) {
     this.title = category.name;
-    this.selectedCategoryId = category.id;
+    this.selectedCategory = category;
 
     this.loadingIndicator = true;
 
@@ -109,7 +109,7 @@ export class ProductsListComponent implements OnInit {
   }
   
   private onSaveSuccess(product: Product, action: string) {
-    if (this.selectedCategoryId !== product.category.id) {
+    if (this.selectedCategory.id !== product.category.id) {
       this.onCategotySelected(product.category);
     }
 
@@ -118,14 +118,14 @@ export class ProductsListComponent implements OnInit {
     this.notificationsService.success('Success', `Product \"${product.name}\" has been successfully ${action}`);
   }
 
-  private createCategoryTreeviewItem(category) {
-    const { id, name } = category;
-    const parsedCategory = {
-      children: null,
-      value: id,
-      text: name,
-      collapsed: true
-    };
-    return new TreeviewItem(parsedCategory);
-  }
+  // private createCategoryTreeviewItem(category) {
+  //   const { id, name } = category;
+  //   const parsedCategory = {
+  //     children: null,
+  //     value: id,
+  //     text: name,
+  //     collapsed: true
+  //   };
+  //   return new TreeviewItem(parsedCategory);
+  // }
 }

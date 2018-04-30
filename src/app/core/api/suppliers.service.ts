@@ -23,17 +23,21 @@ export class SuppliersService {
     return this.addSupplierInternal(supplier)
       .map((res: any) => res.data)
       .catch(() => Observable.throw('Ошибка добавление поставщика'))
+      .delay(2000)
       .finally(() => this.loadSuppliers());
   }
 
   private addSupplierInternal(supplier: Supplier): Observable<any> {
-    const addedSupplier = new Supplier(Object.assign({}, supplier, {
+    const newSupplier = new Supplier(Object.assign({}, supplier, {
       id: '11111111-C9B6-4ACF-A478-5185A07C39BF',
       createdOn: '2018-04-05'
     }));
 
-    SuppliersService.fakeSuppliers.push(addedSupplier);
-    return Observable.of({data: addedSupplier});
+    Observable.of(SuppliersService.fakeSuppliers)
+      .delay(2000)
+      .subscribe(data => data.push(newSupplier));
+
+    return Observable.of({data: newSupplier});
   }
 
   private loadSuppliers() {

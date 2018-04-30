@@ -17,9 +17,8 @@
   </div>
   <div class="appbody">
     <psa-categories-nav
-      [categories]="categories"
-      [selectedCategoryId]="selectedCategoryId"
-      (onCategotySelected)="onCategotySelected($event)">
+      [selectedCategory]="selectedCategory"
+      (onCategorySelected)="onCategotySelected($event)">
     </psa-categories-nav>
     <div class="appcontent">
     <psa-products-table #datatable
@@ -35,7 +34,7 @@
 <ng-template #content>
   <psa-product-modal
               [product]="selectedProduct"
-              [categoryId]="selectedCategoryId"
+              [categoryId]="selectedCategory.id"
               [isSaving]="isModalLoading"
               (onSave)="saveProduct($event)"
               (onClose)="closeModal()">
